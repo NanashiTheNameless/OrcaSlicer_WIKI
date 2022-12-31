@@ -22,7 +22,8 @@ Steps
 ![image](https://user-images.githubusercontent.com/103989404/210139721-919be130-fbba-4e3a-aa58-8a563e8c7792.png)
 
 # Pressure Advance
-I provide two approaches to calibrating PA. Each method has its own Pros and Cons.
+I provide two approaches to calibrating PA. Each method has its own Pros and Cons.  
+**NOTE**: *each method has two versions: DDE(Direct Drive Extruder) and Bowden(Extruder). Make sure you choose the right version for your test.*  
 
 ### Line method
 The line method is quick and straightforward to test. However, its accuracy highly depends on your first layer quality. Make you turn on your bed mesh for this test.
