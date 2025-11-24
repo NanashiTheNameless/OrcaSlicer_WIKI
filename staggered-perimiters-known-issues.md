@@ -3,7 +3,7 @@
 ---
 
 ## If you find an issue or encounter a bug that is not on this list, please let us know by:
-#### - [Opening an issue on this fork's GitHub repo](<https://github.com/NanashiTheNameless/OrcaSlicer>)
+- [Opening an issue on this fork's GitHub repo](<https://github.com/NanashiTheNameless/OrcaSlicer>)
 
 -----
 
