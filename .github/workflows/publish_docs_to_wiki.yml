@@ -16,7 +16,7 @@ on:
 env:
   USER_TOKEN: ${{ secrets.GH_WIKI_PAT }} # This is the repository secret personal access token
   USER_NAME: OrcaSlicerBot # Enter the username of your (bot) account
-  OWNER: OrcaSlicer # Target repository owner
+  OWNER: NanashiTheNameless # Target repository owner
   REPOSITORY_NAME: OrcaSlicer # Target repository name
 
 jobs:
