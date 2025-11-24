@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # NOTE: Ensure your docs are generated into ./docs before the following steps.
       # If you have a build step to generate docs, insert it here.
@@ -58,7 +58,7 @@ jobs:
 
       - name: Checkout target wiki (OrcaSlicer)
         if: ${{ secrets.ORCASLICER_PAT }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: NanashiTheNameless/OrcaSlicer.wiki
           token: ${{ secrets.ORCASLICER_PAT }}
