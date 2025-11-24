@@ -4,10 +4,8 @@
 
 ---
 
-## If you find an issue or encounter a bug that is not on this list, please let us know by either:
-#### - Opening an issue on this GitHub repo
-#### - Sending an Email to `vipul@createinc.dev`
-#### - Sending a Direct Message on Discord to `Divide#4615` or `Xero#1678`
+## If you find an issue or encounter a bug that is not on this list, please let us know by:
+#### - [Opening an issue on this fork's GitHub repo](<https://github.com/NanashiTheNameless/OrcaSlicer>)
 
 -----
 
