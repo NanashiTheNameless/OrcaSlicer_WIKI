@@ -1,41 +1,86 @@
+# Publish docs to Wiki
+#
+# This workflow publishes generated documentation to GitHub wiki repositories.
+#
+# PREREQUISITES:
+# - Target wikis must be initialized with at least one page (e.g., a Home page).
+# - For NanashiTheNameless/OrcaSlicer_WIKI.wiki: uses GITHUB_TOKEN (no setup needed).
+# - For NanashiTheNameless/OrcaSlicer.wiki: requires a Personal Access Token (PAT) 
+#   with 'repo' scope stored as the repository secret ORCASLICER_PAT.
+#   If not set, the OrcaSlicer.wiki push is skipped without failing the workflow.
+#
+# USAGE:
+# - This workflow assumes docs are generated or exist in ./docs directory.
+# - If you have a build step to generate docs, add it before the copy steps.
+
 name: Publish docs to Wiki
 
-# Trigger this action only if there are changes pushed to the doc/** directory under the main branch
 on:
+  workflow_dispatch:
   push:
     branches:
-      - main # This can be changed to any branch of your preference
-
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'     
-        required: true
-        default: 'warning'
-
-env:
-  USER_TOKEN: ${{ secrets.GH_WIKI_PAT }} # This is the repository secret personal access token
-  USER_NAME: OrcaSlicerBot # Enter the username of your (bot) account
-  OWNER: NanashiTheNameless # Target repository owner
-  REPOSITORY_NAME: OrcaSlicer # Target repository name
+      - main
 
 jobs:
-  publish_docs_to_wiki:
-    name: Publish docs to Wiki
+  publish:
     runs-on: ubuntu-latest
-    steps:  
+    steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
-      # Publish content to wiki
-      - name: Pull content from wiki
-        working-directory: ${{ github.workspace }}/..
+      # NOTE: Ensure your docs are generated into ./docs before the following steps.
+      # If you have a build step to generate docs, insert it here.
+
+      - name: Checkout target wiki (OrcaSlicer_WIKI)
+        uses: actions/checkout@v4
+        with:
+          repository: NanashiTheNameless/OrcaSlicer_WIKI.wiki
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: wiki_orca_wiki
+
+      - name: Copy docs to OrcaSlicer_WIKI.wiki and push if changed
         run: |
-          git config --global user.name "$USER_NAME"
-          git config --global user.email "$USER_NAME"@users.noreply.github.com
-          git clone https://"$USER_TOKEN"@github.com/"$OWNER"/"$REPOSITORY_NAME".wiki.git tmp_wiki
-          rsync -av --delete ${{ github.workspace }} tmp_wiki/ --exclude .git
-          cd tmp_wiki
-          git add .
-          git commit -m "Updated Wiki content" 
-          git push origin master
+          if [ ! -d docs ]; then
+            echo "docs directory not found; make sure your docs are generated into ./docs"
+            exit 1
+          fi
+          rsync -av --delete docs/ wiki_orca_wiki/
+          cd wiki_orca_wiki
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "Update OrcaSlicer_WIKI wiki from OrcaSlicer_WIKI"
+            git push
+          else
+            echo "No changes to commit to OrcaSlicer_WIKI.wiki"
+          fi
+
+      - name: Checkout target wiki (OrcaSlicer)
+        if: ${{ secrets.ORCASLICER_PAT != '' }}
+        uses: actions/checkout@v4
+        with:
+          repository: NanashiTheNameless/OrcaSlicer.wiki
+          token: ${{ secrets.ORCASLICER_PAT }}
+          path: wiki_orca
+
+      - name: Copy docs to OrcaSlicer.wiki and push if changed (skipped if ORCASLICER_PAT not set)
+        if: ${{ secrets.ORCASLICER_PAT != '' }}
+        run: |
+          rsync -av --delete docs/ wiki_orca/
+          cd wiki_orca
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "Update OrcaSlicer wiki from OrcaSlicer_WIKI"
+            git push
+          else
+            echo "No changes to commit to OrcaSlicer.wiki"
+          fi
+
+      - name: Warn about missing PAT for external wiki
+        if: ${{ secrets.ORCASLICER_PAT == '' }}
+        run: |
+          echo "ORCASLICER_PAT secret not set — skipping push to NanashiTheNameless/OrcaSlicer.wiki."
+          echo "To enable pushing to the OrcaSlicer wiki, add a Personal Access Token (repo scope) as the secret ORCASLICER_PAT in this repository."
