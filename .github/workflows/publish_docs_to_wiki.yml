@@ -38,13 +38,13 @@ jobs:
           fi
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # NOTE: Ensure your docs are generated into ./docs before the following steps.
       # If you have a build step to generate docs, insert it here.
 
       - name: Checkout target wiki (OrcaSlicer_WIKI)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: NanashiTheNameless/OrcaSlicer_WIKI.wiki
           token: ${{ env.GH_WIKI_PAT }}
@@ -74,7 +74,7 @@ jobs:
           fi
 
       - name: Checkout target wiki (OrcaSlicer)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: NanashiTheNameless/OrcaSlicer.wiki
           token: ${{ env.GH_WIKI_PAT }}
