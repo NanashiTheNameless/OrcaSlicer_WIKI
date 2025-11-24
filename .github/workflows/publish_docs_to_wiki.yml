@@ -57,7 +57,7 @@ jobs:
           fi
 
       - name: Checkout target wiki (OrcaSlicer)
-        if: ${{ secrets.ORCASLICER_PAT != '' }}
+        if: ${{ secrets.ORCASLICER_PAT }}
         uses: actions/checkout@v4
         with:
           repository: NanashiTheNameless/OrcaSlicer.wiki
@@ -65,7 +65,7 @@ jobs:
           path: wiki_orca
 
       - name: Copy docs to OrcaSlicer.wiki and push if changed (skipped if ORCASLICER_PAT not set)
-        if: ${{ secrets.ORCASLICER_PAT != '' }}
+        if: ${{ secrets.ORCASLICER_PAT }}
         run: |
           rsync -av --delete docs/ wiki_orca/
           cd wiki_orca
@@ -80,7 +80,7 @@ jobs:
           fi
 
       - name: Warn about missing PAT for external wiki
-        if: ${{ secrets.ORCASLICER_PAT == '' }}
+        if: ${{ !secrets.ORCASLICER_PAT }}
         run: |
           echo "ORCASLICER_PAT secret not set — skipping push to NanashiTheNameless/OrcaSlicer.wiki."
           echo "To enable pushing to the OrcaSlicer wiki, add a Personal Access Token (repo scope) as the secret ORCASLICER_PAT in this repository."
