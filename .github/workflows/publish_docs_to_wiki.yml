@@ -24,6 +24,8 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      ORCASLICER_PAT: ${{ secrets.ORCASLICER_PAT }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -32,7 +34,7 @@ jobs:
       # If you have a build step to generate docs, insert it here.
 
       - name: Checkout target wiki (OrcaSlicer_WIKI)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: NanashiTheNameless/OrcaSlicer_WIKI.wiki
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -57,15 +59,15 @@ jobs:
           fi
 
       - name: Checkout target wiki (OrcaSlicer)
-        if: ${{ secrets.ORCASLICER_PAT }}
+        if: env.ORCASLICER_PAT != ''
         uses: actions/checkout@v6
         with:
           repository: NanashiTheNameless/OrcaSlicer.wiki
-          token: ${{ secrets.ORCASLICER_PAT }}
+          token: ${{ env.ORCASLICER_PAT }}
           path: wiki_orca
 
       - name: Copy docs to OrcaSlicer.wiki and push if changed (skipped if ORCASLICER_PAT not set)
-        if: ${{ secrets.ORCASLICER_PAT }}
+        if: env.ORCASLICER_PAT != ''
         run: |
           rsync -av --delete docs/ wiki_orca/
           cd wiki_orca
@@ -80,7 +82,7 @@ jobs:
           fi
 
       - name: Warn about missing PAT for external wiki
-        if: ${{ !secrets.ORCASLICER_PAT }}
+        if: env.ORCASLICER_PAT == ''
         run: |
           echo "ORCASLICER_PAT secret not set — skipping push to NanashiTheNameless/OrcaSlicer.wiki."
           echo "To enable pushing to the OrcaSlicer wiki, add a Personal Access Token (repo scope) as the secret ORCASLICER_PAT in this repository."
