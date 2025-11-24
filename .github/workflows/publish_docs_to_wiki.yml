@@ -23,30 +23,45 @@ on:
 
 jobs:
   publish:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     env:
       ORCASLICER_PAT: ${{ secrets.ORCASLICER_PAT }}
     steps:
+      - name: Ensure ORCASLICER_PAT is set
+        run: |
+          if [ -z "${ORCASLICER_PAT}" ]; then
+            echo "Secret ORCASLICER_PAT is not set."
+            echo "Create a Personal Access Token (PAT) with 'repo' scope and add it as ORCASLICER_PAT in repository secrets."
+            exit 1
+          fi
+
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       # NOTE: Ensure your docs are generated into ./docs before the following steps.
       # If you have a build step to generate docs, insert it here.
 
       - name: Checkout target wiki (OrcaSlicer_WIKI)
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           repository: NanashiTheNameless/OrcaSlicer_WIKI.wiki
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ env.ORCASLICER_PAT }}
           path: wiki_orca_wiki
 
-      - name: Copy docs to OrcaSlicer_WIKI.wiki and push if changed
+      - name: Sync content to OrcaSlicer_WIKI.wiki and push if changed
         run: |
-          if [ ! -d docs ]; then
-            echo "docs directory not found; make sure your docs are generated into ./docs"
-            exit 1
-          fi
-          rsync -av --delete docs/ wiki_orca_wiki/
+          if [ -d docs ]; then SRC_DIR="docs"; else SRC_DIR="."; fi
+          echo "Using source: $SRC_DIR"
+          rsync -av --delete \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '.gitignore' \
+            --exclude '.gitattributes' \
+            --exclude 'README.md' \
+            --exclude 'LICENSE' \
+            "$SRC_DIR"/ wiki_orca_wiki/
           cd wiki_orca_wiki
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -59,17 +74,24 @@ jobs:
           fi
 
       - name: Checkout target wiki (OrcaSlicer)
-        if: env.ORCASLICER_PAT != ''
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           repository: NanashiTheNameless/OrcaSlicer.wiki
           token: ${{ env.ORCASLICER_PAT }}
           path: wiki_orca
 
-      - name: Copy docs to OrcaSlicer.wiki and push if changed (skipped if ORCASLICER_PAT not set)
-        if: env.ORCASLICER_PAT != ''
+      - name: Sync content to OrcaSlicer.wiki and push if changed
         run: |
-          rsync -av --delete docs/ wiki_orca/
+          if [ -d docs ]; then SRC_DIR="docs"; else SRC_DIR="."; fi
+          echo "Using source: $SRC_DIR"
+          rsync -av --delete \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '.gitignore' \
+            --exclude '.gitattributes' \
+            --exclude 'README.md' \
+            --exclude 'LICENSE' \
+            "$SRC_DIR"/ wiki_orca/
           cd wiki_orca
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -80,9 +102,3 @@ jobs:
           else
             echo "No changes to commit to OrcaSlicer.wiki"
           fi
-
-      - name: Warn about missing PAT for external wiki
-        if: env.ORCASLICER_PAT == ''
-        run: |
-          echo "ORCASLICER_PAT secret not set — skipping push to NanashiTheNameless/OrcaSlicer.wiki."
-          echo "To enable pushing to the OrcaSlicer wiki, add a Personal Access Token (repo scope) as the secret ORCASLICER_PAT in this repository."
