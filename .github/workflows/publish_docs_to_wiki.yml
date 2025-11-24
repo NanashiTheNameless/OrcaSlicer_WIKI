@@ -34,7 +34,7 @@ jobs:
       # If you have a build step to generate docs, insert it here.
 
       - name: Checkout target wiki (OrcaSlicer_WIKI)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: NanashiTheNameless/OrcaSlicer_WIKI.wiki
           token: ${{ secrets.GITHUB_TOKEN }}
