@@ -5,8 +5,8 @@
 # PREREQUISITES:
 # - Target wikis must be initialized with at least one page (e.g., a Home page).
 # - For NanashiTheNameless/OrcaSlicer_WIKI.wiki: uses GITHUB_TOKEN (no setup needed).
-# - For NanashiTheNameless/OrcaSlicer.wiki: requires a Personal Access Token (PAT) 
-#   with 'repo' scope stored as the repository secret ORCASLICER_PAT.
+# - For NanashiTheNameless/OrcaSlicer.wiki: requires a Personal Access Token (PAT)
+#   with 'repo' scope stored as the repository secret GH_WIKI_PAT.
 #   If not set, the OrcaSlicer.wiki push is skipped without failing the workflow.
 #
 # USAGE:
@@ -27,13 +27,13 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     env:
-      ORCASLICER_PAT: ${{ secrets.ORCASLICER_PAT }}
+      GH_WIKI_PAT: ${{ secrets.GH_WIKI_PAT }}
     steps:
-      - name: Ensure ORCASLICER_PAT is set
+      - name: Ensure GH_WIKI_PAT is set
         run: |
-          if [ -z "${ORCASLICER_PAT}" ]; then
-            echo "Secret ORCASLICER_PAT is not set."
-            echo "Create a Personal Access Token (PAT) with 'repo' scope and add it as ORCASLICER_PAT in repository secrets."
+          if [ -z "${GH_WIKI_PAT}" ]; then
+            echo "Secret GH_WIKI_PAT is not set."
+            echo "Create a Personal Access Token (PAT) with 'repo' scope and add it as GH_WIKI_PAT in repository secrets."
             exit 1
           fi
 
@@ -47,7 +47,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: NanashiTheNameless/OrcaSlicer_WIKI.wiki
-          token: ${{ env.ORCASLICER_PAT }}
+          token: ${{ env.GH_WIKI_PAT }}
           path: wiki_orca_wiki
 
       - name: Sync content to OrcaSlicer_WIKI.wiki and push if changed
@@ -77,7 +77,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: NanashiTheNameless/OrcaSlicer.wiki
-          token: ${{ env.ORCASLICER_PAT }}
+          token: ${{ env.GH_WIKI_PAT }}
           path: wiki_orca
 
       - name: Sync content to OrcaSlicer.wiki and push if changed
