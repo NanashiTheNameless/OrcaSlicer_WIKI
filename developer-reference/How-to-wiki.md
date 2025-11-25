@@ -167,7 +167,7 @@ Format = `![`filename`](` + Base URL + filename.extension + Raw tag + `)`
 - Base URL:
 
   ```markdown
-  https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/
+  https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/
   ```
 
 - Raw tag:
@@ -181,13 +181,13 @@ Format = `![`filename`](` + Base URL + filename.extension + Raw tag + `)`
 - For an image in `doc/images/` named `calibration.png`:
 
   ```markdown
-  ![calibration](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/calibration.png?raw=true)
+  ![calibration](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/calibration.png?raw=true)
   ```
 
 - For an image in a subdirectory like `doc/images/GUI/combobox.png`:
 
   ```markdown
-  ![combobox](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/GUI/combobox.png?raw=true)
+  ![combobox](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/GUI/combobox.png?raw=true)
   ```
 
 > [!IMPORTANT]
@@ -214,7 +214,7 @@ HTML Format = `<img alt="` + filename + `"` + `src="` + Base URL + filename.exte
 Example:
 
 ```html
-<img alt="IS_damp_marlin_print_measure" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/InputShaping/IS_damp_marlin_print_measure.jpg?raw=true" height="200">
+<img alt="IS_damp_marlin_print_measure" src="https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/InputShaping/IS_damp_marlin_print_measure.jpg?raw=true" height="200">
 ```
 
 ### Image Cropping and Highlighting

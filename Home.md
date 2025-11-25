@@ -24,7 +24,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 
 ## Printer Settings
 
-![printer-preset](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/GUI/printer-preset.png?raw=true)
+![printer-preset](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/GUI/printer-preset.png?raw=true)
 
 ![printer](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/printer.svg?raw=true) Settings related to the 3D printer hardware and its configuration.
 
@@ -36,7 +36,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 
 ## Material Settings
 
-![filament-preset](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/GUI/filament-preset.png?raw=true)
+![filament-preset](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/GUI/filament-preset.png?raw=true)
 
 ![filament](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/filament.svg?raw=true) Settings related to the 3D printing material.
 
@@ -45,14 +45,14 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 
 ## Process Settings
 
-![process-preset](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/GUI/process-preset.png?raw=true)
+![process-preset](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/GUI/process-preset.png?raw=true)
 
 ![process](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/process.svg?raw=true) Settings related to the 3D printing process.
 
 ### Quality Settings
 
 ![custom-gcode_quality](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/custom-gcode_quality.svg?raw=true) Settings related to print quality and aesthetics.  
-![process-quality](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/GUI/process/process-quality.png?raw=true)
+![process-quality](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-quality.png?raw=true)
 
 - ![param_layer_height](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_layer_height.svg?raw=true) [Layer Height Settings](quality_settings_layer_height)
 - ![param_line_width](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_line_width.svg?raw=true) [Line Width Settings](quality_settings_line_width)
@@ -67,7 +67,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 ### Strength Settings
 
 ![custom-gcode_strength](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/custom-gcode_strength.svg?raw=true) Settings related to print strength and durability.  
-![process-strength](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/GUI/process/process-strength.png?raw=true)
+![process-strength](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-strength.png?raw=true)
 
 - ![param_wall](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_wall.svg?raw=true) [Walls](strength_settings_walls)
 - ![param_shell](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_shell.svg?raw=true) [Top and Bottom Shells](strength_settings_top_bottom_shells)
@@ -79,7 +79,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 ### Speed Settings
 
 ![custom-gcode_speed](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/custom-gcode_speed.svg?raw=true) Settings related to print speed and movement.  
-![process-speed](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/GUI/process/process-speed.png?raw=true)
+![process-speed](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-speed.png?raw=true)
 
 - ![param_speed_first](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_speed_first.svg?raw=true) [Initial Layer Speed](speed_settings_initial_layer_speed)
 - ![param_speed](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_speed.svg?raw=true) [Other Layers Speed](speed_settings_other_layers_speed)
@@ -92,7 +92,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 ### Support Settings
 
 ![custom-gcode_support](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/custom-gcode_support.svg?raw=true) Settings related to support structures and their properties.  
-![process-support](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/GUI/process/process-support.png?raw=true)
+![process-support](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-support.png?raw=true)
 
 - ![param_support](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_support.svg?raw=true) [Support](support_settings_support)
 - ![param_raft](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_raft.svg?raw=true) [Raft](support_settings_raft)
@@ -104,7 +104,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 ### Multimaterial Settings
 
 ![custom-gcode_multi_material](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/custom-gcode_multi_material.svg?raw=true) Settings related to multimaterial printing.  
-![process-multimaterial](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/GUI/process/process-multimaterial.png?raw=true)
+![process-multimaterial](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-multimaterial.png?raw=true)
 
 - ![param_tower](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_tower.svg?raw=true) [Prime Tower](multimaterial_settings_prime_tower)
 - ![param_filament_for_features](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_filament_for_features.svg?raw=true) [Filament for Features](multimaterial_settings_filament_for_features)
@@ -115,7 +115,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 ### Others Settings
 
 ![custom-gcode_other](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/custom-gcode_other.svg?raw=true) Settings related to various other print settings.  
-![process-others](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/GUI/process/process-others.png?raw=true)
+![process-others](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-others.png?raw=true)
 
 - ![param_skirt](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_skirt.svg?raw=true) [Skirt](others_settings_skirt)
 - ![param_adhension](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_adhension.svg?raw=true) [Brim](others_settings_brim)
