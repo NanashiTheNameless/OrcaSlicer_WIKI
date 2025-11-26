@@ -2,10 +2,9 @@
 
 This guide explains how to contribute to the OrcaSlicer wiki.
 
-OrcaSlicer uses GitHub's wiki feature, which lets users and developers create and edit documentation collaboratively.
+OrcaSlicer uses GitHub's wiki feature, which is automatically generated based on the documents in the [OrcaSlicer_WIKI repository](https://github.com/OrcaSlicer/OrcaSlicer_WIKI).
 
-We encourage developers and users to contribute by updating existing pages and adding new content. This helps keep the documentation accurate and useful.
-
+We encourage developers and users to contribute by updating existing pages and adding new content. This helps keep the documentation accurate and useful.  
 When adding new features, consider updating the wiki so users can access the latest guidance.
 
 - [Wiki Structure](#wiki-structure)
@@ -31,7 +30,8 @@ When adding new features, consider updating the wiki so users can access the lat
 
 ## Wiki Structure
 
-Each wiki page is a Markdown file located in the `doc` directory of the repository. The wiki is organized into sections that cover different areas of the project.
+Each page of the Wiki is a Markdown file located in the [OrcaSlicer_WIKI repository](https://github.com/OrcaSlicer/OrcaSlicer_WIKI).  
+The wiki is organized into sections that cover different areas of the project.
 
 ### Home
 
@@ -53,7 +53,7 @@ Each section can have multiple pages covering specific topics. For example, the 
 
 GitHub Wiki uses file names as page identifiers. To link to a page, use the file name without the `.md` extension. If a file lives in a subdirectory, **do not include the subdirectory** in the link; link directly to the file name from the Home page.
 
-For example, if you add `doc/calibration/flow-rate-calib.md`, link it like this:
+For example, if you add `calibration/flow-rate-calib.md`, link it like this:
 
 ```markdown
 [Flow Rate Calibration](flow-rate-calib)
@@ -80,7 +80,7 @@ When creating new pages, follow these file-naming conventions:
 - Use descriptive names that reflect the page's content.
 - Use kebab-case for filenames (e.g.: `How-to-wiki.md`).
 - If a page belongs to a section, include a suffix that clarifies it (for example, calibration pages should end with `-calib.md`, e.g. `flow-rate-calib.md`).
-- Place files in the appropriate subdirectory when applicable (e.g.: `doc/calibration/` for calibration-related content).
+- Place files in the appropriate subdirectory when applicable (e.g.: `calibration/` for calibration-related content).
 
 ## Orca to Wiki Redirection
 
@@ -152,8 +152,8 @@ Images are encouraged to enhance the clarity and quality of the wiki content. Th
 
 ### Image Placement
 
-- General images should be placed in the `doc/images/` directory.
-- Section-specific images should be stored in their corresponding subdirectories (e.g., `doc/images/calibration/` for calibration content).
+- General images should be placed in the `images/` directory.
+- Section-specific images should be stored in their corresponding subdirectories (e.g., `images/calibration/` for calibration content).
 
 > [!TIP]
 > You can use `\resources\images` images used in the GUI.
@@ -167,7 +167,7 @@ Format = `![`filename`](` + Base URL + filename.extension + Raw tag + `)`
 - Base URL:
 
   ```markdown
-  https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/
+  https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/
   ```
 
 - Raw tag:
@@ -178,16 +178,16 @@ Format = `![`filename`](` + Base URL + filename.extension + Raw tag + `)`
 
 #### Examples
 
-- For an image in `doc/images/` named `calibration.png`:
+- For an image in `images/` named `calibration.png`:
 
   ```markdown
-  ![calibration](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/calibration.png?raw=true)
+  ![calibration](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/calibration.png?raw=true)
   ```
 
-- For an image in a subdirectory like `doc/images/GUI/combobox.png`:
+- For an image in a subdirectory like `images/GUI/combobox.png`:
 
   ```markdown
-  ![combobox](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/GUI/combobox.png?raw=true)
+  ![combobox](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/GUI/combobox.png?raw=true)
   ```
 
 > [!IMPORTANT]
@@ -214,7 +214,7 @@ HTML Format = `<img alt="` + filename + `"` + `src="` + Base URL + filename.exte
 Example:
 
 ```html
-<img alt="IS_damp_marlin_print_measure" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/InputShaping/IS_damp_marlin_print_measure.jpg?raw=true" height="200">
+<img alt="IS_damp_marlin_print_measure" src="https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/InputShaping/IS_damp_marlin_print_measure.jpg?raw=true" height="200">
 ```
 
 ### Image Cropping and Highlighting
