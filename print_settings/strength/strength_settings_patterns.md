@@ -33,7 +33,7 @@ Some patterns may complete faster due to more efficient use of the print head's 
 
 Layer time variability refers to the differences in time it takes to print each layer of a pattern. Some patterns may have consistent layer times, while others may experience significant fluctuations. These variations can potentially impact the outer appearance of the print due to differences in cooling and material flow between layers.
 
-![fill-layer-time-variability](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/fill-layer-time-variability.png?raw=true)
+![fill-layer-time-variability](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/fill-layer-time-variability.png?raw=true)
 
 ## Patterns Quick Reference
 
@@ -73,9 +73,9 @@ Layer time variability refers to the differences in time it takes to print each 
 > This **WILL NOT** be the same for all models and only serves as a standard guideline.
 
 > [!TIP]
-> You can see how this analysis was made in [infill-analysis](https://github.com/OrcaSlicer/OrcaSlicer/tree/main/doc/print_settings/strength/infill-analysis) folder:
->  - [Infill calculator Project](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/print_settings/strength/infill-analysis/infill_calculator.3mf?raw=true) to generate the gcode files and images.
->  - [infill_desc_calculator.xlsx](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/print_settings/strength/infill-analysis/infill_desc_calculator.xlsx?raw=true) used to calculate the values above.  
+> You can see how this analysis was made in [infill-analysis](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/print_settings/strength/infill-analysis) folder:
+>  - [Infill calculator Project](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/print_settings/strength/infill-analysis/infill_calculator.3mf?raw=true) to generate the gcode files and images.
+>  - [infill_desc_calculator.xlsx](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/print_settings/strength/infill-analysis/infill_desc_calculator.xlsx?raw=true) used to calculate the values above.  
 >  - Time, and material usage where simulated with the same [Klipper Estimator](https://github.com/Annex-Engineering/klipper_estimator) values to maintain consistency.
 
 ## Monotonic
@@ -94,7 +94,7 @@ Layer time variability refers to the differences in time it takes to print each 
   - **[Solid Infill](strength_settings_infill#internal-solid-infill)**
   - **[Surface](strength_settings_top_bottom_shells)**
 
-![infill-top-monotonic](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-monotonic.png?raw=true)
+![infill-top-monotonic](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-monotonic.png?raw=true)
 
 ## Monotonic line
 
@@ -112,7 +112,7 @@ Layer time variability refers to the differences in time it takes to print each 
   - **[Solid Infill](strength_settings_infill#internal-solid-infill)**
   - **[Surface](strength_settings_top_bottom_shells)**
 
-![infill-top-monotonic-line](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-monotonic-line.png?raw=true)
+![infill-top-monotonic-line](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-monotonic-line.png?raw=true)
 
 ## Rectilinear
 
@@ -132,7 +132,7 @@ Parallel lines spaced according to infill density. Each layer is printed perpend
   - **[Surface](strength_settings_top_bottom_shells)**
   - **[Ironing](quality_settings_ironing)**
 
-![infill-top-rectilinear](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-rectilinear.png?raw=true)
+![infill-top-rectilinear](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-rectilinear.png?raw=true)
 
 ## Aligned Rectilinear
 
@@ -152,7 +152,7 @@ Recommended with layer anchoring to improve not perpendicular strength.
   - **[Solid Infill](strength_settings_infill#internal-solid-infill)**
   - **[Surface](strength_settings_top_bottom_shells)**
 
-![infill-top-aligned-rectilinear](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-aligned-rectilinear.png?raw=true)
+![infill-top-aligned-rectilinear](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-aligned-rectilinear.png?raw=true)
 
 ## Zig Zag
 
@@ -169,7 +169,7 @@ Similar to [rectilinear](#rectilinear) with consistent pattern between layers. A
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-zig-zag](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-zig-zag.png?raw=true)
+![infill-top-zig-zag](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-zig-zag.png?raw=true)
 
 ## Cross Zag
 
@@ -186,7 +186,7 @@ Similar to [Zig Zag](#zig-zag) but displacing each layer with Infill shift step 
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-cross-zag](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-cross-zag.png?raw=true)
+![infill-top-cross-zag](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-cross-zag.png?raw=true)
 
 ## Locked Zag
 
@@ -205,7 +205,7 @@ Skin density * ( Infill Area - Skin Area + lock depth area) + ( Skin density * S
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-locked-zag](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-locked-zag.png?raw=true)
+![infill-top-locked-zag](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-locked-zag.png?raw=true)
 
 ## Line
 
@@ -222,7 +222,7 @@ Similar to [rectilinear](#rectilinear), but each line is slightly rotated to imp
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-line](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-line.png?raw=true)
+![infill-top-line](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-line.png?raw=true)
 
 ## Grid
 
@@ -239,7 +239,7 @@ Two-layer pattern of perpendicular lines, forming a grid. Overlapping points may
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-grid](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-grid.png?raw=true)
+![infill-top-grid](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-grid.png?raw=true)
 
 ## Triangles
 
@@ -256,7 +256,7 @@ Triangle-based grid, offering strong X-Y strength but with triple overlaps at in
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-triangles](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-triangles.png?raw=true)
+![infill-top-triangles](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-triangles.png?raw=true)
 
 ## Tri-hexagon
 
@@ -273,7 +273,7 @@ Similar to the [triangles](#triangles) pattern but offset to prevent triple over
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-tri-hexagon](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-tri-hexagon.png?raw=true)
+![infill-top-tri-hexagon](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-tri-hexagon.png?raw=true)
 
 ## Cubic
 
@@ -290,7 +290,7 @@ Similar to the [triangles](#triangles) pattern but offset to prevent triple over
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-cubic](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-cubic.png?raw=true)
+![infill-top-cubic](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-cubic.png?raw=true)
 
 ## Adaptive Cubic
 
@@ -307,7 +307,7 @@ Similar to the [triangles](#triangles) pattern but offset to prevent triple over
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-adaptive-cubic](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-adaptive-cubic.png?raw=true)
+![infill-top-adaptive-cubic](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-adaptive-cubic.png?raw=true)
 
 ## Quarter Cubic
 
@@ -324,7 +324,7 @@ Similar to the [triangles](#triangles) pattern but offset to prevent triple over
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-quarter-cubic](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-quarter-cubic.png?raw=true)
+![infill-top-quarter-cubic](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-quarter-cubic.png?raw=true)
 
 ## Support Cubic
 
@@ -341,7 +341,7 @@ Support |Cubic is a variation of the [Cubic](#cubic) infill pattern that is spec
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-support-cubic](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-support-cubic.png?raw=true)
+![infill-top-support-cubic](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-support-cubic.png?raw=true)
 
 ## Lightning
 
@@ -358,7 +358,7 @@ Ultra-fast, ultra-low material infill. Designed for speed and efficiency, ideal 
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-lightning](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-lightning.png?raw=true)
+![infill-top-lightning](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-lightning.png?raw=true)
 
 ## Honeycomb
 
@@ -375,7 +375,7 @@ Hexagonal pattern balancing strength and material use. Double walls in each hexa
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-honeycomb](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-honeycomb.png?raw=true)
+![infill-top-honeycomb](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-honeycomb.png?raw=true)
 
 ## 3D Honeycomb
 
@@ -392,7 +392,7 @@ This infill tries to generate a printable honeycomb structure by printing square
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-3d-honeycomb](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-3d-honeycomb.png?raw=true)
+![infill-top-3d-honeycomb](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-3d-honeycomb.png?raw=true)
 
 ## Lateral Honeycomb
 
@@ -409,7 +409,7 @@ Vertical Honeycomb pattern. Acceptable torsional stiffness. Developed for low de
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-lateral-honeycomb](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-lateral-honeycomb.png?raw=true)
+![infill-top-lateral-honeycomb](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-lateral-honeycomb.png?raw=true)
 
 ## Lateral Lattice
 
@@ -426,7 +426,7 @@ Low-strength pattern with good flexibility. You can adjust **Angle 1** and **Ang
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-lateral-lattice](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-lateral-lattice.png?raw=true)
+![infill-top-lateral-lattice](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-lateral-lattice.png?raw=true)
 
 ## Cross Hatch
 
@@ -444,7 +444,7 @@ Easier to slice but consider using [TPMS-D](#tpms-d) or [Gyroid](#gyroid) for be
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-cross-hatch](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-cross-hatch.png?raw=true)
+![infill-top-cross-hatch](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-cross-hatch.png?raw=true)
 
 ## TPMS-D
 
@@ -461,7 +461,7 @@ Triply Periodic Minimal Surface (Schwarz Diamond). Hybrid between [Cross Hatch](
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-tpms-d](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-tpms-d.png?raw=true)
+![infill-top-tpms-d](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-tpms-d.png?raw=true)
 
 ## TPMS-FK
 
@@ -478,7 +478,7 @@ Triply Periodic Minimal Surface (Fischer–Koch S) pattern. Its smooth, continuo
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-tpms-fk](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-tpms-fk.png?raw=true)
+![infill-top-tpms-fk](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-tpms-fk.png?raw=true)
 
 ## Gyroid
 
@@ -495,7 +495,7 @@ Mathematical, isotropic surface providing equal strength in all directions. Exce
 - **Applies to:**
   - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
-![infill-top-gyroid](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-gyroid.png?raw=true)
+![infill-top-gyroid](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-gyroid.png?raw=true)
 
 ## Concentric
 
@@ -515,7 +515,7 @@ Fills the area with progressively smaller versions of the outer contour, creatin
   - **[Surface](strength_settings_top_bottom_shells)**
   - **[Ironing](quality_settings_ironing)**
 
-![infill-top-concentric](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-concentric.png?raw=true)
+![infill-top-concentric](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-concentric.png?raw=true)
 
 ## Hilbert Curve
 
@@ -535,7 +535,7 @@ Print speed is very low due to the complexity of the path, which can lead to lon
   - **[Solid Infill](strength_settings_infill#internal-solid-infill)**
   - **[Surface](strength_settings_top_bottom_shells)**
 
-![infill-top-hilbert-curve](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-hilbert-curve.png?raw=true)
+![infill-top-hilbert-curve](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-hilbert-curve.png?raw=true)
 
 ## Archimedean Chords
 
@@ -554,7 +554,7 @@ Spiral pattern that fills the area with concentric arcs, creating a smooth and c
   - **[Solid Infill](strength_settings_infill#internal-solid-infill)**
   - **[Surface](strength_settings_top_bottom_shells)**
 
-![infill-top-archimedean-chords](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-archimedean-chords.png?raw=true)
+![infill-top-archimedean-chords](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-archimedean-chords.png?raw=true)
 
 ## Octagram Spiral
 
@@ -573,4 +573,4 @@ Aesthetic pattern with low strength and high print time.
   - **[Solid Infill](strength_settings_infill#internal-solid-infill)**
   - **[Surface](strength_settings_top_bottom_shells)**
 
-![infill-top-octagram-spiral](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/doc/images/fill/infill-top-octagram-spiral.png?raw=true)
+![infill-top-octagram-spiral](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-octagram-spiral.png?raw=true)

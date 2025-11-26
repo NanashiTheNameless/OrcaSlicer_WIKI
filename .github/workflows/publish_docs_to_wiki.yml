@@ -22,7 +22,8 @@ on:
       - main
 
 jobs:
-  publish:
+  publish_docs_to_wiki:
+    name: Update OrcaSlicer Wiki
     permissions:
       contents: write
     runs-on: ubuntu-latest
