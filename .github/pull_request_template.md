@@ -11,5 +11,5 @@
 
 <!--
 > Please list any related OrcaSlicer PRs that are associated with this documentation update.
-> e.g. https://github.com/OrcaSlicer/OrcaSlicer/pull/[PR_NUMBER]
+> e.g. https://github.com/NanashiTheNameless/OrcaSlicer/pull/[PR_NUMBER]
 -->

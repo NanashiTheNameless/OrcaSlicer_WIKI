@@ -2,7 +2,7 @@
 
 Controls how the top and bottom solid layers (shells) are generated.
 
-![top-bottom-shells](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/top-bottom-shells.png?raw=true)
+![top-bottom-shells](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/top-bottom-shells.png?raw=true)
 
 ## Shell Layers
 

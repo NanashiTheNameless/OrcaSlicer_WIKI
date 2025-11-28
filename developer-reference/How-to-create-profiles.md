@@ -140,9 +140,9 @@ The following sample JSON file shows how to create a new generic filament profil
 > To force OrcaSlicer to load your updated profiles:
 >
 > 1. **Access the configuration folder**: Go to **Help** → **Show Configuration Folder**.  
->    ![go-to-configuration-folder](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/develop/go-to-configuration-folder.png?raw=true)
+>    ![go-to-configuration-folder](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/develop/go-to-configuration-folder.png?raw=true)
 > 2. **Clear the cache**: Delete the `system` folder to remove cached profiles.  
->    ![profile-delete-system-folder](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/develop/profile-delete-system-folder.png?raw=true)
+>    ![profile-delete-system-folder](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/develop/profile-delete-system-folder.png?raw=true)
 > 3. **Restart OrcaSlicer**: Launch the application to load your updated profiles.  
 >    This process forces OrcaSlicer to update its profile cache from the source files in the `resources/profiles/` directory.
 

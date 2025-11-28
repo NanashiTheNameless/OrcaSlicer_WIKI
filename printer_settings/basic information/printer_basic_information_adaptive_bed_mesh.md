@@ -3,7 +3,7 @@
 OrcaSlicer introduces comprehensive support for adaptive bed meshing across a variety of firmware, including Marlin, Klipper, and RepRapFirmware (RRF).  
 This feature allows users to seamlessly integrate adaptive bed mesh commands within the Machine Start G-code.  
 The implementation is designed to be straightforward, requiring no additional plugins or alterations to firmware settings, thereby enhancing user experience and print quality directly from OrcaSlicer.  
-![ABM-PrinterConfig](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/Adaptative-Bed-Mesh/ABM-PrinterConfig.png?raw=true)
+![ABM-PrinterConfig](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/Adaptative-Bed-Mesh/ABM-PrinterConfig.png?raw=true)
 
 - [Bed mesh min](#bed-mesh-min)
 - [Bed mesh max](#bed-mesh-max)
@@ -67,4 +67,4 @@ BED_MESH_CALIBRATE mesh_min={adaptive_bed_mesh_min[0]},{adaptive_bed_mesh_min[1]
 M557 X{adaptive_bed_mesh_min[0]}:{adaptive_bed_mesh_max[0]} Y{adaptive_bed_mesh_min[1]}:{adaptive_bed_mesh_max[1]} P{bed_mesh_probe_count[0]}:{bed_mesh_probe_count[1]}
 ```
 
-![ABM-Machine-G-code](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/Adaptative-Bed-Mesh/ABM-Machine-G-code.png?raw=true)
+![ABM-Machine-G-code](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/Adaptative-Bed-Mesh/ABM-Machine-G-code.png?raw=true)
