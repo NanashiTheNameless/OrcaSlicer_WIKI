@@ -96,7 +96,6 @@ jobs:
             --exclude 'LICENSE' \
             --exclude 'wiki_orca_wiki/' \
             --exclude 'wiki_orca/' \
-            --exclude 'logs_*/' \
             "$SRC_DIR"/ wiki_orca/
           cd wiki_orca
           git config user.name "github-actions[bot]"
