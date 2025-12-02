@@ -88,7 +88,7 @@ When creating new pages, follow these file-naming conventions:
 
 OrcaSlicer can redirect users from the GUI to the appropriate wiki pages, making it easier to find relevant documentation.
 
-The option-to-wiki mapping is defined in [src/slic3r/GUI/Tab.cpp](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/src/slic3r/GUI/Tab.cpp).
+The option-to-wiki mapping is defined in [src/slic3r/GUI/Tab.cpp](https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/src/slic3r/GUI/Tab.cpp).
 The links naming uses the same format as the [Wiki Navigation described above](#index-and-navigation), `[filename]#[section(optional)]` e.g. `quality_settings_seam` or `quality_settings_seam#scarf-joint-seam`.
 
 There are 3 main ways to set up these links:

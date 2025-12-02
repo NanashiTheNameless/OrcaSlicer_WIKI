@@ -188,7 +188,7 @@ cmake --version
    ```
 3. Open the application:
    ```shell
-   open build/arm64/OrcaSlicer/OrcaSlicer.app
+   open build/arm64/NanashiTheNameless/OrcaSlicer.app
    ```
 
 ### Debugging in Xcode

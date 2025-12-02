@@ -26,7 +26,7 @@ jobs:
             const fs = require('fs');
             const path = require('path');
 
-            const TAB_URL = 'https://raw.githubusercontent.com/OrcaSlicer/OrcaSlicer/main/src/slic3r/GUI/Tab.cpp';
+            const TAB_URL = 'https://raw.githubusercontent.com/NanashiTheNameless/OrcaSlicer/main/src/slic3r/GUI/Tab.cpp';
             const workspaceRoot = process.cwd();
             const markdownNameIndex = new Map();
             const fileContents = new Map();
@@ -382,7 +382,7 @@ jobs:
             }
 
             function formatFailure(reference, reason, details) {
-              const link = `https://github.com/OrcaSlicer/OrcaSlicer/blob/main/src/slic3r/GUI/Tab.cpp#L${reference.line}`;
+              const link = `https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/src/slic3r/GUI/Tab.cpp#L${reference.line}`;
               const lineInfo = `[Tab.cpp line ${reference.line}](${link})`;
               const failure = { line: reference.line, message: '' };
               switch (reason) {

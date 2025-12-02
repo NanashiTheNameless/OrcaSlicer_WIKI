@@ -6,13 +6,13 @@ To correct for these variations, OrcaSlicer provides:
 - Filament Compensation:
   - [Shrinkage (XY)](material_basic_information#shrinkage-xy)
   - [Shrinkage (Z)](material_basic_information#shrinkage-z)  
-    ![FilamentShrinkageCompensation](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/Tolerance/FilamentShrinkageCompensation.png?raw=true)
+    ![FilamentShrinkageCompensation](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/Tolerance/FilamentShrinkageCompensation.png?raw=true)
 - [Process Compensation](quality_settings_precision):
   - [X-Y hole compensation](quality_settings_precision#x-y-compensation)
   - [X-Y contour compensation](quality_settings_precision#x-y-compensation)
   - [Precise wall](quality_settings_precision#precise-wall)
   - [Precise Z height](quality_settings_precision#precise-z-height)  
-  ![QualityPrecision](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/Tolerance/QualityPrecision.png?raw=true)
+  ![QualityPrecision](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/Tolerance/QualityPrecision.png?raw=true)
 
 ## Handy Models
 

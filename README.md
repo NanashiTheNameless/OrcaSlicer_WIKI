@@ -19,7 +19,7 @@ We appreciate your patience as we continue to develop and improve it!
 <a href="https://www.orcaslicer.com/" style="font-size:2em;">OrcaSlicer.com</a>
 
 #### OFFICIAL OrcaSlicer Repository:
-<a href="https://github.com/OrcaSlicer/OrcaSlicer"><img src="https://img.shields.io/badge/OrcaSlicer-181717?style=flat&logo=github&logoColor=white" width="200" alt="GitHub Logo"/> </a>
+<a href="https://github.com/NanashiTheNameless/OrcaSlicer"><img src="https://img.shields.io/badge/OrcaSlicer-181717?style=flat&logo=github&logoColor=white" width="200" alt="GitHub Logo"/> </a>
 
 #### OFFICIAL Wiki Repository:
-<a href="https://github.com/OrcaSlicer/OrcaSlicer_WIKI"><img src="https://img.shields.io/badge/OrcaSlicer_WIKI-181717?style=flat&logo=github&logoColor=white" width="200" alt="GitHub Logo"/> </a>
+<a href="https://github.com/NanashiTheNameless/OrcaSlicer_WIKI"><img src="https://img.shields.io/badge/OrcaSlicer_WIKI-181717?style=flat&logo=github&logoColor=white" width="200" alt="GitHub Logo"/> </a>
