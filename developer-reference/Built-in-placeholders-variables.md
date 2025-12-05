@@ -145,8 +145,8 @@ Timestamp components information recorded when slicing began.
 | Placeholder | Type | Description |
 | --- | --- | --- |
 | `timestamp` | string (`yyyyMMdd-hhmmss`) | Local timestamp captured when slicing ran. |
-| `year` / month / day | int | Gregorian date components of `timestamp`. |
-| `hour` / minute / second | int | Time-of-day components of `timestamp`. |
+| `year` / `month` / `day` | int | Gregorian date components of `timestamp`. |
+| `hour` / `minute` / `second` | int | Time-of-day components of `timestamp`. |
 
 Any shell environment variable whose name starts with `SLIC3R_` is also imported as a placeholder under the same key, allowing you to pass ad-hoc values into a slice (for example `SLIC3R_BUILD_TAG`).
 
@@ -171,9 +171,9 @@ Names of the print, filament, and printer presets that provided the configuratio
 | `printer_preset` | string | Logical printer preset used for slicing. |
 
 > [!TIP]
-> Others items shares its config key with the placeholder name.  
+> Other items share its config key with the placeholder name.  
 > Hover the label to discover the key.  
-> ![variable_name](https://github.com//NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/develop/variable_name.png?raw=true)
+> ![variable_name](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/develop/variable_name.png?raw=true)
 
 ## Filename Templates
 

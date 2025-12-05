@@ -55,7 +55,7 @@ Shortcuts for preparing the model for slicing.
 | `Arrow Right` | Move selection 10 mm in positive X direction |
 | `Shift + Any arrow` | Movement step set to 1 mm |
 | `Esc` | Deselect all |
-| `1-9` | Keyboard 1-9: set filament for object/part |
+| `1-9` | Set filament for object/part |
 | `Ctrl + 0` | Camera view - Default |
 | `Ctrl + 1` | Camera view - Top |
 | `Ctrl + 2` | Camera view - Bottom |
