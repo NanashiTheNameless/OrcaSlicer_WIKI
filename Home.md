@@ -13,6 +13,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
   - [Others Settings](#others-settings)
 - [Prepare](#prepare)
 - [Calibrations](#calibrations)
+- [General Settings](#general-settings)
 - [Developer Section](#developer-section)
 
 > [!WARNING]
@@ -172,6 +173,10 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
   - [![param_resonance_avoidance](https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_resonance_avoidance.svg?raw=true) Input Shaping](input-shaping-calib)
     - [VFA](vfa-calib)
 
+## General Settings
+
+- [Keyboard Shortcuts](keyboard-shortcuts)
+
 ## Developer Section
 
 ![im_code](https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/im_code.svg?raw=true) This is a documentation from someone exploring the code and is by no means complete or even completely accurate. Please edit the parts you might find inaccurate. This is probably going to be helpful nonetheless.
@@ -183,5 +188,6 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 - [How to contribute to the wiki](How-to-wiki)
 - [Preset, PresetBundle and PresetCollection](Preset-and-bundle)
 - [Plater, Sidebar, Tab, ComboBox](plater-sidebar-tab-combobox)
+- [Built-in placeholders & variables](Built-in-placeholders-variables)
 - [Slicing Call Hierarchy](slicing-hierarchy)
 - [List of staggered perimiters known issues](staggered-perimiters-known-issues)
