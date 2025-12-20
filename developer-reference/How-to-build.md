@@ -1,6 +1,6 @@
 # How to Build
 
-This wiki page provides detailed instructions for building OrcaSlicer from source on different operating systems, including Windows, macOS, and Linux.  
+This wiki page provides detailed instructions for building OrcaSlicer from source on different operating systems, including Windows, macOS, and Linux.\
 It includes tool requirements, setup commands, and build steps for each platform.
 
 Whether you're a contributor or just want a custom build, this guide will help you compile OrcaSlicer successfully.
@@ -62,8 +62,8 @@ How to building with Visual Studio on Windows 64-bit.
 > ```
 
 > [!IMPORTANT]
-> Check your CMake version. Run `cmake --version` in your terminal and verify it returns a **4.x** version.  
-> If you see an older version (e.g. 3.29), it's likely due to another copy in your system's PATH (e.g. from Strawberry Perl).  
+> Check your CMake version. Run `cmake --version` in your terminal and verify it returns a **4.x** version.\
+> If you see an older version (e.g. 3.29), it's likely due to another copy in your system's PATH (e.g. from Strawberry Perl).\
 > You can run where cmake to check the active paths and rearrange your **System Environment Variables** > PATH, ensuring the correct CMake like `C:\Program Files\CMake\bin` appears before others like `C:\Strawberry\c\bin`.
 
 ![windows_variables_path](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/develop/windows_variables_path.png?raw=true)
@@ -120,7 +120,7 @@ How to building with Visual Studio on Windows 64-bit.
    ```shell
    build\OrcaSlicer.sln
    ```
-4. Open the solution in Visual Studio, set the build configuration to `Release` and run the `Local Windows Debugger`.  
+4. Open the solution in Visual Studio, set the build configuration to `Release` and run the `Local Windows Debugger`.\
    ![compile_vs_local_debugger](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/develop/compile_vs_local_debugger.png?raw=true)
 5. Your resulting executable will be located in:
    ```shell
@@ -128,9 +128,9 @@ How to building with Visual Studio on Windows 64-bit.
    ```
 
 > [!NOTE]
-> The first time you build a branch, it will take a long time.  
-> Changes to .cpp files are quickly compiled.  
-> Changes to .hpp files take longer, depending on what you change.  
+> The first time you build a branch, it will take a long time.\
+> Changes to .cpp files are quickly compiled.\
+> Changes to .hpp files take longer, depending on what you change.\
 > If you switch back and forth between branches, it also takes a long time to rebuild, even if you haven't made any changes.
 
 > [!TIP]
@@ -144,11 +144,11 @@ How to building with Visual Studio on Windows 64-bit.
 >    C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\winrt
 >    ```
 >    _(Note: the exact path may vary depending on your Windows SDK version.)_
-> 2. In Visual Studio 2022, open the **libslic3r_gui** project properties:  
->    Go to **Configuration Properties > C/C++ > Preprocessor > Preprocessor Definitions**  
+> 2. In Visual Studio 2022, open the **libslic3r_gui** project properties:\
+>    Go to **Configuration Properties > C/C++ > Preprocessor > Preprocessor Definitions**\
 >    ➕ Add: `HAS_WIN10SDK`
-> 3. In Visual Studio 2022, open the **OrcaSlicer_app_gui** project properties:  
->    Go to **Configuration Properties > C/C++ > General > Additional Include Directories**  
+> 3. In Visual Studio 2022, open the **OrcaSlicer_app_gui** project properties:\
+>    Go to **Configuration Properties > C/C++ > General > Additional Include Directories**\
 >    ➕ Add the path to the `winrt` folder from step 1.
 > 4. Build the solution.
 

@@ -55,7 +55,7 @@ Enable this to enable the camera on printer to check the quality of first layer.
 
 ## Power Loss Recovery
 
-Enable power loss recovery by inserting commands in generated G-code.  
+Enable power loss recovery by inserting commands in generated G-code.\
 Only for [Bambu Lab](https://wiki.bambulab.com/en/knowledge-sharing/power-loss-recovery) or [Marlin 2 firmware](https://marlinfw.org/docs/gcode/M413.html) based printers.
 
 > [!TIP]
