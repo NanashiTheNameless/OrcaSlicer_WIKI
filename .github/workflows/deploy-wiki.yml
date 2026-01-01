@@ -1,0 +1,70 @@
+name: Deploy Wiki to orca-website
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout OrcaSlicer_WIKI repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install mkdocs
+        run: pip install mkdocs
+
+      - name: Build wiki content
+        run: |
+          chmod +x build.sh
+          ./build.sh -d
+
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: OrcaSlicer
+          repositories: orca-website
+
+      - name: Clone orca-website repository
+        run: |
+          git clone --depth 1 https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/OrcaSlicer/orca-website.git orca-website
+
+      - name: Deploy wiki content
+        run: |
+          # Remove old wiki folder if it exists
+          rm -rf orca-website/wiki
+          
+          # Copy new wiki content
+          cp -r wiki orca-website/wiki
+          
+          # Configure git
+          cd orca-website
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Check if there are changes to commit
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to deploy"
+            exit 0
+          fi
+          
+          # Stage, commit and push
+          git add wiki
+          git commit -m "Update wiki content from OrcaSlicer_WIKI
+
+          Source commit: ${{ github.sha }}
+          Triggered by: ${{ github.actor }}"
+          git push
+

@@ -1,0 +1,140 @@
+site_name: OrcaSlicer WIKI
+site_description: Official Wiki for OrcaSlicer - A powerful open source slicer for FFF (FDM) 3D Printers
+site_url: https://www.orcaslicer.com/wiki
+
+# MkDocs requires docs_dir to be a subdirectory
+# The build script will handle the file structure
+docs_dir: docs
+site_dir: html
+
+# Use flat URLs (page.html) instead of directory URLs (page/index.html)
+use_directory_urls: false
+
+# Theme configuration
+theme:
+  name: readthedocs
+
+# Markdown extensions (using built-in extensions to avoid extra dependencies)
+markdown_extensions:
+  - codehilite:
+      guess_lang: false
+  - fenced_code
+  - tables
+  - toc:
+      permalink: true
+  - attr_list
+  - md_in_html
+
+# Navigation structure based on Home.md
+nav:
+- Home: index.md
+- Calibration:
+  - "Adaptive Pressure Advance": "calibration/adaptive-pressure-advance-calib.md"
+  - "Calibration Guide": calibration/Calibration.md
+  - Cornering: "calibration/cornering-calib.md"
+  - "Flow Rate Calibration": "calibration/flow-rate-calib.md"
+  - "Input Shaping": "calibration/input-shaping-calib.md"
+  - "Pressure Advance": "calibration/pressure-advance-calib.md"
+  - "Retraction test": "calibration/retraction-calib.md"
+  - "Temp Calibration": "calibration/temp-calib.md"
+  - "Filament Tolerance Calibration": "calibration/tolerance-calib.md"
+  - VFA: "calibration/vfa-calib.md"
+  - "Max Volumetric Speed (FlowRate) Calibration": "calibration/volumetric-speed-calib.md"
+- "Developer Reference":
+  - "Localization and translation guide": "developer-reference/Localization_guide.md"
+  - "Placeholders Variables": "developer-reference/Built-in-placeholders-variables.md"
+  - "How to Build": "developer-reference/How-to-build.md"
+  - "Guide: Develop Profiles for OrcaSlicer": "developer-reference/How-to-create-profiles.md"
+  - "How to Test": "developer-reference/How-to-test.md"
+  - "How to Contribute to the Wiki": "developer-reference/How-to-wiki.md"
+  - "Application Structure Overview": "developer-reference/plater-sidebar-tab-combobox.md"
+  - "Preset and Bundle": "developer-reference/Preset-and-bundle.md"
+  - "Slicing Hierarchy": "developer-reference/slicing-hierarchy.md"
+- "General Settings":
+  - "Keyboard Shortcuts": "general-settings/keyboard-shortcuts.md"
+- "Material Settings":
+  - Cooling:
+    - "Material Cooling": material_settings/cooling/material_cooling.md
+  - Filament:
+    - "Material Basic Information": material_settings/filament/material_basic_information.md
+    - "Material Flow Ratio and Pressure Advance": material_settings/filament/material_flow_ratio_and_pressure_advance.md
+    - "Material Temperatures": material_settings/filament/material_temperatures.md
+    - "Material Volumetric Speed Limitation": material_settings/filament/material_volumetric_speed_limitation.md
+  - Multimaterial:
+    - "Material Multimaterial Settings": material_settings/multimaterial/material_multimaterial.md
+  - "Setting Overrides":
+    - "Material Setting Overrides": "material_settings/setting overrides/material_setting_overrides.md"
+  - Advanced:
+    - "Advanced Material Settings": material_settings/advanced/material_advanced.md
+  - Dependencies:
+    - "Material Dependencies": material_settings/dependencies/material_dependencies.md
+- "Print Prepare":
+  - "STL Transformation": "print_prepare/stl-transformation.md"
+- "Print Settings":
+  - Multimaterial:
+    - "Filament for Features": print_settings/multimaterial/multimaterial_settings_filament_for_features.md
+    - "Flush Options": print_settings/multimaterial/multimaterial_settings_flush_options.md
+    - "Ooze prevention": print_settings/multimaterial/multimaterial_settings_ooze_prevention.md
+    - "Prime Tower": print_settings/multimaterial/multimaterial_settings_prime_tower.md
+    - "Multimaterial Advanced": print_settings/multimaterial/multimaterial_settings_advanced.md
+  - Quality:
+    - Bridging: print_settings/quality/quality_settings_bridging.md
+    - Ironing: print_settings/quality/quality_settings_ironing.md
+    - "Layer Height": print_settings/quality/quality_settings_layer_height.md
+    - "Line Width": print_settings/quality/quality_settings_line_width.md
+    - Overhangs: print_settings/quality/quality_settings_overhangs.md
+    - Precision: print_settings/quality/quality_settings_precision.md
+    - Seam: print_settings/quality/quality_settings_seam.md
+    - "Wall and surfaces": print_settings/quality/quality_settings_wall_and_surfaces.md
+    - "Wall Generator": print_settings/quality/quality_settings_wall_generator.md
+  - Speed:
+    - Acceleration: print_settings/speed/speed_settings_acceleration.md
+    - "Initial layer speed": print_settings/speed/speed_settings_initial_layer_speed.md
+    - "Jerk XY": print_settings/speed/speed_settings_jerk_xy.md
+    - "Overhang Speed": print_settings/speed/speed_settings_overhang_speed.md
+    - Travel: print_settings/speed/speed_settings_travel.md
+    - "Speed Advanced - Extrusion Rate Smoothing": print_settings/speed/speed_settings_advanced.md
+    - "Other layers speed": print_settings/speed/speed_settings_other_layers_speed.md
+  - Strength:
+    - Infill: print_settings/strength/strength_settings_infill.md
+    - "Infill rotation template metalanguage": print_settings/strength/strength_settings_infill_rotation_template_metalanguage.md
+    - Patterns: print_settings/strength/strength_settings_patterns.md
+    - "Top and Bottom Shells": print_settings/strength/strength_settings_top_bottom_shells.md
+    - Walls: print_settings/strength/strength_settings_walls.md
+    - "Strength Advanced": print_settings/strength/strength_settings_advanced.md
+  - Support:
+    - "Support Filament": print_settings/support/support_settings_filament.md
+    - "Support Ironing": print_settings/support/support_settings_ironing.md
+    - Raft: print_settings/support/support_settings_raft.md
+    - Support: print_settings/support/support_settings_support.md
+    - "Tree Support": print_settings/support/support_settings_tree.md
+    - "Support Advanced": print_settings/support/support_settings_advanced.md
+  - Others:
+    - Brim: print_settings/others/others_settings_brim.md
+    - "Fuzzy Skin": print_settings/others/others_settings_fuzzy_skin.md
+    - "G-Code Output": print_settings/others/others_settings_g_code_output.md
+    - Notes: print_settings/others/others_settings_notes.md
+    - "Post-Processing Scripts": print_settings/others/others_settings_post_processing_scripts.md
+    - Skirt: print_settings/others/others_settings_skirt.md
+    - "Special Mode": print_settings/others/others_settings_special_mode.md
+- "Printer Settings":
+  - "Basic Information":
+    - "Printer Accessory": "printer_settings/basic information/printer_basic_information_accessory.md"
+    - "Adaptive Bed Mesh": "printer_settings/basic information/printer_basic_information_adaptive_bed_mesh.md"
+    - "Advanced Printer Settings": "printer_settings/basic information/printer_basic_information_advanced.md"
+    - "Cooling Fan": "printer_settings/basic information/printer_basic_information_cooling_fan.md"
+    - "Extruder Clearance": "printer_settings/basic information/printer_basic_information_extruder_clearance.md"
+    - "Printable Space": "printer_settings/basic information/printer_basic_information_printable_space.md"
+  - Extruder:
+    - "Basic Extruder Information": printer_settings/extruder/printer_extruder_basic_information.md
+    - Retraction: printer_settings/extruder/printer_extruder_retraction.md
+    - "Z Hop": printer_settings/extruder/printer_extruder_z_hop.md
+  - "Machine G-Code":
+    - "Machine G-code": "printer_settings/machine gcode/printer_machine_gcode.md"
+  - "Motion Ability":
+    - "Motion Ability": "printer_settings/motion ability/printer_motion_ability.md"
+  - Multimaterial:
+    - "Single Extruder Multi-Material Parameters": printer_settings/multimaterial/printer_multimaterial_semm_parameters.md
+    - "Multimaterial setup": printer_settings/multimaterial/printer_multimaterial_setup.md
+    - "Wipe Tower": printer_settings/multimaterial/printer_multimaterial_wipe_tower.md
+    - "Advanced Multi-Material Settings": printer_settings/multimaterial/printer_multimaterial_advanced.md
