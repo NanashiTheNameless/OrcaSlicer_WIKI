@@ -46,7 +46,7 @@ To check which patterns support multiline infill, see the Patterns Quick Referen
 
 > [!NOTE]
 > Orca's approach is different from other slicers that simply multiply the number of lines and material usage, generating a denser infill than expected.
-Orca Slicer keeps the cross-section constant for the set density.  
+Orca Slicer keeps the cross-section constant for the set density. \
 >
 >| Infill   Density % | Infill Lines | Orca Density | Other Slicers Density |
 >|--------------------|--------------|--------------|-----------------------|
@@ -66,19 +66,19 @@ Orca Slicer keeps the cross-section constant for the set density.
 - Increasing the number of lines (e.g., 2 or 3) can **improve part strength** and **print speed** without increasing material usage.
 - **Fire-retardant applications:** Some flame-resistant materials (like PolyMax PC-FR) require a minimum printed wall/infill thickness—often 1.5–3 mm—to comply with standards. Since infill contributes to overall part thickness, using multiple lines helps achieve the necessary thickness without switching to a large nozzle or printing with 100% infill. This is especially useful for high-temperature materials like PC, which are prone to warping when fully solid.
 - Creating **aesthetic** infill patterns (like [Grid](strength_settings_patterns#grid) or [Honeycomb](strength_settings_patterns#honeycomb)) with multiple line widths—without relying on CAD modeling or being limited to a single extrusion width.
-- Increase stability for weak infill patterns like [Lightning](strength_settings_patterns#Lightning).  
-- Printing gears and other mechanisms, because multiline infill transfer torque better.  
+- Increase stability for weak infill patterns like [Lightning](strength_settings_patterns#Lightning). \
+- Printing gears and other mechanisms, because multiline infill transfer torque better. \
 
 ![infill-multiline-aesthetic](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/infill-multiline-aesthetic.gif?raw=true)
 
 ### Strategy
 
-The way multiple lines are generated depends on the selected infill pattern.  
+The way multiple lines are generated depends on the selected infill pattern. \
 The following describes possible strategies for infill generation.
 
 #### Classic Strategy
 
-For most self intersecting infills (e.g. [Cubic](strength_settings_patterns#cubic)) multiline will generate closed loops to avoid overlapping lines. This may lead to some increased print time.  
+For most self intersecting infills (e.g. [Cubic](strength_settings_patterns#cubic)) multiline will generate closed loops to avoid overlapping lines. This may lead to some increased print time. \
 
 In this example of [Cubic](strength_settings_patterns#cubic) and [Gyroid](strength_settings_patterns#gyroid) patterns, you can see (in purple) the closed loops generated to avoid overlapping lines.
 
@@ -89,8 +89,8 @@ In this example of [Cubic](strength_settings_patterns#cubic) and [Gyroid](streng
 #### Non-Crossing Strategy
 
 [Grid](strength_settings_patterns#grid) & [Triangles](strength_settings_patterns#triangles) patterns use a Non-crossing multiline strategy.
-For these infill patterns, an alternative approach is used, generating trapezoidal trajectories designed to avoid self-intersections of the infill lines. In each layer, the pattern rotates to ensure isotropic strength.  
-This strategy improves printing times by avoiding closed loops in favor of continuous printing paths.  
+For these infill patterns, an alternative approach is used, generating trapezoidal trajectories designed to avoid self-intersections of the infill lines. In each layer, the pattern rotates to ensure isotropic strength. \
+This strategy improves printing times by avoiding closed loops in favor of continuous printing paths. \
 
 ![infill-multiline-non-crossing](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/infill-multiline-non-crossing.gif?raw=true)
 

@@ -55,7 +55,7 @@ Enable this to enable the camera on printer to check the quality of first layer.
 
 ## Power Loss Recovery
 
-Enable or Disable power loss recovery by inserting commands in generated G-code.  
+Enable or Disable power loss recovery by inserting commands in generated G-code. \
 Set `Printer configuration` to use the current printer's power loss recovery configuration.
 
 > [!NOTE]
