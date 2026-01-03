@@ -8,7 +8,9 @@ This is the Wiki Repository for [NanashiTheNameless's fork of OrcaSlicer](https:
 
 Documents in this repository are the source files for the OrcaSlicer Wiki and are automatically synchronized with the [UNOFFICIAL OrcaSlicer Wiki](https://github.com/NanashiTheNameless/OrcaSlicer/wiki).
 
-How to contribute to the wiki guide: **[How-to-wiki](https://github.com/NanashiTheNameless/OrcaSlicer/wiki/How-to-wiki)**
+Documents in this repository are the source files for the [UNOFFICIAL OrcaSlicer Wiki](https://github.com/NanashiTheNameless/OrcaSlicer/wiki) and are automatically synchronized with the [Alternate UNOFFICIAL OrcaSlicer Wiki](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/wiki).
+
+How to contribute to the wiki guide: **[How-to-wiki](https://github.com/OrcaSlicer/OrcaSlicer/wiki/How-to-wiki)**
 
 Please Note that this wiki is a work in progress.
 We appreciate your patience as we continue to develop and improve it!
