@@ -59,7 +59,6 @@ Orca Slicer keeps the cross-section constant for the set density. \
 >| 10%                | 5            | 10%          | 50%                   |
 >| 25%                | 5            | 25%          | 100%                  |
 >| 40%                | 5            | 40%          | 100%                  |
->
 
 ### Use cases
 

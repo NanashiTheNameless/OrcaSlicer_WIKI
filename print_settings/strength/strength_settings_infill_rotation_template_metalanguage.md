@@ -139,7 +139,7 @@ They include a simple definition of the angle for each layer. Note that the init
   ![0-30](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/0-30.png?raw=true)
 - `0%`, `10%`, `25%`, `100%`... - infill angle determined from relative terms from a full turn of 360 degree rotation. Rotate by 0, 36, 90, and 0 degrees.\
   - `25%` - the equivalent of `90` instruction.\
-  ![90](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/90.png?raw=true) 
+  ![90](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/90.png?raw=true)
 - `30, 60, 90, 120, 150, 0` - a more complex command defines a turn every layer at 30 degrees. At the end of the template line, the next instruction is read first, and this process continues until the entire height of the model is filled.
 
 ### Relative instructions
