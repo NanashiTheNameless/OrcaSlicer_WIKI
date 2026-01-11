@@ -14,7 +14,7 @@
 - [Outer wall](#outer-wall)
 - [Inner wall](#inner-wall)
 - [Small perimeters](#small-perimeters)
-  - [Small perimeters threshold](#small-perimeters-threshold)
+    - [Small perimeters threshold](#small-perimeters-threshold)
 - [Sparse infill](#sparse-infill)
 - [Internal solid infill](#internal-solid-infill)
 - [Top surface](#top-surface)

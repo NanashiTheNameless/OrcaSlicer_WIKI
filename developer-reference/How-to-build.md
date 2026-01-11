@@ -6,26 +6,26 @@ It includes tool requirements, setup commands, and build steps for each platform
 Whether you're a contributor or just want a custom build, this guide will help you compile OrcaSlicer successfully.
 
 - [Windows 64-bit](#windows-64-bit)
-  - [Windows Tools Required](#windows-tools-required)
-  - [Windows Hardware Requirements](#windows-hardware-requirements)
-  - [Windows Instructions](#windows-instructions)
+    - [Windows Tools Required](#windows-tools-required)
+    - [Windows Hardware Requirements](#windows-hardware-requirements)
+    - [Windows Instructions](#windows-instructions)
 - [MacOS 64-bit](#macos-64-bit)
-  - [MacOS Tools Required](#macos-tools-required)
-  - [MacOS Instructions](#macos-instructions)
-  - [Debugging in Xcode](#debugging-in-xcode)
+    - [MacOS Tools Required](#macos-tools-required)
+    - [MacOS Instructions](#macos-instructions)
+    - [Debugging in Xcode](#debugging-in-xcode)
 - [Linux](#linux)
-  - [Using Docker](#using-docker)
-    - [Docker Dependencies](#docker-dependencies)
-    - [Docker Instructions](#docker-instructions)
-  - [Troubleshooting](#troubleshooting)
-  - [Linux Build](#linux-build)
-    - [Dependencies](#dependencies)
-      - [Common dependencies across distributions](#common-dependencies-across-distributions)
-      - [Additional dependencies for specific distributions](#additional-dependencies-for-specific-distributions)
-    - [Linux Instructions](#linux-instructions)
-    - [Unit Testing](#unit-testing)
+    - [Using Docker](#using-docker)
+        - [Docker Dependencies](#docker-dependencies)
+        - [Docker Instructions](#docker-instructions)
+    - [Troubleshooting](#troubleshooting)
+    - [Linux Build](#linux-build)
+        - [Dependencies](#dependencies)
+            - [Common dependencies across distributions](#common-dependencies-across-distributions)
+            - [Additional dependencies for specific distributions](#additional-dependencies-for-specific-distributions)
+        - [Linux Instructions](#linux-instructions)
+        - [Unit Testing](#unit-testing)
 - [Portable User Configuration](#portable-user-configuration)
-  - [Example folder structure](#example-folder-structure)
+    - [Example folder structure](#example-folder-structure)
 
 ## Windows 64-bit
 
@@ -34,22 +34,31 @@ How to building with Visual Studio on Windows 64-bit.
 ### Windows Tools Required
 
 - [Visual Studio](https://visualstudio.microsoft.com/vs/) 2026, 2022 or Visual Studio 2019
+
   ```shell
   winget install --id=Microsoft.VisualStudio.Community -e
   ```
+
 - [CMake](https://cmake.org/)
+
   ```shell
   winget install --id=Kitware.CMake -e
   ```
+
 - [Strawberry Perl](https://strawberryperl.com/)
+
   ```shell
   winget install --id=StrawberryPerl.StrawberryPerl -e
   ```
+
 - [Git](https://git-scm.com/)
+
   ```shell
   winget install --id=Git.Git -e
   ```
+
 - [git-lfs](https://git-lfs.com/)
+
   ```shell
   winget install --id=GitHub.GitLFS -e
   ```
@@ -82,6 +91,7 @@ How to building with Visual Studio on Windows 64-bit.
    - If using GitHub Desktop clone the repository from the GUI.
    - If using the command line:
      1. Clone the repository:
+
      ```shell
      git clone https://github.com/NanashiTheNameless/OrcaSlicer
      ```
@@ -90,20 +100,27 @@ How to building with Visual Studio on Windows 64-bit.
      ```shell
      git lfs pull
      ```
+
 2. Open the appropriate command prompt:
+
    ```MD
    x64 Native Tools Command Prompt for VS
    ```
 
    1. Navigate to correct drive (if needed), e.g.:
+
       ```shell
       N:
       ```
+
    2. Change directory to the cloned repository, e.g.:
+
       ```shell
       cd N:\Repos\OrcaSlicer
       ```
+
    3. Run the build script:
+
       ```shell
       build_release_vs.bat
       ```
@@ -120,9 +137,11 @@ How to building with Visual Studio on Windows 64-bit.
    ```shell
    build\OrcaSlicer.slnx
    ```
-4. Open the solution in Visual Studio, set the build configuration to `Release` and run the `Local Windows Debugger`.\
-   ![compile_vs_local_debugger](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/develop/compile_vs_local_debugger.png?raw=true)
+
+4. Open the solution in Visual Studio, set the build configuration to `Release` and run the `Local Windows Debugger`. \
+   ![compile_vs_local_debugger](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/develop/compile_vs_local_debugger.png?raw=true)
 5. Your resulting executable will be located in:
+
    ```shell
    \build\src\Release\orca-slicer.exe
    ```
@@ -140,9 +159,11 @@ How to building with Visual Studio on Windows 64-bit.
 > If the "Fix model" option is missing from an object's context menu, it may indicate that your build did not properly include the Windows SDK. To quickly resolve this, follow these steps:
 >
 > 1. Locate the `winrt` folder in your Windows SDK installation. For example:
+>
 >    ```shell
 >    C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\winrt
 >    ```
+>
 >    _(Note: the exact path may vary depending on your Windows SDK version.)_
 > 2. In Visual Studio 2022, open the **libslic3r_gui** project properties:\
 >    Go to **Configuration Properties > C/C++ > Preprocessor > Preprocessor Definitions**\
@@ -198,15 +219,20 @@ cmake --version
 ### MacOS Instructions
 
 1. Clone the repository:
+
    ```shell
    git clone https://github.com/NanashiTheNameless/OrcaSlicer
    cd OrcaSlicer
    ```
+
 2. Build the application:
+
    ```shell
    ./build_release_macos.sh
    ```
+
 3. Open the application:
+
    ```shell
    open build/arm64/NanashiTheNameless/OrcaSlicer.app
    ```
@@ -216,9 +242,11 @@ cmake --version
 To build and debug directly in Xcode:
 
 1. Open the Xcode project:
+
    ```shell
    open build/arm64/OrcaSlicer.xcodeproj
    ```
+
 2. In the menu bar:
    - **Product > Scheme > OrcaSlicer**
    - **Product > Scheme > Edit Scheme...**
@@ -333,6 +361,7 @@ The build system supports multiple Linux distributions including Ubuntu/Debian a
    ```
 
 5. **All-in-one build (recommended):**
+
    ```shell
    ./build_linux.sh -dsti
    ```

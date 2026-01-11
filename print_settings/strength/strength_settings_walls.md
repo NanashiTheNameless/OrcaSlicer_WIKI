@@ -13,10 +13,11 @@ Adjusting wall settings can significantly affect layer adhesion, strength, appea
 
 "Wall loops" refers to the number of times the outer wall is printed in a loop.\
 Increasing the wall loops will:
+
 - Enhance:
-  - Layer adhesion
-  - Strength
-  - Rigidity
+    - Layer adhesion
+    - Strength
+    - Rigidity
 - Reduce infill ghosting
 - Increase print time
 
@@ -27,6 +28,7 @@ When this option is enabled, the ensure vertical shell thickness option needs to
 
 > [!WARNING]
 > It's not recommended to use this option with:
+>
 > - [Lightning infill](strength_settings_patterns#lightning) as there is limited infill to anchor the extra perimeters to.
 > - **[Ensure vertical shell thickness: ALL](strength_settings_advanced#ensure-vertical-shell-thickness)**
 

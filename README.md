@@ -10,18 +10,19 @@ Documents in this repository are the source files for the OrcaSlicer Wiki and ar
 
 Documents in this repository are the source files for the [UNOFFICIAL OrcaSlicer Wiki](https://github.com/NanashiTheNameless/OrcaSlicer/wiki) and are automatically synchronized with the [Alternate UNOFFICIAL OrcaSlicer Wiki](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/wiki).
 
-How to contribute to the wiki guide: **[How-to-wiki](https://github.com/OrcaSlicer/OrcaSlicer/wiki/How-to-wiki)**
+How to contribute to the wiki guide: **[How-to-wiki](https://github.com/NanashiTheNameless/OrcaSlicer/wiki/How-to-wiki)**
 
 Please Note that this wiki is a work in progress.
 We appreciate your patience as we continue to develop and improve it!
 
 ## Official links and community
 
-#### Official Website:
+#### Official Website
+
 <a href="https://www.orcaslicer.com/" style="font-size:2em;">OrcaSlicer.com</a>
 
 #### OFFICIAL OrcaSlicer Repository:
 <a href="https://github.com/OrcaSlicer/OrcaSlicer"><img src="https://img.shields.io/badge/OrcaSlicer-181717?style=flat&logo=github&logoColor=white" width="200" alt="GitHub Logo"/> </a>
 
 #### OFFICIAL Wiki Repository:
-<a href="https://github.com/OrcaSlicer/OrcaSlicer_WIKI"><img src="https://img.shields.io/badge/OrcaSlicer_WIKI-181717?style=flat&logo=github&logoColor=white" width="200" alt="GitHub Logo"/> </a>
+<a href="https://github.com/OrcaSlicer/OrcaSlicer_wiki"><img src="https://img.shields.io/badge/OrcaSlicer_WIKI-181717?style=flat&logo=github&logoColor=white" width="200" alt="GitHub Logo"/> </a>

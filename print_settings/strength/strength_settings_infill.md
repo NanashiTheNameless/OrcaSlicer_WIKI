@@ -4,21 +4,21 @@ Infill is the internal structure of a 3D print, providing strength and support. 
 
 - [Sparse infill density](#sparse-infill-density)
 - [Fill Multiline](#fill-multiline)
-  - [Use cases](#use-cases)
-  - [Strategy](#strategy)
-    - [Classic Strategy](#classic-strategy)
-    - [Non-Crossing Strategy](#non-crossing-strategy)
+    - [Use cases](#use-cases)
+    - [Strategy](#strategy)
+        - [Classic Strategy](#classic-strategy)
+        - [Non-Crossing Strategy](#non-crossing-strategy)
 - [Direction and Rotation](#direction-and-rotation)
-  - [Direction](#direction)
-  - [Rotation](#rotation)
+    - [Direction](#direction)
+    - [Rotation](#rotation)
 - [Infill Wall Overlap](#infill-wall-overlap)
 - [Apply gap fill](#apply-gap-fill)
 - [Filter out tiny gaps](#filter-out-tiny-gaps)
 - [Anchor](#anchor)
 - [Internal Solid Infill](#internal-solid-infill)
 - [Extra Solid Infill](#extra-solid-infill)
-  - [Interval Pattern](#interval-pattern)
-  - [Explicit Layer List](#explicit-layer-list)
+    - [Interval Pattern](#interval-pattern)
+    - [Explicit Layer List](#explicit-layer-list)
 - [Sparse Infill Pattern](#sparse-infill-pattern)
 - [Credits](#credits)
 
@@ -27,9 +27,9 @@ Infill is the internal structure of a 3D print, providing strength and support. 
 Infill density determines the amount of material used to fill the interior of a 3D print. It is usually expressed as a percentage, with 100% being completely solid.
 
 - Higher density increases
-  - Strength
-  - Material usage
-  - Print time.
+    - Strength
+    - Material usage
+    - Print time.
 
 > [!NOTE]
 > Density usually is calculated as a % of the total infill volume, not the total print volume.\
@@ -179,11 +179,11 @@ OrcaSlicer tries to connect two close infill lines to a short perimeter segment.
 
 - **Anchor On**
 
-![InfillAnchorOn](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/InfillAnchorOn.png?raw=true)
+![InfillAnchorOn](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/fill/InfillAnchorOn.png?raw=true)
+
 ## Internal Solid Infill
 
 Line pattern of internal solid infill. If the [detect narrow internal solid infill](strength_settings_advanced#detect-narrow-internal-solid-infill) be enabled, the [concentric pattern](strength_settings_patterns#concentric) will be used for the small area.
-
 
 ## Extra Solid Infill
 
@@ -194,11 +194,13 @@ Insert extra solid infills at specific layers to add strength at critical points
 The pattern supports two formats:
 
 ### Interval Pattern
+
 - **Simple interval**: `N` - Insert 1 solid layer every N layers, equal to `N#1`
 - **Multiple layers**: `N#K` - Insert K consecutive solid layers every N layers
 - **Optional K**: `N#` - Shorthand for `N#1`
 
 Examples:
+
 ```
 5 or 5#1    # Insert 1 solid layer every 5 layers
 5#          # Same as 5#1
@@ -206,6 +208,7 @@ Examples:
 ```
 
 ### Explicit Layer List
+
 Specify exact layer numbers (1-based) using comma-separated values. Each entry may be a single layer `N` or a range `N#K` to insert K consecutive solid layers starting at layer N:
 
 ```
@@ -215,12 +218,14 @@ Specify exact layer numbers (1-based) using comma-separated values. Each entry m
 ```
 
 > [!NOTE]
+>
 > - Layer numbers are 1-based (first layer is layer 1)
 > - `#K` is optional in both interval and explicit list entries (`N#` equals `N#1`)
 > - Solid layers are inserted in addition to the normal sparse infill pattern
 
 > [!TIP]
 > Use this feature to:
+>
 > - Add strength at stress concentration points
 > - Reinforce mounting holes or attachment points
 > - Create internal structure for functional parts
