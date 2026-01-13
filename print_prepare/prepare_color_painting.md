@@ -18,7 +18,7 @@ This tool will let you to paint specific triangular faces of your model. Useful 
 
 ### Height Range
 
-This toll allows you to paint horizontal faces or height ranges of your model.
+This tool allows you to paint horizontal faces or height ranges of your model.
 
 ### Fill
 

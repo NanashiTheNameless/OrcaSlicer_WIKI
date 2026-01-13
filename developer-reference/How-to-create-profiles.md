@@ -364,7 +364,7 @@ You can validate your profiles using both the **OrcaSlicer profile validator** a
 You can run OrcaSlicer to verify if the filament you just added is available and usable. You can also use the [Orca profile validator](https://github.com/SoftFever/Orca_tools/releases/tag/1) tool to help debug any errors.
 
 > [!IMPORTANT]
-> You need to delete the `%appdata%/OrcaSlicer/system` folder to force OrcaSlicer to reload your lastest changes.
+> You need to delete the `%appdata%/OrcaSlicer/system` folder to force OrcaSlicer to reload your latest changes.
 
 The process is the same if you want to add a new brand filament profile into the global library. You need to create a new file in the `resources\profiles\OrcaFilamentLibrary\filament\brand_name` folder. The only difference is that you should put the file into the brand's own subfolder.
 
