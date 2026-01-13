@@ -26,7 +26,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 
 ## Printer Settings
 
-![printer-preset](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/printer-preset.png?raw=true)  
+![printer-preset](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/printer-preset.png?raw=true) \
 <img alt="printer" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/printer.svg?raw=true" height="22"> Settings related to the 3D printer hardware and its configuration.
 
 - Basic Information
@@ -51,7 +51,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 
 ## Material Settings
 
-![filament-preset](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/filament-preset.png?raw=true)  
+![filament-preset](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/filament-preset.png?raw=true) \
 <img alt="filament" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/filament.svg?raw=true" height="22"> Settings related to the 3D printing material.
 
 - Material settings
@@ -70,12 +70,12 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 
 ## Process Settings
 
-![process-preset](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/process-preset.png?raw=true)  
+![process-preset](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/process-preset.png?raw=true) \
 <img alt="process" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/process.svg?raw=true" height="22"> Settings related to the 3D printing process.
 
 ### Quality Settings
 
-![process-quality](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-quality.png?raw=true)  
+![process-quality](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-quality.png?raw=true) \
 <img alt="custom-gcode_quality" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/custom-gcode_quality.svg?raw=true" height="22"> Settings related to print quality and aesthetics.
 
 - [<img alt="param_layer_height" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_layer_height.svg?raw=true" height="22"> Layer Height Settings](quality_settings_layer_height)
@@ -90,7 +90,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 
 ### Strength Settings
 
-![process-strength](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-strength.png?raw=true)  
+![process-strength](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-strength.png?raw=true) \
 <img alt="custom-gcode_strength" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/custom-gcode_strength.svg?raw=true" height="22"> Settings related to print strength and durability.
 
 - [<img alt="param_wall" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_wall.svg?raw=true" height="22"> Walls](strength_settings_walls)
@@ -102,7 +102,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 
 ### Speed Settings
 
-![process-speed](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-speed.png?raw=true)  
+![process-speed](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-speed.png?raw=true) \
 <img alt="custom-gcode_speed" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/custom-gcode_speed.svg?raw=true" height="22"> Settings related to print speed and movement.
 
 - [<img alt="param_speed_first" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_speed_first.svg?raw=true" height="22"> Initial Layer Speed](speed_settings_initial_layer_speed)
@@ -115,7 +115,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 
 ### Support Settings
 
-![process-support](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-support.png?raw=true)  
+![process-support](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-support.png?raw=true) \
 <img alt="custom-gcode_support" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/custom-gcode_support.svg?raw=true" height="22"> Settings related to support structures and their properties.
 
 - [<img alt="param_support" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_support.svg?raw=true" height="22"> Support](support_settings_support)
@@ -127,7 +127,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 
 ### Multimaterial Settings
 
-![process-multimaterial](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-multimaterial.png?raw=true)  
+![process-multimaterial](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-multimaterial.png?raw=true) \
 <img alt="custom-gcode_multi_material" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/custom-gcode_multi_material.svg?raw=true" height="22"> Settings related to multimaterial printing.
 
 - [<img alt="param_tower" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_tower.svg?raw=true" height="22"> Prime Tower](multimaterial_settings_prime_tower)
@@ -138,7 +138,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 
 ### Others Settings
 
-![process-others](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-others.png?raw=true)  
+![process-others](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-others.png?raw=true) \
 <img alt="custom-gcode_other" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/custom-gcode_other.svg?raw=true" height="22"> Settings related to various other print settings.
 
 - [<img alt="param_skirt" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_skirt.svg?raw=true" height="22"> Skirt](others_settings_skirt)

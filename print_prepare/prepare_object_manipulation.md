@@ -27,5 +27,5 @@ The Scale tool allows you to resize your 3D model.
 
 ## Lay on Face
 
-This is one of the fastest ways to properly orient a model for printing.  
+This is one of the fastest ways to properly orient a model for printing. \
 The Lay on Face tool allows you to quickly orient your model by selecting a face to lay flat on the print bed.
