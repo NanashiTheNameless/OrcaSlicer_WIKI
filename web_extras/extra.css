@@ -326,3 +326,8 @@ head:has(link[rel="canonical"][href$="keyboard-shortcuts.html"])~body td>code {
   color: var(--md-typeset-color);
   font-weight: 550;
 }
+
+/* Override theme's height: auto for images to respect explicit height attributes */
+.md-typeset img {
+  height: unset;
+}
