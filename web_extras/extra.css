@@ -165,6 +165,15 @@ h1 + ol, h2 + ol, h3 + ol, h4 + ol{
     vertical-align: middle;
 }
 
+img[height="22"] { /* Text icons */
+    height: 22px;
+}
+img[height="45"] { /* Patterns table */
+    height: 45px;
+}
+img[height="200"] { /* Calibrations guide preview */
+    height: 200px;
+}
 
 /* /////// LINKS */
 
@@ -325,9 +334,4 @@ head:has(link[rel="canonical"][href$="keyboard-shortcuts.html"])~body td>code {
   background-color: transparent;
   color: var(--md-typeset-color);
   font-weight: 550;
-}
-
-/* Override theme's height: auto for images to respect explicit height attributes */
-.md-typeset img {
-  height: revert;
 }
