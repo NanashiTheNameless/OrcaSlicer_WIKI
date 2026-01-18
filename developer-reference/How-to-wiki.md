@@ -68,10 +68,28 @@ For long pages, include a table of contents at the top to help readers find sect
 
 ```markdown
 - [Wiki Structure](#wiki-structure)
-  - [Home](#home)
-    - [Index and Navigation](#index-and-navigation)
-  - [File Naming and Organization](#file-naming-and-organization)
+    - [Home](#home)
+        - [Index and Navigation](#index-and-navigation)
+    - [File Naming and Organization](#file-naming-and-organization)
+- [Orca to Wiki Redirection](#orca-to-wiki-redirection)
 - [Formatting and Style](#formatting-and-style)
+    - [Markdown Formatting](#markdown-formatting)
+    - [Alerts and Callouts](#alerts-and-callouts)
+- [Images](#images)
+    - [Image Sources](#image-sources)
+        - [OrcaSlicer Resources](#orcaslicer-resources)
+        - [Wiki Images](#wiki-images)
+            - [Image Naming](#image-naming)
+            - [Image Placement](#image-placement)
+            - [Linking Images](#linking-images)
+                - [Examples](#examples)
+    - [Avoid the Following](#avoid-the-following)
+        - [Resize Images](#resize-images)
+    - [Image Cropping and Highlighting](#image-cropping-and-highlighting)
+    - [Recommended Formats](#recommended-formats)
+- [Structuring Content](#structuring-content)
+- [Commands and Code Blocks](#commands-and-code-blocks)
+- [External Links](#external-links)
 ```
 
 > [!NOTE]
@@ -96,46 +114,46 @@ The links naming uses the same format as the [Wiki Navigation described above](#
 
 There are 3 main ways to set up these links:
 
-1. Using `append_single_option_line` with a second string argument for the wiki page.
+1. Using `append_single_option_line` with a second string argument for the wiki page. \
 
-```cpp
-optgroup->append_single_option_line("[OPTION_NAME]"); // Option without wiki page/redirection
-optgroup->append_single_option_line("[OPTION_NAME]", "[WIKI_LINK]"); // Option with wiki page and redirection
-```
+   ```cpp
+   optgroup->append_single_option_line("[OPTION_NAME]"); // Option without wiki page/redirection
+   optgroup->append_single_option_line("[OPTION_NAME]", "[WIKI_LINK]"); // Option with wiki page and redirection
+   ```
 
-Example:
+    Example:
 
-```cpp
-optgroup->append_single_option_line("seam_gap","quality_settings_seam"); // Wiki page and redirection
-optgroup->append_single_option_line("seam_slope_type", "quality_settings_seam#scarf-joint-seam"); // Wiki page and redirection to `Scarf Joint Seam` section
-```
+   ```cpp
+   optgroup->append_single_option_line("seam_gap","quality_settings_seam"); // Wiki page and redirection
+   optgroup->append_single_option_line("seam_slope_type", "quality_settings_seam#scarf-joint-seam"); // Wiki page and redirection to `Scarf Joint Seam` section
+   ```
 
 2. Using `append_option_line` with a third string argument for the wiki page.
 
-```cpp
-append_option_line([optgroup], [opt_key], "[WIKI_LINK]");
-```
+   ```cpp
+   append_option_line([optgroup], [opt_key], "[WIKI_LINK]");
+   ```
 
-Example:
+    Example:
 
-```cpp
-append_option_line(optgroup, "machine_max_acceleration_x", "printer_motion_ability#acceleration-limitation");
-```
+   ```cpp
+   append_option_line(optgroup, "machine_max_acceleration_x", "printer_motion_ability#acceleration-limitation");
+   ```
 
 3. Using grouped rows with `append_line` and setting the wiki target via `line.label_path`.
 
-```cpp
-line.label_path = "[WIKI_LINK]";
-```
+   ```cpp
+   line.label_path = "[WIKI_LINK]";
+   ```
 
-Example:
+    Example:
 
-```cpp
-Line line = { L("Overhang speed"), L("...") };
-line.label_path = "speed_settings_overhang_speed#slow-down-for-overhang";
-line.append_option(optgroup->get_option("overhang_1_4_speed"));
-optgroup->append_line(line);
-```
+   ```cpp
+   Line line = { L("Overhang speed"), L("...") };
+   line.label_path = "speed_settings_overhang_speed#slow-down-for-overhang";
+   line.append_option(optgroup->get_option("overhang_1_4_speed"));
+   optgroup->append_line(line);
+   ```
 
 ## Formatting and Style
 
