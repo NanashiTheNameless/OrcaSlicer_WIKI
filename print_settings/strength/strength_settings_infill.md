@@ -11,6 +11,7 @@ Infill is the internal structure of a 3D print, providing strength and support. 
 - [Direction and Rotation](#direction-and-rotation)
     - [Direction](#direction)
     - [Rotation](#rotation)
+    - [Symmetric infill Y axis](#symmetric-infill-y-axis)
 - [Infill Wall Overlap](#infill-wall-overlap)
 - [Apply gap fill](#apply-gap-fill)
 - [Filter out tiny gaps](#filter-out-tiny-gaps)
@@ -31,7 +32,7 @@ Infill density determines the amount of material used to fill the interior of a 
     - Material usage
     - Print time.
 
-> [!NOTE]
+> [!NOTE]slicer/orca
 > Density usually is calculated as a % of the total infill volume, not the total print volume.\
 > Nevertheless, **not all patterns interpret density the same way**, so the actual material usage may vary.\
 > You can see each pattern's material usage in the [Patterns section](strength_settings_patterns).
@@ -95,8 +96,7 @@ This strategy improves printing times by avoiding closed loops in favor of conti
 
 ## Direction and Rotation
 
-> [!TIP]
-> You can use [Template Metalanguage for infill rotation](strength_settings_infill_rotation_template_metalanguage) to create more complex patterns.
+These settings control the orientation of the sparse infill lines to optimize strength and material usage.
 
 ### Direction
 
@@ -132,8 +132,23 @@ Other examples:
 > [!NOTE]
 > If there are more layers than angles, the sequence repeats.
 
+> [!TIP]
+> You can use [Template Metalanguage for infill rotation](strength_settings_infill_rotation_template_metalanguage) to create more complex patterns.
+
 > [!IMPORTANT]
 > Not all sparse [patterns](strength_settings_patterns) support rotation.
+
+### Symmetric infill Y axis
+
+When enabled, the infill pattern will be mirrored along the Y-axis of the print bed. This can help achieve more uniform strength distribution in certain geometries.
+
+> [!IMPORTANT]
+> This setting may not be supported by all infill patterns.
+
+You can apply this setting with multiple objects or using modifiers to control infill orientation for different parts of your print. \
+For example, you might want to mirror the infill pattern for specific components to enhance their structural integrity like planes's wings or boat hulls without the need of using 45° rotation.
+
+![symmetric_infill_y_axis](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/symmetric_infill_y_axis.png?raw=true)
 
 ## Infill Wall Overlap
 
