@@ -1,4 +1,4 @@
-# How to Download Pull Requests Artifacts for Testing
+# How to Download Pull Request Artifacts for Testing
 
 This is an UNOFFICIAL Unstable fork, You should not use PR Builds from this repo. \
 Instead Use the [latest Nightly from this repo](<https://github.com/NanashiTheNameless/OrcaSlicer/releases/latest>) or [the official orcaslicer version](<https://github.com/OrcaSlicer/OrcaSlicer>)... \

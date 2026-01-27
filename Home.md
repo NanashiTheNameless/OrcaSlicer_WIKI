@@ -219,5 +219,5 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 - [Plater, Sidebar, Tab, ComboBox](plater-sidebar-tab-combobox)
 - [Built-in placeholders & variables](Built-in-placeholders-variables)
 - [Slicing Call Hierarchy](slicing-hierarchy)
-- [How to Download Pull Requests Artifacts for Testing](How-to-download-PR-artifacts)
+- [How to Download Pull Request Artifacts for Testing](How-to-download-PR-artifacts)
 - [List of staggered perimiters known issues](staggered-perimiters-known-issues)
