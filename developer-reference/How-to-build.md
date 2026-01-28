@@ -126,13 +126,11 @@ How to building with Visual Studio on Windows 64-bit.
         build_release_vs.bat
         ```
 
-        ![vs_cmd](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/develop/vs_cmd.png?raw=true)
+    ![vs_cmd](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/develop/vs_cmd.png?raw=true)
 
-        > [!NOTE]
-        > The build process will take a long time depending on your system but even with high-end hardware it can take up to 40 minutes.
+    **🕒 Note:** The build process will take a long time depending on your system but even with high-end hardware it can take up to 40 minutes.
 
-        > [!TIP]
-        > If you encounter issues, you can try to uninstall ZLIB from your Vcpkg library.
+    **💡 Tip:** If you encounter issues, you can try to uninstall ZLIB from your Vcpkg library.
 
 3. If successful, you will find the Visual Studio solution file in:
 
@@ -167,12 +165,14 @@ How to building with Visual Studio on Windows 64-bit.
 >    ```
 >
 >    _(Note: the exact path may vary depending on your Windows SDK version.)_
-> 2. In Visual Studio 2022, open the **libslic3r_gui** project properties:\
->    Go to **Configuration Properties > C/C++ > Preprocessor > Preprocessor Definitions**\
+>
+> 2. In Visual Studio 2022, open the **libslic3r_gui** project properties: \
+>    Go to **Configuration Properties > C/C++ > Preprocessor > Preprocessor Definitions** \
 >    ➕ Add: `HAS_WIN10SDK`
-> 3. In Visual Studio 2022, open the **OrcaSlicer_app_gui** project properties:\
->    Go to **Configuration Properties > C/C++ > General > Additional Include Directories**\
+> 3. In Visual Studio 2022, open the **OrcaSlicer_app_gui** project properties: \
+>    Go to **Configuration Properties > C/C++ > General > Additional Include Directories** \
 >    ➕ Add the path to the `winrt` folder from step 1.
+>
 > 4. Build the solution.
 
 ## MacOS 64-bit
