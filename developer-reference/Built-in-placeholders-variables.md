@@ -171,15 +171,15 @@ Names of the print, filament, and printer presets that provided the configuratio
 | `printer_preset` | string | Logical printer preset used for slicing. |
 
 > [!TIP]
-> Other items share its config key with the placeholder name. \
-> Hover the label to discover the key. \
+> Other items share its config key with the placeholder name.  
+> Hover the label to discover the key.  
 > ![variable_name](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/develop/variable_name.png?raw=true)
 
 ## Filename Templates
 
 Notes about the limited placeholder set that is available when OrcaSlicer builds the export filename.
 
-The slicer resolves `filename_format` **before** any G-code is produced (see `Print::output_filename`). \
+The slicer resolves `filename_format` **before** any G-code is produced (see `Print::output_filename`).  
 Only placeholders that are already present in the global parser at that time can be used in the exported file name:
 
 - Configuration keys from the active print/filament/printer presets, including `print_preset`, `filament_preset[]`, `printer_preset`, and every regular setting (line widths, temperatures, etc.).

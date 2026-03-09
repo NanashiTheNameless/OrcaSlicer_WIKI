@@ -1,6 +1,6 @@
 # Brim ears Painting
 
-This painting tool allows you to paint brim ears on the base of your 3D model to improve bed adhesion during printing. \
+This painting tool allows you to paint brim ears on the base of your 3D model to improve bed adhesion during printing.  
 It also includes an Auto-generate points feature that automatically detects and applies brim ears to suitable areas of the model.
 
 ## Parameters

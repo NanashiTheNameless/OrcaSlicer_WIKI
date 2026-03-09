@@ -65,7 +65,7 @@ Minimum width required for a model feature to be printed. Features below this va
 
 ### Minimum wall length
 
-Avoids very short or isolated wall segments that add unnecessary time. \
+Avoids very short or isolated wall segments that add unnecessary time.  
 Increasing this value removes short unconnected walls, **improving efficiency**.
 
 > [!NOTE]

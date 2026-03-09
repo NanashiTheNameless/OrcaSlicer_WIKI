@@ -25,7 +25,7 @@
 
 ## Material Cooling for Specific Layer
 
-This setting allows you to customize the cooling behavior of your 3D printer for specific layers of your print. \
+This setting allows you to customize the cooling behavior of your 3D printer for specific layers of your print.  
 Proper cooling is essential for achieving high-quality prints, especially when dealing with overhangs and bridges.
 
 ### No cooling for the first
@@ -35,8 +35,8 @@ Disabling the fan for the first few layers improves build-plate adhesion and red
 
 ### Full fan speed at layer
 
-Fan speed is increased linearly from 0% starting at the layer specified by [close_fan_the_first_x_layers](#no-cooling-for-the-first) up to the maximum part-cooling speed at this specified layer. \
-If this layer is less than or equal to [close_fan_the_first_x_layers](#no-cooling-for-the-first), it is ignored and the fan will reach the maximum allowed speed on the layer immediately after [close_fan_the_first_x_layers](#no-cooling-for-the-first) (i.e. at layer [close_fan_the_first_x_layers](#no-cooling-for-the-first) + 1). \
+Fan speed is increased linearly from 0% starting at the layer specified by [close_fan_the_first_x_layers](#no-cooling-for-the-first) up to the maximum part-cooling speed at this specified layer.  
+If this layer is less than or equal to [close_fan_the_first_x_layers](#no-cooling-for-the-first), it is ignored and the fan will reach the maximum allowed speed on the layer immediately after [close_fan_the_first_x_layers](#no-cooling-for-the-first) (i.e. at layer [close_fan_the_first_x_layers](#no-cooling-for-the-first) + 1).  
 Set this option to `0` to disable the automatic ramp.
 
 ## Material Part Cooling Fan
@@ -99,13 +99,13 @@ Reducing the internal bridges fan speed, compared to your regular fan speed, can
 
 ### Support interface fan speed
 
-This part cooling fan speed is applied when printing support interfaces. Setting this parameter to a higher than regular speed reduces the layer binding strength between supports and the supported part, making them easier to separate. \
-Set to -1 to disable it. \
+This part cooling fan speed is applied when printing support interfaces. Setting this parameter to a higher than regular speed reduces the layer binding strength between supports and the supported part, making them easier to separate.  
+Set to -1 to disable it.  
 This setting is overridden by disable_fan_first_layers.
 
 ### Ironing fan speed
 
-This part cooling fan speed is applied when ironing. Setting this parameter to a lower than regular speed reduces possible nozzle clogging due to the low volumetric flow rate, making the interface smoother. \
+This part cooling fan speed is applied when ironing. Setting this parameter to a lower than regular speed reduces possible nozzle clogging due to the low volumetric flow rate, making the interface smoother.  
 Set to -1 to disable it.
 
 ### Auxiliary part cooling fan

@@ -10,8 +10,8 @@ Machine G-code are custom G-code scripts that are executed at specific points du
 > - [Klipper G-code](https://www.klipper3d.org/G-Codes)
 
 > [!IMPORTANT]
-> Machine G-code scripts are powerful tools for customizing your printing process. However, they can also cause issues if not used correctly. \
-> It's recommended to use a known base of G-code commands for your specific printer firmware (e.g., Marlin, RepRap, etc.) and to understand the implications of each command used in the scripts. \
+> Machine G-code scripts are powerful tools for customizing your printing process. However, they can also cause issues if not used correctly.  
+> It's recommended to use a known base of G-code commands for your specific printer firmware (e.g., Marlin, RepRap, etc.) and to understand the implications of each command used in the scripts.  
 > Always test your G-code scripts thoroughly before using them in production.
 
 - [Machine start G-code](#machine-start-g-code)
@@ -108,7 +108,7 @@ Example G-codes:
   M106 S75
   {endif}
   ```
- \
+  
 - Marlin G-code to set the fan speed to 0% for the ['Internal Sparse Infill' role](strength_settings_infill) and the first three layers, and to 30% `0.3*255` for the other roles. This achieves good layer adhesion while maintaining perimeter quality.:
 
   ```c++
@@ -118,7 +118,7 @@ Example G-codes:
   M106 S{0.3*255}
   {endif}
   ```
- \
+  
 - Marlin g-code to set pressure advance to 0 for ['Internal Sparse Infill' role](strength_settings_infill) and restore it to previous value for other roles:
 
   ```c++

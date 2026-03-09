@@ -83,7 +83,7 @@ After slicing a model, you can export the sliced result for printing.
 OrcaSlicer also allows you to import sliced files in G-code. This can help you visualize the toolpaths of a G-code file, which can be useful for analyzing the slicing results or for comparing different slicing configurations.
 
 > [!TIP]
-> G-code files will only contain the toolpaths and will not include any printer, material, or process information. \
+> G-code files will only contain the toolpaths and will not include any printer, material, or process information.  
 > If you want to import a sliced file with all the necessary information for printing, it's recommended to use the Gcode.3MF format.
 
 ## Presets
@@ -115,16 +115,16 @@ OrcaSlicer supports the following 3D model file formats for import:
 > [!NOTE]
 > This is the basic file format used for the slicing process in OrcaSlicer. Any other supported file formats (e.g., STEP, 3MF, OBJ) are converted to STL during the import process.
 
-It's main advantage is its simplicity and wide compatibility with various 3D modeling software and slicers.   However, STL files can have limitations in terms of mesh quality and may not capture intricate details accurately. \
-If the original model was designed in a Mesh-based software, such as Blender or ZBrush, the STL file will likely be a good representation of the original design. \
+It's main advantage is its simplicity and wide compatibility with various 3D modeling software and slicers.   However, STL files can have limitations in terms of mesh quality and may not capture intricate details accurately.  
+If the original model was designed in a Mesh-based software, such as Blender or ZBrush, the STL file will likely be a good representation of the original design.  
 However, if the original model was created in a CAD software, such as SolidWorks or Fusion 360, the STL file may not capture all the details and features of the original design accurately and will depend on the CAD's export settings.
 
 ### 3MF
 
 3MF is a modern file format designed for 3D printing that provides a more efficient and comprehensive way to represent 3D models, including support for colors, materials, and multiple objects within a single file.
 
-Some 3MF files may contain Printer, Material, and Process information that can be used to automatically configure print settings in OrcaSlicer. \
-When importing a 3MF file, OrcaSlicer will attempt to extract this information and apply it to the imported model. \
+Some 3MF files may contain Printer, Material, and Process information that can be used to automatically configure print settings in OrcaSlicer.  
+When importing a 3MF file, OrcaSlicer will attempt to extract this information and apply it to the imported model.  
 If the 3MF information is not compatible with OrcaSlicer, it will be ignored and the model will be imported with default settings.
 
 > [!TIP]
@@ -165,7 +165,7 @@ To restore the dialog, go to "Preferences" (Ctrl + P) > "Show the STEP mesh para
 
 ### DRC
 
-[Draco (DRC)](https://github.com/google/draco) is a compression library developed by Google that is designed to compress and decompress 3D geometric meshes. \
+[Draco (DRC)](https://github.com/google/draco) is a compression library developed by Google that is designed to compress and decompress 3D geometric meshes.  
 Its main advantage is its ability to significantly reduce the file size of 3D models while maintaining a high level of visual fidelity.
 
 #### Draco Compression
@@ -174,7 +174,7 @@ Draco uses several compression techniques to achieve high compression ratios, li
 
 ##### Draco Quantization Bits
 
-This technique reduces the precision of the vertex attributes (such as position, normal, and texture coordinates) to further decrease the file size. \
+This technique reduces the precision of the vertex attributes (such as position, normal, and texture coordinates) to further decrease the file size.  
 By default, OrcaSlicer disables quantization by setting the quantization bits to 0, which means that the original precision of the vertex attributes is preserved. This will create a almost Lossless compression (~15% of the original size) but it can be adjusted to achieve a smaller file size at the cost of some loss in visual fidelity.
 
 Using a quantization bit value of 25 will result in a even smaller file size (around 5% of the original size) while still maintaining a good level of visual fidelity and dimensional accuracy for most models.

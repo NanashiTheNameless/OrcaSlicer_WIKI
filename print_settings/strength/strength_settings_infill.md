@@ -33,8 +33,8 @@ Infill density determines the amount of material used to fill the interior of a 
     - Print time.
 
 > [!NOTE]slicer/orca
-> Density usually is calculated as a % of the total infill volume, not the total print volume. \
-> Nevertheless, **not all patterns interpret density the same way**, so the actual material usage may vary. \
+> Density usually is calculated as a % of the total infill volume, not the total print volume.  
+> Nevertheless, **not all patterns interpret density the same way**, so the actual material usage may vary.  
 > You can see each pattern's material usage in the [Patterns section](strength_settings_patterns).
 
 ## Fill Multiline
@@ -46,7 +46,7 @@ To check which patterns support multiline infill, see the Patterns Quick Referen
 ![multiline-infill](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/multiline-infill.png?raw=true)
 
 > [!NOTE]
-> Orca's approach is different from other slicers that simply multiply the number of lines and material usage, generating a denser infill than expected. \
+> Orca's approach is different from other slicers that simply multiply the number of lines and material usage, generating a denser infill than expected.  
 > Orca Slicer keeps the cross-section constant for the set density.
 >
 >| Infill   Density % | Infill Lines | Orca Density | Other Slicers Density |
@@ -66,19 +66,19 @@ To check which patterns support multiline infill, see the Patterns Quick Referen
 - Increasing the number of lines (e.g., 2 or 3) can **improve part strength** and **print speed** without increasing material usage.
 - **Fire-retardant applications:** Some flame-resistant materials (like PolyMax PC-FR) require a minimum printed wall/infill thickness—often 1.5–3 mm—to comply with standards. Since infill contributes to overall part thickness, using multiple lines helps achieve the necessary thickness without switching to a large nozzle or printing with 100% infill. This is especially useful for high-temperature materials like PC, which are prone to warping when fully solid.
 - Creating **aesthetic** infill patterns (like [Grid](strength_settings_patterns#grid) or [Honeycomb](strength_settings_patterns#honeycomb)) with multiple line widths—without relying on CAD modeling or being limited to a single extrusion width.
-- Increase stability for weak infill patterns like [Lightning](strength_settings_patterns#Lightning). \
-- Printing gears and other mechanisms, because multiline infill transfer torque better. \
+- Increase stability for weak infill patterns like [Lightning](strength_settings_patterns#Lightning).  
+- Printing gears and other mechanisms, because multiline infill transfer torque better.  
 
 ![infill-multiline-aesthetic](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/infill-multiline-aesthetic.gif?raw=true)
 
 ### Strategy
 
-The way multiple lines are generated depends on the selected infill pattern. \
+The way multiple lines are generated depends on the selected infill pattern.  
 The following describes possible strategies for infill generation.
 
 #### Classic Strategy
 
-For most self intersecting infills (e.g. [Cubic](strength_settings_patterns#cubic)) multiline will generate closed loops to avoid overlapping lines. This may lead to some increased print time. \
+For most self intersecting infills (e.g. [Cubic](strength_settings_patterns#cubic)) multiline will generate closed loops to avoid overlapping lines. This may lead to some increased print time.  
 
 In this example of [Cubic](strength_settings_patterns#cubic) and [Gyroid](strength_settings_patterns#gyroid) patterns, you can see (in purple) the closed loops generated to avoid overlapping lines.
 
@@ -89,8 +89,8 @@ In this example of [Cubic](strength_settings_patterns#cubic) and [Gyroid](streng
 #### Non-Crossing Strategy
 
 [Grid](strength_settings_patterns#grid) & [Triangles](strength_settings_patterns#triangles) patterns use a Non-crossing multiline strategy.
-For these infill patterns, an alternative approach is used, generating trapezoidal trajectories designed to avoid self-intersections of the infill lines. In each layer, the pattern rotates to ensure isotropic strength. \
-This strategy improves printing times by avoiding closed loops in favor of continuous printing paths. \
+For these infill patterns, an alternative approach is used, generating trapezoidal trajectories designed to avoid self-intersections of the infill lines. In each layer, the pattern rotates to ensure isotropic strength.  
+This strategy improves printing times by avoiding closed loops in favor of continuous printing paths.  
 
 ![infill-multiline-non-crossing](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/infill-multiline-non-crossing.gif?raw=true)
 
@@ -106,7 +106,7 @@ Controls the direction of the infill lines to optimize or strengthen the print.
 
 ### Rotation
 
-This parameter adds a rotation to the sparse infill direction for each layer according to the specified template. \
+This parameter adds a rotation to the sparse infill direction for each layer according to the specified template.  
 The template is a comma-separated list of angles in degrees.
 
 For example:
@@ -145,7 +145,7 @@ When enabled, the infill pattern will be mirrored along the Y-axis of the print 
 > [!IMPORTANT]
 > This setting may not be supported by all infill patterns.
 
-You can apply this setting with multiple objects or using modifiers to control infill orientation for different parts of your print. \
+You can apply this setting with multiple objects or using modifiers to control infill orientation for different parts of your print.  
 For example, you might want to mirror the infill pattern for specific components to enhance their structural integrity like planes's wings or boat hulls without the need of using 45° rotation.
 
 ![symmetric_infill_y_axis](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/symmetric_infill_y_axis.png?raw=true)
@@ -164,7 +164,7 @@ Infill area is enlarged slightly to overlap with wall for better bonding. The pe
 
 ## Apply gap fill
 
-Enables gap fill for the selected solid surfaces. \
+Enables gap fill for the selected solid surfaces.  
 The minimum gap length that will be filled can be controlled from the filter out tiny gaps option.
 
 1. **Everywhere:** Applies gap fill to top, bottom and internal solid surfaces for maximum strength.
@@ -180,7 +180,7 @@ However this is not advised, as gap fill between perimeters is contributing to t
 
 ## Filter out tiny gaps
 
-Don't print gap fill with a length is smaller than the threshold specified (in mm). \
+Don't print gap fill with a length is smaller than the threshold specified (in mm).  
 This setting applies to top, bottom and solid infill and, if using the [classic perimeter generator](quality_settings_wall_generator#classic), to wall gap fill.
 
 ## Anchor

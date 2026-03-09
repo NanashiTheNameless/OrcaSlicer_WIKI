@@ -5,7 +5,7 @@
 OrcaSlicer includes three approaches for calibrating the Pressure Advance value. Each method has its own advantages and disadvantages. It is important to note that each method has two versions: one for a direct-drive extruder and one for a Bowden extruder. Make sure to select the appropriate version for your test.
 
 > [!WARNING]
-> **Marlin Printers:** Linear Advance must be enabled in firmware (M900). \
+> **Marlin Printers:** Linear Advance must be enabled in firmware (M900).  
 > **Not all printers have it enabled by default.**
 
 > [!WARNING]
@@ -21,11 +21,11 @@ OrcaSlicer includes three approaches for calibrating the Pressure Advance value.
 
 You can use different methods to calibrate the Pressure Advance value, each with its own advantages and disadvantages.
 
-The results from these methods should be saved to the material profile. \
+The results from these methods should be saved to the material profile.  
 ![pressure_advance_enable](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/pa/pressure_advance_enable.png?raw=true)
 
 > [!TIP]
-> Consider using the [Adaptive Pressure Advance](adaptive-pressure-advance-calib) method for more accurate results. \
+> Consider using the [Adaptive Pressure Advance](adaptive-pressure-advance-calib) method for more accurate results.  
 > Especially for high-speed printers.
 
 ### Tower method
@@ -34,8 +34,8 @@ The tower method may take a bit more time to complete, but it does not rely on t
 
 1. Select the printer, filament, and process you would like to use for the test.
 2. Examine each corner of the print and mark the height that yields the best overall result.
-3. In this example a height of 8 mm was selected, so the Pressure Advance value should be calculated as `PressureAdvanceStart + (PressureAdvanceStep x measured)`; example: `0 + (0.002 x 8) = 0.016`. \
-   ![pa-tower-preview](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/pa/pa-tower-preview.png?raw=true) \
+3. In this example a height of 8 mm was selected, so the Pressure Advance value should be calculated as `PressureAdvanceStart + (PressureAdvanceStep x measured)`; example: `0 + (0.002 x 8) = 0.016`.  
+   ![pa-tower-preview](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/pa/pa-tower-preview.png?raw=true)  
    ![pa-tower-measure](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/pa/pa-tower-measure.png?raw=true)
 
 > [!TIP]
@@ -48,17 +48,17 @@ The pattern method is adapted from [Andrew Ellis' pattern method generator](http
 
 The test configuration window allows the user to generate one or more tests in a single project. Multiple tests will be placed on the plate with extra plates added if needed.
 
-- **Single test**: \
+- **Single test**:  
   ![pa-pattern-single](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/pa/pa-pattern-single.png?raw=true)
-- **Batch mode testing**: multiple tests on a single plate. \
+- **Batch mode testing**: multiple tests on a single plate.  
   ![pa-pattern-batch](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/pa/pa-pattern-batch.png?raw=true)
 
 Once a test is generated, one or more small rectangular prisms will be placed on the plate, one for each test case. The prism object serves a few purposes:
 
-- The test pattern itself is added in as custom G-Code at each layer, same as you could do by hand. The rectangular prism provides the layers in which to insert that G-Code. This also means that **you'll see the full test pattern when you move to the Preview pane:** \
+- The test pattern itself is added in as custom G-Code at each layer, same as you could do by hand. The rectangular prism provides the layers in which to insert that G-Code. This also means that **you'll see the full test pattern when you move to the Preview pane:**  
   ![pa-pattern-batch-plater](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/pa/pa-pattern-batch-plater.png?raw=true)
 - The prism acts as a handle, enabling you to move the test pattern wherever you'd like on the plate by moving the prism.
-- Each test object is pre-configured with target parameters which are reflected in the object's name. Test parameters may be adjusted for each prism individually via the object list pane: \
+- Each test object is pre-configured with target parameters which are reflected in the object's name. Test parameters may be adjusted for each prism individually via the object list pane:  
   ![pa-pattern-batch-objects](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/pa/pa-pattern-batch-objects.png?raw=true)
 
 Next, Ellis' generator provided the ability to adjust specific printer, filament, and print profile settings. You can make these same changes in OrcaSlicer by adjusting the settings in the Prepare pane as you would with any other print. When you initiate the calibration test, Ellis' default settings are applied. A few things to note about these settings:
@@ -76,7 +76,7 @@ Steps:
 
 1. Select the printer, filament, and process you would like to use for the test.
 2. Print the project and check the result. Choose the value corresponding to the most even line and update your Pressure Advance value in the filament settings.
-3. In this test, a Pressure Advance value of `0.016` appears to be optimal. \
-   ![pa-line](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/pa/pa-line.gif?raw=true) \
-   ![pa-lines](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/pa/pa-lines.png?raw=true) \
+3. In this test, a Pressure Advance value of `0.016` appears to be optimal.  
+   ![pa-line](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/pa/pa-line.gif?raw=true)  
+   ![pa-lines](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/pa/pa-lines.png?raw=true)  
    ![pa-line-0-016](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/pa/pa-line-0-016.png?raw=true)

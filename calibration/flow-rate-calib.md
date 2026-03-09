@@ -1,6 +1,6 @@
 # Flow Rate Calibration
 
-[Flow ratio](material_flow_ratio_and_pressure_advance#flow-ratio) determines how much filament is extruded and is crucial for high-quality prints. \
+[Flow ratio](material_flow_ratio_and_pressure_advance#flow-ratio) determines how much filament is extruded and is crucial for high-quality prints.  
 A properly calibrated flow ratio ensures consistent layer adhesion and accurate dimensions.
 
 - Too **low** flow ratio causes under-extrusion, which leads to gaps, weak layers, and poor structural integrity.
@@ -38,12 +38,12 @@ This method uses the [Archimedean Chords](strength_settings_patterns#archimedean
     1. The smoothest top surface.
     2. No visible gaps between the pattern arcs.
     3. Minimal or no visible line between the Inner Spiral and the Outer Arcs.
-   ![flowcalibration-guide](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/Flow-Rate/flowcalibration-guide.png?raw=true) \
-   In this example, the block with a flow modifier of `+0.01` produced the best results, despite a visible line between the Inner Spiral and the Outer Arcs; reducing the flow further begins to show gaps between the lines. \
+   ![flowcalibration-guide](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/Flow-Rate/flowcalibration-guide.png?raw=true)  
+   In this example, the block with a flow modifier of `+0.01` produced the best results, despite a visible line between the Inner Spiral and the Outer Arcs; reducing the flow further begins to show gaps between the lines.  
    ![flowcalibration-example](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/Flow-Rate/flowcalibration-example.png?raw=true)
 5. Update the flow ratio in the filament settings using the equation: `OldFlowRatio ± modifier`.
-   If your previous flow ratio was `0.98` and you selected the block with a flow rate modifier of `+0.01`, the new value would be: `0.98 + 0.01 = 0.99`. \
-   **Remember** to save the filament profile. \
+   If your previous flow ratio was `0.98` and you selected the block with a flow rate modifier of `+0.01`, the new value would be: `0.98 + 0.01 = 0.99`.  
+   **Remember** to save the filament profile.  
    ![flowcalibration_update_flowrate](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/Flow-Rate/flowcalibration_update_flowrate.png?raw=true)
 
 > [!NOTE]

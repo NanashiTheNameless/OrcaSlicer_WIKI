@@ -1,11 +1,11 @@
 # Patterns
 
-Patterns determine how material is distributed within a print. Different patterns can affect strength, flexibility and print speed using the same density setting. \
+Patterns determine how material is distributed within a print. Different patterns can affect strength, flexibility and print speed using the same density setting.  
 The infill pattern also impacts the uniformity of the layer times, since the patterns may be constant, or present significant variations between adjacent layers.
 
 There is no one-size-fits-all solution, as the best pattern depends on the specific print and its requirements.
 
-Many patterns may look similar and have similar overall specifications, but they can behave very differently in practice. \
+Many patterns may look similar and have similar overall specifications, but they can behave very differently in practice.  
 As most settings in 3D printing, experience is the best way to determine which pattern works best for your specific needs.
 
 ## Analysis parameters
@@ -17,16 +17,16 @@ As most settings in 3D printing, experience is the best way to determine which p
 
 ### Material Usage
 
-Not all patterns use the same amount of material due to their **Density Calculations** and adjustments to the paths. \
+Not all patterns use the same amount of material due to their **Density Calculations** and adjustments to the paths.  
 This leads to patterns that do not use the specified percentage but rather variations of it.
 
 ### Print Time
 
-Print time can vary significantly between patterns due to differences in their pathing and infill strategies. \
+Print time can vary significantly between patterns due to differences in their pathing and infill strategies.  
 Some patterns may complete faster due to more efficient use of the print head's movement, while others may take longer due to more complex paths.
 
 > [!NOTE]
-> OrcaSlicer Time estimations are not always accurate, especially with complex patterns. \
+> OrcaSlicer Time estimations are not always accurate, especially with complex patterns.  
 > This analysis was estimated with [Klipper Estimator](https://github.com/Annex-Engineering/klipper_estimator).
 
 ### Layer Time Variability
@@ -69,14 +69,14 @@ Layer time variability refers to the differences in time it takes to print each 
 | <img alt="param_octagramspiral" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_octagramspiral.svg?raw=true" height="45"> | [Octagram Spiral](#octagram-spiral) | X-Y: ![level-to-better-2](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-better-2.svg?raw=true)<br> Z: ![level-to-better-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-better-4.svg?raw=true) | ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true) | ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true) | ![level-to-worse-0](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-0.svg?raw=true) | [Classic](strength_settings_infill#classic-strategy) |
 
 > [!NOTE]
-> This estimations are based in a Cube model to maintain consistency. \
+> This estimations are based in a Cube model to maintain consistency.  
 > This **WILL NOT** be the same for all models and only serves as a standard guideline.
 
 > [!TIP]
 > You can see how this analysis was made in [infill-analysis](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/print_settings/strength/infill-analysis) folder:
 >
 > - [Infill calculator Project](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/print_settings/strength/infill-analysis/infill_calculator.3mf?raw=true) to generate the gcode files and images.
-> - [infill_desc_calculator.xlsx](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/print_settings/strength/infill-analysis/infill_desc_calculator.xlsx?raw=true) used to calculate the values above. \
+> - [infill_desc_calculator.xlsx](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/print_settings/strength/infill-analysis/infill_desc_calculator.xlsx?raw=true) used to calculate the values above.  
 > - Time, and material usage where simulated with the same [Klipper Estimator](https://github.com/Annex-Engineering/klipper_estimator) values to maintain consistency.
 
 ## Monotonic

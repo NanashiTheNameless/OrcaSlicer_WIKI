@@ -2,11 +2,11 @@
 
 This guide explains how to contribute to the OrcaSlicer wiki.
 
-OrcaSlicer's wiki is generated automatically from the files in the [OrcaSlicer WIKI repository](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI). \
-To suggest small changes or improvements, please [open an issue in that repository](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/issues). \
+OrcaSlicer's wiki is generated automatically from the files in the [OrcaSlicer WIKI repository](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI).  
+To suggest small changes or improvements, please [open an issue in that repository](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/issues).  
 If you prefer to make the edits yourself, follow this guide for best practices when creating a pull request (PR).
 
-We encourage developers and users to contribute by updating existing pages and adding new content. This helps keep the documentation accurate and useful. \
+We encourage developers and users to contribute by updating existing pages and adding new content. This helps keep the documentation accurate and useful.  
 When adding new features, consider updating the wiki so users can access the latest guidance.
 
 - [Wiki Structure](#wiki-structure)
@@ -35,14 +35,14 @@ When adding new features, consider updating the wiki so users can access the lat
 
 ## Wiki Structure
 
-Each page of the Wiki is a Markdown file located in the [OrcaSlicer_WIKI repository](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI). \
+Each page of the Wiki is a Markdown file located in the [OrcaSlicer_WIKI repository](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI).  
 The wiki is organized into sections that cover different areas of the project.
 
 ### Home
 
 The Home page is the starting point for the OrcaSlicer wiki. From there you can navigate to sections and topics related to the project.
 
-When you create a new page or section, link it from the Home page under the appropriate category. \
+When you create a new page or section, link it from the Home page under the appropriate category.  
 The Home page currently organizes content in these top-level entries:
 
 - ![printer](https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/printer.svg?raw=true) [Printer Settings](home#printer-settings)
@@ -114,7 +114,7 @@ The links naming uses the same format as the [Wiki Navigation described above](#
 
 There are 3 main ways to set up these links:
 
-1. Using `append_single_option_line` with a second string argument for the wiki page. \
+1. Using `append_single_option_line` with a second string argument for the wiki page.  
 
     ```cpp
     optgroup->append_single_option_line("[OPTION_NAME]"); // Option without wiki page/redirection
@@ -206,7 +206,7 @@ Use images from the OrcaSlicer resources folder located at `\resources\images` i
 
 #### Wiki Images
 
-Use or add images in the `images/` directory of the [OrcaSlicer_WIKI repository](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/tree/main/images). \
+Use or add images in the `images/` directory of the [OrcaSlicer_WIKI repository](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/tree/main/images).  
 There you can find images already used in the wiki like screenshots, diagrams, and icons.
 
 ##### Image Naming
@@ -326,5 +326,5 @@ When adding commands or code blocks please use the [Code Block with Syntax Highl
 
 ## External Links
 
-Be careful when linking to external resources. \
+Be careful when linking to external resources.  
 Ensure links are relevant and reliable and cite papers or articles when appropriate.

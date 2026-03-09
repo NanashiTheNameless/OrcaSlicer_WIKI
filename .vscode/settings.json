@@ -1,4 +1,6 @@
 {
+  "editor.renderWhitespace": "none",
+  "files.trimTrailingWhitespace": false,
   "[markdown]": {
     "editor.detectIndentation": false,
     "editor.insertSpaces": true,

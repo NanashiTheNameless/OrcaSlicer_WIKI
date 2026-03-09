@@ -31,7 +31,7 @@ The Nozzle Hardness ([Hardness Rockwell C](https://en.wikipedia.org/wiki/Rockwel
 
 ## Auxiliary Part Cooling Fan
 
-Enable this option if machine has auxiliary part cooling fan. \
+Enable this option if machine has auxiliary part cooling fan.  
 The speed will be set for each material in the [material cooling settings](material_cooling#auxiliary-part-cooling-fan).
 
 G-code command:
@@ -262,7 +262,7 @@ gcode:
 
 ## Support air filtration
 
-Air Filtration/Exhaust Fan Control in OrcaSlicer. \
+Air Filtration/Exhaust Fan Control in OrcaSlicer.  
 OrcaSlicer use `M106 P3` command to control air-filtration/exhaust fan.
 
 If you are using Klipper, you can define a `M106` macro to control both the normal part cooling fan, auxiliary fan, and exhaust fan.

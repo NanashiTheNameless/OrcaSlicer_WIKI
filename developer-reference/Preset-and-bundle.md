@@ -31,7 +31,7 @@ This is a bundle containing a few types of `PresetCollection`. One bundle has pr
 `PresetCollection            filaments`\
 `PrinterPresetCollection     printers`
 
-each one of these contains a collection of processes, filaments and printers respectively. \
+each one of these contains a collection of processes, filaments and printers respectively.  
 
 > [!IMPORTANT]
 > Printers, filaments and processes in the bundle don't all have to be compatible with each other. In fact all the saved presets are stored in one `PresetBundle`. The `PresetBundle` is loaded on start up. The list of filaments and processes shown for a particular printer is a subset of `filaments` and `prints` `PresetCollection`s.
@@ -40,8 +40,8 @@ each one of these contains a collection of processes, filaments and printers res
 
 `PrinterPresetCollection` is a class derived from `PresetCollection`.
 
-These contain a collection of presets. The presets could be of any type. \
+These contain a collection of presets. The presets could be of any type.  
 functions of note here are:
 
-`get_edited_preset()`: returns the current selected preset along with any modifications the user has made. \
+`get_edited_preset()`: returns the current selected preset along with any modifications the user has made.  
 `get_selected_preset()`: returns the current selected preset without the modifications the user has made.

@@ -1,6 +1,6 @@
 # Variable Layer Height
 
-The Variable Layer Height feature allows for dynamic adjustment of layer heights throughout the print, optimizing both print quality and speed. \
+The Variable Layer Height feature allows for dynamic adjustment of layer heights throughout the print, optimizing both print quality and speed.  
 As we know from [Layer Height](quality_settings_layer_height), smaller layer heights yield better detail but increase print time, while larger layer heights speed up printing at the cost of detail. With Variable Layer Height, we can strategically use different layer heights in different parts of the model.
 
 > [!NOTE]

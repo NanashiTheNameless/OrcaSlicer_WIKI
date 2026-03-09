@@ -2,7 +2,7 @@
 
 OrcaSlicer primarily relies on STL meshes for slicing, but STL files may come with several limitations.
 
-Typically, STL files feature a low polygon count, which can adversely affect print quality. \
+Typically, STL files feature a low polygon count, which can adversely affect print quality.  
 In contrast, STEP files offer the [option of importing](import_export#importing-step-files) a higher-quality mesh that more accurately represents the original design. However, be aware that both high-polygon STL and STEP files can increase slicing time.
 
 ![stl-transformation-smooth-rough](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/STL-Transformation/stl-transformation-smooth-rough.png?raw=true)
@@ -26,5 +26,5 @@ It is recommended to enable the "Show Wireframe" option when running a simplific
 
 ## Fix Model
 
-The Fix Model option is designed to address common issues in 3D models, such as holes, non-manifold edges, and other mesh errors that can lead to slicing problems or print failures. \
+The Fix Model option is designed to address common issues in 3D models, such as holes, non-manifold edges, and other mesh errors that can lead to slicing problems or print failures.  
 It's only available for Windows users as it relies on the Windows 3D Netfabb API for mesh repair.
