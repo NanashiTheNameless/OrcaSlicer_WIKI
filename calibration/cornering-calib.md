@@ -24,7 +24,7 @@ This test will be set detect automatically your printer firmware type and will a
 - RepRap: [Maximum instantaneous speed changes](https://docs.duet3d.com/User_manual/Reference/Gcodes#m566-set-allowable-instantaneous-speed-change)
 
 > [!NOTE]
-> This calibration example uses Junction Deviation as an example. The process is similar for Jerk calibration; just read the Jerk values instead of JD values.\
+> This calibration example uses Junction Deviation as an example. The process is similar for Jerk calibration; just read the Jerk values instead of JD values. \
 > JD values are between `0.0` and `0.3` (in mm) while Jerk values are usually between `1` and `20` or higher (in mm/s).
 
 1. Pre-requisites:

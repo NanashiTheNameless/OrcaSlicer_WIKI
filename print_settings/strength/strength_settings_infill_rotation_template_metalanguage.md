@@ -144,18 +144,18 @@ They include a simple definition of the angle for each layer. Note that the init
 
 ### Relative instructions
 
-- `+30` - this is a short instruction for counterclockwise rotation. The equivalent of `30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 0` or `30, 60, 90, 120, 150, 0` instruction.\
+- `+30` - this is a short instruction for counterclockwise rotation. The equivalent of `30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 0` or `30, 60, 90, 120, 150, 0` instruction. \
   ![+30](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/+30.png?raw=true)
-- `-30` - this is the same instruction, but with clockwise rotation. The equivalent of `330, 300, 270, 240, 210, 180, 150, 120, 90, 60, 30, 0` or `330, 300, 270, 240, 210, 0` instruction.\
-- `+150` - you can specify a different multiple of the irrational angle for better fill dispersion = `150, 300, 90, 240, 30, 180, 330, 120, 270, 60, 210, 0` ...\
-- `+45` - The equivalent of `45, 90, 135, 180, 225, 270, 315, 0` or `45, 90, 135, 0` instruction.\
+- `-30` - this is the same instruction, but with clockwise rotation. The equivalent of `330, 300, 270, 240, 210, 180, 150, 120, 90, 60, 30, 0` or `330, 300, 270, 240, 210, 0` instruction. \
+- `+150` - you can specify a different multiple of the irrational angle for better fill dispersion = `150, 300, 90, 240, 30, 180, 330, 120, 270, 60, 210, 0` ... \
+- `+45` - The equivalent of `45, 90, 135, 180, 225, 270, 315, 0` or `45, 90, 135, 0` instruction. \
   ![+45](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/+45.png?raw=true)
-- `+90` - The equivalent of `90, 180, 270, 0` or `90, 0` instruction.\
+- `+90` - The equivalent of `90, 180, 270, 0` or `90, 0` instruction. \
   ![+90](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/+90.png?raw=true)
-- `+15%` - useful for dividing angles on a decimal basis = `54, 108, 162, 270, 324, 18, 72, 126, 180, 234, 288, 342, 36, 90, 144, 196, 252, 306, 0` ...\
-- `+30, +90` - a complex instruction setting the rotation of each layer in these positions = `30, 120, 150, 240, 270, 0` ...\
+- `+15%` - useful for dividing angles on a decimal basis = `54, 108, 162, 270, 324, 18, 72, 126, 180, 234, 288, 342, 36, 90, 144, 196, 252, 306, 0` ... \
+- `+30, +90` - a complex instruction setting the rotation of each layer in these positions = `30, 120, 150, 240, 270, 0` ... \
   ![+30+90](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/+30+90.png?raw=true)
-- `0, +30, +90` - a complex instruction setting the rotation of each layer in these positions = `0, 30, 120` ...\
+- `0, +30, +90` - a complex instruction setting the rotation of each layer in these positions = `0, 30, 120` ... \
   ![0+30+90](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/0+30+90.png?raw=true)
 
 ### Repetitive, adjusting and one-time instructions
@@ -178,9 +178,9 @@ The following modifiers are available that determine the range of turn: `mm` `cm
 If there is a `-` sign before the numeric value, then the initial fill angle changes with the final one. This is useful for joining the linear infills in some cases. Absolute values of the rotation angle using the range instructions have no effect.
 It is important to know that this will not be the exact length, but will be tied to the nearest layer from below.
 
-- `+45/100` - rotate the next 100 layers linearly at a 45 degree angle. For this model, this instruction is equivalent to `+45/100%` as it contains 100 layers.\
+- `+45/100` - rotate the next 100 layers linearly at a 45 degree angle. For this model, this instruction is equivalent to `+45/100%` as it contains 100 layers. \
   ![+45-100](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/+45-100.png?raw=true)
-- When changing the height of the instruction `+45/50` or `+45/50%` - the final angle will be 90, as the turn will occur twice.\
+- When changing the height of the instruction `+45/50` or `+45/50%` - the final angle will be 90, as the turn will occur twice. \
   ![+45-50](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/+45-50.png?raw=true)
 - `-50%Z1cm` - rotate one centimeter of infill by sinus function at a 180 degree CW.
 
@@ -189,15 +189,15 @@ It is important to know that this will not be the exact length, but will be tied
 There are 2 letter signs `T` and `B` that can determine the number of shell layers on the top and bottom of the model. It is useful for calculating skipping this amount to align the fill.
 
 - `B!, +30` - skip the first shell layers from rotation, then fill with 30 degree turn each layer\
-- `+30/1cm, T` - rotate one centimeter of infill linearly at a 30 degree angle, then skip the number of layers equal to the count of the upper shell layers without rotation.\
+- `+30/1cm, T` - rotate one centimeter of infill linearly at a 30 degree angle, then skip the number of layers equal to the count of the upper shell layers without rotation. \
 
 ## Complex template examples
 
 - `+10L25%, -10l25%, -10L25%, +10l25%` - fill the model with sine period with 10 degree amplitude\
   ![10period](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/10period.png?raw=true)
-- `+30/-10#` - rotate the infill at height of 10 standard layers (or @ standard layer height is 0.2mm x 10 = 2mm) inverse linearly at a 30 degree angle.\
+- `+30/-10#` - rotate the infill at height of 10 standard layers (or @ standard layer height is 0.2mm x 10 = 2mm) inverse linearly at a 30 degree angle. \
   ![+30-10](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/+30-10.png?raw=true)
-- `+360~100%` or `+100%~100%` - fill the model with infill with random direction at each layer.\
+- `+360~100%` or `+100%~100%` - fill the model with infill with random direction at each layer. \
   ![+360-100p](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/+360-100p.png?raw=true)
 
 ## Credits

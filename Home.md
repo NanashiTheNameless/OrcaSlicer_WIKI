@@ -1,6 +1,6 @@
 # Welcome to the UNOFFICIAL OrcaSlicer WIKI!
 
-This is the Wiki Repository for [NanashiTheNameless's fork of OrcaSlicer](https://github.com/NanashiTheNameless/OrcaSlicer).\
+This is the Wiki Repository for [NanashiTheNameless's fork of OrcaSlicer](https://github.com/NanashiTheNameless/OrcaSlicer). \
 OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki page aims to provide an detailed explanation of the slicer settings, how to get the most out of them as well as how to calibrate and setup your printer.
 
 - [Printer Settings](#printer-settings)
@@ -18,7 +18,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 - [Developer Section](#developer-section)
 
 > [!WARNING]
-> This wiki is community-maintained.\
+> This wiki is community-maintained. \
 > Some pages may be **outdated** while others may be **newer** and present only in [nightly build](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/nightly-builds) or [latest release](https://github.com/NanashiTheNameless/OrcaSlicer/releases).
 
 > [!NOTE]

@@ -21,12 +21,12 @@ During high-speed movements, vibrations can cause a phenomenon called "ringing,"
 
 ## Types
 
-It is usually recommended to use MZV, EI (specially for Delta printers) or ZV as a simple and effective solution.\
+It is usually recommended to use MZV, EI (specially for Delta printers) or ZV as a simple and effective solution. \
 Not all Input Shaping types are available in all firmware and their performance may vary depending on the firmware implementation and the printer's mechanics.
 
 ### Default
 
-When "Default" is selected, the firmware's default input shaper will be used.\
+When "Default" is selected, the firmware's default input shaper will be used. \
 Every firmware and even its version may have a different default type but usually are:
 
 - Klipper: MZV
@@ -61,7 +61,7 @@ Pre-requisites:
     - Speed high enough to trigger ringing (e.g., 200 mm/s).
 
 > [!IMPORTANT]
-> It's recommended to use the fastest [acceleration](speed_settings_acceleration), [speed](speed_settings_other_layers_speed) and [Jerk/Junction Deviation](speed_settings_jerk_xy) your printer can handle without losing steps.\
+> It's recommended to use the fastest [acceleration](speed_settings_acceleration), [speed](speed_settings_other_layers_speed) and [Jerk/Junction Deviation](speed_settings_jerk_xy) your printer can handle without losing steps. \
 > This test **will set the values to high values** limited by your printer's motion ability and the filament's max volumetric speed (avoid materials below 10 mm³/s).
 
 1. Select the Test Model ´Ringing Tower´ (Recommended) or ´Fast Tower´ (Reduced version useful for printers with high ringing).

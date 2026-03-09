@@ -1,8 +1,8 @@
 # Adaptive Bed Mesh
 
-OrcaSlicer introduces comprehensive support for adaptive bed meshing across a variety of firmware, including Marlin, Klipper, and RepRapFirmware (RRF).\
-This feature allows users to seamlessly integrate adaptive bed mesh commands within the Machine Start G-code.\
-The implementation is designed to be straightforward, requiring no additional plugins or alterations to firmware settings, thereby enhancing user experience and print quality directly from OrcaSlicer.\
+OrcaSlicer introduces comprehensive support for adaptive bed meshing across a variety of firmware, including Marlin, Klipper, and RepRapFirmware (RRF). \
+This feature allows users to seamlessly integrate adaptive bed mesh commands within the Machine Start G-code. \
+The implementation is designed to be straightforward, requiring no additional plugins or alterations to firmware settings, thereby enhancing user experience and print quality directly from OrcaSlicer. \
 ![ABM-PrinterConfig](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/Adaptative-Bed-Mesh/ABM-PrinterConfig.png?raw=true)
 
 - [Bed mesh](#bed-mesh)
@@ -16,8 +16,8 @@ The implementation is designed to be straightforward, requiring no additional pl
 
 ## Bed mesh
 
-This option sets the min and max point for the allowed bed mesh area. Due to the probe's XY offset, most printers are unable to probe the entire bed. To ensure the probe point does not go outside the bed area, the minimum and maximum points of the bed mesh should be set appropriately.\
-OrcaSlicer ensures that adaptive_bed_mesh_min/adaptive_bed_mesh_max values do not exceed these min/max points. This information can usually be obtained from your printer manufacturer.\
+This option sets the min and max point for the allowed bed mesh area. Due to the probe's XY offset, most printers are unable to probe the entire bed. To ensure the probe point does not go outside the bed area, the minimum and maximum points of the bed mesh should be set appropriately. \
+OrcaSlicer ensures that adaptive_bed_mesh_min/adaptive_bed_mesh_max values do not exceed these min/max points. This information can usually be obtained from your printer manufacturer. \
 The default setting is (-99999, -99999), which means there are no limits, thus allowing probing across the entire bed.
 
 ## Probe point distance

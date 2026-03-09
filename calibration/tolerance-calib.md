@@ -16,8 +16,8 @@ To correct for these variations, OrcaSlicer provides:
 
 ## Handy Models
 
-OrcaSlicer includes several handy models to help you test and calibrate your printer.\
-Right-click on your plate in Prepare mode and select "Add Handy Model" to access these models.\
+OrcaSlicer includes several handy models to help you test and calibrate your printer. \
+Right-click on your plate in Prepare mode and select "Add Handy Model" to access these models. \
 ![handy-models-list](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/Handy-Models/handy-models-list.png?raw=true)
 
 ### Orca Tolerance Test
