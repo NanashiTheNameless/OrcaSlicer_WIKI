@@ -17,6 +17,7 @@ When adding new features, consider updating the wiki so users can access the lat
 - [Formatting and Style](#formatting-and-style)
     - [Markdown Formatting](#markdown-formatting)
     - [Alerts and Callouts](#alerts-and-callouts)
+        - [New Content](#new-content)
 - [Images](#images)
     - [Image Sources](#image-sources)
         - [OrcaSlicer Resources](#orcaslicer-resources)
@@ -190,6 +191,28 @@ Use GitHub's alert syntax to add inline notes and warnings:
 
 > [!NOTE]
 > Refer to the [GitHub Alerts documentation](https://docs.github.com/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts) for more details.
+
+#### New Content
+
+The Wiki should be updated to reflect the latest stable release with the addition of new features present in current nightly builds.  
+
+When new features or upgrades are merged into the main branch, please add a note using the following format:
+
+```markdown
+> [!IMPORTANT]
+> NEW FEATURE: **Feature short description**  
+> Available in:  
+> [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or releases grater than **stable version number at merge time**.
+```
+
+Example:
+
+> [!IMPORTANT]
+> NEW FEATURE: **Input Shaping Calibration Types**  
+> Available in:  
+> [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-rolling) or releases grater than **2.3.1**.
+
+This notes should be removed after a new stable release is made that includes the new feature.
 
 ## Images
 
