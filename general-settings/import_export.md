@@ -76,7 +76,7 @@ After slicing a model, you can export the sliced result for printing.
 - **Gcode.3MF:** Export the sliced model as a Gcode.3MF file that includes the resulting G-code file along with printer, material, and process information. This is useful for sharing the sliced model with all the necessary information for printing.
 - **Toolpaths as OBJ:** Export the sliced model 3D preview as an OBJ file.
 
-![export_toolpaths_obj](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/import_export/export_toolpaths_obj.png?raw=true)
+![export_toolpaths_obj](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/import_export/export_toolpaths_obj.png?raw=true)
 
 ### Import Sliced
 
@@ -138,14 +138,14 @@ If the 3MF information is not compatible with OrcaSlicer, it will be ignored and
 
 This setting determines how STEP files are converted into STL files and is displayed during the STEP file import process.
 
-![stl-transformation](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/STL-Transformation/stl-transformation.png?raw=true)
+![stl-transformation](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/STL-Transformation/stl-transformation.png?raw=true)
 
 ##### Parameters
 
 The transformation uses [Linear Deflection and Angular Deflection](https://dev.opencascade.org/doc/overview/html/occt_user_guides__mesh.html) parameters to control the mesh quality.
 A finer mesh will result in a more accurate representation of the original surface, but it will also increase the file size and processing time.
 
-![stl-transformation-params](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/STL-Transformation/stl-transformation-params.svg?raw=true)
+![stl-transformation-params](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/STL-Transformation/stl-transformation-params.svg?raw=true)
 
 - **Linear Deflection:** Specifies the maximum distance allowed between the original surface and its polygonal approximation. Lower values produce a mesh that more accurately follows the original curvature.
 - **Angular Deflection:** Defines the maximum allowable angle difference between the actual surface and its tessellated counterpart. Smaller angular deflection values yield a more precise mesh.
@@ -154,14 +154,14 @@ A finer mesh will result in a more accurate representation of the original surfa
 
 Enabling this option will split the imported 3D file into separate [parts of the same object](prepare_object_set#split-to-parts). This is especially useful for adjusting individual part positions, tweaking print settings, or optimizing the model through simplification while maintaining the original design [assembly](prepare_assembly_tools).
 
-![stl-transformation-split](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/STL-Transformation/stl-transformation-split.png?raw=true)
+![stl-transformation-split](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/STL-Transformation/stl-transformation-split.png?raw=true)
 
 ##### Don't show again
 
 This option will hide the STL transformation dialog when opening a STEP file.
 To restore the dialog, go to "Preferences" (Ctrl + P) > "Show the STEP mesh parameter setting dialog".
 
-![stl-transformation-enable](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/STL-Transformation/stl-transformation-enable.png?raw=true)
+![stl-transformation-enable](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/STL-Transformation/stl-transformation-enable.png?raw=true)
 
 ### DRC
 
