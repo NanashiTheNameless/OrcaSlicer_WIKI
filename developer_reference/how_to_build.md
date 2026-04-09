@@ -379,7 +379,7 @@ The build system supports multiple Linux distributions including Ubuntu/Debian a
 
 #### Unit Testing
 
-See [How to Test](How-to-test) for more details.
+See [How to Test](how_to_test) for more details.
 
 ---
 
