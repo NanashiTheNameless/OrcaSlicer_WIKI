@@ -208,6 +208,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 
 - [Import and Export](import_export)
 - [Keyboard Shortcuts](keyboard_shortcuts)
+- [Transfer or Discard Changes popup dialog](transfer_discard_changes)
 
 ## Developer Section
 

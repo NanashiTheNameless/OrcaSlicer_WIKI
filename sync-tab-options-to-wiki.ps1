@@ -88,20 +88,68 @@ function Get-StringVectors {
     return $result
 }
 
+$syncProgressActivity = "sync-tab-options-to-wiki.ps1"
+$syncStageTotal = 7
+
+function Set-SyncStage {
+    param(
+        [int]$Step,
+        [string]$Status
+    )
+
+    $percent = if ($syncStageTotal -gt 0) {
+        [Math]::Max(0, [Math]::Min(100, [int](($Step / [double]$syncStageTotal) * 100)))
+    }
+    else {
+        0
+    }
+
+    Write-Progress -Id 1 -Activity $syncProgressActivity -Status $Status -PercentComplete $percent
+}
+
+function Set-SyncDetail {
+    param(
+        [string]$Status,
+        [int]$Current,
+        [int]$Total
+    )
+
+    $percent = if ($Total -gt 0) {
+        [Math]::Max(0, [Math]::Min(100, [int](($Current / [double]$Total) * 100)))
+    }
+    else {
+        0
+    }
+
+    Write-Progress -Id 2 -ParentId 1 -Activity "Processing markdown mappings" -Status $Status -PercentComplete $percent
+}
+
+function Complete-SyncProgress {
+    Write-Progress -Id 2 -Activity "Processing markdown mappings" -Completed
+    Write-Progress -Id 1 -Activity $syncProgressActivity -Completed
+}
+
+Set-SyncStage -Step 0 -Status "Validating input paths"
+
 if (-not (Test-Path -LiteralPath $WikiRoot)) {
+    Complete-SyncProgress
     throw "Wiki root not found: $WikiRoot"
 }
 
+Set-SyncStage -Step 1 -Status "Loading Tab.cpp content"
 $tabContent = Get-TabCppContent -Source $TabCppPath
 
+Set-SyncStage -Step 2 -Status "Parsing option mappings from Tab.cpp"
 $patternSingle = 'append_single_option_line\(\s*"(?<variable>[^"]+)"\s*,\s*"(?<ref>[^"]+)"(?:\s*,\s*(?<indexer>[^\)]+))?\s*\)'
 $patternOption = 'append_option_line\(\s*[^,]+\s*,\s*"(?<variable>[^"]+)"\s*,\s*"(?<ref>[^"]+)"(?:\s*,\s*(?<indexer>[^\)]+))?\s*\)'
 $patternAppendLineBlock = '(?s)(?<obj>\w+)\.label_path\s*=\s*"(?<ref>[^"]+)"\s*;(?<body>.*?)(?:\w+->)?append_line\(\s*\k<obj>\s*\)\s*;'
+$patternAppendLineAssignedBlock = '(?s)(?<obj>\w+)\s*=\s*\{.*?\}\s*;(?<body>.*?)(?:\w+->)?append_line\(\s*\k<obj>\s*\)\s*;'
 $patternForBlock = '(?s)for\s*\(\s*const\s+std::string\s*&\s*(?<iter>\w+)\s*:\s*(?<collection>\w+)\s*\)\s*\{(?<body>.*?)\}'
 
 $singleMatches = [regex]::Matches($tabContent, $patternSingle)
 $optionMatches = [regex]::Matches($tabContent, $patternOption)
 $appendLineMatches = [regex]::Matches($tabContent, $patternAppendLineBlock)
+$appendLineAssignedMatches = [regex]::Matches($tabContent, $patternAppendLineAssignedBlock)
 $forMatches = [regex]::Matches($tabContent, $patternForBlock)
 $stringVectors = Get-StringVectors -Content $tabContent
 
@@ -139,12 +187,47 @@ foreach ($m in $appendLineMatches) {
     $obj = $m.Groups['obj'].Value
     $ref = $m.Groups['ref'].Value.Trim()
     $body = $m.Groups['body'].Value
-    $optPattern = [regex]::Escape($obj) + '\.append_option\(\s*optgroup->get_option\("(?<variable>[^"]+)"\)\s*\)\s*;'
+    $optPattern = '(?s)' + [regex]::Escape($obj) + '\.append_option\(\s*.*?get_option\("(?<variable>[^"]+)"(?:\s*,\s*(?<indexer>[^\)]+))?\)\s*\)\s*;'
     $optMatches = [regex]::Matches($body, $optPattern)
 
     foreach ($om in $optMatches) {
+        $variable = $om.Groups['variable'].Value.Trim()
+        $indexer = $om.Groups['indexer'].Value.Trim()
+        if (-not [string]::IsNullOrWhiteSpace($indexer) -and $indexer -match '^[A-Za-z_]\w*$') {
+            $variable = "${variable}[$indexer]"
+        }
+
         $rawEntries.Add([PSCustomObject]@{
-            Variable = $om.Groups['variable'].Value.Trim()
+            Variable = $variable
+            Ref      = $ref
+            Index    = [int]($m.Index + $om.Index)
+        })
+    }
+}
+
+foreach ($m in $appendLineAssignedMatches) {
+    $obj = $m.Groups['obj'].Value
+    $body = $m.Groups['body'].Value
+
+    $labelPattern = [regex]::Escape($obj) + '\.label_path\s*=\s*"(?<ref>[^"]+)"\s*;'
+    $labelMatch = [regex]::Match($body, $labelPattern)
+    if (-not $labelMatch.Success) {
+        continue
+    }
+
+    $ref = $labelMatch.Groups['ref'].Value.Trim()
+    $optPattern = '(?s)' + [regex]::Escape($obj) + '\.append_option\(\s*.*?get_option\("(?<variable>[^"]+)"(?:\s*,\s*(?<indexer>[^\)]+))?\)\s*\)\s*;'
+    $optMatches = [regex]::Matches($body, $optPattern)
+
+    foreach ($om in $optMatches) {
+        $variable = $om.Groups['variable'].Value.Trim()
+        $indexer = $om.Groups['indexer'].Value.Trim()
+        if (-not [string]::IsNullOrWhiteSpace($indexer) -and $indexer -match '^[A-Za-z_]\w*$') {
+            $variable = "${variable}[$indexer]"
+        }
+
+        $rawEntries.Add([PSCustomObject]@{
+            Variable = $variable
             Ref      = $ref
             Index    = [int]($m.Index + $om.Index)
         })
@@ -193,13 +276,16 @@ foreach ($fm in $forMatches) {
     }
 }
 
-$matches = @($rawEntries | Sort-Object -Property Index)
 
-if ($matches.Count -eq 0) {
+$parsedMatches = @($rawEntries | Sort-Object -Property Index)
+
+if ($parsedMatches.Count -eq 0) {
     Write-Host "No supported option-to-doc mappings were found." -ForegroundColor Yellow
+    Complete-SyncProgress
     exit 0
 }
 
+Set-SyncStage -Step 3 -Status "Scanning markdown files"
 $mdFiles = Get-ChildItem -LiteralPath $WikiRoot -Recurse -File -Filter '*.md' |
     Where-Object { $_.FullName -notmatch '[\\/]wiki[\\/]' }
 
@@ -212,8 +298,9 @@ foreach ($file in $mdFiles) {
     $mdByName[$key].Add($file.FullName)
 }
 
+Set-SyncStage -Step 4 -Status "Building file and anchor entries"
 $entries = New-Object System.Collections.Generic.List[object]
-foreach ($m in $matches) {
+foreach ($m in $parsedMatches) {
     $variable = $m.Variable
     $ref = $m.Ref
 
@@ -239,6 +326,7 @@ foreach ($m in $matches) {
 
 if ($entries.Count -eq 0) {
     Write-Host "No entries with file#anchor format were found." -ForegroundColor Yellow
+    Complete-SyncProgress
     exit 0
 }
 
@@ -249,9 +337,15 @@ $alreadyPresent = 0
 $normalizedSections = 0
 
 $groupedByFile = $entries | Group-Object -Property FileKey
+$totalFileGroups = $groupedByFile.Count
+$fileNumber = 0
+
+Set-SyncStage -Step 5 -Status "Applying mappings to markdown files ($totalFileGroups files)"
 
 foreach ($group in $groupedByFile) {
+    $fileNumber++
     $fileKey = $group.Name
+    Set-SyncDetail -Status "File $fileNumber/$($totalFileGroups): $fileKey" -Current $fileNumber -Total $totalFileGroups
 
     if (-not $mdByName.ContainsKey($fileKey)) {
         Write-Host "[WARN] Markdown file not found for '$fileKey'" -ForegroundColor Yellow
@@ -272,8 +366,12 @@ foreach ($group in $groupedByFile) {
     $fileChanged = $false
 
     $groupedByAnchor = $group.Group | Group-Object -Property Anchor
+    $anchorCount = $groupedByAnchor.Count
+    $anchorNumber = 0
 
     foreach ($anchorGroup in $groupedByAnchor) {
+        $anchorNumber++
+        Set-SyncDetail -Status "File $fileNumber/$($totalFileGroups): $fileKey | Anchor $anchorNumber/$($anchorCount): $($anchorGroup.Name)" -Current $fileNumber -Total $totalFileGroups
         $anchor = $anchorGroup.Name
 
         $vars = New-Object System.Collections.Generic.List[string]
@@ -359,6 +457,7 @@ foreach ($group in $groupedByFile) {
     }
 }
 
+Set-SyncStage -Step 6 -Status "Finalizing summary"
 Write-Host "Processed: $($entries.Count) entries"
 Write-Host "Inserted:  $changes"
 Write-Host "Skipped (already present): $alreadyPresent"
@@ -369,3 +468,6 @@ Write-Host "Missing heading anchors: $missingHeadings"
 if ($DryRun) {
     Write-Host "Dry run only. No files were modified." -ForegroundColor Cyan
 }
+
+Set-SyncStage -Step 7 -Status "Completed"
+Complete-SyncProgress
