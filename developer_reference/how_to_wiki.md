@@ -201,16 +201,14 @@ When new features or upgrades are merged into the main branch, please add a note
 ```markdown
 > [!IMPORTANT]
 > NEW FEATURE: **Feature short description**  
-> Available in:  
-> [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or releases grater than **stable version number at merge time**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **stable version number at merge time**.
 ```
 
 Example:
 
 > [!IMPORTANT]
-> NEW FEATURE: **Input Shaping Calibration Types**  
-> Available in:  
-> [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-rolling) or releases grater than **2.3.1**.
+> NEW FEATURE: **Inverse Hole Direction**  
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.3.2**.
 
 This notes should be removed after a new stable release is made that includes the new feature.
 
