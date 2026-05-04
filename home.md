@@ -78,15 +78,16 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 ![process-quality](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/process/process-quality.png?raw=true)  
 <img alt="custom-gcode_quality" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/custom-gcode_quality.svg?raw=true" height="22"> Settings related to print quality and aesthetics.
 
-- [<img alt="param_layer_height" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_layer_height.svg?raw=true" height="22"> Layer Height Settings](quality_settings_layer_height)
-- [<img alt="param_line_width" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_line_width.svg?raw=true" height="22"> Line Width Settings](quality_settings_line_width)
-- [<img alt="param_seam" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_seam.svg?raw=true" height="22"> Seam Settings](quality_settings_seam)
-- [<img alt="param_precision" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_precision.svg?raw=true" height="22"> Precision](quality_settings_precision)
-- [<img alt="param_ironing" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_ironing.svg?raw=true" height="22"> Ironing](quality_settings_ironing)
-- [<img alt="param_wall_generator" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_wall_generator.svg?raw=true" height="22"> Wall generator](quality_settings_wall_generator)
-- [<img alt="param_wall_surface" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_wall_surface.svg?raw=true" height="22"> Walls and surfaces](quality_settings_wall_and_surfaces)
-- [<img alt="param_bridge" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_bridge.svg?raw=true" height="22"> Bridging](quality_settings_bridging)
-- [<img alt="param_overhang" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_overhang.svg?raw=true" height="22"> Overhangs](quality_settings_overhangs)
+- [<img alt="param_layer_height" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_layer_height.svg?raw=true" height="22"> Layer Height Settings](quality_settings_layer_height)
+- [<img alt="param_line_width" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_line_width.svg?raw=true" height="22"> Line Width Settings](quality_settings_line_width)
+- [<img alt="param_seam" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_seam.svg?raw=true" height="22"> Seam Settings](quality_settings_seam)
+- [<img alt="param_precision" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_precision.svg?raw=true" height="22"> Precision](quality_settings_precision)
+- [<img alt="param_ironing" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_ironing.svg?raw=true" height="22"> Ironing](quality_settings_ironing)
+- [Z Contouring](quality_settings_z_contouring)
+- [<img alt="param_wall_generator" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_wall_generator.svg?raw=true" height="22"> Wall generator](quality_settings_wall_generator)
+- [<img alt="param_wall_surface" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_wall_surface.svg?raw=true" height="22"> Walls and surfaces](quality_settings_wall_and_surfaces)
+- [<img alt="param_bridge" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_bridge.svg?raw=true" height="22"> Bridging](quality_settings_bridging)
+- [<img alt="param_overhang" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_overhang.svg?raw=true" height="22"> Overhangs](quality_settings_overhangs)
 
 ### Strength Settings
 
@@ -207,6 +208,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 ## General Settings
 
 - [Import and Export](import_export)
+- [Modes](option_mode)
 - [Keyboard Shortcuts](keyboard_shortcuts)
 - [Transfer or Discard Changes popup dialog](transfer_discard_changes)
 

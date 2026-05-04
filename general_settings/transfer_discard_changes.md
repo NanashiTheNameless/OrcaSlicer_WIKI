@@ -4,7 +4,7 @@ This window appears when switching away from a preset profile that has unsaved c
 There are options to discard, transfer, or save settings.
 These options apply to *preset profile* settings, separately from any settings saved in a project 3mf file.
 
-![transfer-discard-changes](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/GUI/transfer-discard-changes.png?raw=true)
+![transfer-discard-changes](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/GUI/transfer-discard-changes.png?raw=true)
 
 The options are:
 

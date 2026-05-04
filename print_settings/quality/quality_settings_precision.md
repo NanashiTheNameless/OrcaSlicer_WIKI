@@ -9,6 +9,7 @@ This section covers the settings that affect the precision of your prints. These
     - [X-Y hole compensation](#x-y-hole-compensation)
     - [X-Y contour compensation](#x-y-contour-compensation)
 - [Elephant foot compensation](#elephant-foot-compensation)
+    - [Elephant Foot Compensation Density](#elephant-foot-compensation-density)
 - [Precise wall](#precise-wall)
     - [Technical explanation](#technical-explanation)
 - [Precise Z Height](#precise-z-height)
@@ -16,18 +17,21 @@ This section covers the settings that affect the precision of your prints. These
 
 ## Slice gap closing radius
 
+[Mode](option_mode): `Advanced`.  
 [Variable](built_in_placeholders_variables): `slice_closing_radius`.  
 Cracks smaller than 2x gap closing radius are being filled during the triangle mesh slicing.  
 The gap closing operation may reduce the final print resolution, therefore it is advisable to keep the value reasonably low.
 
 ## Resolution
 
+[Mode](option_mode): `Advanced`.  
 [Variable](built_in_placeholders_variables): `resolution`.  
 The G-code path is generated after simplifying the contour of models to avoid too many points and G-code lines.  
 Smaller value means higher resolution and more time to slice. If you are using big models in low processing power machines, you may want to increase this value to speed up the slicing process.
 
 ## Arc fitting
 
+[Mode](option_mode): `Advanced`.  
 [Variable](built_in_placeholders_variables): `enable_arc_fitting`.  
 Enable this feature to replace many short straight moves (G1 segments) with fewer circular arc commands using [G2 and G3](https://marlinfw.org/docs/gcode/G002-G003.html).  
 Arc fitting mainly changes how the toolpath is *encoded* in G-code. It can be beneficial in some workflows, but it is not a feature to improve quality .
@@ -66,6 +70,7 @@ Additionally, modern STLs often have a higher resolution than the segments gener
 
 ## X-Y Compensation
 
+[Mode](option_mode): `Advanced`.  
 [Variables](built_in_placeholders_variables): `xy_hole_compensation`, `xy_contour_compensation`.  
 Used to compensate external dimensions of the model.
 With this option you can compensate material expansion or shrinkage, which can occur due to various factors such as the type of filament used, temperature fluctuations, or printer calibration issues.
@@ -87,6 +92,7 @@ This function is used to adjust sizes slightly when the objects have assembling 
 
 ## Elephant foot compensation
 
+[Mode](option_mode): `Advanced`.  
 [Variables](built_in_placeholders_variables): `elefant_foot_compensation`, `elefant_foot_compensation_layers`.  
 This feature compensates for the "elephant foot" effect, which occurs when the first few layers of a print are wider than the rest due:
 
@@ -101,12 +107,12 @@ To mitigate this effect, OrcaSlicer allows you to specify a negative distance th
 
 ![elephant-foot-compensation](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/Precision/elephant-foot-compensation.png?raw=true)
 
-The compensation works as follows:\
-When the `current_layer` is <= `input_compensation_layers`
+The compensation works as follows:  
+When $\mathrm{current\_layer} \le \mathrm{input\_compensation\_layers}$
 
-```c++
-compensation = input_compensation_distance - (input_compensation_distance / input_compensation_layers) × (current_layer - 1)
-```
+$$
+\mathrm{compensation} = \mathrm{input\_compensation\_distance} - \frac{\mathrm{input\_compensation\_distance}}{\mathrm{input\_compensation\_layers}} \times (\mathrm{current\_layer} - 1)
+$$
 
 According to the equation, we can establish the following rules:
 
@@ -136,6 +142,46 @@ Assuming the compensation value is 0.25 mm:
 > That's why the Brim may look disconnected from the object when this feature is enabled. But in the final print, the brim will be correctly attached to the object.  
 > If you use a high value for the Elephant Foot Compensation Distance, you may want to enable the [Brim use EFC outline](others_settings_brim#brim-use-efc-outline) option to ensure proper brim attachment.
 
+### Elephant Foot Compensation Density
+
+[Mode](option_mode): `Expert`.  
+[Variable](built_in_placeholders_variables): `elefant_foot_layers_density`.  
+Controls the [internal solid infill](strength_settings_infill#internal-solid-infill) density used on Elephant Foot Compensation layers above the bottom layer.  
+This helps reduce excess material buildup and ripple/nozzle-scrape artifacts on early solid layers when first-layer squish is high.
+
+- Range: `50%` to `100%`
+- Default: `100%` (feature disabled)
+
+This option works together with [Elephant foot compensation layers](#elephant-foot-compensation).
+For each compensated layer above the bottom layer, OrcaSlicer applies:
+
+$$
+\mathrm{effective\_density} = \mathrm{base\_density} \times \frac{N - (k - 1)}{N}
+$$
+
+Where:
+
+- `base_density` is `elefant_foot_layers_density`
+- `N` is `elefant_foot_compensation_layers`
+- `k` is the compensated layer index (`1` = first layer above the bottom layer)
+
+Example with `base_density = 80%` and `N = 4`:
+
+- 1st compensated layer: `80%`
+- 2nd compensated layer: `60%`
+- 3rd compensated layer: `40%`
+- 4th compensated layer: `20%`
+- Higher layers: normal internal solid infill density (`100%`)
+
+> [!NOTE]
+> This only affects internal solid infill inside the compensation zone.  
+> It does not change sparse infill, top surfaces, or the bottommost layer.  
+> Start with `80-90%` and `1-2` compensation layers, then tune based on visible ripples or nozzle scraping on lower solid layers.
+
+> [!IMPORTANT]
+> NEW FEATURE: **Elephant Foot Compensation Density**  
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.3.2**.
+
 ## Precise wall
 
 [Variable](built_in_placeholders_variables): `precise_outer_wall`.  
@@ -164,6 +210,7 @@ OrcaSlicer adheres to Slic3r's approach to handling flow. To address the downsid
 
 ## Precise Z Height
 
+[Mode](option_mode): `Advanced`.  
 [Variable](built_in_placeholders_variables): `precise_z_height`.  
 This feature ensures the accurate Z height of the model after slicing, even if the model height is not a multiple of the [layer height](quality_settings_layer_height).
 
@@ -181,6 +228,7 @@ By enabling this parameter, the layer height of the last five layers is adjusted
 
 ## Polyholes
 
+[Mode](option_mode): `Advanced`.  
 [Variables](built_in_placeholders_variables): `hole_to_polyhole`, `hole_to_polyhole_threshold`, `hole_to_polyhole_twisted`.  
 A polyhole is a technique used in FFF 3D printing to improve the accuracy of circular holes. Instead of modeling a perfect circle, the hole is represented as a polygon with a reduced number of flat sides. This simplification forces the slicer to treat each segment as a straight line, which prints more reliably. By carefully choosing the number of sides and ensuring the polygon sits on the outer boundary of the hole, you can produce openings that more closely match the intended diameter.
 

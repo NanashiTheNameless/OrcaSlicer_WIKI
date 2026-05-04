@@ -1,5 +1,6 @@
 param(
     [string]$TabCppPath = "https://github.com/OrcaSlicer/OrcaSlicer/blob/main/src/slic3r/GUI/Tab.cpp",
+    [string]$PrintConfigCppPath = "https://github.com/OrcaSlicer/OrcaSlicer/blob/main/src/libslic3r/PrintConfig.cpp",
     [string]$WikiRoot = $PSScriptRoot,
     [switch]$DryRun
 )
@@ -41,8 +42,43 @@ function Find-HeadingLineIndex {
     return -1
 }
 
-function Get-TabCppContent {
-    param([string]$Source)
+function Find-FirstHeadingLineIndex {
+    param([string[]]$Lines)
+
+    for ($i = 0; $i -lt $Lines.Count; $i++) {
+        if ($Lines[$i] -match '^(#{1,6})\s+(.+?)\s*$') {
+            return $i
+        }
+    }
+
+    return -1
+}
+
+function ConvertTo-DocFileKey {
+    param([string]$RefFile)
+
+    if ([string]::IsNullOrWhiteSpace($RefFile)) {
+        return ""
+    }
+
+    $normalizedRef = $RefFile.Trim() -replace '\\', '/'
+    $leaf = ($normalizedRef -split '/')[(-1)]
+    if ([string]::IsNullOrWhiteSpace($leaf)) {
+        return ""
+    }
+
+    if ([System.IO.Path]::GetExtension($leaf).ToLowerInvariant() -eq '.md') {
+        return [System.IO.Path]::GetFileNameWithoutExtension($leaf)
+    }
+
+    return $leaf
+}
+
+function Get-CppSourceContent {
+    param(
+        [string]$Source,
+        [string]$Description
+    )
 
     if ($Source -match '^https?://') {
         $url = $Source
@@ -58,12 +94,12 @@ function Get-TabCppContent {
             return (Invoke-WebRequest -Uri $url -UseBasicParsing).Content
         }
         catch {
-            throw "Failed to download Tab.cpp from URL: $Source"
+            throw "Failed to download $Description from URL: $Source"
         }
     }
 
     if (-not (Test-Path -LiteralPath $Source)) {
-        throw "Tab.cpp not found: $Source"
+        throw "$Description not found: $Source"
     }
 
     return Get-Content -LiteralPath $Source -Raw
@@ -88,8 +124,112 @@ function Get-StringVectors {
     return $result
 }
 
+function Get-OptionModesByVariable {
+    param([string]$Content)
+
+    $result = @{}
+    $lines = $Content -split "`r?`n"
+    $currentVariable = $null
+    $addPattern = '(?:\b\w+\s*=\s*)*def\s*=\s*this->add(?:_nullable)?\(\s*"(?<variable>[^"]+)"\s*,'
+    $modePattern = 'def->mode\s*=\s*(?<mode>comSimple|comAdvanced|comExpert|comDevelop)\s*;'
+
+    foreach ($line in $lines) {
+        if ($line -match $addPattern) {
+            $capturedVariable = [string]$Matches['variable']
+            if ([string]::IsNullOrWhiteSpace($capturedVariable)) {
+                $currentVariable = $null
+            }
+            else {
+                $currentVariable = $capturedVariable.Trim()
+            }
+            continue
+        }
+
+        if (-not [string]::IsNullOrWhiteSpace($currentVariable) -and $line -match $modePattern) {
+            $result[$currentVariable] = [string]$Matches['mode']
+        }
+    }
+
+    return $result
+}
+
+function Convert-ConfigOptionModeToLabel {
+    param([string]$Mode)
+
+    switch ($Mode) {
+        'comSimple' { return 'Simple' }
+        'comAdvanced' { return 'Advanced' }
+        'comExpert' { return 'Expert' }
+        'comDevelop' { return 'Developer' }
+        default { return $null }
+    }
+}
+
+function Remove-StaleSectionMetadata {
+    param(
+        [System.Collections.Generic.List[string]]$Buffer,
+        [hashtable]$ExpectedAnchors,
+        [string]$MetadataLinePattern
+    )
+
+    $sectionsPruned = 0
+    $headings = New-Object System.Collections.Generic.List[object]
+
+    for ($i = 0; $i -lt $Buffer.Count; $i++) {
+        $line = $Buffer[$i]
+        if ($line -match '^(#{1,6})\s+(.+?)\s*$') {
+            $headingText = $Matches[2].Trim()
+            $headingText = $headingText -replace '\s+#+$', ''
+            $slug = ConvertTo-AnchorSlug -Heading $headingText
+            if (-not [string]::IsNullOrWhiteSpace($slug)) {
+                $headings.Add([PSCustomObject]@{
+                    Index  = $i
+                    Anchor = $slug
+                })
+            }
+        }
+    }
+
+    if ($headings.Count -eq 0) {
+        return 0
+    }
+
+    for ($h = $headings.Count - 1; $h -ge 0; $h--) {
+        $sectionStart = $headings[$h].Index
+        $sectionAnchor = $headings[$h].Anchor
+
+        if ($ExpectedAnchors.ContainsKey($sectionAnchor)) {
+            continue
+        }
+
+        $sectionEnd = if ($h -lt ($headings.Count - 1)) { $headings[$h + 1].Index - 1 } else { $Buffer.Count - 1 }
+        if ($sectionEnd -le $sectionStart) {
+            continue
+        }
+
+        $metadataIndexes = New-Object System.Collections.Generic.List[int]
+        for ($k = $sectionStart + 1; $k -le $sectionEnd; $k++) {
+            if ($Buffer[$k] -match $MetadataLinePattern) {
+                $metadataIndexes.Add($k)
+            }
+        }
+
+        if ($metadataIndexes.Count -eq 0) {
+            continue
+        }
+
+        for ($r = $metadataIndexes.Count - 1; $r -ge 0; $r--) {
+            $Buffer.RemoveAt($metadataIndexes[$r])
+        }
+
+        $sectionsPruned++
+    }
+
+    return $sectionsPruned
+}
+
 $syncProgressActivity = "sync-tab-options-to-wiki.ps1"
-$syncStageTotal = 7
+$syncStageTotal = 8
 
 function Set-SyncStage {
     param(
@@ -137,7 +277,7 @@ if (-not (Test-Path -LiteralPath $WikiRoot)) {
 }
 
 Set-SyncStage -Step 1 -Status "Loading Tab.cpp content"
-$tabContent = Get-TabCppContent -Source $TabCppPath
+$tabContent = Get-CppSourceContent -Source $TabCppPath -Description "Tab.cpp"
 
 Set-SyncStage -Step 2 -Status "Parsing option mappings from Tab.cpp"
 $patternSingle = 'append_single_option_line\(\s*"(?<variable>[^"]+)"\s*,\s*"(?<ref>[^"]+)"(?:\s*,\s*(?<indexer>[^\)]+))?\s*\)'
@@ -285,7 +425,19 @@ if ($parsedMatches.Count -eq 0) {
     exit 0
 }
 
-Set-SyncStage -Step 3 -Status "Scanning markdown files"
+Set-SyncStage -Step 3 -Status "Loading and parsing option modes from PrintConfig.cpp"
+$optionModesByVariable = @{}
+if (-not [string]::IsNullOrWhiteSpace($PrintConfigCppPath)) {
+    try {
+        $printConfigContent = Get-CppSourceContent -Source $PrintConfigCppPath -Description "PrintConfig.cpp"
+        $optionModesByVariable = Get-OptionModesByVariable -Content $printConfigContent
+    }
+    catch {
+        Write-Host "[WARN] $($_.Exception.Message). Continuing without option mode annotations." -ForegroundColor Yellow
+    }
+}
+
+Set-SyncStage -Step 4 -Status "Scanning markdown files"
 $mdFiles = Get-ChildItem -LiteralPath $WikiRoot -Recurse -File -Filter '*.md' |
     Where-Object { $_.FullName -notmatch '[\\/]wiki[\\/]' }
 
@@ -298,19 +450,38 @@ foreach ($file in $mdFiles) {
     $mdByName[$key].Add($file.FullName)
 }
 
-Set-SyncStage -Step 4 -Status "Building file and anchor entries"
+Set-SyncStage -Step 5 -Status "Building file and anchor entries"
 $entries = New-Object System.Collections.Generic.List[object]
+$firstHeadingAnchorToken = '__first_heading__'
 foreach ($m in $parsedMatches) {
     $variable = $m.Variable
-    $ref = $m.Ref
-
-    if ($ref -notmatch '#') {
-        continue
+    $baseVariable = [regex]::Match($variable, '^[^\[]+').Value
+    $mode = $null
+    if (-not [string]::IsNullOrWhiteSpace($baseVariable) -and $optionModesByVariable.ContainsKey($baseVariable)) {
+        $mode = $optionModesByVariable[$baseVariable]
     }
 
-    $parts = $ref -split '#', 2
-    $fileKey = $parts[0].Trim()
-    $anchor = $parts[1].Trim().ToLowerInvariant()
+    $ref = $m.Ref
+
+    $rawFileKey = $null
+    $anchor = $null
+    if ($ref -match '#') {
+        $parts = $ref -split '#', 2
+        $rawFileKey = $parts[0].Trim()
+        $anchorPart = $parts[1].Trim().ToLowerInvariant()
+        if ([string]::IsNullOrWhiteSpace($anchorPart)) {
+            $anchor = $firstHeadingAnchorToken
+        }
+        else {
+            $anchor = $anchorPart
+        }
+    }
+    else {
+        $rawFileKey = $ref.Trim()
+        $anchor = $firstHeadingAnchorToken
+    }
+
+    $fileKey = ConvertTo-DocFileKey -RefFile $rawFileKey
 
     if ([string]::IsNullOrWhiteSpace($fileKey) -or [string]::IsNullOrWhiteSpace($anchor)) {
         continue
@@ -321,11 +492,12 @@ foreach ($m in $parsedMatches) {
         FileKey  = $fileKey
         Anchor   = $anchor
         Ref      = $ref
+        Mode     = $mode
     })
 }
 
 if ($entries.Count -eq 0) {
-    Write-Host "No entries with file#anchor format were found." -ForegroundColor Yellow
+    Write-Host "No entries with markdown file references were found." -ForegroundColor Yellow
     Complete-SyncProgress
     exit 0
 }
@@ -335,12 +507,28 @@ $missingFiles = 0
 $missingHeadings = 0
 $alreadyPresent = 0
 $normalizedSections = 0
+$entriesWithMode = @($entries | Where-Object { -not [string]::IsNullOrWhiteSpace($_.Mode) }).Count
+$metadataLinePattern = '^\s*(?:\[(?:Variable|Variables|Mode|Modes)\]\([^\)]+\)|`[^`]+`\s+\[(?:Variable|Variables)\]\([^\)]+\)|Variables?|Modes?)\s*:\s*'
+
+$managedTargetPaths = @{}
+foreach ($fileKey in $mdByName.Keys) {
+    $candidates = $mdByName[$fileKey]
+    $managedPath = $candidates[0]
+    if ($candidates.Count -gt 1) {
+        $managedPath = ($candidates | Sort-Object Length | Select-Object -First 1)
+    }
+
+    $managedTargetPaths[$managedPath] = $true
+}
+
+$expectedAnchorsByPath = @{}
+$processedTargetPaths = @{}
 
 $groupedByFile = $entries | Group-Object -Property FileKey
 $totalFileGroups = $groupedByFile.Count
 $fileNumber = 0
 
-Set-SyncStage -Step 5 -Status "Applying mappings to markdown files ($totalFileGroups files)"
+Set-SyncStage -Step 6 -Status "Applying mappings to markdown files ($totalFileGroups files)"
 
 foreach ($group in $groupedByFile) {
     $fileNumber++
@@ -360,9 +548,21 @@ foreach ($group in $groupedByFile) {
         Write-Host "[WARN] Multiple files matched '$fileKey'. Using: $targetPath" -ForegroundColor Yellow
     }
 
+    $processedTargetPaths[$targetPath] = $true
+    if (-not $expectedAnchorsByPath.ContainsKey($targetPath)) {
+        $expectedAnchorsByPath[$targetPath] = @{}
+    }
+
     $lines = Get-Content -LiteralPath $targetPath
     $buffer = New-Object System.Collections.Generic.List[string]
     $buffer.AddRange([string[]]$lines)
+    $firstHeadingIndex = Find-FirstHeadingLineIndex -Lines $buffer.ToArray()
+    $firstHeadingAnchor = $null
+    if ($firstHeadingIndex -ge 0 -and $buffer[$firstHeadingIndex] -match '^(#{1,6})\s+(.+?)\s*$') {
+        $headingText = $Matches[2].Trim()
+        $headingText = $headingText -replace '\s+#+$', ''
+        $firstHeadingAnchor = ConvertTo-AnchorSlug -Heading $headingText
+    }
     $fileChanged = $false
 
     $groupedByAnchor = $group.Group | Group-Object -Property Anchor
@@ -373,26 +573,103 @@ foreach ($group in $groupedByFile) {
         $anchorNumber++
         Set-SyncDetail -Status "File $fileNumber/$($totalFileGroups): $fileKey | Anchor $anchorNumber/$($anchorCount): $($anchorGroup.Name)" -Current $fileNumber -Total $totalFileGroups
         $anchor = $anchorGroup.Name
+        $resolvedAnchor = $anchor
 
         $vars = New-Object System.Collections.Generic.List[string]
         $seenVars = @{}
+        $varModes = @{}
         foreach ($entry in $anchorGroup.Group) {
             if (-not $seenVars.ContainsKey($entry.Variable)) {
                 $seenVars[$entry.Variable] = $true
                 $vars.Add($entry.Variable)
             }
+
+            $modeLabel = Convert-ConfigOptionModeToLabel -Mode $entry.Mode
+            if (-not [string]::IsNullOrWhiteSpace($modeLabel) -and -not $varModes.ContainsKey($entry.Variable)) {
+                $varModes[$entry.Variable] = $modeLabel
+            }
         }
 
         $formattedVars = $vars | ForEach-Object { "``$_``" }
-        $label = if ($vars.Count -eq 1) { "[Variable](built_in_placeholders_variables):" } else { "[Variables](built_in_placeholders_variables):" }
-        $insertLine = "$label " + ($formattedVars -join ", ") + ".  "  # ending with two spaces so Markdown line break is forced
+        $variableLabel = if ($vars.Count -eq 1) { "[Variable](built_in_placeholders_variables):" } else { "[Variables](built_in_placeholders_variables):" }
+        $insertVariableLine = "$variableLabel " + ($formattedVars -join ", ") + ".  "  # ending with two spaces so Markdown line break is forced
 
-        $idx = Find-HeadingLineIndex -Lines $buffer.ToArray() -Anchor $anchor
+        $distinctModes = New-Object System.Collections.Generic.List[string]
+        $seenModes = @{}
+        $modeToVars = @{}
+        $varsWithoutMode = New-Object System.Collections.Generic.List[string]
+
+        foreach ($varName in $vars) {
+            $formattedVarName = "``$varName``"
+            if (-not $varModes.ContainsKey($varName)) {
+                $varsWithoutMode.Add($formattedVarName)
+                continue
+            }
+
+            $modeName = $varModes[$varName]
+            if (-not $seenModes.ContainsKey($modeName)) {
+                $seenModes[$modeName] = $true
+                $distinctModes.Add($modeName)
+                $modeToVars[$modeName] = New-Object System.Collections.Generic.List[string]
+            }
+
+            $modeToVars[$modeName].Add($formattedVarName)
+        }
+
+        $canonicalLines = New-Object System.Collections.Generic.List[string]
+
+        if ($distinctModes.Count -gt 1) {
+            $canonicalLines.Add("[Modes](option_mode):  ")
+            foreach ($modeName in $distinctModes) {
+                $modeVars = [System.Collections.Generic.List[string]]$modeToVars[$modeName]
+                $groupVariableLabel = if ($modeVars.Count -eq 1) { "[Variable](built_in_placeholders_variables):" } else { "[Variables](built_in_placeholders_variables):" }
+                $canonicalLines.Add("``$modeName`` $groupVariableLabel " + ($modeVars -join ", ") + ".  ")
+            }
+
+            if ($varsWithoutMode.Count -gt 0) {
+                $leftoverVariableLabel = if ($varsWithoutMode.Count -eq 1) { "[Variable](built_in_placeholders_variables):" } else { "[Variables](built_in_placeholders_variables):" }
+                $canonicalLines.Add("$leftoverVariableLabel " + ($varsWithoutMode -join ", ") + ".  ")
+            }
+        }
+        else {
+            $insertModeLine = $null
+            if ($distinctModes.Count -gt 0) {
+                $formattedModes = $distinctModes | ForEach-Object { "``$_``" }
+                $modeLabel = if ($distinctModes.Count -eq 1) { "[Mode](option_mode):" } else { "[Modes](option_mode):" }
+                $insertModeLine = "$modeLabel " + ($formattedModes -join ", ") + ".  "  # ending with two spaces so Markdown line break is forced
+            }
+
+            if (-not [string]::IsNullOrWhiteSpace($insertModeLine)) {
+                $canonicalLines.Add($insertModeLine)
+            }
+            $canonicalLines.Add($insertVariableLine)
+        }
+
+        $idx = -1
+        if ($anchor -eq $firstHeadingAnchorToken) {
+            if ($firstHeadingIndex -lt 0 -or [string]::IsNullOrWhiteSpace($firstHeadingAnchor)) {
+                $sourceRef = $anchorGroup.Group[0].Ref
+                Write-Host "[WARN] First heading not found in $targetPath (from '$sourceRef')" -ForegroundColor Yellow
+                $missingHeadings++
+                continue
+            }
+
+            $idx = $firstHeadingIndex
+            $resolvedAnchor = $firstHeadingAnchor
+        }
+        else {
+            $idx = Find-HeadingLineIndex -Lines $buffer.ToArray() -Anchor $anchor
+        }
+
         if ($idx -lt 0) {
             $sourceRef = $anchorGroup.Group[0].Ref
             Write-Host "[WARN] Heading anchor '$anchor' not found in $targetPath (from '$sourceRef')" -ForegroundColor Yellow
             $missingHeadings++
             continue
+        }
+
+        if (-not [string]::IsNullOrWhiteSpace($resolvedAnchor)) {
+            $expectedAnchorsByPath[$targetPath][$resolvedAnchor] = $true
         }
 
         $nextHeading = -1
@@ -405,21 +682,29 @@ foreach ($group in $groupedByFile) {
 
         $sectionEnd = if ($nextHeading -ge 0) { $nextHeading - 1 } else { $buffer.Count - 1 }
         $metadataLineIndexes = New-Object System.Collections.Generic.List[int]
-        $hasCanonicalLine = $false
 
         for ($k = $idx + 1; $k -le $sectionEnd; $k++) {
-            if ($buffer[$k] -match '^\s*(?:\[(?:Variable|Variables)\]\([^\)]+\)|Variables?)\s*:\s*') {
+            if ($buffer[$k] -match $metadataLinePattern) {
                 $metadataLineIndexes.Add($k)
-                if ($buffer[$k] -eq $insertLine) {
-                    $hasCanonicalLine = $true
-                }
             }
         }
 
         $hasBlankBetween = ($idx + 1) -lt $buffer.Count -and [string]::IsNullOrWhiteSpace($buffer[$idx + 1])
-        $varLineIndex = $idx + 2
-        $hasHeadingRightAfterVariable = ($varLineIndex + 1) -lt $buffer.Count -and $buffer[$varLineIndex + 1] -match '^#{1,6}\s+'
-        $alreadyCanonical = $metadataLineIndexes.Count -eq 1 -and $hasCanonicalLine -and $metadataLineIndexes[0] -eq $varLineIndex -and $hasBlankBetween -and (-not $hasHeadingRightAfterVariable)
+        $metadataStart = $idx + 2
+        $lastMetadataIndex = $metadataStart + $canonicalLines.Count - 1
+        $hasHeadingRightAfterMetadata = ($lastMetadataIndex + 1) -lt $buffer.Count -and $buffer[$lastMetadataIndex + 1] -match '^#{1,6}\s+'
+        $isCanonicalLayout = $hasBlankBetween -and $metadataLineIndexes.Count -eq $canonicalLines.Count
+        if ($isCanonicalLayout) {
+            for ($ci = 0; $ci -lt $canonicalLines.Count; $ci++) {
+                $expectedIndex = $metadataStart + $ci
+                if ($expectedIndex -ge $buffer.Count -or $metadataLineIndexes[$ci] -ne $expectedIndex -or $buffer[$expectedIndex] -ne $canonicalLines[$ci]) {
+                    $isCanonicalLayout = $false
+                    break
+                }
+            }
+        }
+
+        $alreadyCanonical = $isCanonicalLayout -and (-not $hasHeadingRightAfterMetadata)
         if ($alreadyCanonical) {
             $alreadyPresent++
             continue
@@ -433,22 +718,29 @@ foreach ($group in $groupedByFile) {
             $fileChanged = $true
         }
 
-        if ((($idx + 2) -lt $buffer.Count) -and [string]::IsNullOrWhiteSpace($buffer[$idx + 1]) -and $buffer[$idx + 2] -eq $insertLine -and (-not (($idx + 3) -lt $buffer.Count -and $buffer[$idx + 3] -match '^#{1,6}\s+'))) {
-            $alreadyPresent++
-            continue
-        }
-
         if (-not (($idx + 1) -lt $buffer.Count -and [string]::IsNullOrWhiteSpace($buffer[$idx + 1]))) {
             $buffer.Insert($idx + 1, "")
             $fileChanged = $true
         }
 
-        $buffer.Insert($idx + 2, $insertLine)
-        if (($idx + 3) -lt $buffer.Count -and $buffer[$idx + 3] -match '^#{1,6}\s+') {
-            $buffer.Insert($idx + 3, "")
+        $insertIndex = $idx + 2
+        foreach ($metadataLine in $canonicalLines) {
+            $buffer.Insert($insertIndex, $metadataLine)
+            $insertIndex++
+        }
+
+        if ($insertIndex -lt $buffer.Count -and $buffer[$insertIndex] -match '^#{1,6}\s+') {
+            $buffer.Insert($insertIndex, "")
             $fileChanged = $true
         }
+
         $changes++
+        $fileChanged = $true
+    }
+
+    $staleSectionsPruned = Remove-StaleSectionMetadata -Buffer $buffer -ExpectedAnchors $expectedAnchorsByPath[$targetPath] -MetadataLinePattern $metadataLinePattern
+    if ($staleSectionsPruned -gt 0) {
+        $normalizedSections += $staleSectionsPruned
         $fileChanged = $true
     }
 
@@ -457,8 +749,34 @@ foreach ($group in $groupedByFile) {
     }
 }
 
-Set-SyncStage -Step 6 -Status "Finalizing summary"
+foreach ($managedTargetPath in $managedTargetPaths.Keys) {
+    if ($processedTargetPaths.ContainsKey($managedTargetPath)) {
+        continue
+    }
+
+    $lines = Get-Content -LiteralPath $managedTargetPath
+    $buffer = New-Object System.Collections.Generic.List[string]
+    $buffer.AddRange([string[]]$lines)
+
+    $expectedAnchors = @{}
+    if ($expectedAnchorsByPath.ContainsKey($managedTargetPath)) {
+        $expectedAnchors = $expectedAnchorsByPath[$managedTargetPath]
+    }
+
+    $staleSectionsPruned = Remove-StaleSectionMetadata -Buffer $buffer -ExpectedAnchors $expectedAnchors -MetadataLinePattern $metadataLinePattern
+    if ($staleSectionsPruned -le 0) {
+        continue
+    }
+
+    $normalizedSections += $staleSectionsPruned
+    if (-not $DryRun) {
+        Set-Content -LiteralPath $managedTargetPath -Value $buffer -Encoding UTF8
+    }
+}
+
+Set-SyncStage -Step 7 -Status "Finalizing summary"
 Write-Host "Processed: $($entries.Count) entries"
+Write-Host "Entries with option mode: $entriesWithMode"
 Write-Host "Inserted:  $changes"
 Write-Host "Skipped (already present): $alreadyPresent"
 Write-Host "Normalized sections: $normalizedSections"
@@ -469,5 +787,5 @@ if ($DryRun) {
     Write-Host "Dry run only. No files were modified." -ForegroundColor Cyan
 }
 
-Set-SyncStage -Step 7 -Status "Completed"
+Set-SyncStage -Step 8 -Status "Completed"
 Complete-SyncProgress
