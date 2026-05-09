@@ -26,7 +26,7 @@ jobs:
     name: Update OrcaSlicer Wiki
     permissions:
       contents: write
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     env:
       GH_WIKI_PAT: ${{ secrets.GH_WIKI_PAT }}
     steps:
