@@ -214,6 +214,10 @@ img[height="200"] { /* Calibrations guide preview */
 
 /* /////// ANNOTIONS */
 
+:root {
+    --md-admonition-icon--recommended: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 18a8 8 0 0 1-8-8 8 8 0 0 1 8-8 8 8 0 0 1 8 8 8 8 0 0 1-8 8m-2-12.5v9l6-4.5-6-4.5z"/></svg>');
+}
+
 /* Use regular font size on annotions */
 .md-typeset .admonition,
 .md-typeset details {
@@ -284,6 +288,64 @@ img[height="200"] { /* Calibrations guide preview */
     color: #00bfa5;
 }
 
+.md-typeset .admonition.recommended,
+.md-typeset details.recommended {
+    border-color: #43a047;
+    background-color: #43a04708;
+}
+
+.md-typeset .admonition.tip:has(.orca-video-poster-link),
+.md-typeset details.tip:has(.orca-video-poster-link) {
+    border-color: #43a047;
+    background-color: #43a04708;
+}
+
+.md-typeset .admonition.recommended .admonition-title,
+.md-typeset details.recommended summary{
+    color: #43a047;
+}
+
+.md-typeset .admonition.recommended .admonition-title:before,
+.md-typeset details.recommended summary:before{
+    background-color: #43a047;
+    -webkit-mask-image: var(--md-admonition-icon--recommended);
+    mask-image: var(--md-admonition-icon--recommended);
+}
+
+.md-typeset .admonition.tip:has(.orca-video-poster-link) .admonition-title,
+.md-typeset details.tip:has(.orca-video-poster-link) summary {
+    display: none;
+}
+
+.md-typeset .admonition.tip:has(.orca-video-poster-link)>p:has(.orca-video-title),
+.md-typeset details.tip:has(.orca-video-poster-link)>p:has(.orca-video-title) {
+    margin: 0;
+}
+
+.md-typeset .orca-video-title {
+    align-items: center;
+    color: #43a047;
+    display: flex;
+    font-weight: 700;
+    gap: .6rem;
+    margin: .2rem 0 .8rem;
+}
+
+.md-typeset .orca-video-title:before {
+    background-color: #43a047;
+    content: "";
+    display: inline-block;
+    flex: 0 0 1.2em;
+    height: 1.2em;
+    -webkit-mask-image: var(--md-admonition-icon--recommended);
+    mask-image: var(--md-admonition-icon--recommended);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    width: 1.2em;
+}
+
 .md-typeset .admonition.danger,
 .md-typeset details.danger {
     border-color: #ff1744;
@@ -292,6 +354,42 @@ img[height="200"] { /* Calibrations guide preview */
 .md-typeset .admonition.danger .admonition-title,
 .md-typeset details.danger summary{
     color: #ff1744;
+}
+
+.md-typeset .orca-video-embed {
+    aspect-ratio: 16 / 9;
+    background-color: #000;
+    margin: .6rem 0 .2rem;
+    overflow: hidden;
+    width: 100%;
+}
+
+.md-typeset .orca-video-poster-link,
+.md-typeset .orca-video-poster-link img {
+    height: 100%;
+    width: 100%;
+}
+
+.md-typeset .orca-video-poster-link {
+    background-color: #000;
+    display: block;
+}
+
+.md-typeset .orca-video-poster-link:focus-visible {
+    outline: .12rem solid #43a047;
+    outline-offset: .12rem;
+}
+
+.md-typeset .orca-video-poster-link img {
+    display: block;
+    object-fit: contain;
+}
+
+.md-typeset .orca-video-credit {
+    color: var(--md-default-fg-color--light);
+    display: block;
+    font-size: .72rem;
+    margin: .4rem 0 0;
 }
 
 /* /////// TABLES */

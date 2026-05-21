@@ -11,6 +11,17 @@ To access the calibration features, you can find them in the **Calibration** sec
 > [!IMPORTANT]
 > After completing the calibration process, remember to create a new project in order to exit the calibration mode.
 
+> [!TIP]
+> <strong class="orca-video-title">Recommended: Watch this first for a detailed overview</strong>
+>
+> <div class="orca-video-embed">
+>   <a class="orca-video-poster-link" href="https://www.youtube.com/watch?v=gVU5If1VsAM" aria-label="Watch Filament Calibration Masterclass video by Factorian Designs">
+>     <img alt="factorian-calibration-029" src="https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/video/factorian-calibration-029.png?raw=true">
+>   </a>
+> </div>
+>
+> <span class="orca-video-credit">Video by <strong>Factorian Designs</strong>, with consent.</span>
+
 The recommended order for calibration is as follows:
 
 1. **[Temperature](temp_calib):** Start by calibrating the temperature of the nozzle and the bed. This is crucial as it affects the viscosity of the filament, which in turn influences how well it flows through the nozzle and adheres to the print bed.  
