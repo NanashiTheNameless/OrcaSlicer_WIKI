@@ -28,4 +28,4 @@ Enable this option if you want the tool change to always be issued above the wip
 
 > [!IMPORTANT]
 > NEW FEATURE: **Tool Change on Wipe Tower**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.3.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.3.2**.

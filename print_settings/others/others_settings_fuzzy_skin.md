@@ -52,7 +52,7 @@ Apply fuzzy skin only to interior holes and cutouts. This can add grip or visual
 
 > [!IMPORTANT]
 > NEW FEATURE: **Hole Mode**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.3.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.3.2**.
 
 ### Contour and Hole
 
@@ -145,7 +145,7 @@ A clear example is a 3DBenchy, whose windows create small print islands where th
 
 > [!IMPORTANT]
 > NEW FEATURE: **Ripple Noise**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.3.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.3.2**.
 
 #### Ripples per layer
 

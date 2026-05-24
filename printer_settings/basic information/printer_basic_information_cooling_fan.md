@@ -42,4 +42,4 @@ Set to 0 to deactivate.
 
 > [!IMPORTANT]
 > NEW FEATURE: **Minimum non-zero part cooling fan speed**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.3.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.3.2**.
