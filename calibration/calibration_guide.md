@@ -12,11 +12,13 @@ To access the calibration features, you can find them in the **Calibration** sec
 > After completing the calibration process, remember to create a new project in order to exit the calibration mode.
 
 > [!TIP]
-> <strong class="orca-video-title">Recommended: Watch this first for a detailed overview</strong>
+> <strong class="orca-video-title">Recommended</strong>
+>
+> <span class="orca-video-description">Filament Calibration Masterclass</span>
 >
 > <div class="orca-video-embed">
 >   <a class="orca-video-poster-link" href="https://www.youtube.com/watch?v=gVU5If1VsAM" aria-label="Watch Filament Calibration Masterclass video by Factorian Designs">
->     <img alt="factorian-calibration-029" src="https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/video/factorian-calibration-029.png?raw=true">
+>     <img alt="factorian-calibration-029" src="https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/video/factorian-calibration-029.png?raw=true">
 >   </a>
 > </div>
 >

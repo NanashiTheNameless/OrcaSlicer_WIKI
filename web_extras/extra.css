@@ -346,6 +346,13 @@ img[height="200"] { /* Calibrations guide preview */
     width: 1.2em;
 }
 
+.md-typeset .orca-video-description {
+    color: var(--md-default-fg-color);
+    display: block;
+    font-size: .8rem;
+    margin: .35rem 0 .8rem;
+}
+
 .md-typeset .admonition.danger,
 .md-typeset details.danger {
     border-color: #ff1744;
@@ -357,16 +364,13 @@ img[height="200"] { /* Calibrations guide preview */
 }
 
 .md-typeset .orca-video-embed {
-    aspect-ratio: 16 / 9;
     background-color: #000;
     margin: .6rem 0 .2rem;
     overflow: hidden;
     width: 100%;
 }
 
-.md-typeset .orca-video-poster-link,
-.md-typeset .orca-video-poster-link img {
-    height: 100%;
+.md-typeset .orca-video-poster-link {
     width: 100%;
 }
 
@@ -382,7 +386,8 @@ img[height="200"] { /* Calibrations guide preview */
 
 .md-typeset .orca-video-poster-link img {
     display: block;
-    object-fit: contain;
+    height: auto;
+    width: 100%;
 }
 
 .md-typeset .orca-video-credit {

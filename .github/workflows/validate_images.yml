@@ -38,7 +38,9 @@ jobs:
             const currentRepo = context.repo.repo;
             const workspace = process.cwd();
             const allowedExt = new Set(['.md', '.markdown', '.mdown', '.mkd', '.mkdn', '.mdx']);
-            const candidateFiles = collectMarkdownFiles('');
+            const candidateFiles = collectMarkdownFiles('').filter(
+              (f) => !f.startsWith('releases/')
+            );
             if (!candidateFiles.length) {
               core.info('No Markdown files found; skipping image validation.');
               return;

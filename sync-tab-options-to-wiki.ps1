@@ -1,6 +1,6 @@
 param(
-    [string]$TabCppPath = "https://github.com/OrcaSlicer/OrcaSlicer/blob/main/src/slic3r/GUI/Tab.cpp",
-    [string]$PrintConfigCppPath = "https://github.com/OrcaSlicer/OrcaSlicer/blob/main/src/libslic3r/PrintConfig.cpp",
+    [string]$TabCppPath = "https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/src/slic3r/GUI/Tab.cpp",
+    [string]$PrintConfigCppPath = "https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/src/libslic3r/PrintConfig.cpp",
     [string]$WikiRoot = $PSScriptRoot,
     [switch]$DryRun
 )

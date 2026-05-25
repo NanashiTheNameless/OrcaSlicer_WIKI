@@ -10,6 +10,19 @@ Adjusting wall settings can significantly affect layer adhesion, strength, appea
 - [Alternate extra wall](#alternate-extra-wall)
 - [Detect thin wall](#detect-thin-wall)
 
+> [!TIP]
+> <strong class="orca-video-title">Recommended</strong>
+>
+> <span class="orca-video-description">Advanced tips on improving strength.</span>
+>
+> <div class="orca-video-embed">
+>   <a class="orca-video-poster-link" href="https://www.youtube.com/watch?v=c7CI6yBTKMc" aria-label="Watch advanced strength tips video by Maker's Muse">
+>     <img alt="makers-muse-walls-strength" src="https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/video/makers-muse-walls-strength.png?raw=true">
+>   </a>
+> </div>
+>
+> <span class="orca-video-credit">Video by <strong>Maker's Muse</strong>, with consent.</span>
+
 ## Wall loops
 
 [Variable](built_in_placeholders_variables): `wall_loops`.  
