@@ -523,6 +523,7 @@ Mathematical, isotropic surface providing equal strength in all directions. Exce
 
 ### Gyroid Optimized
 
+[Variable](built_in_placeholders_variables): `gyroid_optimized`.  
 > [!IMPORTANT]
 > NEW FEATURE: **Z-buckling bias optimization (experimental)**  
 > Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.3.2**.
