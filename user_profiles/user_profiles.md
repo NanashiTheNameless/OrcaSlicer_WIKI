@@ -7,6 +7,7 @@ This page explains where OrcaSlicer stores your user profiles and custom presets
 - [User Profile Folders](#user-profile-folders)
 - [OrcaCloud Auto Migration](#orcacloud-auto-migration)
 - [Manual Migration](#manual-migration)
+- [Profiles Missing After Updating from Bambu Cloud](#profiles-missing-after-updating-from-bambu-cloud)
 
 ## Storage Location
 
@@ -78,3 +79,33 @@ In most cases, the auto migration works smoothly. However, if your profiles do n
 1. Copy the contents of your old profile folder (`default` or the 10-digit Bambu Cloud folder) into the new UUID folder.
 2. Restart OrcaSlicer.
 3. Wait 1–3 minutes for OrcaSlicer to detect the new profiles and sync them to OrcaCloud.
+
+## Profiles Missing After Updating from Bambu Cloud
+
+If you previously used **Bambu Cloud** for profile syncing and have chosen **not** to use OrcaCloud, you may open OrcaSlicer after updating and find that your custom presets appear to be missing. This is a known side effect of the transition away from Bambu Cloud syncing — **your profiles are not lost.**
+
+Here is what is happening behind the scenes:
+
+- Your profiles are still safely stored in the Bambu Cloud folder (the one named with a 10-digit number).
+- Since Bambu Cloud syncing is no longer supported and you are not signed in to OrcaCloud, OrcaSlicer now loads and saves profiles from the `default` folder.
+- If you only ever used Bambu Cloud, your `default` folder is empty, so it looks as if everything is gone.
+
+You can bring your profiles back in either of the following ways. Both work — pick whichever suits you.
+
+### Option 1: Copy your profiles locally (no account needed)
+
+If you prefer to keep working without any cloud account, simply move your profiles into the folder OrcaSlicer now uses:
+
+1. Open the configuration folder via **Help** > **Show Configuration Folder**, then open the `user` subfolder.
+2. Open your Bambu Cloud folder (the 10-digit one) and copy **all** of its contents.
+3. Paste them into the `default` folder.
+4. Restart OrcaSlicer.
+
+Your profiles will reappear, and OrcaSlicer will continue to load and save them locally from `default`.
+
+### Option 2: Sign in to OrcaCloud (automatic)
+
+If you would also like your profiles backed up and synced across devices, signing in to OrcaCloud will move them for you automatically. On first sign-in, OrcaSlicer copies your profiles from the Bambu Cloud folder into your new OrcaCloud folder. See [OrcaCloud Auto Migration](#orcacloud-auto-migration) for details.
+
+> [!NOTE]
+> You might wonder why OrcaSlicer doesn't just copy your Bambu Cloud profiles into the `default` folder for you. Because the `default` folder lives only on your computer and isn't backed up to any cloud, automatically writing into it could unintentionally overwrite or mix up profiles you already keep there. To avoid touching your local data without your knowledge, OrcaSlicer leaves the `default` folder as-is and lets you decide how to migrate. Automatic migration only runs when you sign in to OrcaCloud, where the target folder is created fresh for your account.
