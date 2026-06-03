@@ -1,11 +1,10 @@
 # Release V2.4.0 Alpha
 
-
 This is the OrcaSlicer V2.4.0 Alpha release. The headline feature is **Orca Cloud** — a new centralized platform for profile sync, preset bundle sharing, and community discovery at cloud.orcaslicer.com. This release also introduces **Z Anti-Aliasing (ZAA) contouring** for smoother top surfaces, an Expert user mode, native Wayland support for Linux, Machine Input Shaping, Optimized Gyroid infill, Prusa-style combined brims, a redesigned printer selection dialog, and a large number of bug fixes and profile updates.
 
 **Note:** Please check #13828 for known issues.
 
-# ☁️ Orca Cloud 
+# ☁️ Orca Cloud
 
 Orca Cloud is now live at [cloud.orcaslicer.com](https://cloud.orcaslicer.com) — a centralized platform that brings your 3D printing workflow online.
 
@@ -56,7 +55,7 @@ Orca Cloud is designed with privacy in mind. Data is currently hosted in the USA
 * **Z Anti-Aliasing (ZAA) contouring** by @adob in [PR 12736](https://github.com/OrcaSlicer/OrcaSlicer/pull/12736) with fixes and improvements by @valerii-bokhan, @RF47, and @ianalexis in [PR 13452](https://github.com/OrcaSlicer/OrcaSlicer/pull/13452), [PR 13508](https://github.com/OrcaSlicer/OrcaSlicer/pull/13508), [PR 13510](https://github.com/OrcaSlicer/OrcaSlicer/pull/13510), [PR 13450](https://github.com/OrcaSlicer/OrcaSlicer/pull/13450), [PR 13766](https://github.com/OrcaSlicer/OrcaSlicer/pull/13766), and [PR 13446](https://github.com/OrcaSlicer/OrcaSlicer/pull/13446)
     Z Anti-Aliasing (ZAA) reduces visible stair-stepping on curved and sloped top surfaces by raycasting each extrusion point against the original 3D mesh and micro-adjusting the Z height to follow the actual surface geometry. Instead of keeping every move at a single flat Z for the whole layer, OrcaSlicer emits varying Z values inside the affected layer — noticeably smoothing domes, chamfers, and shallow slopes without changing the nominal layer height of the rest of the print. Five new settings are available under Print Settings > Quality (`zaa_enabled`, `zaa_min_z`, `zaa_minimize_perimeter_height`, `zaa_dont_alternate_fill_direction`, `zaa_region_disable`). This is an Expert mode feature currently targeting top-facing curved or sloped surfaces. [Wiki](https://www.orcaslicer.com/wiki/quality_settings_z_contouring)
 
-    <img width="800" alt="ZAA contouring" src="https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/z-contouring/z-contouring.jpg?raw=true" />
+    <img width="800" alt="ZAA contouring" src="https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/z-contouring/z-contouring.jpg?raw=true" />
 
 * **Fuzzy skin ripple mode** by @GeordieTomo in [PR 13471](https://github.com/OrcaSlicer/OrcaSlicer/pull/13471) with improvements by @ianalexis in [PR 13506](https://github.com/OrcaSlicer/OrcaSlicer/pull/13506) and [PR 12479](https://github.com/OrcaSlicer/OrcaSlicer/pull/12479)
     Adds a new Ripple generator mode to fuzzy skin that produces uniform patterned textures instead of noise-based perturbation. Three new parameters are available when Ripple mode is selected: ripples per layer, ripple offset, and layers between ripple offset. Also includes fixes for fuzzy skin artifacts when combined with painted fuzzy skin regions and sacrificial bridge layers. Fixes #13325. [Wiki](https://www.orcaslicer.com/wiki/others_settings_fuzzy_skin)
@@ -92,7 +91,7 @@ Orca Cloud is designed with privacy in mind. Data is currently hosted in the USA
 * **Machine Input Shaping** by @ianalexis in [PR 11202](https://github.com/OrcaSlicer/OrcaSlicer/pull/11202) with wiki and calibration updates in [PR 13569](https://github.com/OrcaSlicer/OrcaSlicer/pull/13569) and [PR 13571](https://github.com/OrcaSlicer/OrcaSlicer/pull/13571)
     Adds Resonance Compensation override to the Printer Settings, allowing you to set X/Y axis frequency and damping values directly in OrcaSlicer. Supports Adaptive Klipper, RRF, and Marlin 2 input shaper types. Particularly useful for Marlin printers where the IS menu is disabled, or when you want to manage input shaping from the slicer side. Emits the appropriate G-code for each firmware type. [Wiki](https://www.orcaslicer.com/wiki/printer_motion_ability)
 
-    <img width="800" alt="Machine Input Shaping" src="https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/InputShaping/inputshaping_printer.png?raw=true" />
+    <img width="800" alt="Machine Input Shaping" src="https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/InputShaping/inputshaping_printer.png?raw=true" />
 
 * **Kinematics (Jerk & Acceleration) visualization** by @ianalexis in [PR 13169](https://github.com/OrcaSlicer/OrcaSlicer/pull/13169)
     Adds Jerk/Junction Deviation and Acceleration preview modes to the G-code viewer. JD values are calculated dynamically based on the current acceleration, making it easy to correlate motion parameters with specific print features and identify potential quality issues.

@@ -3,7 +3,7 @@
 Since v2.2.0-beta, OrcaSlicer allows you to use different nozzle sizes in the same print.  
 This feature is extremely useful with the growing popularity of multi-nozzle printers, enabling faster and stronger prints while improving quality.
 
-![cube_line_width](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/multi-tool/cube_line_width.png?raw=true)
+![cube_line_width](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/multi-tool/cube_line_width.png?raw=true)
 
 ## Setup
 
@@ -18,14 +18,14 @@ For example:
 - Extruder 3: `0.2mm` Small nozzle for fine details at Walls
 - Extruder 4: `1.0mm` Extra-large nozzle for very fast infill
 
-![multi_nozzle_diam](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/extruder/multi_nozzle_diam.gif?raw=true)
+![multi_nozzle_diam](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/extruder/multi_nozzle_diam.gif?raw=true)
 
 ### Process
 
 For MultiNozzle processes, you need to make the profile Nozzle agnostic by setting each [line width](quality_settings_line_width) to a percentage of the nozzle diameter.  
 This allows the slicer to automatically adjust the line width for each extruder based on its nozzle size, ensuring consistent print quality across different nozzle sizes.
 
-![line_width](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/multi-tool/line_width.png?raw=true)
+![line_width](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/multi-tool/line_width.png?raw=true)
 
 A quick way to make the profile Nozzle agnostic is to divide each line width by the nozzle diameter and set it as a percentage.  
 For example, if the line width is set to `0.4mm` and the nozzle diameter is `0.4mm`, you would set the line width to `100%` of the nozzle diameter.  

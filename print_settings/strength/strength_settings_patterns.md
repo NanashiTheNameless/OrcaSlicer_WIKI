@@ -352,7 +352,13 @@ Support |Cubic is a variation of the [Cubic](#cubic) infill pattern that is spec
 
 ## Lightning
 
+[Mode](option_mode): `Expert`.  
+[Variables](built_in_placeholders_variables): `lightning_overhang_angle`, `lightning_prune_angle`, `lightning_straightening_angle`.  
 Ultra-fast, ultra-low material infill. Designed for speed and efficiency, ideal for quick prints or non-structural prototypes.
+
+> [!IMPORTANT]
+> NEW FEATURE: **Lightning Angles**  
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.3.2**.
 
 ### Overhang Angle
 
@@ -370,9 +376,9 @@ Limits how far junctions in the Lightning infill can be moved to straighten line
 Using a low value will result in a low lateral distortion between layers, but may cause more pruning.  
 A higher value will allow for more straightening, improving strength but increasing lateral distortion.
 
-![infill-top-lightning-straightening](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-lightning-straightening.png?raw=true)  
-![infill-top-front-lightning-straightening](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-front-lightning-straightening.png?raw=true)  
-![infill-front-lightning-straightening](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-front-lightning-straightening.png?raw=true)
+![infill-top-lightning-straightening](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/fill/infill-top-lightning-straightening.png?raw=true)  
+![infill-top-front-lightning-straightening](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/fill/infill-top-front-lightning-straightening.png?raw=true)  
+![infill-front-lightning-straightening](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/fill/infill-front-lightning-straightening.png?raw=true)
 
 - **Strength**
     - **Horizontal (X-Y):** Low ![level-to-better-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-2.svg?raw=true)
