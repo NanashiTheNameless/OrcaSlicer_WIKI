@@ -1,4 +1,4 @@
-# What's Changed
+# Release V2.4.0 Beta
 
 This is the OrcaSlicer V2.4.0 Beta. A lot of effort has gone into this release to improve stability, speed, and print quality, along with the interface and printer support. Bridging in particular has been greatly improved by @ianalexis, @kisslorand, and many others, and a new realistic rendering option from @RF47 makes your models look gorgeous right inside OrcaSlicer.
 
