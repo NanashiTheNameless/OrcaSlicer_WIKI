@@ -5,7 +5,7 @@ This is the OrcaSlicer V2.4.0 Beta. A lot of effort has gone into this release t
 There's good news for multi-material users too: per-feature filament assignment got a big upgrade, opening up much more creative prints. Ever thought about printing the outer walls in TPU and the rest in PLA? Now you can — check out the details below.
 
 
-**Note:** Everything from the 2.4.0 Alpha — Orca Cloud, Z Anti-Aliasing (ZAA) contouring, Machine Input Shaping, Optimized Gyroid infill, and the redesigned printer selection dialog — is included in this build. See the [2.4.0 Alpha release notes](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/v2.4.0-alpha) for details on those.
+**Note:** Everything from the 2.4.0 Alpha — Orca Cloud, Z Anti-Aliasing (ZAA) contouring, Machine Input Shaping, Optimized Gyroid infill, and the redesigned printer selection dialog — is included in this build. See the [2.4.0 Alpha release notes](https://www.orcaslicer.com/wiki/releases/release_2_4_0_alpha.html) for details on those.
 
 # 🌊 New Features & Improvements
 
