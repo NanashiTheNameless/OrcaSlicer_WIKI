@@ -1,4 +1,4 @@
-# What's Changed
+# V2.4.0
 
 This is the OrcaSlicer V2.4.0 release. It focuses on bug fixes, a smoother Orca Cloud experience, and new features such as sending sliced jobs to the printer as a packaged 3MF. On the Orca Cloud side, you now stay logged in while offline, a sync can no longer overwrite a locally recreated preset, and a notification tells you when a subscribed preset has an update available. Other additions include a new Microsoft Store install channel for Windows (submission currently under review), faster slice-to-preview processing (with the largest gains on Klipper-flavor printers), a skirt-generation overhaul, and filament-list quality-of-life improvements — alongside a broad round of bug fixes (tree supports, calibration, motion-ability settings, and Linux/Flatpak) and refreshed translations, including Chinese.
 
