@@ -56,6 +56,10 @@ This is the folder OrcaSlicer uses when you are **not** logged into any cloud sy
 
 A folder named with a UUID (e.g., `6b89c630-39bb-42cb-a1f0-476bef493c06`). This folder is created when you sign in to **OrcaCloud** (available from version 2.4 onwards). When you are logged in, OrcaSlicer automatically saves and loads your custom presets from this folder instead of `default`.
 
+> [!NOTE]
+> **OrcaCloud is free.** Profile syncing and cloud backup stay free and remain free; see the [Orca Cloud FAQ](https://cloud.orcaslicer.com/wiki/#orca-cloud-faq)
+> for details.
+
 ### `<10-digit number>` (Bambu Cloud)
 
 A folder named with a 10-digit number (e.g., `1509812367`). This folder was used by the legacy **Bambu Cloud** profile syncing feature.

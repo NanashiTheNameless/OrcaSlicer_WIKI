@@ -14,11 +14,6 @@ This can noticeably smooth domes, chamfers, shallow slopes, and similar top-faci
 > [!NOTE]
 > Current implementation targets top-facing curved or sloped surfaces.  
 > **Downward-facing or upside-down curves are not handled.**
-
-> [!IMPORTANT]
-> NEW FEATURE: **Z Contouring**  
-> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.3.2**.
-
 - [Minimize wall height angle](#minimize-wall-height-angle)
 - [Minimum z height](#minimum-z-height)
 - [Don't alternate fill direction](#dont-alternate-fill-direction)

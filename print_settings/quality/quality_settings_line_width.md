@@ -93,6 +93,3 @@ To achieve proper bridge lines union between contiguous lines and reduce sagging
 > This allows you to use a theoretically wider line width for bridges.  
 > However, it is recommended to use [thick bridges](quality_settings_bridging#thick-bridges) or a [bridge flow adjustment](quality_settings_bridging#flow-ratio) instead.
 
-> [!IMPORTANT]
-> NEW FEATURE: **Bridge Width**  
-> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.3.2**.

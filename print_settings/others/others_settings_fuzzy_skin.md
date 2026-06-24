@@ -49,11 +49,6 @@ Useful for creating a textured edge while keeping the inner surfaces smooth.
 ### Hole
 
 Apply fuzzy skin only to interior holes and cutouts. This can add grip or visual interest to negative features without affecting the outer surface.
-
-> [!IMPORTANT]
-> NEW FEATURE: **Hole Mode**  
-> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.3.2**.
-
 ### Contour and Hole
 
 Apply fuzzy skin to both the outer contour and interior holes. Useful when you want the rough texture to appear on negative features as well.
@@ -142,11 +137,6 @@ A clear example is a 3DBenchy, whose windows create small print islands where th
 
 ![Fuzzy-skin-ripple](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/Fuzzy-skin/Fuzzy-skin-ripple.png?raw=true)
 ![Fuzzy-skin-ripple-example](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/Fuzzy-skin/Fuzzy-skin-ripple-example.jpg?raw=true)
-
-> [!IMPORTANT]
-> NEW FEATURE: **Ripple Noise**  
-> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.3.2**.
-
 #### Ripples per layer
 
 [Mode](option_mode): `Advanced`.  

@@ -179,11 +179,6 @@ Results in:
 > This only affects internal solid infill inside the compensation zone.  
 > It does not change sparse infill, top surfaces, or the bottommost layer.  
 > Start with `80-90%` and `1-2` compensation layers, then tune based on visible ripples or nozzle scraping on lower solid layers.
-
-> [!IMPORTANT]
-> NEW FEATURE: **Elephant Foot Compensation Density**  
-> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.3.2**.
-
 ## Precise wall
 
 [Variable](built_in_placeholders_variables): `precise_outer_wall`.  
