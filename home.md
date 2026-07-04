@@ -15,6 +15,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 - [Prepare](#prepare)
 - [Calibrations](#calibrations)
 - [General Settings](#general-settings)
+- [Plugins](#plugins)
 - [Guides](#guides)
 - [Release Notes](#release-notes)
 - [Developer Section](#developer-section)
@@ -216,6 +217,14 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 - [Transfer or Discard Changes popup dialog](transfer_discard_changes)
 - [User Profiles](user_profiles)
 
+## Plugins
+
+- [Getting Started](getting_started)
+- [Local Plugins](local_plugins)
+- [Cloud Plugins](cloud_plugins)
+- [Plugin Types](plugin_types)
+- [Managing Plugins](managing_plugins)
+
 ## Guides
 
 - How to:
@@ -226,6 +235,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 
 ## Release Notes
 
+- [OrcaSlicer V2.4.1](release_2_4_1)
 - [OrcaSlicer V2.4.0](release_2_4_0)
 - [OrcaSlicer V2.4.0 Beta](release_2_4_0_beta)
 - [OrcaSlicer V2.4.0 Alpha](release_2_4_0_alpha)

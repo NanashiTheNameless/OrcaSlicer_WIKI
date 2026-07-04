@@ -39,7 +39,7 @@ jobs:
           fi
 
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       # NOTE: Ensure your docs are generated into ./docs before the following steps.
       # If you have a build step to generate docs, insert it here.
