@@ -30,7 +30,7 @@ Full manual for GNUgettext can be seen here: [http://www.gnu.org/software/gettex
 4. As a result you will have fr.po - the file containing translation to French.
 Notice. When the translation is complete you need to:
     - Rename the file to OrcaSlicer_fr.po
-    - OrcaSlicer_fr.po needs to be copied into the sub-folder fr of [https://github.com/OrcaSlicer/OrcaSlicer/tree/master/localization/i18n](https://github.com/OrcaSlicer/OrcaSlicer/tree/master/localization/i18n), and be pushed
+    - OrcaSlicer_fr.po needs to be copied into the sub-folder fr of [https://github.com/NanashiTheNameless/OrcaSlicer/tree/master/localization/i18n](https://github.com/NanashiTheNameless/OrcaSlicer/tree/master/localization/i18n), and be pushed
 ( name of folder "fr" means "French" - the translation language).
 
 ### Scenario 3. How do I add a new text resource when implementing a feature to OrcaSlicer
