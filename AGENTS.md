@@ -58,6 +58,8 @@ Enforced by CI (`validate_images.yml` + `unreferenced_images.yml`):
 
 - Formats: **SVG** preferred (theme-adaptive), **PNG** for screenshots/transparency, **JPG** for photos. Only use images you have rights to.
 
+To auto-fix these on existing pages, run [`fix-image-links.ps1`](fix-image-links.ps1) (repo root): `pwsh ./fix-image-links.ps1` (add `-DryRun` to preview). It rewrites relative/root-absolute paths (`](/images…`, `](../images…`) to the canonical `…/blob/main/<path>?raw=true` URL, appends a missing `?raw=true`, sets the alt text to the image filename, and moves `alt` before `src` in `<img>` tags. It only touches OrcaSlicer `blob`/`raw` asset URLs and local paths that resolve to a real file — badges, external/`user-attachments` URLs, fenced code blocks, `wiki/`, and `releases/` are left alone; unresolved local paths are reported, not rewritten.
+
 ## List Indentation
 
 Enforced by CI (`validate_list_indentation.yml`):
@@ -110,6 +112,8 @@ Use fenced triple-backtick blocks and **specify the language** for highlighting 
 ## Orca → Wiki Redirection
 
 The OrcaSlicer GUI deep-links into these pages from [src/slic3r/GUI/Tab.cpp](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/src/slic3r/GUI/Tab.cpp) using the same `filename#anchor` scheme (validated weekly by `validate_tab_links.yml`). If you **rename a page or a heading that a Tab.cpp link targets**, that redirect breaks — flag it in the PR so the OrcaSlicer side can be updated. See [how_to_wiki.md](guides/how_to_wiki.md#orca-to-wiki-redirection) for the C++ patterns.
+
+The `[Mode](option_mode)` and `[Variable(s)](built_in_placeholders_variables)` lines under an option's heading are **generated — never hand-edited**. Run [`sync-tab-options-to-wiki.ps1`](sync-tab-options-to-wiki.ps1) (repo root) to import/refresh them: it reads the option→page map from `Tab.cpp` and the option mode from `PrintConfig.cpp`, then inserts the metadata under the matching heading (and prunes it from unreferenced sections). When adding an option's docs, write only the heading + body, then run `pwsh ./sync-tab-options-to-wiki.ps1` (add `-DryRun` to preview). Manual edits to these lines are overwritten. See [how_to_wiki.md](guides/how_to_wiki.md#option-mode-and-variables-metadata).
 
 ## CI Checks
 

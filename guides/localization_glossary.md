@@ -1,4 +1,4 @@
-# OrcaSlicer Translation Glossary
+# Translation Glossary
 
 Cross-language reference of key OrcaSlicer terms, to keep translations
 **consistent** within each language. The base column is English (the `msgid`).
@@ -45,6 +45,7 @@ Languages with non-Latin scripts (ja, ko, zh, ru, uk, th) keep the Latin acronym
 | **Materials**: PLA, PETG, TPU, ABS, ASA, PC, PA, PVA, PEI | Polymer/material abbreviations (PEI is also the plate surface). International standard chemical abbreviations. |
 | **G-code commands**: `M141`, `M191` | Literal printer commands (set / wait for chamber temperature). They are machine instructions and must be copied exactly. |
 | **Macros & variables**: `PRINT_START`, `CHAMBER_TEMP`, `CHAMBER_MIN_TEMP`, `chamber_temperature`, `chamber_minimal_temperature` | Literal identifiers used in custom G-code. Translating or altering them breaks the macro/variable reference. |
+| **Inch symbol**: `″` (U+2033) | The abbreviation for inches (`msgctxt "inches"`, `msgid "in"`). Use the Unicode double-prime character `″` (U+2033) as the standard — not a straight quote `"`, two apostrophes `''`, or the letters *in*. It is a script-neutral typographic symbol, so it stays the same in every language. |
 
 ## Translation table glossary
 
@@ -93,6 +94,7 @@ Languages with non-Latin scripts (ja, ko, zh, ru, uk, th) keep the Latin acronym
 | **Spiral vase** | Vasenmodus | Vaso en espiral | Vase spirale | Vaso a spirale | Vaso espiral | Spiraalvaas | Gerro en Espiral | Spirálová váza | Tryb wazy | Spirál (váza) | Spiralinė vaza | Spiral vas | Spiral vazo | Режим вазы | Спіральна ваза | スパイラル | 나선형 꽃병 모드 | 旋转花瓶 | 螺旋花瓶模式 | แจกันเกลียว | Bình xoắn ốc |
 | **Gyroid** | Gyroid | Giroide | Gyroïde | Giroide | Giroide | Gyroide | Giroide | — | Gyroidalny | — | Giroidas | — | Jiroid | Гироид | Гіроїд | ジャイロイド | 자이로이드 | 螺旋体 | 螺旋體 | ไจรอยด์ | — |
 | **Timelapse** | Zeitraffer | Timelapse | Timelapse | Timelapse | Timelapse | Timelapse | Timelapse | Časosběr | Timelapse | Timelapse | Intervalinis fotografavimas („Timelapse“) | Timelapse | Timelapse | Таймлапсы | Покадрова зйомка | タイムラプス | 타임랩스 | 延时摄影 | 縮時攝影 | ไทม์แลปส์ | Timelapse |
+| **Dialog** *(a UI dialog box — translate the "dialog box" sense, not the "dialogue"/conversation sense)* | Dialog | Cuadro de diálogo | Boîte de dialogue | Finestra di dialogo | Caixa de diálogo | Dialoogvenster | Quadre de diàleg | Dialog | Okno dialogowe | Párbeszédablak | Dialogo langas | Dialogruta | İletişim kutusu | Диалоговое окно | Діалогове вікно | ダイアログ | 대화 상자 | 对话框 | 對話框 | กล่องโต้ตอบ | Hộp thoại |
 
 ## Language specifics
 
