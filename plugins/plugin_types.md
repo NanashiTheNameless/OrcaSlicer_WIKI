@@ -45,6 +45,6 @@ The [Actions Speed Dial](speed_dial) provides a quick launcher for script capabi
 
 ## Printer Connection
 
-Printer connection plugins add printer communication features. After activating a printer connection plugin, OrcaSlicer uses it where printer connection options are available. This is still WIP.
+Printer connection plugins add printer communication features. After activating a printer connection plugin, OrcaSlicer uses it where printer connection options are available.
 
 If the plugin has its own setup instructions, check the **Description** or **Diagnostics** tab in the Plugins window.

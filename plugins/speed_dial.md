@@ -1,9 +1,7 @@
 # Actions Speed Dial
 
 > [!WARNING]
-> This feature is **WIP** and is currently provided by the unmerged
-> [speed-dial pull request](https://github.com/OrcaSlicer/OrcaSlicer/pull/14697). The behavior and
-> shortcut may change before it reaches a nightly build.
+> This feature is available in the [nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds).
 
 The Actions Speed Dial is a search-first launcher for enabled **Script** plugin capabilities.
 It is available from the **Prepare** tab by pressing **Space**.
