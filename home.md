@@ -215,14 +215,14 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 ## Plugins
 
 > [!IMPORTANT]
-> WORK IN PROGRESS: **Python Plugin System**  
-> Available in: [Pull Request 14530](https://github.com/OrcaSlicer/OrcaSlicer/pull/14530).
+> The **Python Plugin System** is available in the [nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds).
 
 - [Getting Started](getting_started)
 - [Local Plugins](local_plugins)
 - [Cloud Plugins](cloud_plugins)
 - [Plugin Types](plugin_types)
 - [Managing Plugins](managing_plugins)
+- [Actions Speed Dial](speed_dial)
 
 ## Guides
 

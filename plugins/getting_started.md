@@ -3,8 +3,7 @@
 Plugins add extra features to OrcaSlicer. They are managed from the Plugins window.
 
 > [!IMPORTANT]
-> WORK IN PROGRESS: **Python Plugin System**  
-> Available in: [Pull Request 14530](https://github.com/OrcaSlicer/OrcaSlicer/pull/14530).
+> The **Python Plugin System** is available in the [nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds).
 
 - [Local Plugins](local_plugins)
 - [Cloud Plugins](cloud_plugins)
@@ -19,6 +18,18 @@ Plugins add extra features to OrcaSlicer. They are managed from the Plugins wind
 ![open-plugins-menu](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/plugins/open-plugins-menu.png?raw=true)
 
 The Plugins window shows installed and available plugins. The upper table lists plugins, and the lower section shows details for the selected plugin.
+
+The details section includes these tabs:
+
+- **Plugin Info** — source, author, version, capabilities, and status.
+- **Description** — information supplied by the plugin author.
+- **Config** — configuration for the selected plugin's capabilities.
+- **Changelog** — available version history.
+- **Diagnostics** — loading and error information.
+
+Every capability has a configuration. OrcaSlicer provides a JSON editor by default; a plugin can
+provide a custom configuration page instead. See [Plugin configuration](plugin_development#capability-configuration)
+for the plugin-author API.
 
 ![plugins-dialog-empty](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/plugins/plugins-dialog-empty.png?raw=true)
 
