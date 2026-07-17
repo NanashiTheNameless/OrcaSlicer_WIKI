@@ -285,10 +285,10 @@ Specify exact layer numbers (1-based) using comma-separated values. Each entry m
 
 > [!IMPORTANT]
 > NEW FEATURE: **Top/Bottom layer direction**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.4.2**.
 
 Fixed angle (in degrees) for the top and bottom solid infill lines.  
-![top-direction](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/directions/top-direction.png?raw=true)
+![top-direction](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/directions/top-direction.png?raw=true)
 
 The top angle also applies to ironing lines.  
 Set to `-1` to follow the default solid infill [direction](#direction).
@@ -300,12 +300,12 @@ Set to `-1` to follow the default solid infill [direction](#direction).
 
 > [!IMPORTANT]
 > NEW FEATURE: **Separated infills**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.4.2**.
 
 Centers the internal infill of each part on itself, as if it were sliced on its own, instead of on the whole assembly.  
 By default the entire assembly is treated as a single whole, so a centered or rotated infill pattern is referenced to one common center and rotates around it. When enabled, each part is centered on its own full 3D bounding box — producing the same pattern you would get by slicing that part on its own.
 
-![separated-infills](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/separated-infills.png?raw=true)
+![separated-infills](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/separated-infills.png?raw=true)
 Parts are grouped by their real geometry when deciding what shares a center:
 
 - **Touching or overlapping parts** are treated as one body and share a single center.
@@ -323,11 +323,11 @@ Patterns locked to global coordinates ([Gyroid](strength_settings_patterns#gyroi
 
 - **Separated Infills Off:** the assembly is treated as a single whole, so the infill of every object is referenced to one common center.
 
-![separated_infills_off](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/separated_infills_off.png?raw=true)
+![separated_infills_off](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/separated_infills_off.png?raw=true)
 
 - **Separated Infills On:** each object in the assembly gets its own self-centered infill pattern.
 
-![separated_infills_on](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/separated_infills_on.png?raw=true)
+![separated_infills_on](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/separated_infills_on.png?raw=true)
 
 ## Credits
 

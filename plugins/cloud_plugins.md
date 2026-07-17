@@ -12,26 +12,26 @@ Cloud plugins are plugins connected to your OrcaCloud account. They can be subsc
 
 Subscribed plugins appear with a **Subscribed** source label. A subscribed plugin may show **Not installed** and **Inactive** until you activate it.
 
-![cloud-plugin-subscribed-inactive](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/plugins/cloud-plugin-subscribed-inactive.png?raw=true)
+![cloud-plugin-subscribed-inactive](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/plugins/cloud-plugin-subscribed-inactive.png?raw=true)
 
 To use a subscribed plugin, check its **Activate** box. OrcaSlicer installs or loads the plugin as needed.
 
-![cloud-plugin-loading](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/plugins/cloud-plugin-loading.png?raw=true)
+![cloud-plugin-loading](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/plugins/cloud-plugin-loading.png?raw=true)
 
 When activation is complete, the plugin status changes to **Activated**. Expand the plugin row to see the available plugin features.
 
-![cloud-plugin-update-available](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/plugins/cloud-plugin-update-available.png?raw=true)
+![cloud-plugin-update-available](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/plugins/cloud-plugin-update-available.png?raw=true)
 
 ## Update a Cloud Plugin
 
 If a newer cloud version is available, the plugin details show an **Update** button.
 
-![cloud-plugin-update-available](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/plugins/cloud-plugin-update-available.png?raw=true)
+![cloud-plugin-update-available](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/plugins/cloud-plugin-update-available.png?raw=true)
 
 Click **Update** and wait for the update to complete.
 
-![cloud-plugin-updating](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/plugins/cloud-plugin-updating.png?raw=true)
+![cloud-plugin-updating](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/plugins/cloud-plugin-updating.png?raw=true)
 
 After updating, the installed version and latest version should match.
 
-![cloud-plugin-updated](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/plugins/cloud-plugin-updated.png?raw=true)
+![cloud-plugin-updated](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/plugins/cloud-plugin-updated.png?raw=true)

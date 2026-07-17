@@ -171,9 +171,9 @@ The top solid infill area is slightly enlarged to overlap with walls...
 - The `[Variable](built_in_placeholders_variables)` line (or `[Variables]` when there is more than one) records the config key(s) that the section documents.
 
 > [!IMPORTANT]
-> Do **not** write or edit these lines by hand. They are generated and normalized by the [`sync-tab-options-to-wiki.ps1`](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/sync-tab-options-to-wiki.ps1) script at the repository root. Any manual edits will be overwritten the next time the script runs.
+> Do **not** write or edit these lines by hand. They are generated and normalized by the [`sync-tab-options-to-wiki.ps1`](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/sync-tab-options-to-wiki.ps1) script at the repository root. Any manual edits will be overwritten the next time the script runs.
 
-The script reads the option-to-page mappings from [Tab.cpp](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/src/slic3r/GUI/Tab.cpp) and the option mode from [PrintConfig.cpp](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/src/libslic3r/PrintConfig.cpp), then inserts or refreshes the metadata under the matching heading in each page. It also prunes metadata from sections that are no longer referenced from `Tab.cpp`.
+The script reads the option-to-page mappings from [Tab.cpp](https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/src/slic3r/GUI/Tab.cpp) and the option mode from [PrintConfig.cpp](https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/src/libslic3r/PrintConfig.cpp), then inserts or refreshes the metadata under the matching heading in each page. It also prunes metadata from sections that are no longer referenced from `Tab.cpp`.
 
 When you add or rename an option's documentation, **write only the heading and the descriptive body** — the section must exist and its anchor must match the `Tab.cpp` link (see above). Then run the script to populate the metadata:
 

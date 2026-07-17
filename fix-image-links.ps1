@@ -9,7 +9,7 @@
       * Relative/root-absolute paths that point at a file in this repo
         (e.g. "](/images/...", "](../images/...", "](../../images/...") are rewritten to the
         canonical raw GitHub URL:
-            https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/<path>?raw=true
+            https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/<path>?raw=true
       * github.com blob/raw URLs for an OrcaSlicer repo get "?raw=true" appended when missing.
       * The alt text / alt attribute is set to the image filename without its extension
         (exactly what the validator expects).

@@ -76,7 +76,7 @@ If [Shell Layers](#shell-layers) is greater than 1, the surface pattern will be 
 
 > [!IMPORTANT]
 > NEW FEATURE: **Top surface expansion** (expansion, margin and direction)  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.4.2**.
 
 Expands the top surfaces by this distance (in mm) to connect distinct top surfaces and fill the gaps left where a feature rises through them.  
 This is useful when the top surface is interrupted by a raised feature, such as text or a boss on a plane, or when overlapping objects would otherwise split it: expanding the surface removes the holes beneath these features, keeps the top-surface pattern uninterrupted, and anchors the solid infill for a cleaner finish when printing on top. It also improves [concentric](strength_settings_patterns#concentric) top surfaces, whose pattern would otherwise be broken up by those small holes.  
@@ -84,15 +84,15 @@ The expansion is applied to the original top surface, before any other processin
 
 - **Original**
 
-![surface_expansion_original](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/surface_expansion_original.png?raw=true)
+![surface_expansion_original](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/surface_expansion_original.png?raw=true)
 
 - **Expanded by 5 mm**
 
-![surface_expansion_5mm](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/surface_expansion_5mm.png?raw=true)
+![surface_expansion_5mm](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/surface_expansion_5mm.png?raw=true)
 
 Improved [concentric](strength_settings_patterns#concentric) top surface:
 
-![surface_expansion_concentric](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/surface_expansion_concentric.png?raw=true)
+![surface_expansion_concentric](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/surface_expansion_concentric.png?raw=true)
 
 ### Surface Expansion Margin
 
@@ -101,7 +101,7 @@ Improved [concentric](strength_settings_patterns#concentric) top surface:
 Using [Surface Expansion](#surface-expansion) may cause a surface that did not previously touch the model's outer walls to now reach them, which can create contraction marks (such as a hull line) on the outer walls.  
 Adding a margin (in mm) keeps the expansion away from the walls where possible, so no hull line is created. The example below uses a 5 mm expansion with a 2 mm margin — compare it with the 5 mm expansion above, which reaches the walls.
 
-![surface_expansion_margin](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/surface_expansion_margin.png?raw=true)
+![surface_expansion_margin](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/surface_expansion_margin.png?raw=true)
 
 ### Surface Expansion Direction
 
@@ -110,11 +110,11 @@ Adding a margin (in mm) keeps the expansion away from the walls where possible, 
 Direction in which the [Surface Expansion](#surface-expansion) grows:
 
 - **Inward:** grows into the holes and gaps left by features rising from the middle of a top surface.
-  ![surface_expansion_direction_inward](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/surface_expansion_direction_inward.png?raw=true)
+  ![surface_expansion_direction_inward](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/surface_expansion_direction_inward.png?raw=true)
 - **Outward:** grows the outer edge of the surface, connecting surfaces separated by features that can divide a surface, such as a lattice pattern.
-  ![surface_expansion_direction_outward](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/surface_expansion_direction_outward.png?raw=true)
+  ![surface_expansion_direction_outward](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/surface_expansion_direction_outward.png?raw=true)
 - **Inward and Outward:** does both. This is the default.
-  ![surface_expansion_direction_inward_and_outward](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/surface_expansion_direction_inward_and_outward.png?raw=true)
+  ![surface_expansion_direction_inward_and_outward](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/surface_expansion_direction_inward_and_outward.png?raw=true)
 
 ## Center Surface Pattern On
 
@@ -123,22 +123,22 @@ Direction in which the [Surface Expansion](#surface-expansion) grows:
 
 > [!IMPORTANT]
 > NEW FEATURE: **Center surface pattern on**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.4.2**.
 
 Chooses where the centering point of centered top/bottom surface patterns ([Archimedean Chords](strength_settings_patterns#archimedean-chords), [Octagram Spiral](strength_settings_patterns#octagram-spiral)) is placed.  
 By default these patterns are centered individually on each surface, which does not keep the pattern continuous across a whole product — a drawback for some artistic prints where the surfaces should read as one piece. This setting widens the scope of the shared center:
 
 - **Each Surface:** centers the pattern on every individual surface region, so each island is symmetric on its own. This is the previous behavior.
 
-![center_of_surface_pattern_each_surface](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/center_of_surface_pattern_each_surface.png?raw=true)
+![center_of_surface_pattern_each_surface](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/center_of_surface_pattern_each_surface.png?raw=true)
 
 - **Each Model:** combines all the surfaces of one model — or each shape in the assembly — under a single center. Parts that touch or overlap share one center; parts detached from the rest each get their own.
 
-![center_of_surface_pattern_each_model](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/center_of_surface_pattern_each_model.png?raw=true)
+![center_of_surface_pattern_each_model](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/center_of_surface_pattern_each_model.png?raw=true)
 
 - **Each Assembly:** all the surfaces of the assembly fall under a single shared center. Well suited for articulated models that should keep one continuous pattern across their parts.
 
-![center_of_surface_pattern_each_assembly](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/center_of_surface_pattern_each_assembly.png?raw=true)
+![center_of_surface_pattern_each_assembly](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/top-bottom-shells/center_of_surface_pattern_each_assembly.png?raw=true)
 
 ## Fill Order
 
@@ -147,11 +147,11 @@ By default these patterns are centered individually on each surface, which does 
 
 > [!IMPORTANT]
 > NEW FEATURE: **Fill order**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.4.2**.
 
 Direction in which the top and bottom surfaces are filled when using a center-based pattern ([Concentric](strength_settings_patterns#concentric), [Archimedean Chords](strength_settings_patterns#archimedean-chords), [Octagram Spiral](strength_settings_patterns#octagram-spiral)). The spirals/rings are then deposited consistently inward or outward instead of following the default shortest path.
 
-![fill-order](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/directions/fill-order.jpg?raw=true)
+![fill-order](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/directions/fill-order.jpg?raw=true)
 
 - **Default:** uses legacy ordering.
 - **Outward:** starts at the center of the surface, so any excess material is pushed towards the edge where it is least visible. Preferred for **top** surfaces, as it hides small imperfections better.

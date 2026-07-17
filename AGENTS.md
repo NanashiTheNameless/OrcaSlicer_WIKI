@@ -41,7 +41,7 @@ Enforced by CI (`validate_images.yml` + `unreferenced_images.yml`):
 - **Always link images with raw GitHub URLs**, never relative paths:
 
     ```markdown
-    ![calibration](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/calibration.png?raw=true)
+    ![calibration](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/calibration.png?raw=true)
     ```
 
 - Hard requirements the validator checks for any `github.com/OrcaSlicer/...` image URL:
@@ -53,7 +53,7 @@ Enforced by CI (`validate_images.yml` + `unreferenced_images.yml`):
 - Only resize when necessary (e.g. thumbnails) using an `<img>` tag with a `height`/`width`; otherwise let the wiki size it:
 
     ```html
-    <img alt="IS_damp_marlin_print_measure" src="https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/InputShaping/IS_damp_marlin_print_measure.jpg?raw=true" height="200">
+    <img alt="IS_damp_marlin_print_measure" src="https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/InputShaping/IS_damp_marlin_print_measure.jpg?raw=true" height="200">
     ```
 
 - Formats: **SVG** preferred (theme-adaptive), **PNG** for screenshots/transparency, **JPG** for photos. Only use images you have rights to.
@@ -94,7 +94,7 @@ When documenting a feature that is only in nightly/newer builds, add:
 ```markdown
 > [!IMPORTANT]
 > NEW FEATURE: **Feature short description**
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **<stable version at merge time>**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **<stable version at merge time>**.
 ```
 
 Remove the note once a stable release that includes the feature ships.
@@ -111,7 +111,7 @@ Use fenced triple-backtick blocks and **specify the language** for highlighting 
 
 ## Orca → Wiki Redirection
 
-The OrcaSlicer GUI deep-links into these pages from [src/slic3r/GUI/Tab.cpp](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/src/slic3r/GUI/Tab.cpp) using the same `filename#anchor` scheme (validated weekly by `validate_tab_links.yml`). If you **rename a page or a heading that a Tab.cpp link targets**, that redirect breaks — flag it in the PR so the OrcaSlicer side can be updated. See [how_to_wiki.md](guides/how_to_wiki.md#orca-to-wiki-redirection) for the C++ patterns.
+The OrcaSlicer GUI deep-links into these pages from [src/slic3r/GUI/Tab.cpp](https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/src/slic3r/GUI/Tab.cpp) using the same `filename#anchor` scheme (validated weekly by `validate_tab_links.yml`). If you **rename a page or a heading that a Tab.cpp link targets**, that redirect breaks — flag it in the PR so the OrcaSlicer side can be updated. See [how_to_wiki.md](guides/how_to_wiki.md#orca-to-wiki-redirection) for the C++ patterns.
 
 The `[Mode](option_mode)` and `[Variable(s)](built_in_placeholders_variables)` lines under an option's heading are **generated — never hand-edited**. Run [`sync-tab-options-to-wiki.ps1`](sync-tab-options-to-wiki.ps1) (repo root) to import/refresh them: it reads the option→page map from `Tab.cpp` and the option mode from `PrintConfig.cpp`, then inserts the metadata under the matching heading (and prunes it from unreferenced sections). When adding an option's docs, write only the heading + body, then run `pwsh ./sync-tab-options-to-wiki.ps1` (add `-DryRun` to preview). Manual edits to these lines are overwritten. See [how_to_wiki.md](guides/how_to_wiki.md#option-mode-and-variables-metadata).
 

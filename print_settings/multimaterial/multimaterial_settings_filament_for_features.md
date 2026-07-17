@@ -8,7 +8,7 @@ These settings allow you to specify which extruder to use for different features
   </a>
 </div>
 
-![filament_for_features](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/filament-for-features/filament_for_features.png?raw=true)
+![filament_for_features](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/filament-for-features/filament_for_features.png?raw=true)
 ## Outer Walls
 
 [Mode](option_mode): `Advanced`.  
