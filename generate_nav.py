@@ -218,6 +218,15 @@ def scan_folder(folder: Path, base_path: Path) -> list:
         key=get_sort_key
     )
 
+    # A folder-level index.md becomes the section's index page (Material's
+    # navigation.indexes feature): emit it as a bare, first entry with no title
+    # (represented as (None, path)) so the section header itself links to it.
+    index_file = next((f for f in md_files if f.stem == 'index'), None)
+    if index_file:
+        md_files = [f for f in md_files if f is not index_file]
+        rel_path = str(index_file.relative_to(base_path)).replace('\\', '/')
+        nav_items.append((None, rel_path))
+
     # Process markdown files
     for md_file in md_files:
         title = get_file_title(md_file)
@@ -281,6 +290,12 @@ def nav_to_yaml(nav: list, indent: int = 2) -> str:
     def format_item(item, level):
         prefix = base_indent * level + "- "
         title, value = item
+
+        # A None title marks a section index page (navigation.indexes): emit the
+        # path as a bare list entry, with no "Title:" mapping key.
+        if title is None:
+            lines.append(f"{prefix}{escape_yaml_string(value)}")
+            return
 
         # Escape title to handle special characters
         escaped_title = escape_yaml_string(title)
@@ -356,6 +371,8 @@ def print_nav_tree(nav: list, indent: int = 0) -> None:
         if isinstance(value, list):
             print(f"{prefix}📁 {title}")
             print_nav_tree(value, indent + 1)
+        elif title is None:
+            print(f"{prefix}📄 (index) {value}")
         else:
             print(f"{prefix}📄 {title}")
 

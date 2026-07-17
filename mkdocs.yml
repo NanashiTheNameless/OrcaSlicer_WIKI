@@ -113,9 +113,14 @@ copyright: Copyright &copy; 2022-2026 Li Jiang. All rights reserved.
 nav:
 - Home: index.md
 - Guides:
+  - "Calibration Guide": guides/calibration_guide.md
+  - "Localization and translation guide": guides/localization_guide.md
+  - "Guide: Develop Profiles for OrcaSlicer": guides/how_to_create_profiles.md
+  - "How to Download Pull Requests Artifacts for Testing": guides/how_to_download_pr_artifacts.md
+  - "How to Contribute to the Wiki": guides/how_to_wiki.md
+  - "Translation Glossary": guides/localization_glossary.md
   - "Mixed Nozzle Sizes": guides/mixed_nozzle_sizes.md
 - Calibration:
-  - "Calibration Guide": calibration/calibration_guide.md
   - "Adaptive Pressure Advance": calibration/adaptive_pressure_advance_calib.md
   - Cornering: calibration/cornering_calib.md
   - "Flow Ratio Calibration": calibration/flow_ratio_calib.md
@@ -235,6 +240,8 @@ nav:
     - "Wipe Tower": printer_settings/multimaterial/printer_multimaterial_wipe_tower.md
     - "Advanced Multi-Material Settings": printer_settings/multimaterial/printer_multimaterial_advanced.md
 - Releases:
+  - Releases: releases/releases_index.md
+  - V2.4.2: releases/release_2_4_2.md
   - V2.4.1: releases/release_2_4_1.md
   - V2.4.0: releases/release_2_4_0.md
   - "V2.4.0 Beta": releases/release_2_4_0_beta.md
@@ -249,13 +256,9 @@ nav:
   - "Managing Plugins": plugins/managing_plugins.md
   - "Actions Speed Dial": plugins/speed_dial.md
 - "Developer Reference":
-  - "Localization and translation guide": developer_reference/localization_guide.md
   - "Placeholders Variables": developer_reference/built_in_placeholders_variables.md
   - "How to Build": developer_reference/how_to_build.md
-  - "Guide: Develop Profiles for OrcaSlicer": developer_reference/how_to_create_profiles.md
-  - "How to Download Pull Requests Artifacts for Testing": developer_reference/how_to_download_pr_artifacts.md
   - "How to Test": developer_reference/how_to_test.md
-  - "How to Contribute to the Wiki": developer_reference/how_to_wiki.md
   - "Application Structure Overview": developer_reference/plater_sidebar_tab_combobox.md
   - "Preset and Bundle": developer_reference/preset_and_bundle.md
   - Hierarchy: developer_reference/slicing_hierarchy.md
