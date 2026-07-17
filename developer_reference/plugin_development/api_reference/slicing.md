@@ -47,6 +47,6 @@ The exposed `orca.slicing.Step` enum includes geometry steps such as `posSlice`,
 > [!IMPORTANT]
 > Pipeline plugins can mutate the live slicing graph and affect generated output. Filesystem access
 > is audited; only the G-code working directory is granted as an extra writable root at
-> `psGCodePostProcess`. See [Plugin Audit Hook](../plugin_audit_hook).
+> `psGCodePostProcess`. See [Plugin Audit Hook](plugin_audit_hook).
 
 See [Registry](registry) for registration and [Host](host) for the model and geometry bindings.

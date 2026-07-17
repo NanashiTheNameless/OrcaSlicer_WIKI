@@ -32,7 +32,7 @@ Every capability also inherits configuration methods from `orca.PythonPluginBase
 | `save_config(config)` | Persist a JSON string for this capability; returns `False` on invalid JSON or write failure. |
 
 Use `json.loads()` and `json.dumps()` at this boundary. See
-[Capability configuration](../plugin_development#capability-configuration) for storage layers and
+[Capability configuration](plugin_development#capability-configuration) for storage layers and
 custom UI messaging.
 
 ## Execution Results

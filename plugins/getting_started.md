@@ -29,7 +29,7 @@ The details section includes these tabs:
 - **Diagnostics** — loading and error information.
 
 Every capability has a configuration. OrcaSlicer provides a JSON editor by default; a plugin can
-provide a custom configuration page instead. See [Plugin configuration](../developer_reference/plugin_development/plugin_development#capability-configuration)
+provide a custom configuration page instead. See [Plugin configuration](plugin_development#capability-configuration)
 for the plugin-author API.
 
 ![plugins-dialog-empty](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/plugins/plugins-dialog-empty.png?raw=true)
