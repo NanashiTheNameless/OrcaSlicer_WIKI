@@ -16,6 +16,18 @@ Plugins add extra features to OrcaSlicer. They are managed from the Plugins wind
 
 The Plugins window shows installed and available plugins. The upper table lists plugins, and the lower section shows details for the selected plugin.
 
+The details section includes these tabs:
+
+- **Plugin Info** — source, author, version, capabilities, and status.
+- **Description** — information supplied by the plugin author.
+- **Config** — configuration for the selected plugin's capabilities.
+- **Changelog** — available version history.
+- **Diagnostics** — loading and error information.
+
+Every capability has a configuration. OrcaSlicer provides a JSON editor by default; a plugin can
+provide a custom configuration page instead. See [Plugin configuration](../developer_reference/plugin_development/plugin_development#capability-configuration)
+for the plugin-author API.
+
 ![plugins-dialog-empty](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/plugins/plugins-dialog-empty.png?raw=true)
 
 Use the split **Browse plugins** button to choose how you want to add plugins:

@@ -247,6 +247,7 @@ nav:
   - "Cloud Plugins": plugins/cloud_plugins.md
   - "Plugin Types": plugins/plugin_types.md
   - "Managing Plugins": plugins/managing_plugins.md
+  - "Actions Speed Dial": plugins/speed_dial.md
 - "Developer Reference":
   - "Localization and translation guide": developer_reference/localization_guide.md
   - "Placeholders Variables": developer_reference/built_in_placeholders_variables.md
@@ -266,6 +267,6 @@ nav:
       - Host: developer_reference/plugin_development/api_reference/host.md
       - "Host UI": developer_reference/plugin_development/api_reference/host_ui.md
       - Script: developer_reference/plugin_development/api_reference/script.md
-      - "G-code": developer_reference/plugin_development/api_reference/gcode.md
       - "Printer Agent": developer_reference/plugin_development/api_reference/printer_agent.md
+      - "Slicing Pipeline": developer_reference/plugin_development/api_reference/slicing.md
     - "Plugin Audit Hook": developer_reference/plugin_development/plugin_audit_hook.md
