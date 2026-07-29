@@ -48,7 +48,7 @@ Languages with non-Latin scripts (ja, ko, zh, ru, uk, th) keep the Latin acronym
 ## Translation table glossary
 
 > [!TIP]
-> You can [download the glossary spreadsheet clicking here](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/guides/localization_glossary.tsv?raw=true)  
+> You can [download the glossary spreadsheet clicking here](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/guides/localization_glossary.tsv?raw=true)  
 > TSV (*tab-separated values*) is the same as CSV, but the cells are separated by tabs instead of commas, so the commas and quotation marks used inside descriptions and translations need no escaping.  
 > Excel, LibreOffice Calc and Google Sheets all open it as a normal spreadsheet, and any text editor shows it as plain text.
 
