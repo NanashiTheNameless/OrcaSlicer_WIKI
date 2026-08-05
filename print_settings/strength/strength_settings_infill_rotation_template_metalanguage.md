@@ -46,9 +46,15 @@ This metalanguage provides a way to define the [direction and rotation](strength
 
 `[±]α` - command for setting rotation infill angle (for joint infills at some height range, this angle is finite):
 
-- `α:β` - set the angle α value as a percentage of the full 360 degree rotation
+- `α%` - set the angle α value as a percentage of the full 360 degree rotation.  
+  e.g. `100%` means 360°, `50%` = 180°, `25%` = 90°, `75%` = 270°, `12%` = 43.2° and so on.
+- `α:β` - set the fractional value of the angle of the full 360 degree rotation.  
+  e.g. `1:1` means 360 degrees, `1:2` = 180°, `1:4` = 90°, `3:4` = 270°, `5:8` = 225° and so on.
 - `+α` - set positive relative angle CCW
 - `-α` - set negative relative angle CW
+
+> [!NOTE]
+> Relative instructions indicate that the infill direction will change by this angle from one layer to the next.
 
 ### Runtime instructions
 
@@ -62,39 +68,42 @@ This metalanguage provides a way to define the [direction and rotation](strength
 
 `[joint sign]` - the symbol which determines the method of connection for turning of the infill:
 
-- `/` - linear displacement of the infill. e.g. `+22.5/50%`\
+- `/` - linear displacement of the infill. e.g. `+22.5/50%`.<br>
+This results in the layers rotating smoothly by 22.5 degrees at half the model's height. Since this is the only instruction, it will repeat until the entire height of the model is filled. Equivalent instructions would be `+1:16/1:2` or `+6.25%/50%`.<br>
   ![linear-joint](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/linear-joint.png?raw=true)
-- `#` - infill of multiple layers with vertical displacement at finish angle. e.g. `+22.5#50%`\
+- `#` - infill of multiple layers with vertical displacement at finish angle. e.g. `+22.5#50%`  
   ![multiple-joint](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/multiple-joint.png?raw=true)
-- `#-` - infill of multiple layers with vertical displacement at initial angle. e.g. `+22.5#-50%`\
+- `#-` - infill of multiple layers with vertical displacement at initial angle. e.g. `+22.5#-50%`.<br>
+Here and further, a negative sign before the height value indicates that instruction's action is reversed: if in a regular instruction the action begins at angle ´α´ and ends at ´α+22.5´. In the reverse one the begin at ´α+22.5´, and the end at ´α´.<br>
   ![multiple-joint-initial-angle](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/multiple-joint-initial-angle.png?raw=true)
-- `|` - infill of multiple layers with vertical displacement at middle angle. e.g. `+22.5|50%`\
+- `|` - infill of multiple layers with vertical displacement at middle angle. e.g. `+22.5|50%`  
   ![multiple-joint-middle-angle](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/multiple-joint-middle-angle.png?raw=true)
-- `N` - infill formed by sinus function (vertical connection). e.g. `+22.5N50%`\
+- `N` - infill formed by sinus function (vertical connection). e.g. `+22.5N50%`.  
+  Reducing the angle and height by two gives the same rotation of the infill, the rotation of the infill remains unchanged, but the frequency of waves increases.  
   ![v-sinus-joint](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/v-sinus-joint.png?raw=true)
-- `n` - infill formed by sinus function (vertical connection, lazy). e.g. `+22.5n50%`\
+- `n` - infill formed by sinus function (vertical connection, lazy). e.g. `+22.5n50%`  
   ![v-sinus-joint-lazy](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/v-sinus-joint-lazy.png?raw=true)
-- `Z` - infill formed by sinus function (horizontal connection). e.g. `+22.5Z50%`\
+- `Z` - infill formed by sinus function (horizontal connection). e.g. `+22.5Z50%`  
   ![z-h-sinus-joint](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/z-h-sinus-joint.png?raw=true)
-- `z` - infill formed by sinus function (horizontal connection, lazy). e.g. `+22.5z50%`\
+- `z` - infill formed by sinus function (horizontal connection, lazy). e.g. `+22.5z50%`  
   ![h-sinus-joint-lazy](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/h-sinus-joint-lazy.png?raw=true)
-- `L` - infill formed by quarter of circle (horizontal to vertical connection). e.g. `+22.5L50%`\
+- `L` - infill formed by quarter of circle (horizontal to vertical connection). e.g. `+22.5L50%`  
   ![vh-quarter-joint](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/vh-quarter-joint.png?raw=true)
-- `l` - infill formed by quarter of circle (vertical to horizontal connection). e.g. `+22.5l50%`\
+- `l` - infill formed by quarter of circle (vertical to horizontal connection). e.g. `+22.5l50%`  
   ![hv-quarter-joint](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/hv-quarter-joint.png?raw=true)
-- `U` - infill formed by squared function. e.g. `+22.5U50%`\
+- `U` - infill formed by squared function. e.g. `+22.5U50%`  
   ![squared-joint](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/squared-joint.png?raw=true)
-- `u-` - infill formed by squared function (inverse). e.g. `+22.5u-50%`\
+- `u-` - infill formed by squared function (inverse). e.g. `+22.5u-50%`  
   ![squared-joint-inverse](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/squared-joint-inverse.png?raw=true)
-- `Q` - infill formed by cubic function. e.g. `+22.5Q50%`\
+- `Q` - infill formed by cubic function. e.g. `+22.5Q50%`  
   ![cubic-joint](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/cubic-joint.png?raw=true)
-- `q-` - infill formed by cubic function (inverse). e.g. `+22.5q-50%`\
+- `q-` - infill formed by cubic function (inverse). e.g. `+22.5q-50%`  
   ![cubic-joint-inverse](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/cubic-joint-inverse.png?raw=true)
-- `$` - infill formed by arcsinus method. e.g. `+22.5$50%`\
+- `$` - infill formed by arcsinus method. e.g. `+22.5$50%`  
   ![arcsinus-joint](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/arcsinus-joint.png?raw=true)
-- `~` - infill formed with random angle. e.g. `+22.5~50%`\
+- `~` - infill formed with random angle. e.g. `+22.5~50%`  
   ![random-joint](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/random-joint.png?raw=true)
-- `^` - infill formed with pseudorandom angle. e.g. `+22.5^50%`\
+- `^` - infill formed with pseudorandom angle. e.g. `+22.5^50%`  
   ![pseudorandom-joint](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/Template-metalanguage/pseudorandom-joint.png?raw=true)
 
 ### Counting
@@ -119,6 +128,7 @@ This metalanguage provides a way to define the [direction and rotation](strength
 - `ℕ"` - the distance in inches
 - `ℕ#` - the distance in range of standard height of ℕ layers
 - `ℕ%` - the distance as a percentage of model height
+- `ℍ:ℕ` - the distance as a fractional of model height ℍ
 
 ## Description of instructions and examples
 
