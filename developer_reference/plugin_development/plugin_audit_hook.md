@@ -117,26 +117,33 @@ rather than its name, so it cannot live in the static map.
 
 ### 4. The Decision Pipeline
 
-Once `audit_hook` has a non-`None` category, every event funnels through
-`PluginAuditDetail::decide_audited_event`, in this order:
+`audit_hook` resolves the category first (`None` -> allow, unaudited), then walks through:
 
-1. **Ancestor-cascade check** (before category resolution — see below). If the current
-   Python call stack already contains a stdlib frame approved for an earlier event in the
-   same call chain, allow immediately with no dialog.
-2. **Resolve category.** `None` -> allow, unaudited.
-3. **Extract targets** (`audit_targets`) — the path(s)/address/command the event names, as
-   display-and-persistence strings.
-4. **Look up the permission list** for this category (`permission_list_for`) — `nullptr` for
-   categories that never persist.
-5. **Filter already-granted targets** out of the list to prompt for. If the category persists
-   grants and every target is already granted, allow with no dialog.
-6. **Show one dialog** for everything still unresolved (`audit_message` + a Yes/No message
-   box).
-7. **On Yes**: persist each newly-approved target (if the category persists), record the
-   current call-site chain as approved (for the cascade check), allow.
-8. **On No**: `report_denied` records an `AuditViolation`, raises `PermissionError` in the
-   calling interpreter, and the hook returns `-1` — CPython treats a nonzero return as
-   "block this operation," so the audited call never completes.
+1. **Denied-path check** (fs categories only — `is_denied_path`, see [Allowed Roots and Denied
+   Paths](#allowed-roots-and-denied-paths) below). If any target is a denied filename or
+   matches a denied path keyword, block immediately: `report_denied`, no dialog — regardless
+   of what an ancestor-cascade approval or an allowed root would otherwise say. This runs
+   *before* the next two steps specifically so neither can launder access to a denied path.
+2. **Ancestor-cascade check.** If the current Python call stack already contains a stdlib
+   frame approved for an earlier event in the same call chain, allow immediately with no
+   dialog.
+3. **Allowed-root shortcut** (fs categories only — `check_path_access`). If every target
+   resolves inside an allowed root — and, for a write/create/delete-shaped event, a root that
+   permits writes — allow immediately with no dialog and nothing persisted.
+4. The rest funnels through `PluginAuditDetail::decide_audited_event`:
+    1. **Extract targets** (`audit_targets`) — the path(s)/address/command the event names, as
+       display-and-persistence strings.
+    2. **Look up the permission list** for this category (`permission_list_for`) — `nullptr`
+       for categories that never persist.
+    3. **Filter already-granted targets** out of the list to prompt for. If the category
+       persists grants and every target is already granted, allow with no dialog.
+    4. **Show one dialog** for everything still unresolved (`audit_message` + a Yes/No message
+       box).
+    5. **On Yes**: persist each newly-approved target (if the category persists), record the
+       current call-site chain as approved (for the cascade check), allow.
+    6. **On No**: `report_denied` records an `AuditViolation`, raises `PermissionError` in the
+       calling interpreter, and the hook returns `-1` — CPython treats a nonzero return as
+       "block this operation," so the audited call never completes.
 
 #### Target extraction
 
@@ -229,28 +236,50 @@ never persisted to the sidecar, and never pruned — it grows with the number of
 stdlib call sites a plugin's actions pass through, which in practice is small and bounded by
 the plugin's own code.
 
-### Allowed Roots and Denied Filenames (currently unwired)
+### Allowed Roots and Denied Paths
 
-`check_path_access(path, is_write)` / `check_open(path, mode)` implement a **second,
-independent** policy that predates the dialog/permission system above: deny by filename first
-(`is_denied_filename` — the app config and cloud refresh token, by base-name prefix match,
-case-insensitive, so `.bak`/`.tmp` companions and Windows alternate-data-stream variants are
-covered too), then allow only if the path resolves (`is_inside_allowed_root`,
-`weakly_canonical` + component-wise comparison, rejecting `..` traversal) inside a scoped root
-(`m_scoped_allowed_roots`, `thread_local`, cleared and restored per
-`ScopedPluginAuditContext` scope) or a global root (`m_global_allowed_roots`, mutex-guarded,
-process-wide).
+`check_path_access(path, is_write)` / `check_open(path, mode)` implement a second policy layer
+that `audit_hook` consults directly, ahead of the per-target dialog/persistence flow (decision
+pipeline steps 1 and 3 above):
 
-Both lists are still populated in the running app — `install_hook()` grants `data_dir()`
-globally, and `SlicingPipelinePluginCapabilityTrampoline::execute()` still grants the G-code
-output folder's parent directory as a scoped root at `psGCodePostProcess` — but
-**`decide_audited_event` never calls `check_path_access`**, so neither list is consulted by
-the live decision path. Every fs target prompts and persists purely by category + exact path,
-regardless of whether it sits inside a granted root. `check_path_access`/`check_open` are
-exercised directly by `tests/slic3rutils/test_plugin_audit.cpp`, but by nothing in the live
-`audit_hook` flow. This is a known, currently open gap — see
-[Known Current Limitations](#known-current-limitations), not something to build new features
-against.
+1. **Deny by filename** (`is_denied_filename` — the app config and cloud refresh token, by
+   base-name prefix match, case-insensitive, so `.bak`/`.tmp` companions and Windows
+   alternate-data-stream variants are covered too).
+2. **Deny by path keyword** (`is_denied_path_keyword` — any path *component*, not just the
+   base name, containing `"secret"`, `"cert"`, or `"conf"` case-insensitively, seeded from
+   `default_denied_path_keywords()`). This is deliberately broader and fuzzier than (1): it
+   rules out whole *classes* of sensitive paths — a `secrets/` subfolder, a `certificates/`
+   folder, a `*.conf`/`config/` file or folder — wherever they sit, including inside an
+   otherwise-allowed root, at the cost of over-blocking an unrelated name that happens to
+   contain the keyword. That's the fail-safe direction, same rationale as (1).
+3. **Allow only if inside an allowed root** (`is_inside_allowed_root`, `weakly_canonical` +
+   component-wise comparison, rejecting `..` traversal) — a scoped root
+   (`m_scoped_allowed_roots`, `thread_local`, cleared and restored per
+   `ScopedPluginAuditContext` scope) or a global root (`m_global_allowed_roots`,
+   mutex-guarded, process-wide). Each registered root (`AllowedRoot { path; allow_write; }`)
+   carries its own write permission: a root registered read-only matches a read-shaped
+   request but never a write/create/delete-shaped one, which instead falls through to
+   "outside allowed root" for that root specifically.
+
+`is_denied_path(path)` is the convenience `is_denied_filename(path) ||
+is_denied_path_keyword(path)` that `audit_hook` calls at decision-pipeline step 1, before it
+even knows which root (if any) the target sits inside.
+
+`install_hook()` populates both roots and both deny registries:
+
+| Root | Access | Covers |
+|---|---|---|
+| `data_dir()` (global) | read+write | each plugin's storage folder (`data_dir()/orca_plugins`), the installed/system profile cache (`data_dir()/system`), and the rest of `data_dir()` |
+| `resources_dir()` (global) | **read-only** | the app's bundled, shared assets (installed system profiles, the bundled TLS client cert, web assets) — never write-eligible, since the install can be shared/read-only on disk |
+| current G-code file's parent directory (scoped, `SlicingPipelinePluginCapabilityTrampoline::execute()`) | read+write | only while a `psGCodePostProcess` call is on the stack, and only for that call |
+
+Denied filenames: `default_denied_filenames()` (the app config, both extensions and app keys,
+plus the cloud refresh token). Denied keywords: `default_denied_path_keywords()` =
+`{"secret", "cert", "conf"}` — this is also what keeps the bundled cert at
+`resources_dir()/cert/...` unreachable despite `resources_dir()` itself being an allowed root.
+
+`check_path_access`/`check_open` are exercised directly by
+`tests/slic3rutils/test_plugin_audit.cpp`, independent of a live interpreter.
 
 ## Audit Hook Development
 
@@ -340,12 +369,10 @@ way; what varies per call is only the `audit_setup` callback (see below).
 ### Adding Per-Call Scoped Roots
 
 `ScopedPluginAuditContext`'s constructor clears the previous scoped roots, so a scoped root
-must be added *after* construction — that is what `audit_setup` is for. As noted in
-[Allowed Roots and Denied Filenames](#allowed-roots-and-denied-filenames-currently-unwired),
-this mechanism currently has **no effect on the live prompt/persist decision** — it only
-feeds `check_path_access`, which nothing in `decide_audited_event` calls. It is preserved
-here as the intended extension point for anyone wiring that check back into the live path;
-the slicing-pipeline trampoline still populates it as an example:
+must be added *after* construction — that is what `audit_setup` is for. The slicing-pipeline
+trampoline uses it to grant write access to the folder holding the current G-code file at
+`psGCodePostProcess`, which the allowed-root shortcut (decision-pipeline step 3) now actually
+consults:
 
 ```cpp
 ExecutionResult execute(SlicingPipelineContext& ctx) override
@@ -361,19 +388,35 @@ ExecutionResult execute(SlicingPipelineContext& ctx) override
 }
 ```
 
+Pass `false` as the second argument to grant a **read-only** scoped root instead —
+`add_scoped_allowed_root(root, /*allow_write=*/false)` — for a call that should be able to
+read a directory without being able to write into it.
+
 ### Adding a Global Allowed Root
 
-Same caveat applies: `install_hook()` still seeds `data_dir()` as a global root, but nothing
-currently consults it.
+If *every* plugin should be allowed a directory, add it in `install_hook()`. `install_hook()`
+grants `data_dir()` read+write and `resources_dir()` read-only:
 
 ```cpp
 void PluginAuditManager::install_hook()
 {
-    PySys_AddAuditHook(audit_hook, this);
-    add_global_allowed_root(data_dir());          // not consulted by decide_audited_event today
+    add_global_allowed_root(data_dir());
+    add_global_allowed_root(resources_dir(), /*allow_write=*/false);
     // add_global_allowed_root(std::filesystem::temp_directory_path());  // e.g. to allow /tmp
+
+    for (const auto& name : default_denied_filenames())
+        add_denied_filename(name);
+    for (const auto& keyword : default_denied_path_keywords())
+        add_denied_path_keyword(keyword);
+
+    PySys_AddAuditHook(audit_hook, this);
 }
 ```
+
+Prefer a scoped root over widening a global one, and prefer read-only over read+write unless
+the plugin genuinely needs to write there — a global root is process-lifetime and applies to
+every plugin. Remember that the deny checks (filename and keyword) run *before* any root is
+consulted, so a global root can never make a denied path reachable.
 
 ### Identity Wiring
 
@@ -384,10 +427,18 @@ never opens a context, so its calls run completely unaudited. The existing call 
 
 ## Known Current Limitations
 
-- **Allowed roots and denied filenames are not consulted by the live decision path.** Every
-  fs operation prompts/persists by exact path regardless of location, even inside a plugin's
-  own scoped directory or `data_dir()` (see
-  [Allowed Roots and Denied Filenames](#allowed-roots-and-denied-filenames-currently-unwired)).
+- **`is_denied_path_keyword` is a plain substring match, not a targeted rule.** A plugin file
+  legitimately named e.g. `myconfig.py` or `deconfliction_report.txt` is blocked too. This is
+  intentional (see [Allowed Roots and Denied Paths](#allowed-roots-and-denied-paths)), but
+  there is no allowlist mechanism to reclaim a specific over-blocked name short of removing
+  the keyword.
+- **The allowed-root shortcut applies uniformly to all four fs categories**, including
+  `FsCreate`/`FsDelete`: a create/delete inside an allowed root (e.g. a plugin's own file
+  under `data_dir()`) now skips the per-call dialog entirely, whereas outside an allowed root
+  `FsCreate`/`FsDelete` still always prompt and never persist (see
+  [Persistence](#persistence)). A pre-determined allowed root is meant to need no prompt at
+  all — this is a deliberate behavior difference from the plain category+dialog model, not a
+  bug.
 - **`Threading` has no events mapped to it**; thread-related audit events are not gated at
   all.
 - **A plugin-spawned OS thread is entirely unaudited** — it runs with an empty `thread_local`
@@ -420,12 +471,15 @@ distinguish an audit denial from an ordinary Python exception; it clears
 `current_plugin()` before logging the traceback so nothing touched while formatting/logging
 the exception is itself audited against the now-departed plugin.
 
-**A different, older log line exists in the same file** —
-`[AUDIT] block path=... is_write=...` — but it is emitted by `check_path_access`/
-`check_open`, which (per
-[Allowed Roots and Denied Filenames](#allowed-roots-and-denied-filenames-currently-unwired))
-is not on the live `audit_hook` path today. If you see this line, it came from a direct call
-to those functions (e.g. a test), not from a real plugin denial.
+**A second, noisier log line exists in the same file** —
+`[AUDIT] block path=... is_write=...` — emitted by `check_path_access` itself, at `warning`
+level, every time a target fails *that specific check*: a denied filename/keyword, or a path
+outside every allowed root. Since `audit_hook`'s allowed-root shortcut (decision-pipeline step
+3) now calls `check_path_access` for every fs-category target, this line fires for the
+ordinary, expected case of "not covered by an allow-list, falling through to the normal
+prompt" just as often as for an actual deny — **it does not by itself mean the operation was
+blocked**. Only `[AUDIT BLOCKED]` (from `report_violation`) means the call was actually denied
+(either an unconditional deny-path hit, or the user later answered No in the dialog).
 
 **Common pitfalls**
 
@@ -443,9 +497,9 @@ to those functions (e.g. a test), not from a real plugin denial.
 
 ## Testing
 
-- `tests/slic3rutils/test_plugin_audit.cpp` — pure-logic coverage of the denied-filename list
-  and `check_path_access`/`check_open` (allowed roots vs. denies), independent of a live
-  interpreter or the `audit_hook` flow itself.
+- `tests/slic3rutils/test_plugin_audit.cpp` — pure-logic coverage of the denied-filename list,
+  the denied-path-keyword list, and `check_path_access`/`check_open` (allowed roots, read-only
+  roots, and denies), independent of a live interpreter or the `audit_hook` flow itself.
 - `sandboxes/orca_audit_matrix_plugin_any.py` — a manual, end-to-end fixture plugin with one
   capability per category (`Audit: fsread`, `Audit: fsreadwrite`, `Audit: fscreate`,
   `Audit: fsdelete`, `Audit: http`, `Audit: socket`, `Audit: processcreate`) plus a run-all

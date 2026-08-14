@@ -576,7 +576,10 @@ the live slicing graph during geometry steps. At `Step.psGCodePostProcess`, the 
 > Filesystem, network, and process access are audited. While `execute()` runs, a
 > sensitive operation (a file read/write/create/delete, an HTTP/socket connection, spawning
 > a process) prompts the user with a Yes/No dialog naming the target; a "Yes" is remembered
-> for that plugin so the same target does not prompt again. See
+> for that plugin so the same target does not prompt again. An operation inside a
+> pre-determined allowed folder — `data_dir()`, the read-only `resources_dir()`, or (at
+> `psGCodePostProcess`) the current G-code file's folder — needs no prompt at all; a
+> `secrets`/`cert`/`conf`-like path is blocked outright, with no prompt either. See
 > [Plugin Audit Hook](plugin_audit_hook).
 
 ### Complete Examples
@@ -773,8 +776,9 @@ Tips:
 - Develop against small, fast inputs; for slicing-pipeline plugins keep a tiny test model so
   each export cycle is quick.
 - Remember that filesystem/network/process actions prompt on first use per plugin: a
-  surprise `PermissionError` usually means an earlier prompt was answered "No", not that a
-  path is disallowed outright. See [Plugin Audit Hook](plugin_audit_hook).
+  surprise `PermissionError` usually means an earlier prompt was answered "No" — or, for a
+  path with `secret`/`cert`/`conf` in it, that it's categorically denied and was never
+  prompted for at all. See [Plugin Audit Hook](plugin_audit_hook).
 
 ## Part 2: Adding a New Plugin Type in C++
 
@@ -1075,11 +1079,11 @@ running interpreter or GUI. For example:
 - Capability reference parsing/serialization (`parse_capability_ref` in `Config.cpp`) - see
   `tests/libslic3r/test_config.cpp` and `tests/slic3rutils/test_plugin_capability_identifier.cpp`
   for local vs. cloud refs and malformed input.
-- The legacy allowed-root/denied-filename logic (`PluginAuditManager::check_open`,
-  `is_inside_allowed_root`) that `tests/slic3rutils/test_plugin_audit.cpp` already covers:
-  inside/outside roots, `..` traversal, read vs write. Note this logic is not on the live
-  `audit_hook` decision path today — see
-  [Plugin Audit Hook](plugin_audit_hook#allowed-roots-and-denied-filenames-currently-unwired).
+- The allowed-root/denied-path logic (`PluginAuditManager::check_open`,
+  `is_inside_allowed_root`, `is_denied_path_keyword`) that `tests/slic3rutils/test_plugin_audit.cpp`
+  already covers: inside/outside roots, read-only roots, `..` traversal, read vs write,
+  denied filenames and keywords. See
+  [Plugin Audit Hook](plugin_audit_hook#allowed-roots-and-denied-paths).
 - Type-string round-trips (`plugin_capability_type_from_string` / `plugin_capability_type_to_string`).
 
 Anything that requires the embedded interpreter, file installs, or GUI dialogs is currently
