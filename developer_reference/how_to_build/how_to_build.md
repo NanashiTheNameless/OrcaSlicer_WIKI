@@ -5,6 +5,7 @@ OrcaSlicer builds from source on Windows, macOS, and Linux. Each platform has it
 - [Build on Windows](how_to_build_windows)
 - [Build on macOS](how_to_build_macos)
 - [Build on Linux](how_to_build_linux)
+- [Compiler Caching](compiler_caching)
 
 ## Build Stages
 

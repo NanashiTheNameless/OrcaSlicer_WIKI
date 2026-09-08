@@ -121,6 +121,7 @@ Use `buildtools` in place of `ide` for the Build Tools without the IDE, and add 
 | `--no-gettext` | Skip regenerating the translations |
 | `-j <n>` | Cap the number of parallel compilers |
 | `-c` | Delete the directories this run would build |
+| `--cache <tool>` | Compile through [a compiler cache](compiler_caching), needs `-l -x` |
 | `-D` | Print every command instead of running it |
 
 Build directories are named for the configuration, compiler and architecture that made them, so changing any of the three configures a new directory instead of reusing one built another way:
@@ -236,7 +237,7 @@ winget install --id=Ninja-build.Ninja -e
 
 ### The Preset File
 
-Visual Studio, VS Code and the command line all read the same CMake preset file. Create `CMakeUserPresets.json` in the repository root:
+Visual Studio, VS Code and `cmake --preset` all read the same CMake preset file. Create `CMakeUserPresets.json` in the repository root:
 
 ```json
 {
@@ -245,18 +246,19 @@ Visual Studio, VS Code and the command line all read the same CMake preset file.
     {
       "name": "x64-clang",
       "displayName": "x64 Clang",
-      "description": "clang-cl and Ninja Multi-Config, built against deps/build-clang",
+      "description": "Matches build_win.bat -s -l -x --tests (build-clang), plus RelWithDebInfo and MinSizeRel in the same directory",
       "generator": "Ninja Multi-Config",
       "binaryDir": "${sourceDir}/build-clang",
       "architecture": { "value": "x64", "strategy": "external" },
       "toolset": { "value": "host=x64", "strategy": "external" },
       "environment": {
-        "CC": "clang-cl",
-        "CXX": "clang-cl",
         "NINJA_STATUS": "[%f/%t %p :: %w / %W] "
       },
       "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang-cl",
+        "CMAKE_CXX_COMPILER": "clang-cl",
         "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;MinSizeRel",
+        "ORCA_TOOLS": { "type": "BOOL", "value": "ON" },
         "BUILD_TESTS": { "type": "BOOL", "value": "ON" }
       },
       "vendor": {
@@ -269,18 +271,18 @@ Visual Studio, VS Code and the command line all read the same CMake preset file.
     {
       "name": "x64-clang-debug",
       "displayName": "x64 Clang Debug",
-      "description": "clang-cl and Ninja, built against deps/build-dbg-clang",
-      "generator": "Ninja",
+      "description": "Matches build_win.bat -s -l -x --tests --config debug (build-dbg-clang)",
+      "generator": "Ninja Multi-Config",
       "binaryDir": "${sourceDir}/build-dbg-clang",
       "architecture": { "value": "x64", "strategy": "external" },
       "toolset": { "value": "host=x64", "strategy": "external" },
       "environment": {
-        "CC": "clang-cl",
-        "CXX": "clang-cl",
         "NINJA_STATUS": "[%f/%t %p :: %w / %W] "
       },
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "clang-cl",
+        "CMAKE_CXX_COMPILER": "clang-cl",
+        "ORCA_TOOLS": { "type": "BOOL", "value": "ON" },
         "BUILD_TESTS": { "type": "BOOL", "value": "ON" }
       },
       "vendor": {
@@ -295,7 +297,7 @@ Visual Studio, VS Code and the command line all read the same CMake preset file.
     { "name": "x64-clang-release",        "configurePreset": "x64-clang", "configuration": "Release" },
     { "name": "x64-clang-relwithdebinfo", "configurePreset": "x64-clang", "configuration": "RelWithDebInfo" },
     { "name": "x64-clang-minsizerel",     "configurePreset": "x64-clang", "configuration": "MinSizeRel" },
-    { "name": "x64-clang-debug-build",    "configurePreset": "x64-clang-debug" }
+    { "name": "x64-clang-debug-build",    "configurePreset": "x64-clang-debug", "configuration": "Debug" }
   ],
   "testPresets": [
     {
@@ -313,6 +315,7 @@ Visual Studio, VS Code and the command line all read the same CMake preset file.
     {
       "name": "x64-clang-test-debug",
       "configurePreset": "x64-clang-debug",
+      "configuration": "Debug",
       "output": { "outputOnFailure": true }
     }
   ]
@@ -323,10 +326,13 @@ Visual Studio, VS Code and the command line all read the same CMake preset file.
 
 Neither preset sets `CMAKE_PREFIX_PATH`. CMake derives the dependency directory from the **name** of the build directory, so `build-clang` finds `deps\build-clang` and `build-dbg-clang` finds `deps\build-dbg-clang`. Those are the names `build_win.bat -l -x` uses, so the presets and the script share build directories and neither reconfigures what the other built.
 
-Only RelWithDebInfo is compiled with `/Zi`, so switch to it when you need to debug. Release and MinSizeRel produce no symbols to step through.
+All four configurations carry symbols, since `SLIC3R_MSVC_PDB` adds `/Zi` to every MSVC build by default. Optimization is what makes Release and MinSizeRel awkward to step through, with inlined frames and variables the debugger cannot show, so switch to RelWithDebInfo when you need to debug.
 
 > [!TIP]
 > `BUILD_TESTS` is `ON` so the test suites build alongside the application, and the test presets can run them. Set it to `OFF` for slightly faster builds if you do not need them. See [How to Test](how_to_test).
+
+> [!TIP]
+> Four more entries in `cacheVariables` build these presets through a compiler cache, so the IDE and `build_win.bat` reuse each other's work. See [Compiler Caching](compiler_caching).
 
 > [!TIP]
 > On Ninja 1.12 or newer, changing `NINJA_STATUS` to `"[%f/%t %p :: %w / %W] "` adds elapsed time and an ETA to each line:

@@ -260,6 +260,7 @@ See the [all releases](releases_index) overview, or jump straight to a version:
     - [Windows](how_to_build_windows)
     - [macOS](how_to_build_macos)
     - [Linux](how_to_build_linux)
+    - [Compiler caching](compiler_caching)
 - [How to run tests](how_to_test)
 - [Preset, PresetBundle and PresetCollection](preset_and_bundle)
 - [Plater, Sidebar, Tab, ComboBox](plater_sidebar_tab_combobox)
