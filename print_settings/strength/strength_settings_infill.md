@@ -314,7 +314,7 @@ Specify exact layer numbers (1-based) using comma-separated values. Each entry m
 [CLI Example](cli_mode#setting-overrides): `--sparse-infill-smooth-factor=20%`.  
 > [!IMPORTANT]
 > NEW FEATURE: **Sparse infill smooth factor**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
 
 Rounds the corners of the sparse infill path, replacing each sharp direction change with a quintic Bézier curve that joins the two straight legs meeting at it.  
 `0%` keeps the original sharp path, while `100%` produces the largest possible curves between adjacent infill lines. A curve never consumes more than half of the shorter leg on each side of a corner, so the curves of two neighboring corners meet at most at the midpoint of the segment they share and never overlap.
@@ -328,15 +328,15 @@ Example with the [Octagram Spiral](strength_settings_patterns#octagram-spiral) p
 
 - **0%:** the original sharp path.
 
-![infill-smooth-factor-0](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-smooth-factor-0.png?raw=true)
+![infill-smooth-factor-0](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/infill-smooth-factor-0.png?raw=true)
 
 - **50%:** each curve reaches a quarter of the shorter leg on both sides of the corner.
 
-![infill-smooth-factor-50](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-smooth-factor-50.png?raw=true)
+![infill-smooth-factor-50](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/infill-smooth-factor-50.png?raw=true)
 
 - **100%:** the curves of two neighboring corners meet at the midpoint of the segment they share, leaving no straight section between them.
 
-![infill-smooth-factor-100](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-smooth-factor-100.png?raw=true)
+![infill-smooth-factor-100](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/infill-smooth-factor-100.png?raw=true)
 
 ### Supported patterns
 

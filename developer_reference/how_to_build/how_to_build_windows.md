@@ -63,9 +63,9 @@ Building OrcaSlicer for 64-bit Windows. `build_win.bat` installs the prerequisit
 >
 > OrcaSlicer needs CMake 3.13 or newer, and 3.21 or newer for the clang-cl presets below. CMake 4.x is fine. `build_win.bat` skips Strawberry's copy for its own runs, so this only affects CMake invoked directly.
 
-![windows_variables_path](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/develop/windows_variables_path.png?raw=true)
+![windows_variables_path](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/develop/windows_variables_path.png?raw=true)
 
-![windows_variables_order](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/develop/windows_variables_order.png?raw=true)
+![windows_variables_order](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/develop/windows_variables_order.png?raw=true)
 
 > [!TIP]
 > [GitHub Desktop](https://desktop.github.com/) is optional and gives you a GUI for repository and branch management:
@@ -189,7 +189,7 @@ MSVC with the Visual Studio generator is the default, and the toolchain CI uses.
 
 3. Set the build configuration to `Release` and run the **Local Windows Debugger**.
 
-    ![compile_vs_local_debugger](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/develop/compile_vs_local_debugger.png?raw=true)
+    ![compile_vs_local_debugger](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/develop/compile_vs_local_debugger.png?raw=true)
 
 4. The executable is written to:
 
