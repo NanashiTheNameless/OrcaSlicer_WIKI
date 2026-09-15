@@ -252,9 +252,6 @@ OrcaSlicer can run headless from the command line for automation, batch processi
     - [Use mixed with different nozzle sizes](mixed_nozzle_sizes)
     - [Calibrate Your Printer](calibration_guide)
     - [Create Profiles](how_to_create_profiles)
-    - [Localization and translation guide](localization_guide)
-        - [Glossary](localization_glossary)
-    - [Contribute to the wiki](how_to_wiki)
     - [Download Pull Requests Artifacts for Testing](how_to_download_pr_artifacts)
 
 ## Release Notes
@@ -277,6 +274,10 @@ See the [all releases](releases_index) overview, or jump straight to a version:
     - [Linux](how_to_build_linux)
     - [Compiler caching](compiler_caching)
 - [How to run tests](how_to_test)
+- [Localization and translation guide](localization_guide)
+    - [Glossary](localization_glossary)
+- [How to create profiles](how_to_create_profiles)
+- [How to contribute to the wiki](how_to_wiki)
 - [Preset, PresetBundle and PresetCollection](preset_and_bundle)
 - [Plater, Sidebar, Tab, ComboBox](plater_sidebar_tab_combobox)
 - [Built-in placeholders & variables](built_in_placeholders_variables)

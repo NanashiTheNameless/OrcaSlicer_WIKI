@@ -114,11 +114,7 @@ nav:
 - Home: index.md
 - Guides:
   - "Calibration Guide": guides/calibration_guide.md
-  - "Localization and translation guide": guides/localization_guide.md
-  - "Guide: Develop Profiles for OrcaSlicer": guides/how_to_create_profiles.md
   - "How to Download Pull Requests Artifacts for Testing": guides/how_to_download_pr_artifacts.md
-  - "How to Contribute to the Wiki": guides/how_to_wiki.md
-  - "Translation Glossary": guides/localization_glossary.md
   - "Mixed Nozzle Sizes": guides/mixed_nozzle_sizes.md
 - "Printer Settings":
   - "Basic Information":
@@ -266,6 +262,8 @@ nav:
   - "V2.4.0 Beta": releases/release_2_4_0_beta.md
   - "V2.4.0 Alpha": releases/release_2_4_0_alpha.md
 - "Developer Reference":
+  - "Localization and translation guide": developer_reference/localization_guide.md
+  - "Translation Glossary": developer_reference/localization_glossary.md
   - "Placeholders Variables": developer_reference/built_in_placeholders_variables.md
   - "How to Build":
     - "Build Overview": developer_reference/how_to_build/how_to_build.md
@@ -273,7 +271,9 @@ nav:
     - "Build on macOS": developer_reference/how_to_build/how_to_build_macos.md
     - "Build on Linux": developer_reference/how_to_build/how_to_build_linux.md
     - "Compiler Caching": developer_reference/how_to_build/compiler_caching.md
+  - "Guide: Develop Profiles for OrcaSlicer": developer_reference/how_to_create_profiles.md
   - "How to Test": developer_reference/how_to_test.md
+  - "How to Contribute to the Wiki": developer_reference/how_to_wiki.md
   - "Application Structure Overview": developer_reference/plater_sidebar_tab_combobox.md
   - "Preset and Bundle": developer_reference/preset_and_bundle.md
   - Hierarchy: developer_reference/slicing_hierarchy.md
