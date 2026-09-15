@@ -3,7 +3,7 @@
 This repository holds the **source Markdown** for the [OrcaSlicer Wiki](https://www.orcaslicer.com/wiki/).
 On push to `main`, the content is published to the GitHub Wiki and deployed to the website automatically — there is no manual build step to run for a docs change. Every pull request is checked by CI validators (see [CI Checks](#ci-checks) below), so follow these rules to keep PRs green.
 
-The authoritative contributor guide is [guides/how_to_wiki.md](guides/how_to_wiki.md). This file is the condensed, must-follow version for automated agents.
+The authoritative contributor guide is [developer_reference/how_to_wiki.md](developer_reference/how_to_wiki.md). This file is the condensed, must-follow version for automated agents.
 
 ## Golden Rules
 
@@ -11,7 +11,7 @@ The authoritative contributor guide is [guides/how_to_wiki.md](guides/how_to_wik
 - **Prefer Markdown over raw HTML.** The only sanctioned HTML is an `<img>` tag when you must constrain image size (see [Images](#images)).
 - **Every new page must be linked** from another page (usually `home.md`) — unreferenced pages fail CI.
 - **Every image under `images/` must be referenced** by at least one page — unreferenced images fail CI.
-- **Never hand-edit generated blocks.** The `[Mode]`/`[Variable(s)]` option lines (from `Tab.cpp`), the translation table in [`guides/localization_glossary.md`](guides/localization_glossary.md) (from its TSV), and the `nav:` in `mkdocs.yml` are all script output. Edit the source, then run the generator.
+- **Never hand-edit generated blocks.** The `[Mode]`/`[Variable(s)]` option lines (from `Tab.cpp`), the translation table in [`developer_reference/localization_glossary.md`](developer_reference/localization_glossary.md) (from its TSV), and the `nav:` in `mkdocs.yml` are all script output. Edit the source, then run the generator.
 - Keep changes minimal and match the surrounding style, tone, and formatting of the page you edit.
 
 ## File & Directory Naming
@@ -112,13 +112,13 @@ Use fenced triple-backtick blocks and **specify the language** for highlighting 
 
 ## Orca → Wiki Redirection
 
-The OrcaSlicer GUI deep-links into these pages from [src/slic3r/GUI/Tab.cpp](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/src/slic3r/GUI/Tab.cpp) using the same `filename#anchor` scheme (validated weekly by `validate_tab_links.yml`). If you **rename a page or a heading that a Tab.cpp link targets**, that redirect breaks — flag it in the PR so the OrcaSlicer side can be updated. See [how_to_wiki.md](guides/how_to_wiki.md#orca-to-wiki-redirection) for the C++ patterns.
+The OrcaSlicer GUI deep-links into these pages from [src/slic3r/GUI/Tab.cpp](https://github.com/OrcaSlicer/OrcaSlicer/blob/main/src/slic3r/GUI/Tab.cpp) using the same `filename#anchor` scheme (validated weekly by `validate_tab_links.yml`). If you **rename a page or a heading that a Tab.cpp link targets**, that redirect breaks — flag it in the PR so the OrcaSlicer side can be updated. See [how_to_wiki.md](developer_reference/how_to_wiki.md#orca-to-wiki-redirection) for the C++ patterns.
 
-The `[Mode](option_mode)` and `[Variable(s)](built_in_placeholders_variables)` lines under an option's heading are **generated — never hand-edited**. Run [`sync-tab-options-to-wiki.ps1`](sync-tab-options-to-wiki.ps1) (repo root) to import/refresh them: it reads the option→page map from `Tab.cpp` and the option mode from `PrintConfig.cpp`, then inserts the metadata under the matching heading (and prunes it from unreferenced sections). When adding an option's docs, write only the heading + body, then run `pwsh ./sync-tab-options-to-wiki.ps1` (add `-DryRun` to preview). Manual edits to these lines are overwritten. See [how_to_wiki.md](guides/how_to_wiki.md#option-mode-and-variables-metadata).
+The `[Mode](option_mode)` and `[Variable(s)](built_in_placeholders_variables)` lines under an option's heading are **generated — never hand-edited**. Run [`sync-tab-options-to-wiki.ps1`](sync-tab-options-to-wiki.ps1) (repo root) to import/refresh them: it reads the option→page map from `Tab.cpp` and the option mode from `PrintConfig.cpp`, then inserts the metadata under the matching heading (and prunes it from unreferenced sections). When adding an option's docs, write only the heading + body, then run `pwsh ./sync-tab-options-to-wiki.ps1` (add `-DryRun` to preview). Manual edits to these lines are overwritten. See [how_to_wiki.md](developer_reference/how_to_wiki.md#option-mode-and-variables-metadata).
 
 ## Translation Glossary
 
-The table under *Translation table glossary* in [`guides/localization_glossary.md`](guides/localization_glossary.md) is **generated — never hand-edited**. The source of truth is `guides/localization_glossary.tsv`: the first column is the English term, the second its description, and every remaining column is a language catalog (`de`, `es`, … — the folder name under `localization/i18n/`). Add a term with a row, a language with a column, leave a cell empty when that language has no translation (the generator renders it as `—`), then run [`generate_glossary.py`](generate_glossary.py) from the repo root:
+The table under *Translation table glossary* in [`developer_reference/localization_glossary.md`](developer_reference/localization_glossary.md) is **generated — never hand-edited**. The source of truth is `developer_reference/localization_glossary.tsv`: the first column is the English term, the second its description, and every remaining column is a language catalog (`de`, `es`, … — the folder name under `localization/i18n/`). Add a term with a row, a language with a column, leave a cell empty when that language has no translation (the generator renders it as `—`), then run [`generate_glossary.py`](generate_glossary.py) from the repo root:
 
 ```bash
 python generate_glossary.py --update   # rewrite the table in the page

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Regenerate the translation table in guides/localization_glossary.md from
-guides/localization_glossary.tsv.
+Regenerate the translation table in developer_reference/localization_glossary.md from
+developer_reference/localization_glossary.tsv.
 
 The TSV is the source of truth: the first column is the English term, the second
 is its description, and every remaining column is a language catalog (`de`, `es`,
@@ -24,8 +24,8 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).parent
-TSV_PATH = REPO_ROOT / "guides" / "localization_glossary.tsv"
-MD_PATH = REPO_ROOT / "guides" / "localization_glossary.md"
+TSV_PATH = REPO_ROOT / "developer_reference" / "localization_glossary.tsv"
+MD_PATH = REPO_ROOT / "developer_reference" / "localization_glossary.md"
 
 # The table is the first block of `|` lines after this heading.
 SECTION_HEADING = "## Translation table glossary"
