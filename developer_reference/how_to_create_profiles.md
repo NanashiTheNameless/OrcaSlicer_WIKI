@@ -5,7 +5,7 @@ This guide explains OrcaSlicer's profile system and how to create or maintain it
 - [High-level Overview](#high-level-overview)
 - [File Structure and Templates](#file-structure-and-templates)
 - [Create or Update a Profile Bundle](#create-or-update-a-profile-bundle)
-- [Vendor Meta File](#vendor-meta-file)
+- [Vendor Index File](#vendor-index-file)
 - [Printer Model Profiles](#printer-model-profiles)
 - [Printer Variant Profiles](#printer-variant-profiles)
 - [Process Profiles](#process-profiles)
@@ -13,6 +13,7 @@ This guide explains OrcaSlicer's profile system and how to create or maintain it
     - [Adding Filament Profiles to the Global Library](#adding-filament-profiles-to-the-global-library)
     - [Adding a Filament Brand](#adding-a-filament-brand)
     - [Adding Filament Profiles to Printer Vendor Library](#adding-filament-profiles-to-printer-vendor-library)
+- [The Profile Tool](#the-profile-tool)
 - [Setting IDs](#setting-ids)
 - [Filament IDs](#filament-ids)
 - [Testing Profile Changes](#testing-profile-changes)
@@ -36,7 +37,7 @@ For example, a user might select `Orca 3D Fuse1 0.4 nozzle`, `Generic PLA @Syste
 
 A **printer model** (`machine_model`) describes a product, such as `Orca 3D Fuse1`. It lists the available nozzle variants and references the bed model and texture used in the 3D view. A **printer variant** (`machine`) is the actual printer preset used for slicing, such as `Orca 3D Fuse1 0.4 nozzle`. One model can have several variants.
 
-A **vendor bundle** groups related profiles. It consists of a folder containing the profiles and a matching JSON **meta file** that lists them. Think of the meta file as the bundle's index: putting a new file in the folder is only half the job; you must also register it in that index.
+A **vendor bundle** groups related profiles. It consists of a folder containing the profiles and a matching JSON **index file** that lists them and holds the bundle's version. Putting a new file in the folder is only half the job; you must also register it in that index.
 
 `OrcaFilamentLibrary` is a shared bundle of generic and branded filament profiles. Printer bundles can use these materials and inherit their settings. You only need a printer-specific filament profile when you have material settings tuned for that printer.
 
@@ -58,12 +59,12 @@ A global filament can serve many printers. When a printer-specific filament has 
 
 ### How the Files Connect
 
-Each box below represents a JSON file. Dotted arrows mean the meta file registers a profile; solid arrows show references through named fields. The example includes a vendor filament that inherits settings from a global filament.
+Each box below represents a JSON file. Dotted arrows mean the vendor index registers a profile; solid arrows show references through named fields. The example includes a vendor filament that inherits settings from a global filament.
 
 ```mermaid
 flowchart TB
     subgraph Vendor["Printer vendor bundle"]
-        Index["Vendor meta file"]
+        Index["Vendor index file"]
         Model["Printer model"]
         Machine["Printer variant"]
         MachineBase["Shared printer base"]
@@ -85,7 +86,7 @@ flowchart TB
     end
 
     subgraph Library["OrcaFilamentLibrary"]
-        LibraryIndex["Library meta file"]
+        LibraryIndex["Library index file"]
         GlobalFilament["Global filament"]
         LibraryIndex -.-> GlobalFilament
     end
@@ -102,7 +103,7 @@ The filament's `inherits` arrow reuses settings. Replacing the global fallback i
 | `setting_id` | One selectable preset | Two printer-specific presets of PolyLite PLA have different setting IDs |
 | `filament_id` | One filament product, shared across its presets | Those PolyLite PLA presets share one filament ID |
 
-The ID tool generates both values; see [Setting IDs](#setting-ids) and [Filament IDs](#filament-ids) for details.
+The [profile tool](#the-profile-tool) generates both values; see [Setting IDs](#setting-ids) and [Filament IDs](#filament-ids) for details.
 
 ## File Structure and Templates
 
@@ -110,7 +111,7 @@ Edit `resources/profiles/` in your **OrcaSlicer source checkout**. This is the s
 
 ```text
 resources/profiles/
-├── Orca 3D.json                         # Vendor meta file (the index)
+├── Orca 3D.json                         # Vendor index file
 ├── Orca 3D/
 │   ├── machine/
 │   │   ├── fdm_machine_common.json      # Shared printer settings
@@ -126,11 +127,11 @@ resources/profiles/
     └── filament/                       # Generic and branded materials
 ```
 
-Each profile's filename is its `name` plus `.json`. Use the same name in the vendor meta file and in references from other profiles.
+Each profile's filename is its `name` plus `.json`. Use the same name in the vendor index and in references from other profiles.
 
 | File or profile | Name pattern | Example |
 | --- | --- | --- |
-| Vendor meta file | `<vendor>` | `Orca 3D` |
+| Vendor index file | `<vendor>` | `Orca 3D` |
 | Printer model | `<vendor> <printer>` | `Orca 3D Fuse1` |
 | Printer variant | `<vendor> <printer> <nozzle> nozzle` | `Orca 3D Fuse1 0.4 nozzle` |
 | Filament | `<product name> @<target>` | `Generic ABS @Orca 3D Fuse1` |
@@ -164,7 +165,7 @@ Choose the smallest change that meets your goal:
 
 | Your goal | What to add or update |
 | --- | --- |
-| Support a new printer | A model, its printer variants, compatible processes and the vendor meta file |
+| Support a new printer | A model, its printer variants, compatible processes and the vendor index |
 | Add a nozzle size to an existing printer | The model's nozzle list, a printer variant, matching processes and any relevant filament compatibility lists |
 | Add a generic material or filament product | Profiles and index entries in `OrcaFilamentLibrary` |
 | Tune an existing material for a printer | A printer-specific filament profile in the appropriate library, with explicit compatibility |
@@ -172,19 +173,19 @@ Choose the smallest change that meets your goal:
 
 For a new printer, work through these steps:
 
-1. **Choose the bundle and parents.** Reuse the printer vendor's bundle if it exists. For a new vendor, create its folder and meta file. Identify or create the shared printer and process bases.
+1. **Choose the bundle and parents.** Reuse the printer vendor's bundle if it exists. For a new vendor, create its folder and index file. Identify or create the shared printer and process bases.
 2. **Describe the hardware.** Add the printer model, then one printer variant for each supported nozzle configuration. Make the variant's `printer_model` match the model name.
 3. **Add a usable process.** Create a process for each variant and list that variant in `compatible_printers`. Set the printer's `default_print_profile` to the process's exact name.
 4. **Choose materials.** Start with the global filament library. Add printer-specific profiles only for materials you have tuned, and set the printer's default filament to an available preset.
-5. **Register the files.** Add the new profiles, including shared bases, to the matching lists in the [Vendor Meta File](#vendor-meta-file). Review names, paths and references together.
-6. **Generate IDs and version the update.** Run the [ID tool](#generating-the-id), update the filament snapshot when filament entries or identities change, and bump the last component of each changed bundle's `version`.
+5. **Register the files.** Add the new profiles, including shared bases, to the matching lists in the [Vendor Index File](#vendor-index-file), or let the [profile tool](#the-profile-tool) write those lists from the files on disk. Review names, paths and references together.
+6. **Generate IDs and version the update.** Run the [profile tool](#the-profile-tool), update the filament snapshot when filament entries or identities change, and bump the last component of each changed bundle's `version`.
 7. **Validate and try the profiles.** Run the [profile checks](#validate-profiles), load the changed resources in OrcaSlicer, inspect a sliced model and test the settings on the target printer. When editing a shared base, test all affected variants.
 
 For a filament-only change, use the relevant [filament example](#filament-profiles), then complete registration, ID generation, versioning and validation. The JSON examples below show structure and selected settings; they are not complete, tested configurations for a real printer. Unless a section explicitly shows generated IDs, the examples omit them so you can run the tool after choosing your own names.
 
-## Vendor Meta File
+## Vendor Index File
 
-Each bundle has a `resources/profiles/<vendor>.json` meta file next to its folder. OrcaSlicer reads this file to find the profiles to load. Register every profile, including non-selectable bases, in the appropriate list:
+Each bundle has a `resources/profiles/<vendor>.json` index file next to its folder. OrcaSlicer reads this file to find the profiles to load. Register every profile, including non-selectable bases, in the appropriate list:
 
 | List | Contains |
 | --- | --- |
@@ -237,6 +238,14 @@ Each entry's `name` matches the profile's name. Its `sub_path` is relative to th
 ```
 
 If you use only global filaments, leave `filament_list` empty; do not copy their entries into the printer bundle. Add them to `OrcaFilamentLibrary.json` when contributing to the global library itself.
+
+OrcaSlicer reads the `sub_path` values listed here and nothing else, so a profile no list names never reaches a user, however correct the file itself is. The [profile tool](#the-profile-tool) can write these lists for you:
+
+```sh
+python3 scripts/orca_profile_tool.py update-index --vendor "Orca 3D"
+```
+
+It reads every file in the bundle folder, puts each one in the list its own `type` names, and orders each list parents-first so the loader resolves `inherits` in one pass. The [profile checks](#validate-profiles) report a file that no list references, and two files in one bundle claiming the same profile name — only one of those can be indexed, and the loader silently ignores the other.
 
 When updating a bundle, increment the last component of its existing `version`, for example `01.00.00.00` → `01.00.00.01`, so users receive the profile update. Preserve the other bundle metadata unless your change requires updating it.
 
@@ -361,8 +370,8 @@ This example adds `Generic PLA-GF @System`:
 3. Generate the IDs and update the snapshot (see [Generating the ID](#generating-the-id)):
 
     ```sh
-    python3 scripts/orca_id_tool.py --generate
-    python3 scripts/orca_id_tool.py --update-snapshot
+    python3 scripts/orca_profile_tool.py generate-id
+    python3 scripts/orca_profile_tool.py update-snapshot
     ```
 
     The tool adds both IDs. `Generic` (inherited from the base profile), `PLA-GF` and `Generic PLA-GF` give the ID `OFkuMukj`:
@@ -474,6 +483,40 @@ The profile keeps the `Generic ABS` name and inherits `Generic ABS @System`, so 
 
 Register the file in the printer vendor's `filament_list`, bump that bundle's version, then [generate the IDs, update the snapshot and validate](#generating-the-id).
 
+## The Profile Tool
+
+`scripts/orca_profile_tool.py` does every maintenance job on the profile tree. Run it from the root of your checkout. Every command but `update-snapshot` takes `--vendor <Vendor>` to work on one bundle, and every command that writes takes `--dry-run` to report what it would do and write nothing.
+
+| Command | What it does |
+| --- | --- |
+| `check` | Validate the tree, including that `normalize` and `update-index` would change nothing; this is what CI runs, see [Validate Profiles](#validate-profiles) |
+| `generate-id` | Write the [`setting_id`](#setting-ids) and [`filament_id`](#filament-ids) each profile's identity implies |
+| `normalize` | Rewrite profile files into their canonical shape: add a missing `type`, drop keys the slicer ignores (including print speeds pinned in a filament profile), reorder keys |
+| `trim` | Delete profile files that no `<vendor>.json` list references |
+| `update-index` | Rebuild the `*_list` sections of `<vendor>.json` from the files on disk |
+| `update-snapshot` | Re-record `scripts/filament_id_snapshot.json` |
+
+For the usual contribution — adding or editing profiles — this is the sequence:
+
+```sh
+python3 scripts/orca_profile_tool.py normalize --vendor "Orca 3D"
+python3 scripts/orca_profile_tool.py update-index --vendor "Orca 3D"
+python3 scripts/orca_profile_tool.py generate-id --vendor "Orca 3D"
+python3 scripts/orca_profile_tool.py update-snapshot
+python3 scripts/orca_profile_tool.py check
+```
+
+Leave out `--vendor` to cover every bundle. `update-snapshot`, and the `setting_id` and `filament_id` parts of `check`, read the whole tree either way: they describe properties that no single bundle can answer.
+
+`normalize` and `update-index` are not optional polish. They define what a profile file and a `<vendor>.json` are supposed to look like, and `check` fails when either of them would still change something — so running them is how you produce the file that gets reviewed, rather than leaving the next maintainer to run them and carry your diff into their change. Run `normalize` before `update-index`: `normalize` writes the `type` that `update-index` files a profile by.
+
+`trim` is the one command outside that sequence. It deletes profile files an existing bundle no longer lists, which is a cleanup sweep rather than part of landing a new profile. When you do run it, run it after `normalize` and before `update-index`, since it judges against the index `update-index` is about to rebuild.
+
+> [!WARNING]
+> `trim` deletes every profile file the index does not list — including a profile you have just added and not yet registered. Register your files first, and preview with `--dry-run` before letting it write.
+
+`python3 scripts/orca_profile_tool.py <command> --help` documents one command in full.
+
 ## Setting IDs
 
 Every selectable machine, filament or process preset (`"instantiation": "true"`) needs a `setting_id` that is unique across all OrcaSlicer profiles. It is computed from the vendor folder, the profile type (`filament`, `process` or `machine`) and the profile name:
@@ -482,10 +525,10 @@ Every selectable machine, filament or process preset (`"instantiation": "true"`)
 setting_id = base62_16( uuid5(namespace, "<vendor>/<type>/<name>") )
 ```
 
-Don't write or copy a `setting_id`. Add your profiles without one and let the ID tool fill it in:
+Don't write or copy a `setting_id`. Add your profiles without one and let the [profile tool](#the-profile-tool) fill it in:
 
 ```sh
-python3 scripts/orca_id_tool.py --generate
+python3 scripts/orca_profile_tool.py generate-id
 ```
 
 This works the same for new and existing vendors. The same run adds the [`filament_id`](#filament-ids) of new filaments, and re-running it on an unchanged tree changes nothing. Add `--vendor <Vendor>` to limit it to one vendor, `--setting-id` to write only `setting_id`, or `--dry-run` to preview.
@@ -520,7 +563,7 @@ The result is always 8 characters, short enough for the AMS. The same product ge
 > Bambu Lab filaments follow the same rule. For filaments that exist in both OrcaSlicer and Bambu Studio, OrcaSlicer maintains a mapping file between the two sets of IDs.
 
 > [!IMPORTANT]
-> Never write or copy a `filament_id`. Create the filament without one and let the ID tool add it.
+> Never write or copy a `filament_id`. Create the filament without one and let the [profile tool](#the-profile-tool) add it.
 
 ### Do I Need a New ID?
 
@@ -546,15 +589,15 @@ Whether a preset sets `filament_id` or inherits it, the ID must match the preset
 Create the filament profile without a `filament_id`, then run:
 
 ```sh
-python3 scripts/orca_id_tool.py --dry-run          # preview the IDs
-python3 scripts/orca_id_tool.py --generate         # write filament_id and setting_id
-python3 scripts/orca_id_tool.py --update-snapshot  # update scripts/filament_id_snapshot.json
-./scripts/check_profile.sh                         # validate (.\scripts\check_profile.bat on Windows)
+python3 scripts/orca_profile_tool.py generate-id --dry-run  # preview the IDs
+python3 scripts/orca_profile_tool.py generate-id            # write filament_id and setting_id
+python3 scripts/orca_profile_tool.py update-snapshot        # update scripts/filament_id_snapshot.json
+./scripts/check_profile.sh                                  # validate (.\scripts\check_profile.bat on Windows)
 ```
 
 Commit the profiles together with `scripts/filament_id_snapshot.json`. The snapshot records each filament ID, its product identity and the bundle/filament-name pairs that use it, such as `BBL/PolyLite PLA`. Multiple printer-specific presets of that product in one bundle share a single entry. CI requires the snapshot to match the state derived from the profiles. Don't edit it by hand.
 
-Add `--vendor <Vendor>` to limit `--generate` or `--dry-run` to one vendor, or `--filament-id` to write only `filament_id`. If you skip the tool, CI fails and prints the expected ID.
+Add `--vendor <Vendor>` to limit `generate-id` to one vendor, or `--filament-id` to write only `filament_id`. If you skip the tool, CI fails and prints the expected ID.
 
 ### Renaming or Correcting a Filament
 
@@ -566,7 +609,7 @@ Renaming a filament or fixing its `filament_vendor` or `filament_type` changes i
 }
 ```
 
-Then run `--generate` and `--update-snapshot` and commit the updated profiles and snapshot.
+Then run `generate-id` and `update-snapshot` and commit the updated profiles and snapshot.
 
 > [!CAUTION]
 > Old IDs are not forwarded. A printer slot or calibration record holding the old ID falls back to matching by filament type until the user selects the filament again. Only change a filament's identity to fix a real mistake.
@@ -608,7 +651,7 @@ All checks run even if one fails, and the script exits with an error if any fail
 
 | Check | Catches |
 | --- | --- |
-| `extra_json_check` | Duplicate keys, `vendor_name.json` entries that don't match the files, bad filament `compatible_printers`, and [`setting_id`](#setting-ids) or [`filament_id`](#filament-ids) errors |
+| [`profile_tool`](#the-profile-tool) | Duplicate keys, `vendor_name.json` entries and profile files that don't match each other, two profiles in a bundle sharing a name, bad filament `compatible_printers`, profiles or indexes that [`normalize` or `update-index`](#the-profile-tool) would still rewrite, and [`setting_id`](#setting-ids) or [`filament_id`](#filament-ids) errors |
 | `validate_system` | Profiles that fail to load, such as JSON errors, a missing parent profile, or a filament without a `filament_id` |
 | `validate_slice` | Custom G-code errors, found by slicing a test cube on every printer |
 | `validate_filament_subtypes` | Two filament presets with the same `filament_id` on one printer |
@@ -652,7 +695,7 @@ To run only some checks, name them after the options: `./scripts/check_profile.s
 
 A vendor run is faster, but CI checks the whole tree:
 
-- `extra_json_check` still checks ids across all vendors, so it can fail on another vendor's files.
+- `profile_tool` still checks ids across all vendors, so it can fail on another vendor's files.
 - `validate_slice` is skipped for vendors with no printers, such as `OrcaFilamentLibrary`.
 - The validator checks fail with `references unknown compatible_printers` when a library profile lists printers of a vendor that isn't being checked, because only that vendor's printers are loaded.
 
@@ -664,7 +707,7 @@ The run ends with a summary:
 
 ```text
 ==> summary
-    PASS  extra_json_check
+    PASS  profile_tool
     PASS  validate_system
     PASS  validate_slice
     PASS  validate_filament_subtypes
@@ -680,11 +723,10 @@ A failed check shows `FAIL` and the path of its log. Logs are saved in `.test/ch
 To debug a check outside the script, run its command directly:
 
 ```sh
-python3 scripts/orca_extra_profile_check.py                    # extra_json_check
-python3 scripts/orca_id_tool.py --check                         # filament_id part of extra_json_check
+python3 scripts/orca_profile_tool.py check                      # profile_tool
 OrcaSlicer_profile_validator -p resources/profiles -l 2         # validate_system
 OrcaSlicer_profile_validator -p resources/profiles -s -l 2      # validate_slice
 OrcaSlicer_profile_validator -p resources/profiles -l 2 -f      # validate_filament_subtypes
 ```
 
-Add `--vendor "Orca 3D"` to the Python script, or `-v "Orca 3D"` to the validator, to check one vendor. `orca_extra_profile_check.py` also has two checks CI doesn't run: `--check-materials` and `--check-obsolete-keys`.
+Add `--vendor "Orca 3D"` to the [profile tool](#the-profile-tool), or `-v "Orca 3D"` to the validator, to check one vendor. `check` also has two checks CI doesn't run: `--materials` and `--obsolete-keys`.
