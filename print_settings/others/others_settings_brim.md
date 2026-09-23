@@ -118,7 +118,7 @@ This parameter indicates the minimum length of the deviation for the decimation.
 [CLI Example](cli_mode#setting-overrides): `--brim-ears-outer-only=1`.  
 > [!IMPORTANT]
 > NEW FEATURE: **Limit automatic and painted brim ears to outer contours**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.4.2**.
 
 When enabled, brim ears are generated only on the model's outer contour. Ears that would otherwise be placed in holes or other enclosed sections are excluded.
 

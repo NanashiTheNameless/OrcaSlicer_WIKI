@@ -164,7 +164,7 @@ Tooltips and parameter descriptions may be *expanded* beyond the English so that
 have to go research the topic in a language they may not speak. Treat the original description as the
 basis to build on, not as a spec to reproduce.
 
-Good sources for the extra context: the [OrcaSlicer wiki](https://github.com/OrcaSlicer/OrcaSlicer/wiki),
+Good sources for the extra context: the [OrcaSlicer wiki](https://github.com/NanashiTheNameless/OrcaSlicer/wiki),
 developer answers in GitHub Issues/Discussions, the Discord history, and comments in the source code.
 
 > [!IMPORTANT]

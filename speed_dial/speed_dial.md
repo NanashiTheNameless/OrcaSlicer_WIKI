@@ -2,7 +2,7 @@
 
 > [!IMPORTANT]
 > NEW FEATURE: **Speed Dial**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.4.2**.
 
 The Speed Dial is a search-first launcher for everything runnable in OrcaSlicer: plugin
 script capabilities, built-in commands (slice and export, calibration, views, object and plate
@@ -17,7 +17,7 @@ or from the menu (**Open speed dial...**).
 3. Press **Enter** or double-click to run the highlighted action.
 4. Press **Escape** to clear the search, then again to close.
 
-![speed_dial](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/speed_dial/speed_dial.png?raw=true)
+![speed_dial](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/speed_dial/speed_dial.png?raw=true)
 
 ## Favourites
 
@@ -28,7 +28,7 @@ You can bookmark up to 10 actions in the favourites bar.
 - Use the arrow keys to move between the favourites bar and the action list;
 - Right-click a favourite to move it left or right, or unpin it.
 
-![speed_dial_favourites](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/speed_dial/speed_dial_favourites.png?raw=true)
+![speed_dial_favourites](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/speed_dial/speed_dial_favourites.png?raw=true)
 
 ## Recents and categories
 
@@ -41,7 +41,7 @@ You can bookmark up to 10 actions in the favourites bar.
     - Use the arrow button to expand or collapse it.
 - Press **F1** (or click the **Wiki** link) to open its page.
 
-![speed_dial_tooltip](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/speed_dial/speed_dial_tooltip.png?raw=true)
+![speed_dial_tooltip](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/speed_dial/speed_dial_tooltip.png?raw=true)
 
 ## Plugins
 
@@ -54,4 +54,4 @@ Under **Preferences > General > Features**:
 - **Open the Speed Dial with the Space key** turns the Space shortcut on or off.
 - **Recent actions** sets how many recent actions to show. Set to 0 to hide all recent actions.
 
-![speed_dial_preferences](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/speed_dial/speed_dial_preferences.png?raw=true)
+![speed_dial_preferences](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/speed_dial/speed_dial_preferences.png?raw=true)

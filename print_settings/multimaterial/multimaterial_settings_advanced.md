@@ -46,7 +46,7 @@ Determines the order of tool changes on each layer:
 
 > [!IMPORTANT]
 > NEW FEATURE: **Custom cyclic toolchange sequence**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.4.2**.
 
 Only available when [Toolchange Ordering](#toolchange-ordering) is set to `Cyclic`.
 

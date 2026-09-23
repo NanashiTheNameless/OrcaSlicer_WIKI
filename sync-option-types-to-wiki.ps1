@@ -41,7 +41,7 @@
     pwsh ./sync-option-types-to-wiki.ps1 -PrintConfigCppPath ../OrcaSlicer/src/libslic3r/PrintConfig.cpp
 #>
 param(
-    [string]$PrintConfigCppPath = "https://github.com/OrcaSlicer/OrcaSlicer/blob/main/src/libslic3r/PrintConfig.cpp",
+    [string]$PrintConfigCppPath = "https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/src/libslic3r/PrintConfig.cpp",
     [string]$OverridesPath = "option_type_overrides.json",
     [string]$WikiRoot = $PSScriptRoot,
     [switch]$DryRun,

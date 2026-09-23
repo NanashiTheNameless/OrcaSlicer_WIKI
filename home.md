@@ -12,6 +12,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
     - [Support Settings](#support-settings)
     - [Multimaterial Settings](#multimaterial-settings)
     - [Others Settings](#others-settings)
+- [Design](#design)
 - [Prepare](#prepare)
 - [Calibrations](#calibrations)
 - [General Settings](#general-settings)
@@ -157,6 +158,19 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 - [<img alt="param_gcode" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/param_gcode.svg?raw=true" height="22"> Post Processing Scripts](others_settings_post_processing_scripts)
 - [<img alt="note" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/note.svg?raw=true" height="22"> Notes](others_settings_notes)
 
+## Design
+
+> [!IMPORTANT]
+> NEW FEATURE: **Design Tab**  
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.4.2**.
+
+<img alt="tab_design_active" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/tab_design_active.svg?raw=true" height="22"> Parametric CAD inside the slicer: sketch, constrain, build solids and send them to the plate. Experimental, and switched on in [Preferences](design_tab#enabling-the-design-tab).
+
+- [Design Tab](design_tab)
+    - [Sketching](design_sketching)
+    - [Modeling Tools](design_modeling_tools)
+    - [Design Keyboard Shortcuts](design_keyboard_shortcuts)
+
 ## Prepare
 
 <img alt="tab_3d_active" src="https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/resources/images/tab_3d_active.svg?raw=true" height="22"> First steps to prepare your model/s for printing.
@@ -245,14 +259,14 @@ OrcaSlicer can run headless from the command line for automation, batch processi
 ## Speed Dial
 > [!IMPORTANT]
 > NEW FEATURE: **Speed Dial**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.4.2**.
 - [Speed Dial](speed_dial)
 
 ## Publishing 3MF
 
 > [!IMPORTANT]
 > NEW FEATURE: **Publish 3MF**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.4.2**.
 
 - [What does Publish 3MF do?](publish_3mf)
 - [For creators](publish_3mf_creators)

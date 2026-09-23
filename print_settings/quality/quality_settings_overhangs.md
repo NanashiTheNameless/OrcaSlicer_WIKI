@@ -33,7 +33,7 @@ When detecting line width with 100% overhang, bridge options are used.
 
 > [!IMPORTANT]
 > NEW FEATURE: **Print unsupported walls last**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.4.2**.
 
 Wall loops that lie entirely in mid air, with nothing under them on the layer below, are printed once something can hold them: they are extruded after the walls that anchor them, innermost first, whatever the [walls printing order](quality_settings_wall_and_surfaces#walls-printing-order) is.
 

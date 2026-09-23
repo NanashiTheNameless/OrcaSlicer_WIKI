@@ -622,11 +622,11 @@ OrcaSlicer also keeps system profiles in its configuration folder. If an older c
 
 1. In OrcaSlicer, go to **Help** → **Show Configuration Folder**, then close OrcaSlicer.
 
-    ![go-to-configuration-folder](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/develop/go-to-configuration-folder.png?raw=true)
+    ![go-to-configuration-folder](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/develop/go-to-configuration-folder.png?raw=true)
 
 2. Remove the `system` folder from that configuration folder so OrcaSlicer reloads its system profiles.
 
-    ![profile-delete-system-folder](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/develop/profile-delete-system-folder.png?raw=true)
+    ![profile-delete-system-folder](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/develop/profile-delete-system-folder.png?raw=true)
 
 3. Restart OrcaSlicer, enable the printer if needed, and confirm that its variants, default process and compatible filaments appear as expected.
 4. Slice a representative model, inspect the preview and generated G-code, and test the settings on the target printer. Automated checks cannot establish print quality or verify the physical machine's limits.

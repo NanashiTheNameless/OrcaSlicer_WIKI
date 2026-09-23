@@ -211,7 +211,7 @@ This setting will use your printer/material Wipe Distance and retract amount bef
 
 > [!IMPORTANT]
 > NEW FEATURE: **Wipe inward**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
+> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.4.2**.
 
 Shifts the wipe that follows an external wall away from the outer surface and onto the inner wall next to it. Instead of running the hot nozzle back over the outside of the part it has just extruded, the nozzle wipes over material that is no longer visible, which reduces the reheating that leaves a mark around the seam. This is most noticeable at layer heights below 0.1 mm, where wipe marks stand out the most.
 

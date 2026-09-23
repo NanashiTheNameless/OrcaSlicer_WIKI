@@ -24,7 +24,7 @@ import re
 import sys
 import urllib.request
 
-DEFAULT_SOURCE = "https://github.com/OrcaSlicer/OrcaSlicer/blob/main/src/libslic3r/PrintConfig.cpp"
+DEFAULT_SOURCE = "https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/src/libslic3r/PrintConfig.cpp"
 DEFAULT_OVERRIDES = "cli_option_overrides.json"
 
 CLASS_MARKERS = [

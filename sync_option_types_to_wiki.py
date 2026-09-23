@@ -26,7 +26,7 @@ import sys
 import tempfile
 import urllib.request
 
-DEFAULT_SOURCE = "https://github.com/OrcaSlicer/OrcaSlicer/blob/main/src/libslic3r/PrintConfig.cpp"
+DEFAULT_SOURCE = "https://github.com/NanashiTheNameless/OrcaSlicer/blob/main/src/libslic3r/PrintConfig.cpp"
 DEFAULT_OVERRIDES = "option_type_overrides.json"
 SETTINGS_DIRS = ["print_settings", "printer_settings", "material_settings"]
 
