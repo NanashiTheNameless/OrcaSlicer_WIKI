@@ -39,7 +39,7 @@ sudo xcodebuild -license accept   # if you haven't accepted it yet
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/OrcaSlicer/OrcaSlicer
+   git clone https://github.com/NanashiTheNameless/OrcaSlicer
    cd OrcaSlicer
    ```
 

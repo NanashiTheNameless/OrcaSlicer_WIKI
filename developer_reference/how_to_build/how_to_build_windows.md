@@ -86,7 +86,7 @@ Building OrcaSlicer for 64-bit Windows. `build_win.bat` installs the prerequisit
 Clone the repository, either from GitHub Desktop or on the command line:
 
 ```pwsh
-git clone https://github.com/OrcaSlicer/OrcaSlicer
+git clone https://github.com/NanashiTheNameless/OrcaSlicer
 ```
 
 Nothing below needs a developer command prompt. Change into the clone:

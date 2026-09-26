@@ -24,7 +24,7 @@ How to build and run OrcaSlicer using Docker.
 ### Docker Instructions
 
 ```pwsh
-git clone https://github.com/OrcaSlicer/OrcaSlicer && cd OrcaSlicer && ./scripts/DockerBuild.sh && ./scripts/DockerRun.sh
+git clone https://github.com/NanashiTheNameless/OrcaSlicer && cd OrcaSlicer && ./scripts/DockerBuild.sh && ./scripts/DockerRun.sh
 ```
 
 ## Troubleshooting
