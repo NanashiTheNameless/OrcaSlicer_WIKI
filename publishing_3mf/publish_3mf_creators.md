@@ -20,8 +20,6 @@ Settings that differ from your base presets are pre-checked and bold; the rest s
 
 If you check nothing, the file carries only the geometry.
 
-<video src="https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/publish_3mf/publish_dialog_settings.webm?raw=true" controls width="720" height="480"></video>
-
 ### Printer tab
 
 One tab per extruder, each listing that extruder's **Retraction** and **Z-Hop** values.
@@ -43,18 +41,18 @@ An enabled slot offers:
 
 Enabling a particular mixed filament automatically selects the required filament components.
 
-<video src="https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/publish_3mf/publish_dialog_filament_settings.webm?raw=true" controls width="720" height="480"></video>
+![publish_dialog_filament_settings](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/publish_3mf/publish_dialog_filament_settings.png?raw=true)
 
 > [!NOTE]
 > If a mixed filament is enabled, but its required components are either disabled or have their type unchecked, a warning message will be shown.
 > This does not prevent publishing.
-> <video src="https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/publish_3mf/publish_dialog_mixed_filament_warning.webm?raw=true" controls width="720" height="480"></video>
+> ![publish_dialog_mixed_filament_warning](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/publish_3mf/publish_dialog_mixed_filament_warning.png?raw=true)
 
 ### Process tab
 
-Mirrors the Process settings: one inner tab per page (**Quality**, **Speed**, **Strength**…), each keeping its option grouping.
+Mirrors the Process settings that you see in the sidebar.
 
-<video src="https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/publish_3mf/publish_dialog_process_settings.webm?raw=true" controls width="720" height="480"></video>
+![publish_dialog_process_settings](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/publish_3mf/publish_dialog_process_settings.png?raw=true)
 
 ## Tips
 

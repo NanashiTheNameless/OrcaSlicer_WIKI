@@ -55,3 +55,8 @@ Under **Preferences > General > Features**:
 - **Recent actions** sets how many recent actions to show. Set to 0 to hide all recent actions.
 
 ![speed_dial_preferences](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/speed_dial/speed_dial_preferences.png?raw=true)
+
+## Video
+A speed dial video guide is also available on our YouTube channel. [Link](https://www.youtube.com/watch?v=DxJPhETR1Hs)
+
+[![speed_dial_youtube_thumbnail](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/speed_dial/speed_dial_youtube_thumbnail.jpg?raw=true)](https://www.youtube.com/watch?v=DxJPhETR1Hs)
