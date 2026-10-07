@@ -114,6 +114,7 @@ nav:
 - Home: index.md
 - Guides:
   - "Calibration Guide": guides/calibration_guide.md
+  - "Belt Printing": guides/belt_printing.md
   - "How to Download Pull Requests Artifacts for Testing": guides/how_to_download_pr_artifacts.md
   - "Mixed Nozzle Sizes": guides/mixed_nozzle_sizes.md
 - "Printer Settings":
@@ -121,8 +122,10 @@ nav:
     - "Printer Accessory": "printer_settings/basic information/printer_basic_information_accessory.md"
     - "Adaptive Bed Mesh": "printer_settings/basic information/printer_basic_information_adaptive_bed_mesh.md"
     - "Advanced Printer Settings": "printer_settings/basic information/printer_basic_information_advanced.md"
+    - "Belt Printer": "printer_settings/basic information/printer_basic_information_belt_printer.md"
     - "Cooling Fan": "printer_settings/basic information/printer_basic_information_cooling_fan.md"
     - "Extruder Clearance": "printer_settings/basic information/printer_basic_information_extruder_clearance.md"
+    - "Machine Frame Transforms": "printer_settings/basic information/printer_basic_information_machine_frame_transforms.md"
     - "Printable Space": "printer_settings/basic information/printer_basic_information_printable_space.md"
   - Extruder:
     - "Basic Extruder Information": printer_settings/extruder/printer_extruder_basic_information.md

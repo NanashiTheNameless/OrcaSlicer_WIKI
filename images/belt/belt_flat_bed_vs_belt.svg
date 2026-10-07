@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="920px" height="360px" viewBox="0 0 920 360" style="background: transparent; color-scheme: light dark;">
+  <title>A flat bed compared with a tilted belt</title>
+  <style>
+    .ink   { stroke: #2b2b2b; stroke: light-dark(#2b2b2b, #e6e6e6); fill: none; stroke-width: 2; stroke-linecap: round; }
+    .solid { fill: #2b2b2b; fill: light-dark(#2b2b2b, #e6e6e6); stroke: none; }
+    .txt   { fill: #2b2b2b; fill: light-dark(#2b2b2b, #e6e6e6); font-family: sans-serif; font-size: 16px; }
+    .head  { font-size: 20px; font-weight: bold; }
+    .bed   { fill: #9e9e9e; fill: light-dark(#9e9e9e, #757575); stroke: none; }
+    .part  { fill: #009688; fill-opacity: 0.2; stroke: #009688; stroke-width: 2; }
+    .ghost { fill: none; stroke: #009688; stroke-width: 1.5; stroke-dasharray: 6 5; }
+    .layer { stroke: #009688; stroke-width: 1.5; fill: none; }
+    .rail  { stroke: #9e9e9e; stroke: light-dark(#757575, #9e9e9e); stroke-width: 9; stroke-linecap: round; fill: none; }
+    .hot   { fill: #e65100; fill: light-dark(#e65100, #ff9800); stroke: none; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path class="solid" d="M 0 0 L 10 5 L 0 10 z"/>
+    </marker>
+  </defs>
+
+  <!-- Flat bed -->
+  <text class="txt head" x="210" y="32" text-anchor="middle">Flat bed</text>
+  <rect class="bed" x="50" y="280" width="320" height="14" rx="3"/>
+  <rect class="part" x="130" y="160" width="160" height="120"/>
+  <path class="layer" d="M 130 175 H 290 M 130 190 H 290 M 130 205 H 290 M 130 220 H 290 M 130 235 H 290 M 130 250 H 290 M 130 265 H 290"/>
+  <rect class="hot" x="198" y="106" width="24" height="30" rx="3"/>
+  <path class="hot" d="M 200 138 L 220 138 L 210 156 z"/>
+  <path class="ink" d="M 335 276 V 168" marker-end="url(#arrow)"/>
+  <text class="txt" x="346" y="226">Z</text>
+  <text class="txt" x="210" y="326" text-anchor="middle">Layers are parallel to the bed</text>
+
+  <!-- Belt printer -->
+  <text class="txt head" x="690" y="32" text-anchor="middle">Belt printer</text>
+  <rect class="bed" x="500" y="280" width="380" height="14"/>
+  <circle class="bed" cx="500" cy="287" r="13"/>
+  <circle class="bed" cx="880" cy="287" r="13"/>
+  <rect class="ghost" x="640" y="160" width="160" height="120"/>
+  <path class="part" d="M 660 280 L 780 160 L 800 160 L 800 280 z"/>
+  <path class="layer" d="M 675 280 L 795 160 M 690 280 L 800 170 M 705 280 L 800 185 M 720 280 L 800 200 M 735 280 L 800 215 M 750 280 L 800 230 M 765 280 L 800 245 M 780 280 L 800 260"/>
+  <path class="rail" d="M 602 282 L 782 102"/>
+  <g transform="translate(720 220) rotate(-45)">
+    <rect class="hot" x="-12" y="-44" width="24" height="28" rx="3"/>
+    <path class="hot" d="M -10 -14 L 10 -14 L 0 0 z"/>
+  </g>
+  <path class="ink" d="M 690 280 A 30 30 0 0 0 681.2 258.8"/>
+  <text class="txt" x="697" y="272">α</text>
+  <path class="ink" d="M 540 262 L 630 172" marker-end="url(#arrow)"/>
+  <text class="txt" x="574" y="200" text-anchor="end">gantry</text>
+  <path class="ink" d="M 620 326 H 760" marker-end="url(#arrow)"/>
+  <text class="txt" x="690" y="348" text-anchor="middle">belt travel</text>
+</svg>

@@ -34,6 +34,8 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 - Basic Information
     - [<img alt="param_printable_space" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_printable_space.svg?raw=true" height="22"> Printable space](printer_basic_information_printable_space)
     - [<img alt="param_advanced" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_advanced.svg?raw=true" height="22"> Advanced](printer_basic_information_advanced)
+    - [<img alt="param_advanced" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_advanced.svg?raw=true" height="22"> Belt printer](printer_basic_information_belt_printer)
+    - [<img alt="param_advanced" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_advanced.svg?raw=true" height="22"> Machine frame transforms](printer_basic_information_machine_frame_transforms)
     - [<img alt="param_cooling_fan" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_cooling_fan.svg?raw=true" height="22"> Cooling Fan](printer_basic_information_cooling_fan)
     - [<img alt="param_extruder_clearance" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_extruder_clearance.svg?raw=true" height="22"> Extruder Clearance](printer_basic_information_extruder_clearance)
     - [<img alt="param_adaptive_mesh" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_adaptive_mesh.svg?raw=true" height="22"> Adaptive bed mesh](printer_basic_information_adaptive_bed_mesh)
@@ -275,6 +277,7 @@ OrcaSlicer can run headless from the command line for automation, batch processi
 - How to:
     - [Use mixed with different nozzle sizes](mixed_nozzle_sizes)
     - [Calibrate Your Printer](calibration_guide)
+    - [Print on a Belt Printer](belt_printing)
     - [Create Profiles](how_to_create_profiles)
     - [Download Pull Requests Artifacts for Testing](how_to_download_pr_artifacts)
 

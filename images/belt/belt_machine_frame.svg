@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="640px" height="340px" viewBox="0 0 640 340" style="background: transparent; color-scheme: light dark;">
+  <title>Gantry travel and belt position of a point above the belt</title>
+  <style>
+    .ink   { stroke: #2b2b2b; stroke: light-dark(#2b2b2b, #e6e6e6); fill: none; stroke-width: 2; stroke-linecap: round; }
+    .thin  { stroke-width: 1.5; }
+    .dash  { stroke-dasharray: 6 5; }
+    .solid { fill: #2b2b2b; fill: light-dark(#2b2b2b, #e6e6e6); stroke: none; }
+    .txt   { fill: #2b2b2b; fill: light-dark(#2b2b2b, #e6e6e6); font-family: sans-serif; font-size: 16px; }
+    .bed   { fill: #9e9e9e; fill: light-dark(#9e9e9e, #757575); stroke: none; }
+    .layer { stroke: #009688; stroke-width: 3; fill: none; stroke-linecap: round; }
+    .teal  { fill: #009688; font-family: sans-serif; font-size: 16px; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path class="solid" d="M 0 0 L 10 5 L 0 10 z"/>
+    </marker>
+  </defs>
+
+  <!-- Belt -->
+  <rect class="bed" x="40" y="260" width="560" height="10"/>
+
+  <!-- The layer through P: rises at the tilt angle from the belt -->
+  <path class="layer" d="M 200 260 L 406.8 86.4"/>
+  <text class="teal" transform="translate(262 186) rotate(-40)" text-anchor="middle">gantry travel = h / sin α</text>
+
+  <!-- Height of P above the belt -->
+  <path class="ink thin dash" d="M 368.5 118.6 V 260"/>
+  <text class="txt" x="380" y="196">h</text>
+  <circle class="solid" cx="368.5" cy="118.6" r="5"/>
+  <text class="txt" x="382" y="138">P</text>
+
+  <!-- Tilt angle -->
+  <path class="ink thin" d="M 236 260 A 36 36 0 0 0 227.6 236.9"/>
+  <text class="txt" x="244" y="250">α</text>
+
+  <!-- Distance along the belt between the layer's base and P -->
+  <path class="ink thin" d="M 200 276 V 290 M 368.5 276 V 290"/>
+  <path class="ink thin" d="M 204 283 H 364.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text class="txt" x="284" y="306" text-anchor="middle">h · cot α</text>
+  <text class="txt" x="368.5" y="328" text-anchor="middle">y</text>
+  <text class="txt" x="200" y="328" text-anchor="middle">belt position = y + h · cot α</text>
+
+  <!-- Directions -->
+  <path class="ink" d="M 470 60 H 590" marker-end="url(#arrow)"/>
+  <text class="txt" x="530" y="48" text-anchor="middle">belt travel</text>
+  <path class="ink" d="M 170 60 H 50" marker-end="url(#arrow)"/>
+  <text class="txt" x="110" y="48" text-anchor="middle">+Y in Prepare</text>
+</svg>

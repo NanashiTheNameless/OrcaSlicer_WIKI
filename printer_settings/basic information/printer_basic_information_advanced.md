@@ -15,6 +15,7 @@ Advanced settings related to the printer configuration.
 - [Use firmware retraction](#use-firmware-retraction)
 - [Bed temperature type](#bed-temperature-type)
 - [Time cost](#time-cost)
+- [Build plate tilt](#build-plate-tilt)
 
 ## Printer structure
 
@@ -161,3 +162,19 @@ This option determines how the bed temperature is set during slicing: based on t
 [Type](option_type#integer-float-percentage): `Float`.  
 [CLI Example](cli_mode#setting-overrides): `--time-cost=1`.  
 The printer cost per hour.
+
+## Build plate tilt
+
+[Mode](option_mode): `Expert`.  
+[Variables](built_in_placeholders_variables): `build_plate_tilt_x`, `build_plate_tilt_y`.  
+[Type](option_type#integer-float-percentage): `Float`.  
+[CLI Example](cli_mode#setting-overrides): `--build-plate-tilt-x=1` (same pattern for the other variables above).  
+> [!IMPORTANT]
+> NEW FEATURE: **Build plate tilt**  
+> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) with the `_belt` suffix (built from the `belt-printer` branch) or Releases greater than **2.4.2**.
+
+**Build plate tilt X** and **Build plate tilt Y** specify the build surface's tilt in degrees. Support generation uses these values to adjust its gravity direction, so overhangs are evaluated relative to the machine's actual downward direction rather than the slicer's Z axis.
+
+Set both to 0 for a level bed.
+
+On a [belt printer](printer_basic_information_belt_printer), these values are derived from the [belt tilt](printer_basic_information_belt_printer#belt-tilt) each time a print is prepared, overwriting any manual entries. A belt tilt about X sets **Build plate tilt X**, and a belt tilt about Y sets **Build plate tilt Y**.

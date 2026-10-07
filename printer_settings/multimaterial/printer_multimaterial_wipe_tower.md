@@ -52,3 +52,31 @@ Enable this option to defer that wait instead: the incoming tool's target temper
 
 > [!CAUTION]
 > Your firmware or tool change macro must not already wait for the temperature itself, or the toolhead will end up waiting twice.
+
+## Belt purge tower
+
+[Mode](option_mode): `Advanced`.  
+[Variable](built_in_placeholders_variables): `enable_belt_purge_tower`.  
+[Type](option_type#boolean): `Boolean`.  
+[CLI Example](cli_mode#setting-overrides): `--enable-belt-purge-tower=1`.  
+> [!IMPORTANT]
+> NEW FEATURE: **Belt purge tower**  
+> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) with the `_belt` suffix (built from the `belt-printer` branch) or Releases greater than **2.4.2**.
+
+![belt_purge_tower_printer_option](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/belt/belt_purge_tower_printer_option.png?raw=true)
+
+Enables a replacement for the prime tower on [belt printers](belt_printing). This option is only shown when [belt printing](printer_basic_information_belt_printer#enable-belt-printing) is enabled.
+
+The standard prime tower cannot be used on a belt because it requires a flat bed and its G-code is not transformed for the tilted gantry. When this option is enabled and a plate uses more than one filament, OrcaSlicer adds a **Belt Purge Tower** object to that plate:
+
+- It is a long, thin bar positioned beside the parts along the belt, flush with the belt's far edge.
+- It appears in the object list and is sliced with the same tilted layers as the parts.
+- Material is purged into it at every filament change, in the same way as [flushing into an object](multimaterial_settings_flush_options).
+- It is created, resized and removed automatically as parts, filaments and settings change. Do not edit it by hand.
+
+The tower's width is set by [Belt purge tower width](multimaterial_settings_prime_tower#belt-purge-tower-width) in the process settings, and its length follows the parts along the belt. Its height is calculated so that a single tilted layer through the tower can accommodate the maximum purge volume required in any layer. This calculation uses the flushing volumes for a single-extruder multi-material printer with [Purge in prime tower](#purge-in-prime-tower) enabled, and the prime volume otherwise.
+
+The printed tower is smaller than the object shown in Prepare: it ends after the last filament change, and infill that is not needed for purging is omitted.
+
+> [!NOTE]
+> The belt purge tower is not generated when the print sequence is **By object**. In this mode, no purge is performed at filament changes.

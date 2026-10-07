@@ -170,3 +170,17 @@ Layers are merged following these rules:
 
 > [!NOTE]
 > This option is only shown when [No sparse layers](#no-sparse-layers) is disabled, since dropping the sparse layers leaves nothing to combine. It also has no effect when [smooth timelapse](others_settings_special_mode#timelapse) or clumping detection is enabled, because both need a prime tower on every layer.
+
+## Belt purge tower width
+
+[Mode](option_mode): `Advanced`.  
+[Variable](built_in_placeholders_variables): `belt_purge_tower_width`.  
+[Type](option_type#integer-float-percentage): `Float`.  
+[CLI Example](cli_mode#setting-overrides): `--belt-purge-tower-width=1`.  
+> [!IMPORTANT]
+> NEW FEATURE: **Belt purge tower**  
+> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) with the `_belt` suffix (built from the `belt-printer` branch) or Releases greater than **2.4.2**.
+
+Sets the width of the [belt purge tower](printer_multimaterial_wipe_tower#belt-purge-tower), measured across the belt. This tower replaces the prime tower on belt printers. The setting is shown when the belt purge tower is enabled in the printer settings.
+
+Only the width is set here. The length follows the printed parts along the belt, and the height is calculated from the maximum purge volume required in a single layer. Increasing the width therefore reduces the tower's height.

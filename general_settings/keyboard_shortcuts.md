@@ -206,6 +206,7 @@ Available while the 3D view on the Preview tab has focus.
 | `Shift + Mouse wheel`<br>`Ctrl + Mouse wheel` | Scroll slider 5x faster |
 | `C` | On/Off G-code window |
 | `L` | On/Off one layer mode of the vertical slider |
+| `B` | Show/Hide raw G-code ([belt printers](belt_printing#preview) only) |
 | `I` | Zoom in |
 | `O` | Zoom out |
 | `Ctrl + M` (Windows/Linux)<br>`Cmd + Shift + M` (macOS) | Show/Hide 3Dconnexion devices settings dialog |
