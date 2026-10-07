@@ -10,5 +10,11 @@
   "machine_max_jerk_x": { "type": "coFloats" },
   "machine_max_jerk_y": { "type": "coFloats" },
   "machine_max_jerk_z": { "type": "coFloats" },
-  "machine_max_jerk_e": { "type": "coFloats" }
+  "machine_max_jerk_e": { "type": "coFloats" },
+  "preslice_remap_x": { "type": "coEnum", "enum_values": ["pos_x", "pos_y", "pos_z", "neg_x", "neg_y", "neg_z", "rev_x", "rev_y", "rev_z"], "default": "pos_x" },
+  "preslice_remap_y": { "type": "coEnum", "enum_values": ["pos_x", "pos_y", "pos_z", "neg_x", "neg_y", "neg_z", "rev_x", "rev_y", "rev_z"], "default": "pos_y" },
+  "preslice_remap_z": { "type": "coEnum", "enum_values": ["pos_x", "pos_y", "pos_z", "neg_x", "neg_y", "neg_z", "rev_x", "rev_y", "rev_z"], "default": "pos_z" },
+  "gcode_remap_x": { "type": "coEnum", "enum_values": ["pos_x", "pos_y", "pos_z", "neg_x", "neg_y", "neg_z", "rev_x", "rev_y", "rev_z"], "default": "pos_x" },
+  "gcode_remap_y": { "type": "coEnum", "enum_values": ["pos_x", "pos_y", "pos_z", "neg_x", "neg_y", "neg_z", "rev_x", "rev_y", "rev_z"], "default": "pos_y" },
+  "gcode_remap_z": { "type": "coEnum", "enum_values": ["pos_x", "pos_y", "pos_z", "neg_x", "neg_y", "neg_z", "rev_x", "rev_y", "rev_z"], "default": "pos_z" }
 }

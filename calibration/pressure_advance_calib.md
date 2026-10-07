@@ -28,6 +28,9 @@ The results from these methods should be saved to the material profile.
 > Consider using the [Adaptive Pressure Advance](adaptive_pressure_advance_calib) method for more accurate results.  
 > Especially for high-speed printers.
 
+> [!NOTE]
+> On a [belt printer](belt_printing), only the [Tower method](#tower-method) is available. The Pattern and Line methods are disabled.
+
 ### Tower method
 
 The tower method may take a bit more time to complete, but it does not rely on the quality of the first layer.

@@ -1,0 +1,303 @@
+site_name: OrcaSlicer Wiki
+site_description: Official Wiki for OrcaSlicer - A powerful open source slicer for FFF (FDM) 3D Printers
+site_url: https://www.orcaslicer.com/wiki
+repo_url: https://github.com/OrcaSlicer/OrcaSlicer_WIKI
+repo_name: OrcaSlicer/OrcaSlicer_WIKI
+edit_uri: edit/main/
+
+# MkDocs requires docs_dir to be a subdirectory
+# The build script will handle the file structure
+docs_dir: docs
+site_dir: html
+
+# Use flat URLs (page.html) instead of directory URLs (page/index.html)
+use_directory_urls: false
+
+# Theme configuration
+theme:
+  name: material
+  custom_dir: overrides
+  logo: assets/images/OrcaSlicer.png
+  favicon: assets/images/OrcaSlicer.ico
+  features:
+      - navigation.instant         # Enable instant loading (SPA behavior)
+      - navigation.instant.progress # Show progress bar on slow connections
+      - navigation.instant.prefetch # Preload linked pages on hover
+      - navigation.instant.preview # Show page preview on hover
+      - content.action.edit        # Adds "Edit this page" action
+      - content.code.copy  # Enables the copy-to-clipboard button
+      - search.suggest
+      - search.highlight
+      - navigation.path    # shows breadcrumb trail
+      - navigation.top     # adds back to top button
+      - navigation.footer  # adds next and previous buttons
+      - navigation.indexes
+      - content.code.copy # force copy button to code blocks
+  palette: # Automatic light/dark mode with toggle
+    - media: "(prefers-color-scheme)" # Auto-detect system preference
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)" # Light mode
+      scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)" # Dark mode
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to system preference
+  font: false # default font only pulls font with 300, 400, 400i and 700 weight
+              # pulled fonts with CSS method. Fonts are pulled from Google and its same for Default behavior
+
+extra_css:
+  - assets/stylesheets/extra.css
+  - https://unpkg.com/katex@0/dist/katex.min.css
+
+extra_javascript:
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+  - assets/javascripts/katex.js
+  - assets/javascripts/icon-theme.js
+
+plugins:
+  - search
+  - gh-admonitions   # converts GitHub annotations to admonitions
+  #- optimize        # automatically optimizes images
+  #- git-committers: # not works # adds committers to footer # pip install mkdocs-git-committers-plugin-2
+  #    repository: OrcaSlicer/OrcaSlicer_WIKI
+  #    branch: main
+
+# Markdown extensions (using built-in extensions to avoid extra dependencies)
+markdown_extensions:
+  - tables
+  - toc:
+      permalink: true
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details  # For collapsible admonitions
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      use_pygments: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+
+extra:
+  generator: false # hides "Made with Material for MkDocs" from footer
+  social:          # adds links to footer
+    - icon: fontawesome/solid/link
+      link: https://www.orcaslicer.com
+    - icon: fontawesome/brands/github
+      link: https://github.com/OrcaSlicer/OrcaSlicer
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/P4VE9UY9gJ
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/real_OrcaSlicer
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/@OfficialOrcaSlicer
+
+copyright: Copyright &copy; 2022-2026 Li Jiang. All rights reserved.
+
+# Navigation structure based on home.md
+nav:
+- Home: index.md
+- Guides:
+  - "Calibration Guide": guides/calibration_guide.md
+  - "Belt Printing": guides/belt_printing.md
+  - "How to Download Pull Requests Artifacts for Testing": guides/how_to_download_pr_artifacts.md
+  - "Mixed Nozzle Sizes": guides/mixed_nozzle_sizes.md
+- "Printer Settings":
+  - "Basic Information":
+    - "Printer Accessory": "printer_settings/basic information/printer_basic_information_accessory.md"
+    - "Adaptive Bed Mesh": "printer_settings/basic information/printer_basic_information_adaptive_bed_mesh.md"
+    - "Advanced Printer Settings": "printer_settings/basic information/printer_basic_information_advanced.md"
+    - "Belt Printer": "printer_settings/basic information/printer_basic_information_belt_printer.md"
+    - "Cooling Fan": "printer_settings/basic information/printer_basic_information_cooling_fan.md"
+    - "Extruder Clearance": "printer_settings/basic information/printer_basic_information_extruder_clearance.md"
+    - "Machine Frame Transforms": "printer_settings/basic information/printer_basic_information_machine_frame_transforms.md"
+    - "Printable Space": "printer_settings/basic information/printer_basic_information_printable_space.md"
+  - Extruder:
+    - "Basic Extruder Information": printer_settings/extruder/printer_extruder_basic_information.md
+    - Retraction: printer_settings/extruder/printer_extruder_retraction.md
+    - "Z Hop": printer_settings/extruder/printer_extruder_z_hop.md
+  - "Machine G-Code":
+    - "Machine G-code": "printer_settings/machine gcode/printer_machine_gcode.md"
+  - "Motion Ability":
+    - "Motion Ability": "printer_settings/motion ability/printer_motion_ability.md"
+  - Multimaterial:
+    - "Single Extruder Multi-Material Parameters": printer_settings/multimaterial/printer_multimaterial_semm_parameters.md
+    - "Multimaterial setup": printer_settings/multimaterial/printer_multimaterial_setup.md
+    - "Wipe Tower": printer_settings/multimaterial/printer_multimaterial_wipe_tower.md
+    - "Advanced Multi-Material Settings": printer_settings/multimaterial/printer_multimaterial_advanced.md
+- "Material Settings":
+  - Cooling:
+    - "Material Cooling": material_settings/cooling/material_cooling.md
+  - Filament:
+    - "Material Basic Information": material_settings/filament/material_basic_information.md
+    - "Material Flow Ratio and Pressure Advance": material_settings/filament/material_flow_ratio_and_pressure_advance.md
+    - "Material Temperatures": material_settings/filament/material_temperatures.md
+    - "Material Volumetric Speed Limitation": material_settings/filament/material_volumetric_speed_limitation.md
+  - Multimaterial:
+    - "Material Multimaterial Settings": material_settings/multimaterial/material_multimaterial.md
+  - "Setting Overrides":
+    - "Material Setting Overrides": "material_settings/setting overrides/material_setting_overrides.md"
+  - Advanced:
+    - "Advanced Material Settings": material_settings/advanced/material_advanced.md
+  - Dependencies:
+    - "Material Dependencies": material_settings/dependencies/material_dependencies.md
+- "Print Settings":
+  - Multimaterial:
+    - "Filament for Features": print_settings/multimaterial/multimaterial_settings_filament_for_features.md
+    - "Flush Options": print_settings/multimaterial/multimaterial_settings_flush_options.md
+    - "Ooze prevention": print_settings/multimaterial/multimaterial_settings_ooze_prevention.md
+    - "Prime Tower": print_settings/multimaterial/multimaterial_settings_prime_tower.md
+    - "Multimaterial Advanced": print_settings/multimaterial/multimaterial_settings_advanced.md
+  - Quality:
+    - Bridging: print_settings/quality/quality_settings_bridging.md
+    - Ironing: print_settings/quality/quality_settings_ironing.md
+    - "Layer Height": print_settings/quality/quality_settings_layer_height.md
+    - "Line Width": print_settings/quality/quality_settings_line_width.md
+    - Overhangs: print_settings/quality/quality_settings_overhangs.md
+    - Precision: print_settings/quality/quality_settings_precision.md
+    - Seam: print_settings/quality/quality_settings_seam.md
+    - "Wall and surfaces": print_settings/quality/quality_settings_wall_and_surfaces.md
+    - "Wall Generator": print_settings/quality/quality_settings_wall_generator.md
+    - "Z Contouring": print_settings/quality/quality_settings_z_contouring.md
+  - Speed:
+    - Acceleration: print_settings/speed/speed_settings_acceleration.md
+    - "Initial layer speed": print_settings/speed/speed_settings_initial_layer_speed.md
+    - "Jerk XY": print_settings/speed/speed_settings_jerk_xy.md
+    - "Overhang Speed": print_settings/speed/speed_settings_overhang_speed.md
+    - Travel: print_settings/speed/speed_settings_travel.md
+    - "Speed Advanced - Extrusion Rate Smoothing": print_settings/speed/speed_settings_advanced.md
+    - "Other layers speed": print_settings/speed/speed_settings_other_layers_speed.md
+  - Strength:
+    - Infill: print_settings/strength/strength_settings_infill.md
+    - "Infill rotation template metalanguage": print_settings/strength/strength_settings_infill_rotation_template_metalanguage.md
+    - Patterns: print_settings/strength/strength_settings_patterns.md
+    - Reference: print_settings/strength/strength_settings_patterns_quick_reference.md
+    - "Top and Bottom Shells": print_settings/strength/strength_settings_top_bottom_shells.md
+    - Walls: print_settings/strength/strength_settings_walls.md
+    - "Strength Advanced": print_settings/strength/strength_settings_advanced.md
+  - Support:
+    - "Support Filament": print_settings/support/support_settings_filament.md
+    - "Support Ironing": print_settings/support/support_settings_ironing.md
+    - Raft: print_settings/support/support_settings_raft.md
+    - Support: print_settings/support/support_settings_support.md
+    - "Tree Support": print_settings/support/support_settings_tree.md
+    - "Support Advanced": print_settings/support/support_settings_advanced.md
+  - Others:
+    - Brim: print_settings/others/others_settings_brim.md
+    - "Fuzzy Skin": print_settings/others/others_settings_fuzzy_skin.md
+    - "G-Code Output": print_settings/others/others_settings_g_code_output.md
+    - Notes: print_settings/others/others_settings_notes.md
+    - "Post-Processing Scripts": print_settings/others/others_settings_post_processing_scripts.md
+    - Skirt: print_settings/others/others_settings_skirt.md
+    - "Special Mode": print_settings/others/others_settings_special_mode.md
+- Design:
+  - "Design Tab": design/design_tab.md
+  - Sketching: design/design_sketching.md
+  - "Modeling Tools": design/design_modeling_tools.md
+  - "Design Keyboard Shortcuts": design/design_keyboard_shortcuts.md
+- "Print Prepare":
+  - "Prepare Toolbar": print_prepare/prepare_basic.md
+  - "Assembly Tools": print_prepare/prepare_assembly_tools.md
+  - "Auto Arrange": print_prepare/prepare_auto_arrange.md
+  - "Auto Orientation": print_prepare/prepare_auto_orient.md
+  - "Brim ears Painting": print_prepare/prepare_brim_ears_painting.md
+  - "Color Painting": print_prepare/prepare_color_painting.md
+  - "Cutting Tool": print_prepare/prepare_cutting_tool.md
+  - Emboss: print_prepare/prepare_emboss.md
+  - "Mesh Boolean": print_prepare/prepare_mesh_boolean.md
+  - "Object Manipulation": print_prepare/prepare_object_manipulation.md
+  - "Object Set": print_prepare/prepare_object_set.md
+  - "Paint on Fuzzy Skin": print_prepare/prepare_paint_on_fuzzy_skin.md
+  - "Precise Seam": print_prepare/prepare_precise_seam.md
+  - "Seam Painting": print_prepare/prepare_seam_painting.md
+  - "STL Transformation": print_prepare/prepare_stl_transformation.md
+  - "Support Painting": print_prepare/prepare_support_painting.md
+  - "Texture Displacement": print_prepare/prepare_texture_displacement.md
+  - "Texture Displacement Pro Mode": print_prepare/prepare_texture_displacement_pro.md
+  - "Texture Displacement UV Editor": print_prepare/prepare_texture_displacement_uv_editor.md
+  - "Variable Layer Height": print_prepare/prepare_variable_layer_height.md
+- Calibration:
+  - "Adaptive Pressure Advance": calibration/adaptive_pressure_advance_calib.md
+  - Cornering: calibration/cornering_calib.md
+  - "Flow Ratio Calibration": calibration/flow_ratio_calib.md
+  - "Input Shaping": calibration/input_shaping_calib.md
+  - "Pressure Advance": calibration/pressure_advance_calib.md
+  - "Retraction test": calibration/retraction_calib.md
+  - "Temp Calibration": calibration/temp_calib.md
+  - "Filament Tolerance Calibration": calibration/tolerance_calib.md
+  - VFA: calibration/vfa_calib.md
+  - "Max Volumetric Speed (FlowRate) Calibration": calibration/volumetric_speed_calib.md
+- "Command Line Interface":
+  - "CLI Actions": cli/cli_actions.md
+  - "CLI Mode": cli/cli_mode.md
+  - "CLI Transform": cli/cli_transform.md
+  - "CLI Misc": cli/cli_misc.md
+- "General Settings":
+  - "Import and Export": general_settings/import_export.md
+  - "Keyboard Shortcuts": general_settings/keyboard_shortcuts.md
+  - "Option Modes": general_settings/option_mode.md
+  - "Option Types": general_settings/option_type.md
+  - "Transfer or Discard Changes popup dialog": general_settings/transfer_discard_changes.md
+  - "Troubleshoot Center": general_settings/troubleshoot_center.md
+- "User Profiles":
+  - "OrcaSlicer User Profiles": user_profiles/user_profiles.md
+- Plugins:
+  - "Getting Started": plugins/plugins_getting_started.md
+  - "Local Plugins": plugins/plugins_local.md
+  - "Managing Plugins": plugins/plugins_management.md
+  - "Cloud Plugins": plugins/plugins_cloud.md
+  - "Plugin Types": plugins/plugins_types.md
+- "Speed Dial":
+  - "Speed Dial": speed_dial/speed_dial.md
+- "Publishing 3MF":
+  - "What does Publish 3MF do?": publishing_3mf/publish_3mf.md
+  - "For creators": publishing_3mf/publish_3mf_creators.md
+- Releases:
+  - Releases: releases/releases_index.md
+  - V2.4.2: releases/release_2_4_2.md
+  - V2.4.1: releases/release_2_4_1.md
+  - V2.4.0: releases/release_2_4_0.md
+  - "V2.4.0 Beta": releases/release_2_4_0_beta.md
+  - "V2.4.0 Alpha": releases/release_2_4_0_alpha.md
+- "Developer Reference":
+  - "Localization and translation guide": developer_reference/localization_guide.md
+  - "Translation Glossary": developer_reference/localization_glossary.md
+  - "Placeholders Variables": developer_reference/built_in_placeholders_variables.md
+  - "How to Build":
+    - "Build Overview": developer_reference/how_to_build/how_to_build.md
+    - "Build on Windows": developer_reference/how_to_build/how_to_build_windows.md
+    - "Build on macOS": developer_reference/how_to_build/how_to_build_macos.md
+    - "Build on Linux": developer_reference/how_to_build/how_to_build_linux.md
+    - "Compiler Caching": developer_reference/how_to_build/compiler_caching.md
+  - "Guide: Develop Profiles for OrcaSlicer": developer_reference/how_to_create_profiles.md
+  - "How to Test": developer_reference/how_to_test.md
+  - "How to Contribute to the Wiki": developer_reference/how_to_wiki.md
+  - "Application Structure Overview": developer_reference/plater_sidebar_tab_combobox.md
+  - "Preset and Bundle": developer_reference/preset_and_bundle.md
+  - Hierarchy: developer_reference/slicing_hierarchy.md
+  - "Plugin Development":
+    - "Plugin System Overview": developer_reference/plugin_development/plugin_system.md
+    - "Plugin Development": developer_reference/plugin_development/plugin_development.md
+    - "API Reference":
+      - Registry: developer_reference/plugin_development/api_reference/registry.md
+      - Host: developer_reference/plugin_development/api_reference/host.md
+      - "Host UI": developer_reference/plugin_development/api_reference/host_ui.md
+      - Script: developer_reference/plugin_development/api_reference/script.md
+      - "Printer Agent": developer_reference/plugin_development/api_reference/printer_agent.md
+      - "Slicing Pipeline": developer_reference/plugin_development/api_reference/slicing.md
+    - "Plugin Audit Hook": developer_reference/plugin_development/plugin_audit_hook.md
