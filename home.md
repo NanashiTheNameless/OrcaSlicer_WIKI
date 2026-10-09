@@ -301,6 +301,7 @@ See the [all releases](releases_index) overview, or jump straight to a version:
     - [Linux](how_to_build_linux)
     - [Compiler caching](compiler_caching)
 - [How to run tests](how_to_test)
+- [How to run the clang-tidy check](clang_tidy)
 - [Localization and translation guide](localization_guide)
     - [Glossary](localization_glossary)
 - [How to create profiles](how_to_create_profiles)
