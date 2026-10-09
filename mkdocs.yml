@@ -278,6 +278,7 @@ nav:
   - "Localization and translation guide": developer_reference/localization_guide.md
   - "Translation Glossary": developer_reference/localization_glossary.md
   - "Placeholders Variables": developer_reference/built_in_placeholders_variables.md
+  - "Clang-Tidy Check": developer_reference/clang_tidy.md
   - "How to Build":
     - "Build Overview": developer_reference/how_to_build/how_to_build.md
     - "Build on Windows": developer_reference/how_to_build/how_to_build_windows.md
