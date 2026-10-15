@@ -288,6 +288,12 @@
       "description": "Output directory for exported files.",
       "notes": "Created recursively if it doesn't exist; the process exits with an error if creation fails."
     },
+    "export_statistics": {
+      "group": "Output & Logging",
+      "input": "boolean",
+      "description": "Write the statistics of each sliced plate as JSON, as `plate_N.statistics.json` next to its G-code in the output directory and inside the 3MF of [`--export-3mf`](cli_actions#export): print time, filament and feature totals, and the same per layer and per object.",
+      "notes": "Same files as the [Export Statistics](import_export#export-statistics) preference."
+    },
     "debug": {
       "group": "Output & Logging",
       "input": "`level` (int, 0-5)",
