@@ -211,6 +211,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
         - [Texture Displacement](prepare_texture_displacement)
             - [UV Editor](prepare_texture_displacement_uv_editor)
             - [Pro Mode](prepare_texture_displacement_pro)
+        - [Image](prepare_image_tool)
         - [<img alt="toolbar_text_dark" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/toolbar_text_dark.svg?raw=true" height="22"> Emboss](prepare_emboss)
         - [<img alt="toolbar_brimears_dark" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/toolbar_brimears_dark.svg?raw=true" height="22"> Brim Ears Painting](prepare_brim_ears_painting)
     - [Assembly Tools](prepare_assembly_tools)
@@ -292,6 +293,7 @@ OrcaSlicer can run headless from the command line for automation, batch processi
 
 See the [all releases](releases_index) overview, or jump straight to a version:
 
+- [OrcaSlicer V2.5.0 Alpha](release_2_5_0_alpha)
 - [OrcaSlicer V2.4.2](release_2_4_2)
 - [OrcaSlicer V2.4.1](release_2_4_1)
 - [OrcaSlicer V2.4.0](release_2_4_0)

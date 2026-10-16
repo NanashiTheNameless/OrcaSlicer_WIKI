@@ -33,6 +33,23 @@ working G-code path; geometry steps receive the active slicing context instead.
 > Slicing-pipeline plugins can change generated geometry or G-code. Review and test plugins from
 > sources you trust before using them for a print.
 
+## Pages
+
+Page plugins add their own tab to the main window, after OrcaSlicer's built-in tabs. The tab
+appears while the plugin feature is activated and disappears when it is deactivated.
+
+If many page plugins are activated, set how many tabs are shown side by side in **Preferences** >
+**General** > **Plugins** > **Visible plugin pages** (1 to 10, default 5). The remaining pages
+are listed in a dropdown on the last plugin tab.
+
+## Resource Textures
+
+Resource-texture plugins contribute height-map images as a resource pack. Each plugin provides one pack of images, and the pack's name is how it appears in the app.
+
+These plugins install as wheels (`.whl`) only, because a pack ships image files alongside its code.
+
+Enabling, disabling, or uninstalling a pack adds or removes its textures, and the change shows up without a restart. A project that has already used a pack texture keeps working, because it stores its own copy of the image.
+
 ## Plugin Configuration
 
 Select a plugin, open the **Config** tab, and select one of its capabilities. Edit the JSON
@@ -49,6 +66,10 @@ The [Speed Dial](speed_dial) allows quick access to installed plugins.
 
 ## Printer Connection
 
-Printer connection plugins add printer communication features. After activating a printer connection plugin, OrcaSlicer uses it where printer connection options are available. The Printer Agent workflow is still WIP.
+Printer connection plugins add printer communication features. The Printer Agent workflow is still WIP.
+
+For printers that are not Bambu Lab printers, OrcaSlicer only sends print jobs through a printer connection plugin when **Preferences** > **Developer** > **Experimental Features** > **Use printer agents instead of print hosts** is enabled. It is off by default, so the classic print host upload is used.
+
+Each printer connection has an ID. If a plugin's printer connection uses an ID that another plugin or a built-in connection already uses, OrcaSlicer shows a warning, turns that feature off, and marks the plugin with a **RuntimeError** status. See [Managing Plugins](plugins_management#plugin-status).
 
 If the plugin has its own setup instructions, check the **Description** or **Diagnostics** tab in the Plugins window.

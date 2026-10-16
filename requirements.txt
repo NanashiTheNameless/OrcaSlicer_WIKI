@@ -1,0 +1,7 @@
+# Python packages for building the wiki locally (build.sh / build.ps1) and running the repo's scripts.
+# Install with: pip install -r requirements.txt
+mkdocs
+mkdocs-material
+pymdown-extensions
+mkdocs-github-admonitions-plugin
+PyYAML
