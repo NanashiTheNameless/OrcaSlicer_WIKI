@@ -41,9 +41,18 @@ It is measured on the cube alone, whose layers all have the same shape, so that 
 
 ![fill-layer-time-variability](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/fill/fill-layer-time-variability.png?raw=true)
 
+### Slicing Time
+
+How long OrcaSlicer takes to slice each run and write its G-code, from the command line and one run at a time. Patterns with more and shorter lines take longer to generate, order and write.  
+It depends on the computer, so only the comparison between patterns applies.
+
+### G-code Size
+
+The size of each run's G-code file. Patterns made of many short moves give larger files, which take longer to send to the printer.
+
 ### Multiline
 
-The patterns that support [Fill Multiline](strength_settings_infill#fill-multiline) are also rated with 2 and 3 lines, against the same model and density printed with one line, so a rating above the pattern's own shows what the extra lines cost.
+The patterns that support [Fill Multiline](strength_settings_infill#fill-multiline) are also rated with 2 and 3 lines. **Print Time** is rated like the pattern's own, against the other patterns printed with one line, followed by how much faster or slower it is than the same pattern printed with one line on the same model and density.
 
 ## Monotonic
 
@@ -57,6 +66,8 @@ The patterns that support [Fill Multiline](strength_settings_infill#fill-multili
     - **Print Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
         - **Material/Time (Higher better):** Normal-High ![level-to-better-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-5.svg?raw=true)
         - **Layer time Variability:** None
+    - **Slicing Time:** Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-2.svg?raw=true)
+    - **G-code Size:** Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** N/A
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** N/A
@@ -79,6 +90,8 @@ The patterns that support [Fill Multiline](strength_settings_infill#fill-multili
     - **Print Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
         - **Material/Time (Higher better):** Normal-High ![level-to-better-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-5.svg?raw=true)
         - **Layer time Variability:** None
+    - **Slicing Time:** Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-2.svg?raw=true)
+    - **G-code Size:** Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** N/A
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** N/A
@@ -101,10 +114,12 @@ Parallel lines spaced according to infill density. Each layer is printed perpend
     - **Print Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
         - **Material/Time (Higher better):** Normal ![level-to-better-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-4.svg?raw=true)
         - **Layer time Variability:** Unnoticeable
+    - **Slicing Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+    - **G-code Size:** Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-2.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
-        - **3 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+        - **2 lines:** Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true) (10% Faster over single line)
+        - **3 lines:** Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true) (13% Faster over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** No
 - **Applies to:**
@@ -112,6 +127,8 @@ Parallel lines spaced according to infill density. Each layer is printed perpend
     - **[Solid Infill](strength_settings_infill#internal-solid-infill)**
     - **[Surface](strength_settings_top_bottom_shells)**
     - **[Ironing](quality_settings_ironing)**
+    - **[Support Base](support_settings_advanced#base-pattern)**
+    - **[Support Interface](support_settings_advanced#interface-pattern)**
 
 ![infill-top-rectilinear](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-rectilinear.png?raw=true)
 
@@ -128,10 +145,12 @@ Recommended with layer anchoring to improve non-perpendicular strength.
     - **Print Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
         - **Material/Time (Higher better):** Normal ![level-to-better-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-4.svg?raw=true)
         - **Layer time Variability:** Unnoticeable
+    - **Slicing Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+    - **G-code Size:** Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-2.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
-        - **3 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+        - **2 lines:** Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true) (10% Faster over single line)
+        - **3 lines:** Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true) (13% Faster over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** No
 - **Applies to:**
@@ -149,10 +168,12 @@ Similar to [rectilinear](#rectilinear), with a consistent pattern between layers
     - **Horizontal (X-Y):** Normal-Low ![level-to-better-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-3.svg?raw=true)
     - **Vertical (Z):** Low ![level-to-better-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-2.svg?raw=true)
 - **Density Calculation:**  % of  total infill volume
-    - **Material Usage:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
-    - **Print Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
-        - **Material/Time (Higher better):** Normal ![level-to-better-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-4.svg?raw=true)
-        - **Layer time Variability:** Unnoticeable
+    - **Material Usage:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+    - **Print Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+        - **Material/Time (Higher better):** Normal ![level-to-better-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-better-4.svg?raw=true)
+        - **Layer time Variability:** None
+    - **Slicing Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+    - **G-code Size:** Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-2.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** No
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** Yes
@@ -178,6 +199,8 @@ Similar to [Zig Zag](#zig-zag), but each layer is shifted by the **Infill shift 
     - **Print Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
         - **Material/Time (Higher better):** Normal ![level-to-better-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-4.svg?raw=true)
         - **Layer time Variability:** Unnoticeable
+    - **Slicing Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+    - **G-code Size:** Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-2.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** No
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** Yes
@@ -206,7 +229,9 @@ Skeleton density * (Infill area - Skin area + Lock depth area) + (Skin density *
     - **Material Usage:** High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-6.svg?raw=true)
     - **Print Time:** High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-6.svg?raw=true)
         - **Material/Time (Higher better):** Normal ![level-to-better-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-better-4.svg?raw=true)
-        - **Layer time Variability:** Unnoticeable
+        - **Layer time Variability:** None
+    - **Slicing Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+    - **G-code Size:** Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-2.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** No
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** Yes
@@ -228,6 +253,8 @@ Similar to [rectilinear](#rectilinear), but each line is slightly rotated to imp
     - **Print Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
         - **Material/Time (Higher better):** Normal-High ![level-to-better-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-5.svg?raw=true)
         - **Layer time Variability:** Unnoticeable
+    - **Slicing Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+    - **G-code Size:** Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** No
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
@@ -249,14 +276,17 @@ Two sets of perpendicular lines on every layer, forming a grid. Overlapping poin
     - **Print Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
         - **Material/Time (Higher better):** Normal-High ![level-to-better-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-5.svg?raw=true)
         - **Layer time Variability:** Unnoticeable
+    - **Slicing Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+    - **G-code Size:** Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Non-Crossing](strength_settings_infill#non-crossing-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-5.svg?raw=true)
-        - **3 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+        - **2 lines:** Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true) (35% Slower over single line)
+        - **3 lines:** Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true) (23% Slower over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** [Multiline](strength_settings_infill#fill-multiline) only
 - **Applies to:**
     - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
+    - **[Support Interface](support_settings_advanced#interface-pattern)**
 
 ![infill-top-grid](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-grid.png?raw=true)
 
@@ -272,10 +302,12 @@ Triangle-based grid, offering strong X-Y strength but with triple overlaps at in
     - **Print Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
         - **Material/Time (Higher better):** Normal-High ![level-to-better-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-5.svg?raw=true)
         - **Layer time Variability:** Unnoticeable
+    - **Slicing Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+    - **G-code Size:** Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Non-Crossing](strength_settings_infill#non-crossing-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
-        - **3 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+        - **2 lines:** Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true) (11% Slower over single line)
+        - **3 lines:** Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true) (6% Slower over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** [Multiline](strength_settings_infill#fill-multiline) only
 - **Applies to:**
@@ -295,10 +327,12 @@ Similar to the [triangles](#triangles) pattern but offset to prevent triple over
     - **Print Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
         - **Material/Time (Higher better):** Normal-High ![level-to-better-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-5.svg?raw=true)
         - **Layer time Variability:** Unnoticeable
+    - **Slicing Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+    - **G-code Size:** Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Non-Crossing](strength_settings_infill#non-crossing-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-5.svg?raw=true)
-        - **3 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+        - **2 lines:** Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true) (40% Slower over single line)
+        - **3 lines:** Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true) (23% Slower over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** [Multiline](strength_settings_infill#fill-multiline) only
 - **Applies to:**
@@ -318,10 +352,12 @@ Similar to the [triangles](#triangles) pattern but offset to prevent triple over
     - **Print Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
         - **Material/Time (Higher better):** Normal-High ![level-to-better-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-5.svg?raw=true)
         - **Layer time Variability:** Unnoticeable
+    - **Slicing Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+    - **G-code Size:** Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Non-Crossing](strength_settings_infill#non-crossing-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
-        - **3 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+        - **2 lines:** Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true) (30% Slower over single line)
+        - **3 lines:** Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true) (19% Slower over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** [Multiline](strength_settings_infill#fill-multiline) only
 - **Applies to:**
@@ -341,10 +377,12 @@ Similar to the [triangles](#triangles) pattern but offset to prevent triple over
     - **Print Time:** Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-2.svg?raw=true)
         - **Material/Time (Higher better):** Normal ![level-to-better-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-4.svg?raw=true)
         - **Layer time Variability:** Possibly Noticeable
+    - **Slicing Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+    - **G-code Size:** Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Non-Crossing](strength_settings_infill#non-crossing-strategy)
-        - **2 lines:** Material Usage Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-2.svg?raw=true), Print Time Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-2.svg?raw=true)
-        - **3 lines:** Material Usage Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true), Print Time Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-2.svg?raw=true)
+        - **2 lines:** Print Time Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-2.svg?raw=true) (33% Slower over single line)
+        - **3 lines:** Print Time Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-2.svg?raw=true) (31% Slower over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** No
 - **Applies to:**
@@ -364,10 +402,12 @@ Similar to the [triangles](#triangles) pattern but offset to prevent triple over
     - **Print Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
         - **Material/Time (Higher better):** Normal-High ![level-to-better-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-5.svg?raw=true)
         - **Layer time Variability:** Unnoticeable
+    - **Slicing Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+    - **G-code Size:** Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
-        - **3 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+        - **2 lines:** Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true) (19% Slower over single line)
+        - **3 lines:** Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true) (6% Slower over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** No
 - **Applies to:**
@@ -387,10 +427,12 @@ Support Cubic is a variation of the [Cubic](#cubic) infill pattern that is speci
     - **Print Time:** Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-2.svg?raw=true)
         - **Material/Time (Higher better):** Normal ![level-to-better-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-4.svg?raw=true)
         - **Layer time Variability:** Likely Noticeable
+    - **Slicing Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+    - **G-code Size:** Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Non-Crossing](strength_settings_infill#non-crossing-strategy)
-        - **2 lines:** Material Usage Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-2.svg?raw=true), Print Time Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-2.svg?raw=true)
-        - **3 lines:** Material Usage Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-2.svg?raw=true), Print Time Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-2.svg?raw=true)
+        - **2 lines:** Print Time Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-2.svg?raw=true) (43% Slower over single line)
+        - **3 lines:** Print Time Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-2.svg?raw=true) (61% Slower over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** No
 - **Applies to:**
@@ -433,14 +475,17 @@ A higher value will allow for more straightening, improving strength but increas
     - **Print Time:** Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-1.svg?raw=true)
         - **Material/Time (Higher better):** Low ![level-to-better-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-2.svg?raw=true)
         - **Layer time Variability:** Likely Noticeable
+    - **Slicing Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+    - **G-code Size:** Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Material Usage Ultra-Low ![level-to-worse-0](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-0.svg?raw=true), Print Time Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-1.svg?raw=true)
-        - **3 lines:** Material Usage Ultra-Low ![level-to-worse-0](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-0.svg?raw=true), Print Time Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-1.svg?raw=true)
+        - **2 lines:** Print Time Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true) (15% Faster over single line)
+        - **3 lines:** Print Time Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true) (17% Faster over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** Yes
 - **Applies to:**
     - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
+    - **[Support Base](support_settings_advanced#base-pattern)**
 
 ![infill-top-lightning](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-lightning.png?raw=true)
 
@@ -452,18 +497,21 @@ Hexagonal pattern balancing strength and material use. Double walls in each hexa
     - **Horizontal (X-Y):** High ![level-to-better-6](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-6.svg?raw=true)
     - **Vertical (Z):** High ![level-to-better-6](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-6.svg?raw=true)
 - **Density Calculation:**  % of  total infill volume
-    - **Material Usage:** Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-5.svg?raw=true)
-    - **Print Time:** Extra-High ![level-to-worse-7](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-7.svg?raw=true)
-        - **Material/Time (Higher better):** Normal-Low ![level-to-better-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-3.svg?raw=true)
+    - **Material Usage:** High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-6.svg?raw=true)
+    - **Print Time:** Extra-High ![level-to-worse-7](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-7.svg?raw=true)
+        - **Material/Time (Higher better):** Normal-Low ![level-to-better-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-better-3.svg?raw=true)
         - **Layer time Variability:** Unnoticeable
+    - **Slicing Time:** Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true)
+    - **G-code Size:** High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-6.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Material Usage High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-6.svg?raw=true), Print Time High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-6.svg?raw=true)
-        - **3 lines:** Material Usage Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-5.svg?raw=true), Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-5.svg?raw=true)
+        - **2 lines:** Print Time High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-6.svg?raw=true) (15% Faster over single line)
+        - **3 lines:** Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true) (24% Faster over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** Yes
 - **Applies to:**
     - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
+    - **[Support Base](support_settings_advanced#base-pattern)**
 
 ![infill-top-honeycomb](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-honeycomb.png?raw=true)
 
@@ -516,10 +564,12 @@ Behavior with other settings:
     - **Print Time:** High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-6.svg?raw=true)
         - **Material/Time (Higher better):** Low ![level-to-better-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-2.svg?raw=true)
         - **Layer time Variability:** Unnoticeable
+    - **Slicing Time:** Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true)
+    - **G-code Size:** Ultra-High ![level-to-worse-8](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-8.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Non-Crossing](strength_settings_infill#non-crossing-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-5.svg?raw=true)
-        - **3 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+        - **2 lines:** Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true) (21% Faster over single line)
+        - **3 lines:** Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true) (28% Faster over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** Yes
 - **Applies to:**
@@ -543,10 +593,12 @@ Vertical honeycomb pattern with acceptable torsional stiffness, developed for lo
     - **Print Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
         - **Material/Time (Higher better):** Normal-High ![level-to-better-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-5.svg?raw=true)
         - **Layer time Variability:** Possibly Noticeable
+    - **Slicing Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+    - **G-code Size:** Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
-        - **3 lines:** Material Usage Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true), Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+        - **2 lines:** Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true) (9% Faster over single line)
+        - **3 lines:** Print Time Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-2.svg?raw=true) (12% Faster over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** No
 - **Applies to:**
@@ -570,10 +622,12 @@ Low-strength pattern with good flexibility. You can adjust **Angle 1** and **Ang
     - **Print Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
         - **Material/Time (Higher better):** Normal-High ![level-to-better-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-5.svg?raw=true)
         - **Layer time Variability:** Unnoticeable
+    - **Slicing Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+    - **G-code Size:** Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
-        - **3 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+        - **2 lines:** Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true) (10% Faster over single line)
+        - **3 lines:** Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true) (11% Faster over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** No
 - **Applies to:**
@@ -594,10 +648,12 @@ Easier to slice but consider using [TPMS-D](#tpms-d) or [Gyroid](#gyroid) for be
     - **Print Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
         - **Material/Time (Higher better):** Normal-Low ![level-to-better-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-3.svg?raw=true)
         - **Layer time Variability:** Likely Noticeable
+    - **Slicing Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+    - **G-code Size:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
-        - **3 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+        - **2 lines:** Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true) (12% Faster over single line)
+        - **3 lines:** Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true) (18% Faster over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** Yes
 - **Applies to:**
@@ -617,10 +673,12 @@ Triply Periodic Minimal Surface (Schwarz Diamond). Hybrid between [Cross Hatch](
     - **Print Time:** High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-6.svg?raw=true)
         - **Material/Time (Higher better):** Low ![level-to-better-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-2.svg?raw=true)
         - **Layer time Variability:** Possibly Noticeable
+    - **Slicing Time:** High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-6.svg?raw=true)
+    - **G-code Size:** Ultra-High ![level-to-worse-8](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-8.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-5.svg?raw=true)
-        - **3 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+        - **2 lines:** Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true) (18% Faster over single line)
+        - **3 lines:** Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true) (26% Faster over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** No
     - **[Adaptive Density](#adaptive-density):** Yes
@@ -641,10 +699,12 @@ Triply Periodic Minimal Surface (Fischer–Koch S) pattern. Its smooth, continuo
     - **Print Time:** Extra-High ![level-to-worse-7](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-7.svg?raw=true)
         - **Material/Time (Higher better):** Low ![level-to-better-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-2.svg?raw=true)
         - **Layer time Variability:** Possibly Noticeable
+    - **Slicing Time:** High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-6.svg?raw=true)
+    - **G-code Size:** Ultra-High ![level-to-worse-8](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-8.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-6.svg?raw=true)
-        - **3 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-5.svg?raw=true)
+        - **2 lines:** Print Time High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-6.svg?raw=true) (19% Faster over single line)
+        - **3 lines:** Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true) (28% Faster over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** No
     - **[Adaptive Density](#adaptive-density):** Yes
@@ -664,10 +724,10 @@ Triply Periodic Minimal Surface (Fischer–Koch S) pattern. Its smooth, continuo
 ### Adaptive Density
 
 [Mode](option_mode): `Advanced`.  
-[Variable](built_in_placeholders_variables): `tpms_adaptive`.  
+[Variable](built_in_placeholders_variables): `adaptive_infill_mode`.  
 [Type](option_type#choice): `Choice`.  
 [Options](option_type#choice): `disabled, distance_warp, smooth_blend, stepped_shells, lobes, normal_z, normal_y, normal_x`.  
-[CLI Example](cli_mode#setting-overrides): `--tpms-adaptive=disabled`.  
+[CLI Example](cli_mode#setting-overrides): `--adaptive-infill-mode=disabled`.  
 Grades the Gyroid and TPMS infill inside the object: its cells grow from the surface of the object towards its center. The [Sparse infill density](strength_settings_infill#sparse-infill-density) is used at the surface and the [Interior Density](#interior-density) at the center.
 
 | Mode | Follows | Use it for |
@@ -694,19 +754,19 @@ Grades the Gyroid and TPMS infill inside the object: its cells grow from the sur
 ### Interior Density
 
 [Mode](option_mode): `Advanced`.  
-[Variable](built_in_placeholders_variables): `tpms_interior_density`.  
+[Variable](built_in_placeholders_variables): `adaptive_infill_interior_density`.  
 [Type](option_type#integer-float-percentage): `Percentage`.  
-[CLI Example](cli_mode#setting-overrides): `--tpms-interior-density=20%`.  
+[CLI Example](cli_mode#setting-overrides): `--adaptive-infill-interior-density=20%`.  
 Density of the adaptive infill at the center of the object.  
 It can also be higher than the sparse infill density, to make the core denser than the surface.
 
 ### Adaptive Gradient
 
 [Mode](option_mode): `Advanced`.  
-[Variable](built_in_placeholders_variables): `tpms_adaptive_gradient`.  
+[Variable](built_in_placeholders_variables): `adaptive_infill_gradient`.  
 [Type](option_type#choice): `Choice`.  
 [Options](option_type#choice): `linear, quadratic, exponential`.  
-[CLI Example](cli_mode#setting-overrides): `--tpms-adaptive-gradient=linear`.  
+[CLI Example](cli_mode#setting-overrides): `--adaptive-infill-gradient=linear`.  
 How the density changes from the surface (depth `0`) to the center of the object (depth `1`), where `S` is the sparse infill density and `I` the interior density:
 
 | Gradient | Density at depth `t` | Behavior |
@@ -732,10 +792,12 @@ Mathematical, isotropic surface providing equal strength in all directions. Exce
     - **Print Time:** High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-6.svg?raw=true)
         - **Material/Time (Higher better):** Low ![level-to-better-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-2.svg?raw=true)
         - **Layer time Variability:** Unnoticeable
+    - **Slicing Time:** High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-6.svg?raw=true)
+    - **G-code Size:** Ultra-High ![level-to-worse-8](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-8.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-6.svg?raw=true)
-        - **3 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-5.svg?raw=true)
+        - **2 lines:** Print Time High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-6.svg?raw=true) (16% Faster over single line)
+        - **3 lines:** Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true) (27% Faster over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** No
     - **[Adaptive Density](#adaptive-density):** Yes
@@ -752,14 +814,16 @@ Fills the area with progressively smaller versions of the outer contour, creatin
     - **Horizontal (X-Y):** Low ![level-to-better-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-2.svg?raw=true)
     - **Vertical (Z):** Normal ![level-to-better-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-4.svg?raw=true)
 - **Density Calculation:**  % of  total infill volume
-    - **Material Usage:** High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-6.svg?raw=true)
-    - **Print Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
-        - **Material/Time (Higher better):** High ![level-to-better-6](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-6.svg?raw=true)
+    - **Material Usage:** High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-6.svg?raw=true)
+    - **Print Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+        - **Material/Time (Higher better):** Normal-High ![level-to-better-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-better-5.svg?raw=true)
         - **Layer time Variability:** None
+    - **Slicing Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+    - **G-code Size:** Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Material Usage Extra-High ![level-to-worse-7](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-7.svg?raw=true), Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-5.svg?raw=true)
-        - **3 lines:** Material Usage Ultra-High ![level-to-worse-8](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-8.svg?raw=true), Print Time High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-6.svg?raw=true)
+        - **2 lines:** Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true) (19% Slower over single line)
+        - **3 lines:** Print Time High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-6.svg?raw=true) (35% Slower over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** Yes
 - **Applies to:**
@@ -767,6 +831,7 @@ Fills the area with progressively smaller versions of the outer contour, creatin
     - **[Solid Infill](strength_settings_infill#internal-solid-infill)**
     - **[Surface](strength_settings_top_bottom_shells)**
     - **[Ironing](quality_settings_ironing)**
+    - **[Support Interface](support_settings_advanced#interface-pattern)**
 
 ![infill-top-concentric](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-concentric.png?raw=true)
 
@@ -792,6 +857,8 @@ On top and bottom surfaces, the direction of the spiral is set by [Fill Order](s
     - **Print Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
         - **Material/Time (Higher better):** Normal ![level-to-better-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-4.svg?raw=true)
         - **Layer time Variability:** None
+    - **Slicing Time:** Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-2.svg?raw=true)
+    - **G-code Size:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** N/A
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** N/A
@@ -814,10 +881,12 @@ Print speed is very low due to the complexity of the path, which can lead to lon
     - **Print Time:** High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-6.svg?raw=true)
         - **Material/Time (Higher better):** Low ![level-to-better-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-2.svg?raw=true)
         - **Layer time Variability:** Unnoticeable
+    - **Slicing Time:** Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true)
+    - **G-code Size:** Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-5.svg?raw=true)
-        - **3 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+        - **2 lines:** Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true) (14% Faster over single line)
+        - **3 lines:** Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true) (24% Faster over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** Yes
 - **Applies to:**
@@ -839,10 +908,12 @@ Spiral pattern that fills the area with concentric arcs, creating a smooth and c
     - **Print Time:** Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
         - **Material/Time (Higher better):** Normal-High ![level-to-better-5](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-5.svg?raw=true)
         - **Layer time Variability:** None
+    - **Slicing Time:** Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true)
+    - **G-code Size:** High ![level-to-worse-6](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-6.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
-        - **3 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+        - **2 lines:** Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true) (5% Faster over single line)
+        - **3 lines:** Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true) (8% Faster over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** No
 - **Applies to:**
@@ -860,14 +931,16 @@ Aesthetic pattern with low strength and high print time.
     - **Horizontal (X-Y):** Low ![level-to-better-2](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-2.svg?raw=true)
     - **Vertical (Z):** Normal ![level-to-better-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-4.svg?raw=true)
 - **Density Calculation:**  % of  total infill volume
-    - **Material Usage:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
-    - **Print Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true)
-        - **Material/Time (Higher better):** Normal ![level-to-better-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-better-4.svg?raw=true)
-        - **Layer time Variability:** Unnoticeable
+    - **Material Usage:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+    - **Print Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+        - **Material/Time (Higher better):** Normal ![level-to-better-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-better-4.svg?raw=true)
+        - **Layer time Variability:** None
+    - **Slicing Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true)
+    - **G-code Size:** Low ![level-to-worse-2](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-2.svg?raw=true)
 - **Extra:**
     - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Material Usage Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-4.svg?raw=true), Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
-        - **3 lines:** Material Usage Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true), Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_wiki/blob/main/images/misc/level-to-worse-3.svg?raw=true)
+        - **2 lines:** Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true) (4% Faster over single line)
+        - **3 lines:** Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true) (9% Faster over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
     - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** Yes
 - **Applies to:**
