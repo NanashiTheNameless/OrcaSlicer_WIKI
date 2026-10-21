@@ -5,6 +5,7 @@ Infill is the internal structure of a 3D print, providing strength and support. 
 - [Sparse infill density](#sparse-infill-density)
 - [Fill Multiline](#fill-multiline)
     - [Use cases](#use-cases)
+    - [Print time](#print-time)
     - [Strategy](#strategy)
         - [Classic Strategy](#classic-strategy)
         - [Non-Crossing Strategy](#non-crossing-strategy)
@@ -22,6 +23,9 @@ Infill is the internal structure of a 3D print, providing strength and support. 
     - [Explicit Layer List](#explicit-layer-list)
 - [Sparse Infill Pattern](#sparse-infill-pattern)
 - [Sparse Infill Smooth Factor](#sparse-infill-smooth-factor)
+    - [How rounded corners are printed](#how-rounded-corners-are-printed)
+    - [Print time and material](#print-time-and-material)
+    - [Best smooth factor for speed](#best-smooth-factor-for-speed)
     - [Supported patterns](#supported-patterns)
     - [Corners left sharp](#corners-left-sharp)
 - [Top-Bottom Direction](#top-bottom-direction)
@@ -90,17 +94,18 @@ With more lines, the pattern is laid out that many times larger and each of its 
 
 In the [infill analysis](strength_settings_patterns#multiline), more lines usually printed faster:
 
-- Curved and angular patterns gain the most: [Gyroid](strength_settings_patterns#gyroid), [TPMS-D](strength_settings_patterns#tpms-d), [TPMS-FK](strength_settings_patterns#tpms-fk), [Honeycomb](strength_settings_patterns#honeycomb), [3D Honeycomb](strength_settings_patterns#3d-honeycomb) and [Hilbert Curve](strength_settings_patterns#hilbert-curve) printed 14-21% faster with 2 lines and 24-28% faster with 3.
-- The other patterns whose lines do not cross printed 4-18% faster.
-- Patterns whose lines cross take longer: the [Non-Crossing](#non-crossing-strategy) paths of [Grid](strength_settings_patterns#grid), [Triangles](strength_settings_patterns#triangles), [Tri-hexagon](strength_settings_patterns#tri-hexagon), [Cubic](strength_settings_patterns#cubic), [Adaptive Cubic](strength_settings_patterns#adaptive-cubic) and [Support Cubic](strength_settings_patterns#support-cubic) turn at every crossing instead of running straight across, and [Quarter Cubic](strength_settings_patterns#quarter-cubic) prints [closed loops](#classic-strategy). They took 6-61% longer than with 1 line, and [Concentric](strength_settings_patterns#concentric) 19-35% longer.
+- Curved and angular patterns gain the most: [Gyroid](strength_settings_patterns#gyroid), [TPMS-D](strength_settings_patterns#tpms-d), [TPMS-FK](strength_settings_patterns#tpms-fk), [Honeycomb](strength_settings_patterns#honeycomb), [3D Honeycomb](strength_settings_patterns#3d-honeycomb) and [Hilbert Curve](strength_settings_patterns#hilbert-curve) printed 15-21% faster with 2 lines and 23-32% faster with 3.
+- The other patterns whose lines do not cross printed 3-26% faster.
+- Patterns whose lines cross take longer: the [Non-Crossing](#non-crossing-strategy) paths of [Grid](strength_settings_patterns#grid), [Triangles](strength_settings_patterns#triangles), [Tri-hexagon](strength_settings_patterns#tri-hexagon), [Cubic](strength_settings_patterns#cubic), [Adaptive Cubic](strength_settings_patterns#adaptive-cubic) and [Support Cubic](strength_settings_patterns#support-cubic) turn at every crossing instead of running straight across, and [Quarter Cubic](strength_settings_patterns#quarter-cubic) prints [closed loops](#classic-strategy). They took 19-80% longer than with 1 line, and [Concentric](strength_settings_patterns#concentric) 16-22% longer.
 
 Each pattern's 2 and 3 lines entries in the [Patterns section](strength_settings_patterns) show its own print time over a single line.
 
 > [!TIP]
-> Two other settings cut the time of the sparse infill, with or without multiline:
+> Three other settings cut the time of the sparse infill, with or without multiline:
 >
 > - [Reduce Infill Retraction](others_settings_g_code_output#reduce-infill-retraction) skips the retraction, wipe and Z-hop of travels that stay inside the infill, where oozing can't be seen. Each skipped retraction saves tens of milliseconds, which add up over the thousands of infill travels of a large print.
 > - [Infill Combination](strength_settings_advanced#infill-combination) prints the sparse infill of several layers as one thicker layer, while the walls keep the original layer height. Fewer, thicker layers mean fewer infill moves for the same volume.
+> - [Sparse Infill Smooth Factor](#sparse-infill-smooth-factor) rounds the corners of the sparse infill path, so the toolhead keeps more of its speed through the turns. At `100%` it shortened the infill print time of the patterns that support it by 4-25% (see [how much for each pattern](#print-time-and-material)), at the cost of a larger G-code file, which its [vertex budget](#how-rounded-corners-are-printed) keeps in check.
 
 ### Strategy
 
@@ -353,11 +358,8 @@ Specify exact layer numbers (1-based) using comma-separated values. Each entry m
 > NEW FEATURE: **Sparse infill smooth factor**  
 > Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
 
-Rounds the corners of the sparse infill path, replacing each sharp direction change with a quintic Bézier curve that joins the two straight legs meeting at it.  
+Rounds the corners of the sparse infill path, replacing each sharp direction change with a curve that joins the two straight legs meeting at it. The curvature of the curve grows from zero at both legs, so the nozzle eases into and out of the turn instead of snapping into it.  
 `0%` keeps the original sharp path, while `100%` produces the largest possible curves between adjacent infill lines. A curve never consumes more than half of the shorter leg on each side of a corner, so the curves of two neighboring corners meet at most at the midpoint of the segment they share and never overlap.
-
-> [!NOTE]
-> Unlike a simple rounded corner (an arc with constant curvature), a quintic Bézier curve eases into and out of the turn gradually, starting and ending straight. This lets the nozzle change direction smoothly instead of snapping into a curve, which is what actually cuts down on vibration and ringing, compared to a plain round-over.
 
 Smoothing the corners reduces plastic shrinkage at each turn and helps keep the nozzle from scratching the infill during travel moves made with little or no Z-hop. It also lets the toolhead keep more of its speed through the turns instead of decelerating into every corner.
 
@@ -374,6 +376,49 @@ Example with the [Octagram Spiral](strength_settings_patterns#octagram-spiral) p
 - **100%:** the curves of two neighboring corners meet at the midpoint of the segment they share, leaving no straight section between them.
 
 ![infill-smooth-factor-100](https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/fill/infill-smooth-factor-100.png?raw=true)
+
+### How rounded corners are printed
+
+A curve is printed as straight moves, and the printer slows down at each junction between two moves by how much it turns there. A rounded corner is therefore printed as the polygon of the curve's tangents taken at equal steps of direction, so every one of its vertices turns by the same angle.
+
+How many vertices a corner gets follows the [G-code resolution](quality_settings_precision#resolution), like every other path: the fewest that keep the polygon within the resolution of the curve. It depends only on the shape of the corner and the resolution, not on the printer, and a larger curve takes more vertices.
+
+The vertices are what make a rounded corner fast: each one is a slowdown, and the gentler its turn, the less it slows the toolhead. A curve split into a few vertices saves little, and can even print slower than the sharp corner, as the short moves between its vertices leave no room to accelerate.
+
+A curve is only as fast as its sharpest vertex. On a Klipper printer with a square corner velocity of 9 mm/s and 10,000 mm/s² acceleration, a vertex turning by 13.6 degrees allows about 69 mm/s, and one turning by 9 degrees about 104 mm/s. At `100%` the curves of neighboring corners meet on patterns like [Hilbert Curve](strength_settings_patterns#hilbert-curve), so the whole infill path is curves and runs at that speed rather than at the sparse infill speed. That is why the [G-code resolution](quality_settings_precision#resolution), which sets how finely a curve is split, matters most on those patterns.
+
+### Print time and material
+
+Rounded corners let the toolhead keep more of its speed through the turns, so the infill prints faster. This is how much shorter the print time of the sparse infill was than with `0%`, counting the travel between its lines, in the setup of the [infill analysis](strength_settings_patterns_quick_reference) (the mean of a 100 mm cube, a 3DBenchy and the Stanford bunny at 5, 15, 30 and 50% density, on a Klipper printer):
+
+| Pattern | 25% | 50% | 75% | 100% |
+| :-- | --: | --: | --: | --: |
+| [Octagram Spiral](strength_settings_patterns#octagram-spiral) | 9% | 17% | 23% | 29% |
+| [3D Honeycomb](strength_settings_patterns#3d-honeycomb) | 3% | 10% | 14% | 21% |
+| [Honeycomb](strength_settings_patterns#honeycomb) | 2% | 9% | 13% | 19% |
+| [Hilbert Curve](strength_settings_patterns#hilbert-curve) | 1% | 5% | 9% | 18% |
+| [Tri-hexagon](strength_settings_patterns#tri-hexagon), 3 lines | 4% | 8% | 12% | 16% |
+| [Tri-hexagon](strength_settings_patterns#tri-hexagon), 2 lines | 6% | 11% | 11% | 16% |
+| [Cubic](strength_settings_patterns#cubic), 3 lines | 3% | 6% | 10% | 13% |
+| [Cubic](strength_settings_patterns#cubic), 2 lines | 4% | 8% | 9% | 13% |
+| [Cross Hatch](strength_settings_patterns#cross-hatch) | 2% | 5% | 8% | 12% |
+| [Grid](strength_settings_patterns#grid), 3 lines | 1% | 5% | 5% | 10% |
+| [Grid](strength_settings_patterns#grid), 2 lines | 2% | 3% | 9% | 8% |
+| [Triangles](strength_settings_patterns#triangles), 2 lines | 0% | 1% | 2% | 5% |
+| [Concentric](strength_settings_patterns#concentric) | 1% | 2% | 3% | 4% |
+| [Lightning](strength_settings_patterns#lightning) | 1% | 2% | 2% | 3% |
+| [Triangles](strength_settings_patterns#triangles), 3 lines | -1% | 0% | 3% | 2% |
+
+[Octagram Spiral](strength_settings_patterns#octagram-spiral), [Hilbert Curve](strength_settings_patterns#hilbert-curve) and [Honeycomb](strength_settings_patterns#honeycomb) cut their corners deeply enough to print 29%, 15% and 7% less material at `100%`, which is part of their time saving. The other patterns keep their material within 4%, so their saving comes from speed.
+
+> [!NOTE]
+> A rounded corner takes several moves instead of one, so the G-code file gets larger as the smooth factor goes up. At `100%` the infill G-code is about 1.5 to 3 times that of the sharp path for most patterns, about 5 times for [Honeycomb](strength_settings_patterns#honeycomb), 6 times for [Hilbert Curve](strength_settings_patterns#hilbert-curve) and 8 times for [Octagram Spiral](strength_settings_patterns#octagram-spiral), whose sharp path has very few vertices.
+
+### Best smooth factor for speed
+
+- **`100%` prints fastest** for almost every pattern and density in the analysis: the largest curves get the most vertices and the gentlest turns. The exceptions are close: [Grid](strength_settings_patterns#grid) with 2 lines and [Triangles](strength_settings_patterns#triangles) with 3 lines print about one point faster at `75%`.
+- **Lower factors save less.** On average `50%` saves about half of what `100%` saves, and [Triangles](strength_settings_patterns#triangles) saves almost nothing below `75%`. Use them for the look of the infill, not for speed.
+- **A finer [G-code resolution](quality_settings_precision#resolution) prints faster.** It splits every corner into more and gentler turns: on the 100 mm cube at `100%`, going from 0.012 to 0.006 mm raised the mean saving from 16% to 22%, for about 1.5 times the infill G-code. The resolution applies to the whole print, walls included.
 
 ### Supported patterns
 
