@@ -31,9 +31,11 @@ The other plugin development pages cover the implementation details:
   machine (see [Plugin references in presets](#plugin-references-in-presets)).
 - **A single, narrow API surface** - plugins see only the embedded `orca` module, not the
   slicer internals.
-- **A permission boundary, not a sandbox** - filesystem, network, and process-spawn
-  operations by plugin code are categorized and gated by an audit hook that prompts the user
-  and remembers the answer per plugin; see the audit doc for current scope and gaps.
+- **A permission boundary, not a sandbox** - filesystem, network, process-spawn, and
+  thread-creation operations by plugin code are categorized and gated by an audit hook that
+  prompts the user and remembers the answer per plugin; a plugin can also declare what it
+  expects up front with `orca.request_permissions(...)`. See the audit doc for current scope
+  and gaps.
 - **Isolation of failure** - a misbehaving plugin reports an error and is unloaded rather
   than taking down the app; tracebacks are persisted to a log file.
 
@@ -133,7 +135,10 @@ logged in.
         │   ├─ install dependencies via bundled `uv`; extract bundled .whl deps onto sys.path
         │   ├─ begin capture → import module (runs @orca.plugin, marking the package class)
         │   ├─ finalize capture → instantiate package, call register_capabilities(),
-        │   │      then instantiate each registered capability and cache its get_name()
+        │   │      collect its request_permissions() declarations
+        │   ├─ if permissions were declared, show one combined dialog;
+        │   │      a No aborts the load before any capability is created
+        │   ├─ instantiate each registered capability and cache its get_name()
         │   ├─ set_audit_plugin_key(descriptor.plugin_key)   // audit identity
         │   ├─ on_load()  (under the GIL)
         │   └─ store the capabilities; fire on-load + on-capability-load callbacks
@@ -157,6 +162,10 @@ A few load-time invariants worth knowing:
   `orca.base`), and that class's `register_capabilities()` must register at least one valid
   capability via `orca.register_capability(...)`, or the load fails. Each capability must
   resolve `get_name()`, and `(type, name)` must be unique within the plugin.
+- **Declared permissions are requested after registration.** If `register_capabilities()`
+  calls `orca.request_permissions(...)`, OrcaSlicer shows one combined dialog once that method
+  returns and before it instantiates any capability. Targets already persisted for the plugin
+  are skipped; denying the dialog aborts the load. See the audit doc.
 
 ## Execution Model
 
@@ -321,10 +330,13 @@ previously granted to that plugin key, so new code has to ask again; see
 ## Security and Observability
 
 - **Security** - all C++ to Python calls cross a trampoline that opens a per-call audit context;
-  the `PluginAuditManager` audit hook then categorizes sensitive filesystem/network/process
-  events, prompts the user with a Yes/No dialog naming the target, and persists most
-  categories' grants per plugin. This is a permission system, not a hardened sandbox; read
-  [Plugin Audit Hook](plugin_audit_hook) for exactly what is and isn't enforced.
+  the `PluginAuditManager` audit hook then categorizes sensitive filesystem, network,
+  process-spawn, and thread-creation events, prompts the user with a Yes/No dialog naming the
+  target, and persists most categories' grants per plugin. A plugin can declare the targets it
+  expects with `orca.request_permissions(...)`, which produces one combined prompt during load.
+  This is a permission system, not a hardened sandbox; read [Plugin Audit Hook](plugin_audit_hook)
+  for exactly what is and isn't enforced (thread creation is gated, the work a spawned thread
+  runs is not).
 - **Observability** - Python `sys.stderr` (plugin tracebacks, including from
   plugin-spawned threads) is teed to `data_dir()/log/python_*.log`; C++-side
   load/discovery messages go to the main session log. How errors surface in the UI (message
@@ -350,7 +362,8 @@ previously granted to that plugin key, so new code has to ask again; see
 | `src/slic3r/plugin/PluginDescriptor.hpp` | the per-plugin record (types, changelog, `sanitize_plugin_name`) |
 | `src/slic3r/plugin/CloudPluginService.{hpp,cpp}` | cloud fetch / download / subscribe / unsubscribe |
 | `src/slic3r/plugin/PythonInterpreter.{hpp,cpp}` | embedded CPython, GIL handoff, audit-hook + log install |
-| `src/slic3r/plugin/PythonPluginBridge.{hpp,cpp}` | the `orca` module, `@orca.plugin` / `register_capability`, package + capability capture |
+| `src/slic3r/plugin/PythonPluginBridge.{hpp,cpp}` | the `orca` module, `@orca.plugin` / `register_capability` / `request_permissions`, package + capability capture |
+| `src/slic3r/plugin/PluginFsUtils.hpp` | `PluginPermissions` / `PluginInstallState`: the `.install_state.json` sidecar and its permission buckets |
 | `src/slic3r/plugin/PyPluginPackage.hpp` | the package base (`orca.base`) + `register_capabilities` |
 | `src/slic3r/plugin/PyPluginTrampoline.hpp` | C++ to Python boundary macros (traceback logging + audit scope) |
 | `src/slic3r/plugin/pluginTypes/*` | per-type capability bases + trampolines |
