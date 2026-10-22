@@ -4,10 +4,9 @@
 #
 # PREREQUISITES:
 # - Target wikis must be initialized with at least one page (e.g., a Home page).
-# - For NanashiTheNameless/OrcaSlicer_WIKI.wiki: uses GITHUB_TOKEN (no setup needed).
-# - For NanashiTheNameless/OrcaSlicer.wiki: requires a Personal Access Token (PAT)
-#   with 'repo' scope stored as the repository secret GH_WIKI_PAT.
-#   If not set, the OrcaSlicer.wiki push is skipped without failing the workflow.
+# - Both target wikis require a Personal Access Token (PAT) with write access
+#   stored as the repository secret GH_WIKI_PAT.
+#   If not set, the workflow fails before checking out either wiki.
 #
 # USAGE:
 # - This workflow assumes docs are generated or exist in ./docs directory.
@@ -26,7 +25,7 @@ jobs:
     name: Update OrcaSlicer Wiki
     permissions:
       contents: write
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     env:
       GH_WIKI_PAT: ${{ secrets.GH_WIKI_PAT }}
     steps:
@@ -38,16 +37,21 @@ jobs:
             exit 1
           fi
 
+      # Always publish the newest main so re-running an older run cannot roll the wiki back.
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          ref: main
+          path: docs
 
       # NOTE: Ensure your docs are generated into ./docs before the following steps.
       # If you have a build step to generate docs, insert it here.
 
       - name: Checkout target wiki (OrcaSlicer_WIKI)
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: NanashiTheNameless/OrcaSlicer_WIKI.wiki
+          ref: master
           token: ${{ env.GH_WIKI_PAT }}
           path: wiki_orca_wiki
 
@@ -71,15 +75,16 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git add -A
             git commit -m "Update OrcaSlicer_WIKI wiki from OrcaSlicer_WIKI"
-            git push
           else
             echo "No changes to commit to OrcaSlicer_WIKI.wiki"
           fi
+          git push origin master
 
       - name: Checkout target wiki (OrcaSlicer)
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: NanashiTheNameless/OrcaSlicer.wiki
+          ref: master
           token: ${{ env.GH_WIKI_PAT }}
           path: wiki_orca
 
@@ -103,7 +108,7 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git add -A
             git commit -m "Update OrcaSlicer wiki from OrcaSlicer_WIKI"
-            git push
           else
             echo "No changes to commit to OrcaSlicer.wiki"
           fi
+          git push origin master

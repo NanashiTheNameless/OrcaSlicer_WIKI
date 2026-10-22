@@ -146,6 +146,7 @@ for read-only access to the live slicer model graph, presets, and mesh geometry 
 | `orca.base` | class | the **package** base; subclass it and override `register_capabilities()` |
 | `orca.plugin` | decorator | marks the single package class for the file (exactly one per file) |
 | `orca.register_capability(cls)` | function | register one capability class; call it inside `register_capabilities()` |
+| `orca.request_permissions(...)` | function | declare filesystem, network, process, and thread permissions up front; one combined prompt after registration ([Registry](registry#permissions)) |
 | `orca.pages` | submodule | [Pages](pages): `PagesPluginCapabilityBase`, a plugin tab in the main window |
 | `orca.slicing` | submodule | [Slicing Pipeline](slicing): `Step`, `SlicingPipelineContext`, `SlicingPipelineCapabilityBase` |
 | `orca.script` | submodule | `ScriptPluginCapabilityBase` |
@@ -505,12 +506,21 @@ once for each capability class you want to expose:
 @orca.plugin
 class SamplePlugin(orca.base):
     def register_capabilities(self):
+        orca.request_permissions(
+            fs_read=["/path/to/input"],
+            network_http=["https://example.com"])
         orca.register_capability(GCodeBenchmark)
         orca.register_capability(EnvironmentReport)
 ```
 
 OrcaSlicer instantiates the package class (it must be callable as `SamplePlugin()` with no
 arguments), calls `register_capabilities()`, then instantiates each registered capability.
+`orca.request_permissions(...)` is optional; when it is called, the declarations are collected
+during registration and shown as **one combined Yes/No dialog after `register_capabilities()`
+returns and before any capability instance is created**. Targets already granted to the plugin
+are not asked for again, and denying the request aborts the load with an error. See
+[Registry](registry#permissions) for the parameters and [Plugin Audit Hook](plugin_audit_hook)
+for how the grants are enforced.
 
 Rules enforced when a plugin loads (most in `PythonPluginBridge.cpp`):
 
@@ -523,6 +533,8 @@ Rules enforced when a plugin loads (most in `PythonPluginBridge.cpp`):
   not unique across it.
 - A capability class you never pass to `register_capability` is **invisible** to OrcaSlicer,
   even if it is defined in the file.
+- If the plugin calls `orca.request_permissions(...)`, the user must accept the combined
+  dialog that follows registration; declining it fails the load.
 
 #### Wheel (`.whl`) plugins
 
@@ -615,13 +627,16 @@ the live slicing graph during geometry steps. At `Step.psGCodePostProcess`, the 
 | `cancelled()` | whether the active print has been cancelled |
 
 > [!IMPORTANT]
-> Filesystem, network, and process access are audited. While `execute()` runs, a
-> sensitive operation (a file read/write/create/delete, an HTTP/socket connection, spawning
-> a process) prompts the user with a Yes/No dialog naming the target; a "Yes" is remembered
-> for that plugin so the same target does not prompt again. An operation inside a
-> pre-determined allowed folder — `data_dir()`, the read-only `resources_dir()`, or (at
-> `psGCodePostProcess`) the current G-code file's folder — needs no prompt at all; a
-> `secrets`/`cert`/`conf`-like path is blocked outright, with no prompt either. See
+> Filesystem, network, process, and thread-creation access are audited. While `execute()` runs,
+> a sensitive operation (a file read/write/create/delete, an HTTP/socket connection, spawning
+> a process, or starting a thread) prompts the user with a Yes/No dialog naming the target; a
+> "Yes" is remembered for that plugin so the same target does not prompt again. Thread
+> creation is granted once per plugin: the work the spawned thread then runs is **not** audited.
+> An operation inside a pre-determined allowed folder — `data_dir()`, the read-only
+> `resources_dir()`, or (at `psGCodePostProcess`) the current G-code file's folder — needs no
+> prompt at all; a `secrets`/`cert`/`conf`-like path is blocked outright, with no prompt
+> either. To avoid first-use prompts, declare what you need with
+> `orca.request_permissions(...)` in `register_capabilities()`. See
 > [Plugin Audit Hook](plugin_audit_hook).
 
 ### Complete Examples
@@ -781,8 +796,8 @@ session log via Boost.
   of the traceback. Dialogs show only the message, not the stack.
 - **Details-area / Diagnostics error** -> the plugin didn't load; usually a registration
   problem (a capability that doesn't subclass a typed base, a missing `get_name()`, a
-  duplicate capability name, or no `@orca.plugin` package class) or an import error. Fix it,
-  then reload.
+  duplicate capability name, or no `@orca.plugin` package class), an import error, or a denied
+  `orca.request_permissions(...)` dialog. Fix it, then reload.
 - **Anything blocked with a `PermissionError`** -> the user answered "No" to the audit
   hook's prompt for that operation (or it was auto-denied). See the *Debugging* section of
   [Plugin Audit Hook](plugin_audit_hook) and the `[AUDIT BLOCKED]` log line.
@@ -813,10 +828,12 @@ Tips:
   list. A capability that is never passed to `orca.register_capability` will not appear.
 - Develop against small, fast inputs; for slicing-pipeline plugins keep a tiny test model so
   each export cycle is quick.
-- Remember that filesystem/network/process actions prompt on first use per plugin: a
+- Remember that filesystem/network/process/thread actions prompt on first use per plugin: a
   surprise `PermissionError` usually means an earlier prompt was answered "No" — or, for a
   path with `secret`/`cert`/`conf` in it, that it's categorically denied and was never
-  prompted for at all. See [Plugin Audit Hook](plugin_audit_hook).
+  prompted for at all. Off the main thread a prompt is posted asynchronously and the current
+  attempt is denied; accepting it lets a later attempt through. See
+  [Plugin Audit Hook](plugin_audit_hook).
 
 ## Part 2: Adding a New Plugin Type in C++
 
@@ -1103,10 +1120,14 @@ Verification is primarily manual, with targeted Catch2 tests where the logic is 
   `ExecutionResult.failure(...)`; confirm the message box text, and that the full traceback
   appears in `data_dir()/log/python_*.log`. Confirm an invalid-metadata plugin surfaces its
   error in the details area rather than crashing.
-- **Audit** - trigger a filesystem/network/process action, confirm the Yes/No dialog names
-  the right target, and that answering **No** blocks it with a `PermissionError` and an
+- **Audit** - trigger a filesystem/network/process/thread action, confirm the Yes/No dialog
+  names the right target, and that answering **No** blocks it with a `PermissionError` and an
   `[AUDIT BLOCKED]` log line while answering **Yes** lets it through and persists the grant
   so a repeat of the same action does not prompt again.
+- **Declared permissions** - call `orca.request_permissions(...)` from
+  `register_capabilities()`, then reload: confirm one combined dialog appears after
+  registration, that already-granted targets are skipped on the next load, and that **No**
+  aborts the load (Diagnostics shows the error and no capability appears).
 
 ### Automated Tests Where Appropriate
 
@@ -1148,7 +1169,7 @@ best covered by the manual steps above.
 | File | Responsibility |
 |---|---|
 | `src/slic3r/plugin/PythonPluginInterface.hpp` | `PluginCapabilityType`, `PluginContext`, `PluginResult`, `ExecutionResult`, `PluginCapabilityInterface`, type-string maps |
-| `src/slic3r/plugin/PythonPluginBridge.{hpp,cpp}` | the `orca` module (`bind_python_api`), `@orca.plugin` / `register_capability`, package + capability capture/instantiation |
+| `src/slic3r/plugin/PythonPluginBridge.{hpp,cpp}` | the `orca` module (`bind_python_api`), `@orca.plugin` / `register_capability` / `request_permissions`, package + capability capture/instantiation |
 | `src/slic3r/plugin/PyPluginPackage.hpp` | the package base (`orca.base`) and its `register_capabilities` |
 | `src/slic3r/plugin/PyPluginTrampoline.hpp` | the `ORCA_PY_*` trampoline macros (traceback logging + audit scope) and common trampolines |
 | `src/slic3r/plugin/pluginTypes/<type>/` | per-type capability base (`*PluginCapability.hpp/.cpp`) and trampoline (`*PluginCapabilityTrampoline.hpp`) |
