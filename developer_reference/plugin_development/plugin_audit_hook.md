@@ -9,9 +9,10 @@ operation, and remembered answers are persisted per plugin.
 > This is an interactive permission system, not a sandbox: a user who clicks **Yes** has
 > authorized the action, and there is no isolation layer stopping a genuinely malicious
 > plugin from doing damage after that. Today it categorizes and gates filesystem,
-> network, and process-spawn events; native-code loading (`ctypes`) and OS-thread
-> spawning are not covered. See [Known Current Limitations](#known-current-limitations)
-> before relying on it as a security boundary.
+> network, process-spawn, and thread-creation events; native-code loading (`ctypes`) is not
+> audited, and what a plugin-spawned thread does after it starts is not attributed to the
+> plugin. See [Known Current Limitations](#known-current-limitations) before relying on it as
+> a security boundary.
 
 ## What Is a Plugin Audit Hook?
 
@@ -80,7 +81,9 @@ trampoline call, stay unaudited.
 itself** (`threading.Thread`, `_thread.start_new_thread`, ...). A freshly spawned OS thread
 gets its own empty `thread_local` storage, so `current_plugin()` reads empty inside it and
 everything that thread does is unaudited unless it happens to call back into a C++ to Python
-trampoline. There is currently no thread-spawn attribution mechanism that closes this gap.
+trampoline. The *creation* of such a thread is gated separately as a `Threading` event (see
+[Category Resolution](#3-category-resolution)), but that grant covers only the spawn, not what
+the new thread runs.
 
 ### 3. Category Resolution
 
@@ -105,7 +108,7 @@ lookup table. `event_category(event_name)` returns `None` for anything not liste
 | `Http` | `http.client.connect`, `http.client.send`, `urllib.Request` |
 | `Socket` | `socket.__new__`, `socket.bind`, `socket.connect`, `socket.getaddrinfo`, `socket.gethostbyaddr`, `socket.gethostbyname`, `socket.gethostname`, `socket.getnameinfo`, `socket.getservbyname`, `socket.getservbyport`, `socket.sendmsg`, `socket.sendto` |
 | `ProcessCreate` | `os.fork`, `os.forkpty`, `os.posix_spawn`, `os.spawn`, `os.system`, `os.startfile`, `os.startfile/2`, `pty.spawn`, `subprocess.Popen`, `_winapi.CreateProcess`, `_posixsubprocess.fork_exec` |
-| `Threading` | *(declared, but no event currently maps to it — thread-spawn events are not audited)* |
+| `Threading` | `_thread.start_new_thread` (thread creation; `threading.Thread` reaches it through this call, but the new thread's own work is not audited) |
 
 `open` is a special case, checked before the map: CPython's `open` audit event fires for both
 `open()`/`io.open()` (`args = (path, mode, flags)`, `mode` a string like `"r"`/`"wb"`/`"a+"`)
@@ -145,6 +148,16 @@ rather than its name, so it cannot live in the static map.
        calling interpreter, and the hook returns `-1` — CPython treats a nonzero return as
        "block this operation," so the audited call never completes.
 
+The dialog is modal and its answer applies to the current event when the event fires on the
+main/UI thread. An event can also fire on a thread the UI thread may itself be waiting on (the
+slicing-pipeline hook runs on the slicing worker). Blocking that thread on a dialog would
+deadlock the application, so the prompt is posted to the UI thread **asynchronously**, the
+current event is denied (fail closed, exactly like an unanswered prompt), and a **Yes** is
+persisted when the user accepts. The plugin's next attempt at the same target therefore
+succeeds without a prompt. Plugin **load** runs on a worker the UI thread is not waiting on, so
+a declarative `request_permissions(...)` made there can marshal its dialog synchronously and
+wait for the answer (see [Persistence](#persistence)).
+
 #### Target extraction
 
 - **Filesystem categories** (`FsRead`/`FsReadWrite`/`FsCreate`/`FsDelete`, including `open`):
@@ -161,8 +174,10 @@ rather than its name, so it cannot live in the static map.
   `http.client.send` is deliberately not listed: it carries no host in its own arguments and
   relies on the ancestor cascade instead.
 - **Events with nothing sensible to point at** (`socket.__new__`, `os.fork`, ...) get an
-  empty target list. An empty list prompts for the bare event name and never persists —
-  there is nothing to remember a grant *for*.
+  empty target list. The prompt names the event itself, and a grant is persisted per event
+  under `permissions.events`, keyed `<Category>:<event>` (for example `Socket:socket.__new__`).
+  That keeps an event grant from doubling as a target grant of the same string in its
+  category.
 
 #### Persistence
 
@@ -175,7 +190,11 @@ Persisted categories map onto `PluginPermissions` (`PluginFsUtils.hpp`) 1:1:
 | `Http` | `network_http` |
 | `Socket` | `network_socket` |
 | `ProcessCreate` | `process` |
+| `Threading` | `threading` (always the fixed target `thread`) |
 | `FsCreate`, `FsDelete` | *(none — never persisted)* |
+
+Events with no target persist to `events` rather than to a category list; see
+[Target extraction](#target-extraction).
 
 `FsCreate`/`FsDelete` always prompt, with nothing remembered across calls, since creating or
 deleting a file is consequential enough to confirm every time, even for the same target
@@ -192,20 +211,46 @@ path canonicalization, no argument-shape awareness beyond what `str()` already p
         "fs_readwrite": [],
         "network_http": ["http://example.com"],
         "network_socket": ["('example.com', 80)"],
-        "process": ["/usr/bin/python3"]
+        "process": ["/usr/bin/python3"],
+        "threading": ["thread"],
+        "events": ["Socket:socket.__new__"]
     }
 }
 ```
 
-A separate, declarative grant path exists alongside this reactive one:
-`orca.request_permissions(fs_read: list[str] = [])`, typically called once from
-`register_capabilities()`, checks/persists a batch of `fs_read` paths up front instead of
-waiting for the first access to prompt. It raises `ValueError` if called outside plugin
-discovery or with an empty path string, shows its own dialog (marshaled to the UI thread when
-called off-thread), and writes the same `fs_read` list that reactive grants do — a path
-granted either way satisfies the other check, since both read/write the same JSON array. Only
-`fs_read` has a declarative form today; the other four persisted lists are populated
-reactively, one dialog "Yes" at a time.
+A separate, **declarative** grant path exists alongside this reactive one:
+`orca.request_permissions(...)`, called from `register_capabilities()`, declares up front what
+the plugin expects to use instead of waiting for each first access to prompt:
+
+```python
+@orca.plugin
+class SamplePlugin(orca.base):
+    def register_capabilities(self):
+        orca.request_permissions(
+            fs_read=["/path/to/input"],
+            fs_readwrite=["/path/to/output"],
+            network_http=["https://example.com"],
+            network_socket=["('example.com', 443)"],
+            process=["/usr/bin/convert"],
+            threading=True)
+        orca.register_capability(SampleCapability)
+```
+
+Each bucket takes the target strings the matching audit event reports: filesystem paths for
+`fs_read`/`fs_readwrite`, URLs for `network_http`, socket addresses for `network_socket`, and
+commands for `process`. `threading=True` requests the fixed `thread` target. All parameters
+are optional and default to an empty list / `False`.
+
+Declarations are collected while `register_capabilities()` runs. The host then shows **one
+combined dialog** after that method returns and **before any capability instance is created**;
+targets already persisted for the plugin are skipped, so redeclaring a granted target does not
+prompt again. Denying the request aborts the plugin load with an error and no capability is
+instantiated. Calling it outside plugin discovery raises `ValueError`, as does an empty string
+in any target list.
+
+Both paths write the same `permissions` lists, so a target granted declaratively satisfies the
+reactive check and vice versa. A declaration does not widen the policy: it pre-approves only
+the exact targets declared, and any other access still prompts on first use.
 
 Granted permissions belong to the installed package, not just the plugin key: every successful
 install (installing a local plugin over an existing one, **Reinstall**, or a cloud update)
@@ -445,10 +490,14 @@ never opens a context, so its calls run completely unaudited. The existing call 
   [Persistence](#persistence)). A pre-determined allowed root is meant to need no prompt at
   all — this is a deliberate behavior difference from the plain category+dialog model, not a
   bug.
-- **`Threading` has no events mapped to it**; thread-related audit events are not gated at
-  all.
-- **A plugin-spawned OS thread is entirely unaudited** — it runs with an empty `thread_local`
-  plugin context unless it re-enters through a C++ to Python trampoline call.
+- **Thread creation is gated, but a spawned thread's work is not.** `_thread.start_new_thread`
+  (and therefore `threading.Thread`) maps to `Threading` and is granted per plugin as the fixed
+  target `thread`, but the new thread runs with an empty `thread_local` plugin context, so what
+  it does is unaudited unless it re-enters through a C++ to Python trampoline call.
+- **A declarative request only pre-approves the exact strings it declares.** There is no
+  wildcard, directory prefix, or address normalization: each target still has to match the
+  string the audit event reports, and the dialog is all-or-nothing (denying it aborts the
+  load).
 - **`os.open()`'s numeric-flags form is not decoded.** With `mode=None` it always resolves to
   `FsReadWrite`, which can over-prompt for what is actually a read-only `os.open()` call.
 - **Persistence for `Http`/`Socket`/`ProcessCreate` is keyed by `str()`** of an extracted
@@ -490,8 +539,15 @@ blocked**. Only `[AUDIT BLOCKED]` (from `report_violation`) means the call was a
 **Common pitfalls**
 
 - **No prompt appears at all.** Check whether the target was already granted (persisted in
-  the plugin's `.install_state.json` sidecar) or covered by the ancestor cascade — both allow
-  silently by design, not a bug.
+  the plugin's `.install_state.json` sidecar, either reactively or through
+  `orca.request_permissions(...)`) or covered by the ancestor cascade — both allow silently by
+  design, not a bug.
+- **A prompt appears during load, before the plugin is usable.** That is the combined
+  `orca.request_permissions(...)` dialog. Declining it aborts the load and the reason is shown
+  in the plugin's Diagnostics tab; grant the request or remove the declaration to load again.
+- **First use is denied while a prompt is still open.** Off the main thread the prompt is
+  posted asynchronously and the current event is denied (fail closed). Accepting it persists the
+  grant, so a later attempt succeeds; it does not retroactively allow the denied call.
 - **No context = no enforcement.** If a plugin's calls are never audited, check that its
   instance got `set_audit_plugin_key()` (non-empty key) and that the method actually wraps
   through `ORCA_PY_OVERRIDE_AUDITED` / `ORCA_PY_AUDIT_SCOPE()`.
@@ -517,10 +573,11 @@ blocked**. Only `[AUDIT BLOCKED]` (from `report_violation`) means the call was a
 
 | File | Responsibility |
 |---|---|
-| `src/slic3r/plugin/PluginAuditManager.{hpp,cpp}` | categories, targets, persistence, the decision pipeline, `audit_hook`, `ScopedPluginAuditContext` |
+| `src/slic3r/plugin/PluginAuditManager.{hpp,cpp}` | categories, targets, persistence, declarative `request_permissions`, the decision pipeline, `audit_hook`, `ScopedPluginAuditContext` |
 | `src/slic3r/plugin/PyPluginTrampoline.hpp` | `ORCA_PY_AUDIT_SCOPE()` / `ORCA_PY_OVERRIDE_AUDITED` (audit context + traceback logging) |
 | `src/slic3r/plugin/PythonPluginInterface.hpp` | the per-instance audit identity |
 | `src/slic3r/plugin/PluginLoader.cpp` | stamps the audit key at load / key migration |
 | `src/slic3r/plugin/pluginTypes/*/*Trampoline.hpp` | per-plugin-type methods and their `audit_setup` callbacks |
-| `src/slic3r/plugin/PythonPluginBridge.cpp` | binds `orca.request_permissions(fs_read=[...])` |
+| `src/slic3r/plugin/PythonPluginBridge.cpp` | binds `orca.request_permissions(...)`, collects declarations during plugin capture, and asks once after `register_capabilities()` |
+| `src/slic3r/plugin/PluginFsUtils.hpp` | `PluginPermissions` / `PluginInstallState`: the sidecar's `permissions` buckets (`fs_read`, `fs_readwrite`, `network_http`, `network_socket`, `process`, `threading`, `events`) |
 | `src/slic3r/plugin/PythonInterpreter.cpp` | installs the hook once at interpreter init |

@@ -17,6 +17,7 @@ capability base classes, the package base, result types, and capability registra
 | `orca.base` | class | the **package** base; subclass it and override `register_capabilities()` |
 | `orca.plugin` | decorator | marks the single package class for the file (exactly one per file) |
 | `orca.register_capability(cls)` | function | register one capability class; call it inside `register_capabilities()` |
+| `orca.request_permissions(...)` | function | declare filesystem, network, process, and thread permissions up front; call it inside `register_capabilities()` (see [Permissions](#permissions)) |
 | `orca.slicing` | submodule | [Slicing Pipeline](slicing): `Step`, `SlicingPipelineContext`, `SlicingPipelineCapabilityBase` |
 | `orca.script` | submodule | [Script](script): `ScriptPluginCapabilityBase` |
 | `orca.pages` | submodule | [Pages](pages): `PagesPluginCapabilityBase`, a plugin tab in the main window |
@@ -93,6 +94,37 @@ Rules enforced when a plugin loads (most in `PythonPluginBridge.cpp`):
   not unique across it.
 - A capability class you never pass to `orca.register_capability` is **invisible** to
   OrcaSlicer, even if it is defined in the file.
+- If the plugin calls `orca.request_permissions(...)`, the user must accept the combined
+  dialog that follows registration; declining it fails the load.
+
+## Permissions
+
+`orca.request_permissions(...)` declares, from `register_capabilities()`, the filesystem,
+network, process, and thread access the plugin expects. All parameters are optional:
+
+```python
+orca.request_permissions(
+    fs_read=[],           # filesystem paths to read
+    fs_readwrite=[],      # filesystem paths to read/write
+    network_http=[],      # URLs
+    network_socket=[],    # socket addresses, as str() renders them
+    process=[],           # commands / argv
+    threading=False)      # True requests the fixed "thread" target
+```
+
+- Each list takes the target strings the corresponding audit event reports: paths for the
+  filesystem buckets, a URL for `network_http`, an address string such as
+  `"('example.com', 443)"` for `network_socket`, and a command for `process`.
+- `threading=True` requests permission to create one thread; thread creation is granted once
+  per plugin, and the new thread's own work is not audited.
+- OrcaSlicer collects the declarations while `register_capabilities()` runs and shows **one
+  combined Yes/No dialog** after it returns and before any capability instance is created.
+  Targets already granted to the plugin are skipped, so declaring them again does not prompt.
+- Declining the dialog aborts the plugin load. An empty string in any list, or calling the
+  function outside plugin discovery, raises `ValueError`.
+- A declaration pre-approves only the exact target strings listed; any other access still
+  prompts on first use. See [Plugin Audit Hook](plugin_audit_hook) for the audit categories,
+  persistence, and off-thread prompt behavior.
 
 ## Capability Names and Types
 
