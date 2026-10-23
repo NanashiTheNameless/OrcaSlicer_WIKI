@@ -410,6 +410,17 @@ img[height="200"] { /* Calibrations guide preview */
     table-layout: auto;
 }
 
+/* Keep names in the first column whole, so the column widens instead of breaking a name mid-word */
+.md-typeset table:not([class]) td:first-child code {
+    word-break: normal;
+    overflow-wrap: normal;
+}
+
+/* A second cell split with <br> lines up with the names stacked beside it, so it must not wrap */
+.md-typeset table:not([class]) td:nth-child(2):has(br) {
+    white-space: nowrap;
+}
+
 /* Vertical align table cells so icons sit in the middle */
 .md-typeset table td,
 .md-typeset table th {
