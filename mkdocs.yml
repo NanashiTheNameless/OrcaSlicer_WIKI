@@ -279,6 +279,7 @@ nav:
   - "V2.4.0 Beta": releases/release_2_4_0_beta.md
   - "V2.4.0 Alpha": releases/release_2_4_0_alpha.md
 - "Developer Reference":
+  - "How to Contribute": developer_reference/how_to_contribute.md
   - "How to Build":
     - "Build Overview": developer_reference/how_to_build/how_to_build.md
     - "Build on Windows": developer_reference/how_to_build/how_to_build_windows.md
@@ -307,5 +308,5 @@ nav:
       - "Resource Texture": developer_reference/plugin_development/api_reference/resource_texture.md
       - "Slicing Pipeline": developer_reference/plugin_development/api_reference/slicing.md
     - "Plugin Audit Hook": developer_reference/plugin_development/plugin_audit_hook.md
-  - "Placeholders Variables": developer_reference/built_in_placeholders_variables.md
+  - "Placeholders and Expressions": developer_reference/built_in_placeholders_variables.md
   - Hierarchy: developer_reference/slicing_hierarchy.md
