@@ -2,10 +2,6 @@
 
 This page lists the keyboard shortcuts available in the application, and how to change them.
 
-> [!IMPORTANT]
-> NEW FEATURE: **Assignable keyboard shortcuts**  
-> Available in: [Nightly builds](https://github.com/NanashiTheNameless/OrcaSlicer/releases/tag/Nightly-Rolling) or Releases greater than **2.4.2**.
-
 - [Customizing Shortcuts](#customizing-shortcuts)
 - [Global](#global)
 - [Design](#design)

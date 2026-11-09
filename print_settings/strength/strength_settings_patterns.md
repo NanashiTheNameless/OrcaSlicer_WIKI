@@ -405,11 +405,11 @@ Similar to the [triangles](#triangles) pattern but offset to prevent triple over
     - **Slicing Time:** Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true)
     - **G-code Size:** Extra-Low ![level-to-worse-1](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-1.svg?raw=true)
 - **Extra:**
-    - **[Multiline](strength_settings_infill#fill-multiline):** [Classic](strength_settings_infill#classic-strategy)
-        - **2 lines:** Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true) (19% Slower over single line)
-        - **3 lines:** Print Time Normal-Low ![level-to-worse-3](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-3.svg?raw=true) (6% Slower over single line)
+    - **[Multiline](strength_settings_infill#fill-multiline):** [Non-Crossing](strength_settings_infill#non-crossing-strategy)
+        - **2 lines:** Print Time Normal-High ![level-to-worse-5](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-5.svg?raw=true) (65% Slower over single line)
+        - **3 lines:** Print Time Normal ![level-to-worse-4](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/misc/level-to-worse-4.svg?raw=true) (45% Slower over single line)
     - **[Symmetric infill Y axis](strength_settings_infill#symmetric-infill-y-axis):** No
-    - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** No
+    - **[Smooth Factor](strength_settings_infill#sparse-infill-smooth-factor):** [Multiline](strength_settings_infill#fill-multiline) only
 - **Applies to:**
     - **[Sparse Infill](strength_settings_infill#sparse-infill-density)**
 
@@ -525,10 +525,6 @@ This infill tries to generate a printable honeycomb structure by printing square
 [Variable](built_in_placeholders_variables): `infill_complete_top`.  
 [Type](option_type#boolean): `Boolean`.  
 [CLI Example](cli_mode#setting-overrides): `--infill-complete-top=1`.  
-
-> [!IMPORTANT]
-> NEW FEATURE: **Fill pattern tops**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
 
 The square at the top of each cell is left open by default. This option covers those squares.
 
@@ -715,10 +711,6 @@ Triply Periodic Minimal Surface (Fischer–Koch S) pattern. Its smooth, continuo
 
 ## Adaptive TPMS
 
-> [!IMPORTANT]
-> NEW FEATURE: **Adaptive TPMS density**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
-
 [Gyroid](#gyroid), [TPMS-D](#tpms-d) and [TPMS-FK](#tpms-fk) can grade their density inside the object: fine cells next to the walls and the top and bottom surfaces, where the infill supports the shells, growing continuously towards the center of the object, where they save material and print time.
 
 ### Adaptive Density
@@ -836,10 +828,6 @@ Fills the area with progressively smaller versions of the outer contour, creatin
 ![infill-top-concentric](https://github.com/NanashiTheNameless/OrcaSlicer_WIKI/blob/main/images/fill/infill-top-concentric.png?raw=true)
 
 ## Spiral Inset
-
-> [!IMPORTANT]
-> NEW FEATURE: **Spiral Inset pattern**  
-> Available in: [Nightly builds](https://github.com/OrcaSlicer/OrcaSlicer/releases/tag/nightly-builds) or Releases greater than **2.4.2**.
 
 Version of [Concentric](#concentric) that joins its loops into one continuous spiral: each loop is cut short and runs straight into the next loop inside it, instead of being printed as a separate closed loop.
 
