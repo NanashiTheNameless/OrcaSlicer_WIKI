@@ -117,7 +117,7 @@ nav:
   - "Calibration Guide": guides/calibration_guide.md
   - "Belt Printing": guides/belt_printing.md
   - "IDEX/IQEX Parallel Printing": guides/idex_iqex_parallel_printing.md
-  - "How to Download Pull Requests Artifacts for Testing": guides/how_to_download_pr_artifacts.md
+  - "How to Download Pull Request Artifacts for Testing": guides/how_to_download_pr_artifacts.md
 - Calibration:
   - "Temp Calibration": calibration/temp_calib.md
   - "Max Volumetric Speed (FlowRate) Calibration": calibration/volumetric_speed_calib.md
@@ -314,3 +314,4 @@ nav:
     - "Plugin Audit Hook": developer_reference/plugin_development/plugin_audit_hook.md
   - "Placeholders and Expressions": developer_reference/built_in_placeholders_variables.md
   - Hierarchy: developer_reference/slicing_hierarchy.md
+  - "Staggered layers is currently in *Alpha*.": developer_reference/staggered_perimeters_known_issues.md

@@ -325,4 +325,4 @@ See the [all releases](releases_index) overview, or jump straight to a version:
     - [Plugin Audit Hook](plugin_audit_hook)
 - [Placeholders and Expressions](built_in_placeholders_variables)
 - [Slicing Call Hierarchy](slicing_hierarchy)
-- [List of staggered perimeters known issues](staggered-perimeters-known-issues)
+- [List of staggered perimeters known issues](staggered_perimeters_known_issues)
